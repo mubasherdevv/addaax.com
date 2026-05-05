@@ -68,6 +68,10 @@ foreach ($files as $file) {
 }
 sort($root_pages);
 
+// Fetch States and Cities for Location-based SEO
+$all_states = $conn->query("SELECT id, name FROM states WHERE status = 1 ORDER BY name ASC")->fetch_all(MYSQLI_ASSOC);
+$all_cities = $conn->query("SELECT id, name, state_id FROM cities WHERE status = 1 ORDER BY name ASC")->fetch_all(MYSQLI_ASSOC);
+
 require_once 'includes/admin_layout.php';
 renderAdminHeader('SEO Management');
 renderAdminSidebar('seo');
@@ -141,23 +145,57 @@ renderAdminSidebar('seo');
             <input type="hidden" name="id" id="seo_id">
             
             <div class="form-group">
-                <label>Select Page</label>
-                <select name="page_name_select" id="page_name_select" class="form-control" onchange="checkCustomPage(this.value)" required>
-                    <option value="">-- Choose Page --</option>
-                    <?php foreach($root_pages as $page): ?>
-                        <option value="<?php echo $page; ?>"><?php echo $page; ?></option>
-                    <?php endforeach; ?>
-                    <option value="custom">-- Custom URL --</option>
+                <label>Target Type</label>
+                <select name="page_type" id="page_type" class="form-control" onchange="toggleTargetType(this.value)" required>
+                    <option value="file">Internal File (.php)</option>
+                    <option value="location">Location Page (City)</option>
+                    <option value="custom">Custom URL / Path</option>
                 </select>
             </div>
 
-            <div class="form-group" id="custom_page_group" style="display: none;">
+            <!-- 1. File Selection -->
+            <div class="form-group" id="file_target_group">
+                <label>Select Page</label>
+                <select name="page_name_select" id="page_name_select" class="form-control">
+                    <option value="">-- Choose File --</option>
+                    <?php foreach($root_pages as $page): ?>
+                        <option value="<?php echo $page; ?>"><?php echo $page; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <!-- 2. Location Selection -->
+            <div id="location_target_group" style="display: none;">
+                <div class="form-group">
+                    <label>Select Province</label>
+                    <select id="state_select" class="form-control" onchange="filterCities(this.value)">
+                        <option value="">-- Choose Province --</option>
+                        <?php foreach($all_states as $state): ?>
+                            <option value="<?php echo $state['id']; ?>"><?php echo htmlspecialchars($state['name']); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Select City</label>
+                    <select id="city_select" class="form-control" onchange="generateCityUrl(this.options[this.selectedIndex].text)">
+                        <option value="">-- Choose City --</option>
+                        <!-- Populated via JS -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- 3. Custom Path -->
+            <div class="form-group" id="custom_target_group" style="display: none;">
                 <label>Custom Page Name / URL</label>
                 <input type="text" name="page_name_custom" id="page_name_custom" class="form-control" placeholder="e.g. /category/electronics">
             </div>
             
-            <!-- Hidden input for the final value -->
-            <input type="hidden" name="page_name" id="page_name">
+            <!-- Final Value (Hidden or Readonly) -->
+            <div class="form-group">
+                <label>Final Page URL Path</label>
+                <input type="text" name="page_name" id="page_name" class="form-control" readonly style="background: #f1f5f9; cursor: not-allowed;" required>
+                <small style="color: var(--text-muted);">This is the path used for SEO mapping.</small>
+            </div>
             
             <div class="form-group">
                 <label>Meta Title</label>
@@ -234,6 +272,9 @@ renderAdminSidebar('seo');
 </style>
 
 <script>
+// Data from PHP
+const allCities = <?php echo json_encode($all_cities); ?>;
+
 // Move functions to global scope explicitly
 window.showAddForm = function() {
     const modal = document.getElementById('seoModal');
@@ -241,15 +282,52 @@ window.showAddForm = function() {
 
     document.getElementById('modalTitle').innerText = 'Add SEO Settings';
     document.getElementById('seo_id').value = '';
+    document.getElementById('page_type').value = 'file';
     document.getElementById('page_name_select').value = '';
     document.getElementById('page_name_custom').value = '';
     document.getElementById('page_name').value = '';
     document.getElementById('meta_title').value = '';
     document.getElementById('meta_description').value = '';
-    document.getElementById('custom_page_group').style.display = 'none';
+    
+    toggleTargetType('file');
     
     modal.style.display = 'flex';
     setTimeout(() => modal.classList.add('visible'), 50);
+};
+
+window.toggleTargetType = function(type) {
+    document.getElementById('file_target_group').style.display = (type === 'file') ? 'block' : 'none';
+    document.getElementById('location_target_group').style.display = (type === 'location') ? 'block' : 'none';
+    document.getElementById('custom_target_group').style.display = (type === 'custom') ? 'block' : 'none';
+    
+    // Clear final page name when switching
+    if (type !== 'file' || document.getElementById('page_name_select').value === '') {
+        document.getElementById('page_name').value = '';
+    }
+};
+
+window.filterCities = function(stateId) {
+    const citySelect = document.getElementById('city_select');
+    citySelect.innerHTML = '<option value="">-- Choose City --</option>';
+    
+    if (!stateId) return;
+    
+    const filtered = allCities.filter(c => c.state_id == stateId);
+    filtered.forEach(city => {
+        const opt = document.createElement('option');
+        opt.value = city.id;
+        opt.text = city.name;
+        citySelect.add(opt);
+    });
+};
+
+window.generateCityUrl = function(cityName) {
+    if (!cityName || cityName.includes('--')) {
+        document.getElementById('page_name').value = '';
+        return;
+    }
+    const slug = cityName.toLowerCase().trim().replace(/ /g, '-');
+    document.getElementById('page_name').value = '/escorts/' + slug;
 };
 
 window.editSeo = function(data) {
@@ -260,30 +338,26 @@ window.editSeo = function(data) {
     document.getElementById('seo_id').value = data.id;
     document.getElementById('meta_title').value = data.meta_title;
     document.getElementById('meta_description').value = data.meta_description;
-    
-    const select = document.getElementById('page_name_select');
-    const customGroup = document.getElementById('custom_page_group');
-    const customInput = document.getElementById('page_name_custom');
-    
-    let exists = false;
-    for (let i = 0; i < select.options.length; i++) {
-        if (select.options[i].value === data.page_name) {
-            select.selectedIndex = i;
-            exists = true;
-            break;
-        }
-    }
-    
-    if (exists) {
-        customGroup.style.display = 'none';
-        customInput.value = '';
-    } else {
-        select.value = 'custom';
-        customGroup.style.display = 'block';
-        customInput.value = data.page_name;
-    }
-    
     document.getElementById('page_name').value = data.page_name;
+    
+    // Determine type
+    if (data.page_name.startsWith('/escorts/')) {
+        document.getElementById('page_type').value = 'location';
+        toggleTargetType('location');
+        // We don't necessarily know the state_id here easily without more data, 
+        // but we can set the custom field if needed or just let them re-select.
+        document.getElementById('page_name_custom').value = data.page_name; 
+        document.getElementById('page_type').value = 'custom'; // Safer to treat as custom on edit
+        toggleTargetType('custom');
+    } else if (data.page_name.endsWith('.php')) {
+        document.getElementById('page_type').value = 'file';
+        toggleTargetType('file');
+        document.getElementById('page_name_select').value = data.page_name;
+    } else {
+        document.getElementById('page_type').value = 'custom';
+        toggleTargetType('custom');
+        document.getElementById('page_name_custom').value = data.page_name;
+    }
     
     modal.style.display = 'flex';
     setTimeout(() => modal.classList.add('visible'), 50);
@@ -296,30 +370,24 @@ window.closeModal = function() {
     setTimeout(() => modal.style.display = 'none', 300);
 };
 
-window.checkCustomPage = function(value) {
-    const customGroup = document.getElementById('custom_page_group');
-    if (value === 'custom') {
-        customGroup.style.display = 'block';
-    } else {
-        customGroup.style.display = 'none';
-        document.getElementById('page_name').value = value;
-    }
-};
-
 // Form submit handler
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('#seoModal form');
-    if (form) {
-        form.onsubmit = function() {
-            const selectValue = document.getElementById('page_name_select').value;
-            if (selectValue === 'custom') {
-                document.getElementById('page_name').value = document.getElementById('page_name_custom').value;
-            } else {
-                document.getElementById('page_name').value = selectValue;
-            }
+    // Listen for file select changes
+    const fileSelect = document.getElementById('page_name_select');
+    if (fileSelect) {
+        fileSelect.onchange = function() {
+            document.getElementById('page_name').value = this.value;
         };
     }
     
+    // Listen for custom input changes
+    const customInput = document.getElementById('page_name_custom');
+    if (customInput) {
+        customInput.oninput = function() {
+            document.getElementById('page_name').value = this.value;
+        };
+    }
+
     // Close on outside click
     window.onclick = function(event) {
         const modal = document.getElementById('seoModal');

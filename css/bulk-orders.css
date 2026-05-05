@@ -1,0 +1,594 @@
+/* Critical Styles - DO NOT MODIFY */
+header .mobile-menu-toggle,
+button.mobile-menu-toggle,
+.mobile-menu-toggle {
+    position: absolute !important;
+    display: flex !important;
+    top: 1.5rem !important;
+    right: 1rem !important;
+    z-index: 9999 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background-color: rgba(255,255,255,0.9) !important;
+    border-radius: 4px !important;
+    padding: 8px !important;
+    border: 1px solid #ccc !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+header .mobile-menu-toggle i,
+header .mobile-menu-toggle .menu-text,
+button.mobile-menu-toggle i,
+button.mobile-menu-toggle .menu-text,
+.mobile-menu-toggle i,
+.mobile-menu-toggle .menu-text {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #333 !important;
+}
+
+.mobile-menu-toggle .menu-text {
+    margin-left: 4px !important;
+    font-size: 1.5rem !important;
+}
+
+/* Bulk Orders Page Specific Styles */
+
+/* Main Layout */
+.bulk-orders-main {
+    padding: var(--space-xl) 0;
+    background-color: var(--background-color);
+}
+
+/* Intro Section */
+.bulk-orders-intro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: var(--space-xxl);
+    align-items: center;
+}
+
+.intro-content {
+    flex: 1;
+    min-width: 300px;
+}
+
+.intro-content h2 {
+    margin-bottom: var(--space-md);
+    color: var(--primary-color);
+}
+
+.intro-content p {
+    margin-bottom: var(--space-md);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.bulk-benefits {
+    list-style: none;
+    margin-top: var(--space-lg);
+}
+
+.bulk-benefits li {
+    margin-bottom: var(--space-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.bulk-benefits i {
+    color: var(--success-color);
+    font-size: 1.1rem;
+}
+
+.intro-image {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.intro-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+/* Volume Discount Table */
+.volume-discount-table {
+    margin-bottom: var(--space-xxl);
+}
+
+.volume-discount-table h2 {
+    margin-bottom: var(--space-lg);
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.table-container {
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.volume-discount-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.volume-discount-table th,
+.volume-discount-table td {
+    padding: var(--space-md);
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.volume-discount-table th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+.volume-discount-table tr:nth-child(even) {
+    background-color: var(--background-alt);
+}
+
+.volume-discount-table tr:hover {
+    background-color: rgba(var(--primary-rgb), 0.05);
+}
+
+/* Bulk Order Form Section */
+.bulk-order-form-section {
+    background-color: white;
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xxl);
+    box-shadow: var(--shadow-md);
+}
+
+.bulk-order-form-section h2 {
+    margin-bottom: var(--space-sm);
+    color: var(--primary-color);
+}
+
+.bulk-order-form-section > p {
+    margin-bottom: var(--space-lg);
+    color: var(--text-secondary);
+}
+
+.form-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: var(--space-lg);
+}
+
+.form-column {
+    flex: 1;
+    min-width: 300px;
+}
+
+.form-column h3 {
+    margin: var(--space-lg) 0 var(--space-md);
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 1.2rem;
+}
+
+.form-column h3:first-child {
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: var(--space-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    background-color: white;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.checkbox-input {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+}
+
+.checkbox-input input {
+    width: auto;
+    margin-top: 0.25rem;
+}
+
+.checkbox-input label {
+    margin-bottom: 0;
+    font-weight: normal;
+    line-height: 1.4;
+}
+
+/* Product Entry Styles */
+.product-entry-container {
+    margin-bottom: var(--space-md);
+}
+
+.product-entry {
+    background-color: var(--background-alt);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    border: 1px solid var(--border-color);
+}
+
+.btn-add-product {
+    margin-bottom: var(--space-lg);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    background-color: white;
+    border: 1px dashed var(--primary-color);
+    color: var(--primary-color);
+    padding: var(--space-sm);
+}
+
+.btn-add-product:hover {
+    background-color: var(--primary-light);
+}
+
+/* Form Actions */
+.form-actions {
+    text-align: center;
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border-color);
+}
+
+.btn-submit-quote {
+    padding: var(--space-md) var(--space-xl);
+    font-size: 1.1rem;
+}
+
+/* FAQ Section */
+.bulk-order-faq {
+    margin-bottom: var(--space-xxl);
+}
+
+.bulk-order-faq h2 {
+    margin-bottom: var(--space-lg);
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.faq-item {
+    background-color: white;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.faq-question {
+    padding: var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--background-alt);
+    transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+    background-color: var(--primary-light);
+}
+
+.faq-question h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.faq-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-toggle {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    padding: 0 var(--space-md);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+    padding: var(--space-md);
+    max-height: 500px;
+}
+
+.faq-answer p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Testimonials Section */
+.bulk-testimonials {
+    margin-bottom: var(--space-xxl);
+}
+
+.bulk-testimonials h2 {
+    margin-bottom: var(--space-lg);
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+}
+
+.testimonial-card {
+    background-color: white;
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-content {
+    flex: 1;
+    margin-bottom: var(--space-md);
+}
+
+.testimonial-content p {
+    font-style: italic;
+    line-height: 1.6;
+    position: relative;
+    padding-left: var(--space-lg);
+}
+
+.testimonial-content p::before {
+    content: "\201C";
+    position: absolute;
+    left: 0;
+    top: -10px;
+    font-size: 3rem;
+    color: var(--primary-light);
+    line-height: 1;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.testimonial-author img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+}
+
+.author-info h4 {
+    margin: 0 0 5px;
+    font-size: 1rem;
+}
+
+.author-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Call to Action */
+.call-to-action {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.cta-content h2 {
+    margin-bottom: var(--space-md);
+    color: white;
+}
+
+.cta-content p {
+    margin-bottom: var(--space-lg);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.call-to-action .btn-outline {
+    color: white;
+    border-color: white;
+}
+
+.call-to-action .btn-outline:hover {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+    .bulk-orders-intro {
+        flex-direction: column;
+    }
+    
+    .intro-image {
+        max-width: 100%;
+        order: -1;
+        margin-bottom: var(--space-md);
+    }
+    
+    .form-columns {
+        flex-direction: column;
+    }
+    
+    .bulk-order-form-section {
+        padding: var(--space-md);
+    }
+    
+    .mobile-menu-toggle {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        position: relative !important;
+    }
+    
+    .mobile-menu-toggle i,
+    .mobile-menu-toggle .menu-text {
+        opacity: 1 !important;
+        visibility: visible !important;
+        color: #333 !important;
+    }
+    
+    .mobile-menu-toggle .menu-text {
+        display: inline !important;
+        font-size: 1.5rem !important;
+        margin-left: 4px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+    
+    .table-container {
+        margin: 0 -15px;
+        width: calc(100% + 30px);
+        border-radius: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-row {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+    
+    .form-row .form-group {
+        min-width: 100%;
+    }
+    
+    .bulk-benefits li {
+        align-items: flex-start;
+    }
+    
+    .bulk-benefits i {
+        margin-top: 3px;
+    }
+}
+
+/* Mobile Menu Toggle Button - Force visibility */
+.mobile-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--primary-color, #4a6cf7);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: auto;
+    z-index: 1001;
+    width: 40px;
+    height: 40px;
+    color: #333; /* Ensure visible text color */
+}
+
+@media (max-width: 991px) {
+    .mobile-menu-toggle {
+        display: flex !important; /* Force display on mobile */
+        opacity: 1 !important; /* Ensure visible */
+        visibility: visible !important; /* Ensure visible */
+        position: relative !important; /* Ensure it takes space */
+    }
+    
+    /* Ensure the icon is visible */
+    .mobile-menu-toggle i,
+    .mobile-menu-toggle .menu-text {
+        opacity: 1 !important;
+        visibility: visible !important;
+        color: #333 !important; /* Dark color for visibility */
+    }
+    
+    /* Ensure the hamburger symbol fallback is visible */
+    .mobile-menu-toggle .menu-text {
+        display: inline !important;
+        font-size: 1.5rem !important;
+        margin-left: 4px !important;
+    }
+} 

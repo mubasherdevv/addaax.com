@@ -1,0 +1,15 @@
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+# 1. Base Escorts Page (website/escorts)
+RewriteRule ^escorts/?$ products.php [L,QSA]
+
+# 2. City Filter (website/escorts/delhi)
+RewriteRule ^escorts/([^/]+)/?$ products.php?city=$1 [L,QSA]
+
+# 3. Area Filter (website/escorts/delhi/clifton)
+RewriteRule ^escorts/([^/]+)/([^/]+)/?$ products.php?city=$1&area=$2 [L,QSA]
+
+# 4. Product Details (website/ad/product-title-106)
+RewriteRule ^ad/([a-z0-9-]+)-([0-9]+)/?$ product_details.php?id=$2 [L,QSA]

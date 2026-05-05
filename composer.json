@@ -1,0 +1,9 @@
+{
+    "name": "your-vendor/your-project",
+    "description": "E-commerce Website",
+    "require": {
+        "tecnickcom/tcpdf": "*",
+        "endroid/qr-code": "^6.0",
+        "phpoffice/phpspreadsheet": "^4.1"
+    }
+}

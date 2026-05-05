@@ -1,0 +1,111 @@
+/* CSS fixes for display issues */
+
+/* Make sure mobile toggle is always visible on mobile */
+@media (max-width: 991px) {
+    .mobile-menu-toggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+        z-index: 1000 !important;
+        width: 40px !important;
+        height: 40px !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .mobile-menu-toggle i,
+    .mobile-menu-toggle .menu-text {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Fix for product cards that don't have proper dimensions */
+.product-card {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: var(--radius-md, 0.5rem);
+    overflow: hidden;
+    background-color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.product-card img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    background-color: #f3f4f6;
+}
+
+/* Ensure consistent button dimensions */
+.btn {
+    min-width: 120px;
+    min-height: 40px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure consistent product metadata display */
+.product-meta {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+}
+
+/* Ensure footer is properly spaced and styled */
+footer {
+    margin-top: 3rem;
+    padding: 3rem 0 1rem;
+    background-color: #f3f4f6;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Fix for inconsistent container padding */
+.container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+}
+
+/* Ensure all images have fallback styles */
+img {
+    min-height: 30px;
+    min-width: 30px;
+    background-color: #f3f4f6;
+}
+
+/* Fix for cart page display issues */
+.cart-item {
+    display: grid;
+    grid-template-columns: 3fr 1fr 2fr 1fr 1fr;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .cart-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .cart-header {
+        display: none;
+    }
+} 

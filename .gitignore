@@ -1,0 +1,7 @@
+.gemini/
+.git/
+*.log
+scratch/
+auth/check_*.php
+auth/list_columns.php
+auth/check_badges_data.php

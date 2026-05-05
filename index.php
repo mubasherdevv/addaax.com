@@ -87,21 +87,7 @@ renderHeader($PAGE_TITLE, 'home');
             </div>
         </section>
 
-        <!-- Top Searches -->
-        <section class="searches-bg">
-            <div class="container-wide">
-                <h2 class="section-title">Top Searches in India</h2>
-                
-                <div class="search-tags">
-                    <a href="products.php?q=Shemale+escort+in+India" class="tag-btn">Shemale escort in India</a>
-                    <a href="products.php?q=Erotic+massage+in+India" class="tag-btn">Erotic massage in India</a>
-                    <a href="products.php?q=Bhabhi+sex+girl+in+India" class="tag-btn">Bhabhi sex girl in India</a>
-                    <a href="products.php?q=Cash+payment+call+girl+in+India" class="tag-btn">Cash payment call girl in India</a>
-                    <a href="products.php?q=Tamil+lady+sex+in+India" class="tag-btn">Tamil lady sex in India</a>
-                    <a href="products.php?q=Whatsapp+sex+chat+in+India" class="tag-btn">Whatsapp sex chat in India</a>
-                </div>
-            </div>
-        </section>
+       
     </main>
 
 <?php

@@ -65,7 +65,7 @@ renderHeader('Browse Ads | Adaax Premium', 'explore');
                 <nav class="breadcrumbs">
                     <a href="/index.php">Home</a> 
                     <span>></span> 
-                    <a href="/products.php">Escort</a>
+                    <a href="/escorts/">Escort</a>
                     <?php if (!empty($city_name)): ?>
                         <span>></span> 
                         <span class="current"><?php echo str_replace('-', ' ', htmlspecialchars($city_name)); ?></span>
@@ -168,10 +168,10 @@ renderHeader('Browse Ads | Adaax Premium', 'explore');
             <!-- Sidebar -->
             <aside class="sidebar-desktop">
                 <div class="sidebar-card">
-                    <div class="sidebar-title">ADS IN INDIA</div>
+                    <div class="sidebar-title">ADS IN PAKISTAN</div>
                     <div class="sidebar-list">
                         <?php foreach($sidebar_cities as $sc): ?>
-                            <a href="/products.php?city=<?php echo urlencode(strtolower(str_replace(' ', '-', $sc['name']))); ?>">
+                            <a href="/escorts/<?php echo urlencode(strtolower(str_replace(' ', '-', $sc['name']))); ?>">
                                 <?php echo htmlspecialchars($sc['name']); ?> Escort
                             </a>
                         <?php endforeach; ?>

@@ -1,6 +1,7 @@
-Options -MultiViews
+Options -MultiViews +FollowSymLinks
 RewriteEngine On
 RewriteBase /
+RewriteOptions Inherit
 
 # 1. Base Escorts Page (website/escorts)
 RewriteRule ^escorts/?$ products.php [L,QSA]

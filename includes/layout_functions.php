@@ -71,7 +71,7 @@ function renderHeader($page_title = 'Adaax Premium', $active_page = 'home') {
                 </div>
                 <nav class="desktop-nav">
                     <a href="/index.php" class="nav-link <?php echo $active_page == 'home' ? 'active' : ''; ?>">Home</a>
-                    <a href="/products.php" class="nav-link <?php echo $active_page == 'explore' ? 'active' : ''; ?>">Explore</a>
+                    <a href="/escorts/" class="nav-link <?php echo $active_page == 'explore' ? 'active' : ''; ?>">Explore</a>
                     <a href="/cities.php" class="nav-link <?php echo $active_page == 'cities' ? 'active' : ''; ?>">Cities</a>
                 </nav>
                 <div class="header-actions">
@@ -96,7 +96,7 @@ function renderHeader($page_title = 'Adaax Premium', $active_page = 'home') {
             </div>
             <ul class="menu-links">
                 <li><a href="/index.php">Home</a></li>
-                <li><a href="/products.php">Explore</a></li>
+                <li><a href="/escorts/">Explore</a></li>
                 <li><a href="/cities.php">Cities</a></li>
                 <?php if ($is_logged_in): ?>
                     <li><a href="/auth/dashboard.php">My Account</a></li>
@@ -127,7 +127,7 @@ function renderFooter() {
                     <div class="footer-col">
                         <h4>Quick Links</h4>
                         <ul class="footer-links">
-                            <li><a href="/products.php">Explore Ads</a></li>
+                            <li><a href="/escorts/">Explore Ads</a></li>
                             <li><a href="/post-ad.php">Post an Ad</a></li>
                             <li><a href="/cities.php">Cities</a></li>
                             <li><a href="/categories.php">Categories</a></li>
@@ -164,7 +164,7 @@ function renderFooter() {
                 <i class="fas fa-home"></i>
                 <span>Home</span>
             </a>
-            <a href="/products.php" class="nav-item">
+            <a href="/escorts/" class="nav-item">
                 <i class="fas fa-search"></i>
                 <span>Search</span>
             </a>

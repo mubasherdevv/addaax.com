@@ -1,18 +1,19 @@
-Options -MultiViews +FollowSymLinks
+Options +FollowSymLinks -MultiViews
 RewriteEngine On
-RewriteBase /
 
 # 1. Base Escorts Page
 RewriteRule ^escorts/?$ products.php [L,QSA]
 
-# 2. City Filter (Catch everything after /escorts/)
-RewriteRule ^escorts/([^/.]+)/?$ products.php?city=$1 [L,QSA]
+# 2. City Filter
+RewriteRule ^escorts/([^/]+)/?$ products.php?city=$1 [L,QSA]
 
 # 3. Area Filter
-RewriteRule ^escorts/([^/.]+)/([^/.]+)/?$ products.php?city=$1&area=$2 [L,QSA]
+RewriteRule ^escorts/([^/]+)/([^/]+)/?$ products.php?city=$1&area=$2 [L,QSA]
 
 # 4. Product Details
 RewriteRule ^ad/([a-z0-9-]+)-([0-9]+)/?$ product_details.php?id=$2 [L,QSA]
 
-# Test Rule
-RewriteRule ^test-rewrite$ index.php [L]
+# 5. Generic PHP Extension Hide (Optional)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]

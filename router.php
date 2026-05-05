@@ -7,8 +7,14 @@
 $request_uri = $_SERVER['REQUEST_URI'];
 $base_path = '/'; // Change this if the site is in a subdirectory
 
-// Remove base path and query strings
-$path = str_replace($base_path, '', parse_url($request_uri, PHP_URL_PATH));
+// Get the path from URL
+$path = parse_url($request_uri, PHP_URL_PATH);
+
+// Remove the base path from the start of the path
+if ($base_path !== '/' && strpos($path, $base_path) === 0) {
+    $path = substr($path, strlen($base_path));
+}
+
 $path = trim($path, '/');
 
 // Routing Logic

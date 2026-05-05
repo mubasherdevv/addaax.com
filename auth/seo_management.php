@@ -231,34 +231,6 @@ renderAdminSidebar('seo');
     cursor: pointer;
     color: #64748b;
 }
-.modal {
-    background: white !important;
-    padding: 30px;
-    border-radius: 20px;
-    width: 95%;
-    max-width: 600px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    transform: translateY(-20px);
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 10000;
-    margin: auto;
-}
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 15px;
-}
-.modal-close {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #64748b;
-}
 </style>
 
 <script>

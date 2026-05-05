@@ -1,19 +1,11 @@
 Options +FollowSymLinks -MultiViews
 RewriteEngine On
+RewriteBase /
 
-# 1. Base Escorts Page
-RewriteRule ^escorts/?$ products.php [L,QSA]
+# Skip existing files and directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
 
-# 2. City Filter
-RewriteRule ^escorts/([^/]+)/?$ products.php?city=$1 [L,QSA]
-
-# 3. Area Filter
-RewriteRule ^escorts/([^/]+)/([^/]+)/?$ products.php?city=$1&area=$2 [L,QSA]
-
-# 4. Product Details
-RewriteRule ^ad/([a-z0-9-]+)-([0-9]+)/?$ product_details.php?id=$2 [L,QSA]
-
-# 5. Generic PHP Extension Hide (Optional)
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.*)$ $1.php [NC,L]
+# Redirect everything else to router.php
+RewriteRule ^ router.php [L]

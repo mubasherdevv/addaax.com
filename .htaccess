@@ -2,26 +2,17 @@ Options -MultiViews +FollowSymLinks
 RewriteEngine On
 RewriteBase /
 
-# Force trailing slash for /escorts
-RewriteRule ^escorts$ /escorts/ [R=301,L]
-
 # 1. Base Escorts Page
 RewriteRule ^escorts/?$ products.php [L,QSA]
 
-# 2. City Filter
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^escorts/([^/]+)/?$ products.php?city=$1 [L,QSA]
+# 2. City Filter (Catch everything after /escorts/)
+RewriteRule ^escorts/([^/.]+)/?$ products.php?city=$1 [L,QSA]
 
 # 3. Area Filter
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^escorts/([^/]+)/([^/]+)/?$ products.php?city=$1&area=$2 [L,QSA]
+RewriteRule ^escorts/([^/.]+)/([^/.]+)/?$ products.php?city=$1&area=$2 [L,QSA]
 
 # 4. Product Details
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ad/([a-z0-9-]+)-([0-9]+)/?$ product_details.php?id=$2 [L,QSA]
 
-# Test Rule (addaax.com/test-rewrite should show home page)
+# Test Rule
 RewriteRule ^test-rewrite$ index.php [L]

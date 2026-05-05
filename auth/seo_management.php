@@ -233,9 +233,11 @@ renderAdminSidebar('seo');
 </style>
 
 <script>
-const modal = document.getElementById('seoModal');
+// Move functions to global scope explicitly
+window.showAddForm = function() {
+    const modal = document.getElementById('seoModal');
+    if (!modal) return;
 
-function showAddForm() {
     document.getElementById('modalTitle').innerText = 'Add SEO Settings';
     document.getElementById('seo_id').value = '';
     document.getElementById('page_name_select').value = '';
@@ -246,10 +248,13 @@ function showAddForm() {
     document.getElementById('custom_page_group').style.display = 'none';
     
     modal.style.display = 'flex';
-    setTimeout(() => modal.classList.add('visible'), 10);
-}
+    setTimeout(() => modal.classList.add('visible'), 50);
+};
 
-function editSeo(data) {
+window.editSeo = function(data) {
+    const modal = document.getElementById('seoModal');
+    if (!modal) return;
+
     document.getElementById('modalTitle').innerText = 'Edit SEO Settings';
     document.getElementById('seo_id').value = data.id;
     document.getElementById('meta_title').value = data.meta_title;
@@ -259,7 +264,6 @@ function editSeo(data) {
     const customGroup = document.getElementById('custom_page_group');
     const customInput = document.getElementById('page_name_custom');
     
-    // Check if the page exists in the dropdown
     let exists = false;
     for (let i = 0; i < select.options.length; i++) {
         if (select.options[i].value === data.page_name) {
@@ -281,10 +285,17 @@ function editSeo(data) {
     document.getElementById('page_name').value = data.page_name;
     
     modal.style.display = 'flex';
-    setTimeout(() => modal.classList.add('visible'), 10);
-}
+    setTimeout(() => modal.classList.add('visible'), 50);
+};
 
-function checkCustomPage(value) {
+window.closeModal = function() {
+    const modal = document.getElementById('seoModal');
+    if (!modal) return;
+    modal.classList.remove('visible');
+    setTimeout(() => modal.style.display = 'none', 300);
+};
+
+window.checkCustomPage = function(value) {
     const customGroup = document.getElementById('custom_page_group');
     if (value === 'custom') {
         customGroup.style.display = 'block';
@@ -292,29 +303,30 @@ function checkCustomPage(value) {
         customGroup.style.display = 'none';
         document.getElementById('page_name').value = value;
     }
-}
-
-// Before submitting, ensure the hidden page_name is set
-document.querySelector('form').onsubmit = function() {
-    const selectValue = document.getElementById('page_name_select').value;
-    if (selectValue === 'custom') {
-        document.getElementById('page_name').value = document.getElementById('page_name_custom').value;
-    } else {
-        document.getElementById('page_name').value = selectValue;
-    }
 };
 
-function closeModal() {
-    modal.classList.remove('visible');
-    setTimeout(() => modal.style.display = 'none', 300);
-}
-
-// Close on outside click
-window.onclick = function(event) {
-    if (event.target == modal) {
-        closeModal();
+// Form submit handler
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('#seoModal form');
+    if (form) {
+        form.onsubmit = function() {
+            const selectValue = document.getElementById('page_name_select').value;
+            if (selectValue === 'custom') {
+                document.getElementById('page_name').value = document.getElementById('page_name_custom').value;
+            } else {
+                document.getElementById('page_name').value = selectValue;
+            }
+        };
     }
-}
+    
+    // Close on outside click
+    window.onclick = function(event) {
+        const modal = document.getElementById('seoModal');
+        if (event.target == modal) {
+            window.closeModal();
+        }
+    }
+});
 </script>
 
 <?php renderAdminFooter(); ?>

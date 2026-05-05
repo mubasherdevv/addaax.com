@@ -86,15 +86,18 @@ try {
         $new_filename = 'product_' . time() . '_' . uniqid() . '.' . $file_extension;
         $target_file = $upload_dir . $new_filename;
         
-        // Move uploaded file
-        if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
+        // Move uploaded file with compression
+        require_once '../includes/image_utils.php';
+        $saved_filename = compressImage($_FILES['product_image']['tmp_name'], $target_file, 80);
+        
+        if ($saved_filename) {
             // Delete old image if it exists
             if (!empty($current_product['image']) && file_exists($upload_dir . $current_product['image'])) {
                 unlink($upload_dir . $current_product['image']);
             }
-            $product_image = $new_filename;
+            $product_image = $saved_filename;
         } else {
-            throw new Exception('Failed to upload image');
+            throw new Exception('Failed to upload and compress image');
         }
     }
 

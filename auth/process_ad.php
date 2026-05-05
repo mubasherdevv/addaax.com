@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Handle images
         if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
+            require_once '../includes/image_utils.php';
             $upload_dir = '../uploads/products/';
             if (!file_exists($upload_dir)) {
                 mkdir($upload_dir, 0777, true);
@@ -77,8 +78,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $unique_name = uniqid() . '_' . time() . '.' . $ext;
                     $target_path = $upload_dir . $unique_name;
 
-                    if (move_uploaded_file($tmp_name, $target_path)) {
-                        $db_path = 'uploads/products/' . $unique_name;
+                    // Use compression instead of move_uploaded_file
+                    $saved_filename = compressImage($tmp_name, $target_path, 75);
+                    
+                    if ($saved_filename) {
+                        $db_path = 'uploads/products/' . $saved_filename;
                         if (empty($first_image)) $first_image = $db_path;
 
                         $is_primary = ($key === 0) ? 1 : 0;

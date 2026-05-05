@@ -86,11 +86,14 @@ try {
         $new_filename = 'product_' . time() . '_' . uniqid() . '.' . $file_extension;
         $target_file = $upload_dir . $new_filename;
         
-        // Move uploaded file
-        if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
-            $product_image = $new_filename;
+        // Move uploaded file with compression
+        require_once '../includes/image_utils.php';
+        $saved_filename = compressImage($_FILES['product_image']['tmp_name'], $target_file, 80);
+        
+        if ($saved_filename) {
+            $product_image = $saved_filename;
         } else {
-            throw new Exception("Failed to upload image: " . error_get_last()['message']);
+            throw new Exception("Failed to upload and compress image");
         }
     }
 

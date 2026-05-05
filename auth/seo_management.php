@@ -192,23 +192,28 @@ renderAdminSidebar('seo');
     z-index: 9999;
     opacity: 0;
     transition: opacity 0.3s ease;
-}
 .modal-overlay.visible {
     display: flex !important;
     opacity: 1;
 }
+.modal-overlay.visible .modal {
+    display: block !important;
+    transform: translateY(0);
+    opacity: 1 !important;
+    visibility: visible !important;
+}
 .modal {
-    background: white;
+    background: white !important;
     padding: 30px;
     border-radius: 20px;
-    width: 90%;
+    width: 95%;
     max-width: 600px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     transform: translateY(-20px);
-    transition: transform 0.3s ease;
-}
-.modal-overlay.visible .modal {
-    transform: translateY(0);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 10000;
+    margin: auto;
 }
 .modal-header {
     display: flex;

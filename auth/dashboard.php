@@ -92,7 +92,7 @@ renderHeader('User Dashboard | ADAAX Premium', 'dashboard');
                 <?php if ($active_tab === 'overview'): ?>
                     <div class="dash-section-header">
                         <h2>Dashboard Overview</h2>
-                        <a href="/main/post-ad.php" class="post-ad-btn" style="padding: 10px 20px; font-size: 13px;">+ New Ad</a>
+                        <a href="/post-ad.php" class="post-ad-btn" style="padding: 10px 20px; font-size: 13px;">+ New Ad</a>
                     </div>
 
                     <div class="dash-stats-grid">
@@ -137,9 +137,9 @@ renderHeader('User Dashboard | ADAAX Premium', 'dashboard');
                                         <tr>
                                             <td>
                                                 <div class="dash-ad-item">
-                                                    <img src="<?php echo !empty($ad['image']) ? '/main/' . $ad['image'] : '/main/images/placeholder.png'; ?>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;">
+                                                    <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;">
                                                     <div>
-                                                        <a href="/main/product_details.php?id=<?php echo $ad['id']; ?>" class="dash-ad-title"><?php echo htmlspecialchars($ad['name']); ?></a>
+                                                        <a href="/product_details.php?id=<?php echo $ad['id']; ?>" class="dash-ad-title"><?php echo htmlspecialchars($ad['name']); ?></a>
                                                         <div style="font-size: 11px; color: var(--text-muted);"><?php echo $ad['city'] ?? 'Location N/A'; ?></div>
                                                     </div>
                                                 </div>
@@ -167,7 +167,7 @@ renderHeader('User Dashboard | ADAAX Premium', 'dashboard');
                 <?php elseif ($active_tab === 'ads'): ?>
                     <div class="dash-section-header">
                         <h2>My Advertisements</h2>
-                        <a href="/main/post-ad.php" class="post-ad-btn" style="padding: 10px 20px; font-size: 13px;">+ Post New Ad</a>
+                        <a href="/post-ad.php" class="post-ad-btn" style="padding: 10px 20px; font-size: 13px;">+ Post New Ad</a>
                     </div>
                     <div class="dash-table-wrap">
                         <table class="dash-table">
@@ -188,9 +188,9 @@ renderHeader('User Dashboard | ADAAX Premium', 'dashboard');
                                         <tr>
                                             <td>
                                                 <div class="dash-ad-item">
-                                                    <img src="<?php echo !empty($ad['image']) ? '/main/' . $ad['image'] : '/main/images/placeholder.png'; ?>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;">
+                                                    <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;">
                                                     <div>
-                                                        <a href="/main/product_details.php?id=<?php echo $ad['id']; ?>" class="dash-ad-title"><?php echo htmlspecialchars($ad['name']); ?></a>
+                                                        <a href="/product_details.php?id=<?php echo $ad['id']; ?>" class="dash-ad-title"><?php echo htmlspecialchars($ad['name']); ?></a>
                                                         <div style="font-size: 11px; color: var(--text-muted);"><?php echo $ad['city'] ?? 'Location N/A'; ?></div>
                                                     </div>
                                                 </div>

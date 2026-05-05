@@ -57,7 +57,7 @@ $cities = $conn->query("SELECT * FROM cities WHERE status = 1 ORDER BY name")->f
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Ad | Adaax Premium</title>
-    <link rel="stylesheet" href="/main/css/modern-directory.css">
+    <link rel="stylesheet" href="/css/modern-directory.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -72,7 +72,7 @@ $cities = $conn->query("SELECT * FROM cities WHERE status = 1 ORDER BY name")->f
 <body>
     <header class="premium-header">
         <div class="container-wide header-inner">
-            <a href="/main/index.php" class="logo">Adaa<span>x</span></a>
+            <a href="/index.php" class="logo">Adaa<span>x</span></a>
             <div class="header-actions">
                 <a href="dashboard.php" class="user-profile-link"><i class="fas fa-user-circle"></i> <span>Dashboard</span></a>
             </div>

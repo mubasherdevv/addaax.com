@@ -45,7 +45,17 @@ function renderHeader($page_title = 'ADDAAX Premium', $active_page = 'home') {
         <?php if (!empty($meta_description)): ?>
         <meta name="description" content="<?php echo htmlspecialchars($meta_description); ?>">
         <?php endif; ?>
-        <link rel="canonical" href="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+        <?php 
+        $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http");
+        $canonical_uri = str_replace('/index.php', '/', $_SERVER['REQUEST_URI']);
+        if ($canonical_uri == '') $canonical_uri = '/';
+        $canonical_url = $protocol . "://" . $_SERVER['HTTP_HOST'] . $canonical_uri;
+        // Remove trailing slash if it's not just the root
+        if (strlen($canonical_uri) > 1) {
+            $canonical_url = rtrim($canonical_url, '/');
+        }
+        ?>
+        <link rel="canonical" href="<?php echo $canonical_url; ?>">
         
         <!-- Organization Schema -->
         <script type="application/ld+json">

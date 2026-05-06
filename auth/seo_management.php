@@ -80,7 +80,7 @@ require_once 'includes/admin_layout.php';
 renderAdminHeader('SEO Management');
 ?>
 <!-- TinyMCE CDN -->
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/1vxh163mkcmuu0c82seo7eyc3ihpi172k71utpwgfqqwvinq/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
   function initTinyMCE() {
     if (tinymce.get('footer_content')) {

@@ -1,3 +1,5 @@
+Sitemap: https://addaax.com/sitemap.xml
+
 User-agent: *
 Allow: /
 Disallow: /auth/

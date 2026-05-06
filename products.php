@@ -156,6 +156,9 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                                 
                                 <!-- User Profile (Name Only) -->
                                 <div class="seller-pill">
+                                    <?php if($ad['is_featured']): ?>
+                                        <img src="/svg-icon/icon.svg" class="wa-mini-icon" alt="WhatsApp">
+                                    <?php endif; ?>
                                     <i class="fas fa-user-circle"></i>
                                     <span class="seller-name"><?php echo htmlspecialchars(($ad['first_name'] ?? 'Admin') . ' ' . ($ad['last_name'] ?? '')); ?></span>
                                 </div>

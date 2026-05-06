@@ -2731,3 +2731,48 @@ html.no-scroll, body.no-scroll {
     font-weight: 600;
     text-transform: capitalize;
 }
+
+/* WhatsApp Mini Icon in Listing */
+.wa-mini-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+    vertical-align: middle;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    transition: transform 0.3s ease;
+}
+
+.seller-pill:hover .wa-mini-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.seller-pill {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.seller-pill i {
+    font-size: 16px;
+    margin-right: 6px;
+    color: var(--accent-gold);
+}
+
+/* Responsive adjustments for mobile grid/list */
+@media (max-width: 768px) {
+    .wa-mini-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+    }
+    .seller-pill {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+}

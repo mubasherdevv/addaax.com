@@ -154,16 +154,10 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                             <div class="info-bottom">
                                 <div class="product-price">PKR <?php echo number_format($ad['price']); ?></div>
                                 
-                                <div class="seller-info-group">
-                                    <?php if($ad['is_featured']): ?>
-                                        <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $ad['phone'] ?? ''); ?>" target="_blank" class="wa-float-link" onclick="event.stopPropagation();">
-                                            <img src="/svg-icon/icon.svg" class="wa-mini-icon" alt="WhatsApp">
-                                        </a>
-                                    <?php endif; ?>
-                                    <div class="seller-pill">
-                                        <i class="fas fa-user-circle"></i>
-                                        <span class="seller-name"><?php echo htmlspecialchars(($ad['first_name'] ?? 'Admin') . ' ' . ($ad['last_name'] ?? '')); ?></span>
-                                    </div>
+                                <!-- User Profile (Name Only) -->
+                                <div class="seller-pill">
+                                    <i class="fas fa-user-circle"></i>
+                                    <span class="seller-name"><?php echo htmlspecialchars(($ad['first_name'] ?? 'Admin') . ' ' . ($ad['last_name'] ?? '')); ?></span>
                                 </div>
                             </div>
                         </div>

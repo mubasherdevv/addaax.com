@@ -80,7 +80,6 @@ function renderHeader($page_title = 'ADDAAX Premium', $active_page = 'home') {
         <link rel="icon" href="/images/<?php echo htmlspecialchars($favicon); ?>" type="image/x-icon">
         <?php endif; ?>
         <link rel="stylesheet" href="/css/modern-directory.css?v=2.1">
-        <link rel="stylesheet" href="/css/whatsapp-styles.css?v=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     </head>

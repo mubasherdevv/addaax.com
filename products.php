@@ -152,24 +152,7 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                             <p class="product-desc"><?php echo mb_strimwidth(strip_tags($ad['description'] ?? ''), 0, 180, "..."); ?></p>
                             
                             <div class="info-bottom">
-                                <div class="product-price">
-                                    <span>PKR <?php echo number_format($ad['price']); ?></span>
-                                    
-                                    <!-- Desktop WhatsApp -->
-                                    <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $ad['phone'] ?? ''); ?>" class="whatsapp-desktop" onclick="event.stopPropagation();" target="_blank">
-                                        <img src="/svg-icon/whatsapp-icon/dektop.svg" alt="WhatsApp">
-                                    </a>
-
-                                    <!-- Mobile List WhatsApp -->
-                                    <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $ad['phone'] ?? ''); ?>" class="whatsapp-mobile-list" onclick="event.stopPropagation();" target="_blank">
-                                        <img src="/svg-icon/whatsapp-icon/mobile-list.svg" alt="WhatsApp">
-                                    </a>
-
-                                    <!-- Mobile Grid WhatsApp -->
-                                    <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $ad['phone'] ?? ''); ?>" class="whatsapp-mobile-grid" onclick="event.stopPropagation();" target="_blank">
-                                        <img src="/svg-icon/whatsapp-icon/mobile-grid.svg" alt="WhatsApp">
-                                    </a>
-                                </div>
+                                <div class="product-price">PKR <?php echo number_format($ad['price']); ?></div>
                                 
                                 <!-- User Profile (Name Only) -->
                                 <div class="seller-pill">

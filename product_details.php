@@ -145,7 +145,7 @@ renderHeader($PAGE_TITLE, 'explore');
                 <!-- Gallery Section -->
                 <div class="gallery-card" style="max-width: 800px; margin-left: auto; margin-right: auto;">
                     <div class="main-image-box">
-                        <img id="mainImage" src="<?php echo str_starts_with($primary_image, 'http') ? $primary_image : '/' . $primary_image; ?>" alt="<?php echo htmlspecialchars($product['name'] ?? ''); ?>">
+                        <img id="mainImage" src="<?php echo str_starts_with($primary_image, 'http') ? $primary_image : '/' . $primary_image; ?>" alt="<?php echo htmlspecialchars($product['name'] ?? ''); ?>" width="800" height="500" fetchpriority="high">
                     </div>
                     <?php if(count($images) > 1): ?>
                     <div class="thumb-strip hide-scrollbar">
@@ -153,7 +153,7 @@ renderHeader($PAGE_TITLE, 'explore');
                             $img_path = str_starts_with($img['image_path'], 'http') ? $img['image_path'] : '/' . $img['image_path'];
                         ?>
                             <div class="thumb-box <?php echo $idx == 0 ? 'active' : ''; ?>" onclick="changeImage('<?php echo htmlspecialchars($img_path); ?>', this)">
-                                <img src="<?php echo htmlspecialchars($img_path); ?>" alt="">
+                                <img src="<?php echo htmlspecialchars($img_path); ?>" alt="" width="80" height="60" loading="lazy">
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -275,7 +275,7 @@ renderHeader($PAGE_TITLE, 'explore');
                 ?>
                     <a href="<?php echo getProductUrl($rp['id'], $rp['name']); ?>" class="product-card" style="margin-bottom: 0; display: block;">
                         <div class="product-image" style="height: 180px;">
-                            <img src="<?php echo htmlspecialchars($rp_img); ?>" alt="<?php echo htmlspecialchars($rp['name'] ?? ''); ?>">
+                            <img src="<?php echo htmlspecialchars($rp_img); ?>" alt="<?php echo htmlspecialchars($rp['name'] ?? ''); ?>" width="250" height="180" loading="lazy">
                             <?php if(!empty($rp['is_featured'])): ?>
                                 <div class="featured-badge" style="top: 10px; left: 10px;">★ FEATURED</div>
                             <?php endif; ?>

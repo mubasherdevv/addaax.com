@@ -47,8 +47,8 @@ function renderHeader($page_title = 'ADDAAX Premium', $active_page = 'home') {
         if (!empty($favicon)): ?>
         <link rel="icon" href="/images/<?php echo htmlspecialchars($favicon); ?>" type="image/x-icon">
         <?php endif; ?>
-        <link rel="stylesheet" href="/css/modern-directory.css?v=<?php echo time(); ?>">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="/css/modern-directory.css?v=2.1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -62,7 +62,7 @@ function renderHeader($page_title = 'ADDAAX Premium', $active_page = 'home') {
             $site_name = !empty($website_settings['website_name']) ? $website_settings['website_name'] : 'ADDAAX';
             ?>
             <a href="/index.php" class="logo">
-                <img src="<?php echo BASE_URL; ?>/images/<?php echo htmlspecialchars($logo_to_show); ?>" alt="Logo" height="35" style="vertical-align: middle; margin-right: 10px;" onerror="this.src='<?php echo BASE_URL; ?>/images/logo.jpg'; this.onerror=null;">
+                <img src="<?php echo BASE_URL; ?>/images/<?php echo htmlspecialchars($logo_to_show); ?>" alt="<?php echo htmlspecialchars($site_name); ?> Logo" width="35" height="35" fetchpriority="high" style="vertical-align: middle; margin-right: 10px;" onerror="this.src='<?php echo BASE_URL; ?>/images/logo.jpg'; this.onerror=null;">
                 <span><?php echo htmlspecialchars($site_name); ?></span>
             </a>
             <div class="mobile-nav-toggle" id="menuToggle">

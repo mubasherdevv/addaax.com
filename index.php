@@ -34,7 +34,7 @@ renderHeader($PAGE_TITLE, 'home');
                 </div>
                 
                 <div class="hero-image-wrap">
-                    <img src="images/hero_model.png" alt="Premium Escort Directory">
+                    <img src="images/hero_model.png" alt="Premium Escort Directory" width="600" height="400" fetchpriority="high">
                 </div>
             </div>
         </section>
@@ -46,37 +46,37 @@ renderHeader($PAGE_TITLE, 'home');
                 
                 <div class="location-grid">
                     <a href="/escorts/lahore" class="location-card">
-                        <img src="images/city_mumbai.png" alt="Lahore">
+                        <img src="images/city_mumbai.png" alt="Lahore" width="220" height="150" loading="lazy">
                         <div class="overlay">
                             <h3>Lahore</h3>
                         </div>
                     </a>
                     <a href="/escorts/karachi" class="location-card">
-                        <img src="images/city_delhi.png" alt="Karachi">
+                        <img src="images/city_delhi.png" alt="Karachi" width="220" height="150" loading="lazy">
                         <div class="overlay">
                             <h3>Karachi</h3>
                         </div>
                     </a>
                     <a href="/escorts/multan" class="location-card">
-                        <img src="images/city_bangalore.png" alt="Multan">
+                        <img src="images/city_bangalore.png" alt="Multan" width="220" height="150" loading="lazy">
                         <div class="overlay">
                             <h3>Multan</h3>
                         </div>
                     </a>
                     <a href="/escorts/islamabad" class="location-card">
-                        <img src="images/city_mumbai.png" alt="Islamabad" style="filter: hue-rotate(45deg);">
+                        <img src="images/city_mumbai.png" alt="Islamabad" width="220" height="150" loading="lazy" style="filter: hue-rotate(45deg);">
                         <div class="overlay">
                             <h3>Islamabad</h3>
                         </div>
                     </a>
                     <a href="/escorts/rawalpindi" class="location-card">
-                        <img src="images/city_delhi.png" alt="Rawalpindi" style="filter: hue-rotate(-45deg);">
+                        <img src="images/city_delhi.png" alt="Rawalpindi" width="220" height="150" loading="lazy" style="filter: hue-rotate(-45deg);">
                         <div class="overlay">
                             <h3>Rawalpindi</h3>
                         </div>
                     </a>
                     <a href="/escorts/murree" class="location-card">
-                        <img src="images/city_bangalore.png" alt="Murree" style="filter: brightness(0.8);">
+                        <img src="images/city_bangalore.png" alt="Murree" width="220" height="150" loading="lazy" style="filter: brightness(0.8);">
                         <div class="overlay">
                             <h3>Murree</h3>
                         </div>

@@ -16,8 +16,6 @@ if ($cities_result) {
         $city_slug = strtolower(str_replace(' ', '-', trim($city['name'])));
         echo '<url>';
         echo '<loc>' . $base_url . '/escorts/' . $city_slug . '</loc>';
-        echo '<changefreq>weekly</changefreq>';
-        echo '<priority>0.8</priority>';
         echo '</url>';
     }
 }

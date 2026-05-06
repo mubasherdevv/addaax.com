@@ -16,8 +16,6 @@ if ($ads_result) {
         $ad_slug = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', trim($ad['name']))));
         echo '<url>';
         echo '<loc>' . $base_url . '/ad/' . $ad_slug . '-' . $ad['id'] . '</loc>';
-        echo '<changefreq>daily</changefreq>';
-        echo '<priority>0.6</priority>';
         echo '</url>';
     }
 }

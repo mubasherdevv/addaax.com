@@ -46,4 +46,3 @@ try {
     error_log("Stack trace: " . $e->getTraceAsString());
     die("Database connection failed: " . $e->getMessage());
 }
-?> 

@@ -1,5 +1,5 @@
 ErrorDocument 404 /404.php
-RewriteRule ^sitemap\.xml$ sitemap.php [L]
+RewriteRule ^sitemap\.xml$ seo-system/index.php [L]
 Options +FollowSymLinks -MultiViews
 RewriteEngine On
 RewriteBase /

@@ -707,32 +707,42 @@ html.no-scroll, body.no-scroll {
 .product-card:hover .seller-name {
   color: var(--accent-gold);
 }
-
-/* --- WhatsApp Button Styling (Stable) --- */
-.seller-pill-wrap {
+/* WhatsApp Featured Icon Logic */
+.whatsapp-featured-wrap {
     display: flex;
     align-items: center;
-    gap: 10px;
+    margin-right: 4px;
 }
-.wa-btn-main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.wa-icon {
+    display: none; /* Hidden by default */
 }
-.wa-btn-main img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
+/* Desktop Default */
+.wa-desktop {
+    display: block;
+    height: 22px;
+    width: auto;
 }
-
-/* Hide on mobile grid if it's too cramped, or resize */
+/* Mobile Responsive */
 @media (max-width: 768px) {
-    .wa-btn-main img {
-        width: 22px;
-        height: 22px;
+    .wa-desktop { display: none !important; }
+    
+    /* Show Mobile List Icon by Default on Mobile */
+    .wa-mobile-list {
+        display: block;
+        height: 18px;
+        width: auto;
+    }
+    
+    /* Toggle for Grid View on Mobile */
+    .listing-items-wrapper.grid-view .wa-mobile-list {
+        display: none !important;
+    }
+    .listing-items-wrapper.grid-view .wa-mobile-grid {
+        display: block !important;
+        height: 16px;
+        width: auto;
     }
 }
-
 
 .action-btn {
   width: 40px;

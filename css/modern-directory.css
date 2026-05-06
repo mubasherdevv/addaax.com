@@ -2731,25 +2731,3 @@ html.no-scroll, body.no-scroll {
     font-weight: 600;
     text-transform: capitalize;
 }
-/* --- Featured WA Button --- */
-.wa-card-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    background: #22c55e;
-    color: white;
-    border-radius: 8px;
-    font-size: 16px;
-    text-decoration: none;
-    margin-left: 10px;
-    transition: all 0.2s ease;
-}
-
-.wa-card-btn:hover {
-    background: #16a34a;
-    transform: translateY(-2px);
-    color: white;
-}
-

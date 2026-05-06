@@ -275,11 +275,9 @@ renderHeader($PAGE_TITLE, 'explore');
                             </div>
                         </div>
 
-                        <?php if($product['is_featured']): ?>
                         <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $product['seller_phone'] ?: $product['phone'] ?: ''); ?>" target="_blank" class="btn-contact" style="background: #22c55e; height: 48px; border-radius: 8px;">
                             <i class="fab fa-whatsapp"></i> WhatsApp Seller
                         </a>
-                        <?php endif; ?>
                         <button class="btn-contact" id="callBtn" onclick="showPhone('<?php echo htmlspecialchars($product['seller_phone'] ?: $product['phone'] ?: 'N/A'); ?>')" style="background: transparent; border: 1px solid var(--white); color: var(--white); height: 48px; border-radius: 8px;">
                             <i class="fas fa-phone-alt"></i> <span id="callBtnText">Show Phone Number</span>
                         </button>

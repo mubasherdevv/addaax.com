@@ -32,7 +32,7 @@ if (!empty($city_name)) {
 $where = "WHERE " . implode(" AND ", $query_parts);
 
 // Fetch Products
-$query = "SELECT p.*, c.name as category_name, u.first_name, u.last_name, u.profile_image, u.phone as seller_phone, p.phone as product_phone, p.badges,
+$query = "SELECT p.*, c.name as category_name, u.first_name, u.last_name, u.profile_image, p.badges,
           IFNULL(NULLIF(p.image, ''), (SELECT image_path FROM product_images WHERE product_id = p.id ORDER BY is_primary DESC LIMIT 1)) as display_image
           FROM products p 
           LEFT JOIN categories c ON p.category_id = c.id 
@@ -152,17 +152,7 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                             <p class="product-desc"><?php echo mb_strimwidth(strip_tags($ad['description'] ?? ''), 0, 180, "..."); ?></p>
                             
                             <div class="info-bottom">
-                                <div style="display: flex; align-items: center;">
-                                    <div class="product-price">PKR <?php echo number_format($ad['price']); ?></div>
-                                    <?php if($ad['is_featured']): 
-                                        $wa_phone = preg_replace('/[^0-9]/', '', $ad['product_phone'] ?: $ad['seller_phone'] ?: '');
-                                        if(!empty($wa_phone)):
-                                    ?>
-                                        <a href="https://wa.me/<?php echo $wa_phone; ?>" target="_blank" class="wa-card-btn" onclick="event.stopPropagation();">
-                                            <i class="fab fa-whatsapp"></i>
-                                        </a>
-                                    <?php endif; endif; ?>
-                                </div>
+                                <div class="product-price">PKR <?php echo number_format($ad['price']); ?></div>
                                 
                                 <!-- User Profile (Name Only) -->
                                 <div class="seller-pill">

@@ -156,6 +156,13 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                                 
                                 <!-- User Profile (Name Only) -->
                                 <div class="seller-pill">
+                                    <?php if (isset($ad['is_featured']) && $ad['is_featured'] == 1): ?>
+                                        <div class="whatsapp-featured-wrap">
+                                            <img src="/svg-icon/whatsapp-icon/dektop.svg" class="wa-icon wa-desktop" alt="WA">
+                                            <img src="/svg-icon/whatsapp-icon/mobile-list.svg" class="wa-icon wa-mobile-list" alt="WA">
+                                            <img src="/svg-icon/whatsapp-icon/mobile-grid.svg" class="wa-icon wa-mobile-grid" alt="WA">
+                                        </div>
+                                    <?php endif; ?>
                                     <i class="fas fa-user-circle"></i>
                                     <span class="seller-name"><?php echo htmlspecialchars(($ad['first_name'] ?? 'Admin') . ' ' . ($ad['last_name'] ?? '')); ?></span>
                                 </div>

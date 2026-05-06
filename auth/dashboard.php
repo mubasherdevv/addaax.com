@@ -30,15 +30,21 @@ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $pending_ads = $stmt->get_result()->fetch_assoc()['count'] ?? 0;
 
-// Get Ads
+// Get Ads with Pagination
 $my_ads = [];
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$limit = 10;
+$offset = ($page - 1) * $limit;
+
 if ($active_tab === 'ads') {
-    $sql_ads = "SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE p.seller_id = ? ORDER BY p.created_at DESC";
+    $sql_ads = "SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE p.seller_id = ? ORDER BY p.created_at DESC LIMIT ? OFFSET ?";
     $stmt = $conn->prepare($sql_ads);
-    $stmt->bind_param("i", $user_id);
+    $stmt->bind_param("iii", $user_id, $limit, $offset);
     $stmt->execute();
     $res = $stmt->get_result();
     while ($row = $res->fetch_assoc()) { $my_ads[] = $row; }
+    
+    $total_pages = ceil($total_ads / $limit);
 }
 
 $recent_ads = [];
@@ -139,15 +145,20 @@ renderHeader('User Dashboard | ADAAX Premium', 'dashboard');
                                                 <div class="dash-ad-item">
                                                     <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;">
                                                     <div>
-                                                        <a href="/product_details.php?id=<?php echo $ad['id']; ?>" class="dash-ad-title"><?php echo htmlspecialchars($ad['name']); ?></a>
+                                                        <a href="/product_details.php?id=<?php echo $ad['id']; ?>" class="dash-ad-title">
+                                                            <?php echo htmlspecialchars($ad['name']); ?>
+                                                            <?php if(isset($ad['is_featured']) && $ad['is_featured']): ?>
+                                                                <span style="font-size: 9px; background: var(--accent-gold); color: #000; padding: 2px 5px; border-radius: 4px; margin-left: 5px; font-weight: 800;">FEATURED</span>
+                                                            <?php endif; ?>
+                                                        </a>
                                                         <div style="font-size: 11px; color: var(--text-muted);"><?php echo $ad['city'] ?? 'Location N/A'; ?></div>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td><?php echo htmlspecialchars($ad['category_name'] ?? 'Escorts'); ?></td>
                                             <td>
-                                                <span class="dash-status status-<?php echo $ad['status'] == 1 ? 'active' : ($ad['status'] == 0 ? 'pending' : 'expired'); ?>">
-                                                    <?php echo $ad['status'] == 1 ? 'Active' : ($ad['status'] == 0 ? 'Pending' : 'Expired'); ?>
+                                                <span class="dash-status status-<?php echo $ad['status'] == 1 ? 'active' : ($ad['status'] == 0 ? 'pending' : ($ad['status'] == 2 ? 'hidden' : 'expired')); ?>">
+                                                    <?php echo $ad['status'] == 1 ? 'Active' : ($ad['status'] == 0 ? 'Pending' : ($ad['status'] == 2 ? 'Hidden' : 'Expired')); ?>
                                                 </span>
                                             </td>
                                             <td><?php echo date('M d, Y', strtotime($ad['created_at'])); ?></td>
@@ -190,15 +201,20 @@ renderHeader('User Dashboard | ADAAX Premium', 'dashboard');
                                                 <div class="dash-ad-item">
                                                     <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;">
                                                     <div>
-                                                        <a href="/product_details.php?id=<?php echo $ad['id']; ?>" class="dash-ad-title"><?php echo htmlspecialchars($ad['name']); ?></a>
+                                                        <a href="/product_details.php?id=<?php echo $ad['id']; ?>" class="dash-ad-title">
+                                                            <?php echo htmlspecialchars($ad['name']); ?>
+                                                            <?php if(isset($ad['is_featured']) && $ad['is_featured']): ?>
+                                                                <span style="font-size: 9px; background: var(--accent-gold); color: #000; padding: 2px 5px; border-radius: 4px; margin-left: 5px; font-weight: 800;">FEATURED</span>
+                                                            <?php endif; ?>
+                                                        </a>
                                                         <div style="font-size: 11px; color: var(--text-muted);"><?php echo $ad['city'] ?? 'Location N/A'; ?></div>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td><?php echo htmlspecialchars($ad['category_name'] ?? 'Escorts'); ?></td>
                                             <td>
-                                                <span class="dash-status status-<?php echo $ad['status'] == 1 ? 'active' : ($ad['status'] == 0 ? 'pending' : 'expired'); ?>">
-                                                    <?php echo $ad['status'] == 1 ? 'Active' : ($ad['status'] == 0 ? 'Pending' : 'Expired'); ?>
+                                                <span class="dash-status status-<?php echo $ad['status'] == 1 ? 'active' : ($ad['status'] == 0 ? 'pending' : ($ad['status'] == 2 ? 'hidden' : 'expired')); ?>">
+                                                    <?php echo $ad['status'] == 1 ? 'Active' : ($ad['status'] == 0 ? 'Pending' : ($ad['status'] == 2 ? 'Hidden' : 'Expired')); ?>
                                                 </span>
                                             </td>
                                             <td><?php echo number_format($ad['views'] ?? 0); ?></td>
@@ -214,6 +230,18 @@ renderHeader('User Dashboard | ADAAX Premium', 'dashboard');
                             </tbody>
                         </table>
                     </div>
+
+                    <?php if ($total_pages > 1): ?>
+                        <div class="pagination" style="margin-top: 30px; display: flex; justify-content: center; gap: 10px;">
+                            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                                <a href="dashboard.php?tab=ads&page=<?php echo $i; ?>" 
+                                   style="padding: 8px 15px; border-radius: 8px; background: <?php echo $page == $i ? 'var(--accent-gold)' : 'var(--glass-bg)'; ?>; 
+                                          color: <?php echo $page == $i ? '#000' : 'var(--text-main)'; ?>; text-decoration: none; font-weight: 700; border: 1px solid var(--glass-border);">
+                                    <?php echo $i; ?>
+                                </a>
+                            <?php endfor; ?>
+                        </div>
+                    <?php endif; ?>
 
                 <?php elseif ($active_tab === 'profile'): ?>
                     <div class="dash-section-header">

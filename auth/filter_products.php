@@ -149,9 +149,19 @@ try {
                     </div>
                 </td>
                 <td><?php echo htmlspecialchars($product['name']); ?></td>
-                <td><?php echo htmlspecialchars($product['category_name'] ?? 'Uncategorized'); ?></td>
                 <td>
-                    <?php echo formatCurrency($product['price']); ?>
+                    <span class="status-badge <?php echo $product['status'] == 1 ? 'active' : 'hidden'; ?>" 
+                          style="padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; 
+                                 background: <?php echo $product['status'] == 1 ? '#dcfce7' : '#fee2e2'; ?>; 
+                                 color: <?php echo $product['status'] == 1 ? '#166534' : '#991b1b'; ?>;">
+                        <?php echo $product['status'] == 1 ? 'ACTIVE' : 'HIDDEN'; ?>
+                    </span>
+                </td>
+                <td style="text-align: center;">
+                    <i class="fas fa-star <?php echo $product['is_featured'] ? 'featured-active' : 'featured-inactive'; ?>" 
+                       style="font-size: 18px; cursor: pointer; color: <?php echo $product['is_featured'] ? '#fbbf24' : '#e2e8f0'; ?>"
+                       onclick="toggleFeatured(<?php echo $product['id']; ?>, this)"
+                       title="<?php echo $product['is_featured'] ? 'Remove from Featured' : 'Mark as Featured'; ?>"></i>
                 </td>
                 <td>
                     <div style="font-size: 13.5px; line-height: 1.4;">
@@ -176,9 +186,15 @@ try {
                 </td>
                 <td>
                     <div class="table-actions">
-                        <a href="edit_product.php?id=<?php echo $product['id']; ?>" class="btn-edit"><i class="fas fa-edit"></i> Edit</a>
-                        <a href="#" class="btn-delete" onclick="deleteProduct(<?php echo $product['id']; ?>); return false;"><i class="fas fa-trash"></i></a>
-                        <a href="<?php echo getProductUrl($product['id'], $product['name']); ?>" class="btn-view"><i class="fas fa-eye"></i></a>
+                        <a href="#" class="btn-status-toggle" 
+                           style="color: <?php echo $product['status'] == 1 ? '#ef4444' : '#22c55e'; ?>"
+                           onclick="toggleStatus(<?php echo $product['id']; ?>, this)"
+                           title="<?php echo $product['status'] == 1 ? 'Hide Ad' : 'Show Ad'; ?>">
+                            <i class="fas <?php echo $product['status'] == 1 ? 'fa-eye-slash' : 'fa-eye'; ?>"></i>
+                        </a>
+                        <a href="edit_product.php?id=<?php echo $product['id']; ?>" class="btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="btn-delete" onclick="deleteProduct(<?php echo $product['id']; ?>); return false;" title="Delete"><i class="fas fa-trash"></i></a>
+                        <a href="<?php echo getProductUrl($product['id'], $product['name']); ?>" class="btn-view" title="View"><i class="fas fa-eye"></i></a>
                     </div>
                 </td>
             </tr>
@@ -244,6 +260,12 @@ try {
                         </div>
                     </div>
                     <div class="product-actions">
+                        <a href="#" class="btn-status-toggle" 
+                           style="color: <?php echo $product['status'] == 1 ? '#ef4444' : '#22c55e'; ?>"
+                           onclick="toggleStatus(<?php echo $product['id']; ?>, this)"
+                           title="<?php echo $product['status'] == 1 ? 'Hide Ad' : 'Show Ad'; ?>">
+                            <i class="fas <?php echo $product['status'] == 1 ? 'fa-eye-slash' : 'fa-eye'; ?>"></i>
+                        </a>
                         <a href="edit_product.php?id=<?php echo $product['id']; ?>" class="btn-edit"><i class="fas fa-edit"></i> <span>Edit</span></a>
                         <a href="#" class="btn-delete" onclick="deleteProduct(<?php echo $product['id']; ?>); return false;"><i class="fas fa-trash"></i> <span>Delete</span></a>
                         <a href="<?php echo getProductUrl($product['id'], $product['name']); ?>" class="btn-view"><i class="fas fa-eye"></i> <span>View</span></a>

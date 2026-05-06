@@ -79,10 +79,24 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
 
 // Get all products
 $products = [];
-$category_filter = isset($_GET['category']) ? intval($_GET['category']) : 0;
-$category_name = '';
+    // Pagination settings
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $limit = 20;
+    $offset = ($page - 1) * $limit;
 
-try {
+    // Get total count for pagination
+    $count_sql = "SELECT COUNT(*) as total FROM products p";
+    if ($category_filter > 0) {
+        $count_sql .= " WHERE p.category_id = ?";
+        $count_stmt = $conn->prepare($count_sql);
+        $count_stmt->bind_param('i', $category_filter);
+        $count_stmt->execute();
+        $total_products = $count_stmt->get_result()->fetch_assoc()['total'];
+    } else {
+        $total_products = $conn->query($count_sql)->fetch_assoc()['total'];
+    }
+    $total_pages = ceil($total_products / $limit);
+
     // Check if category filter is applied
     if ($category_filter > 0) {
         // Get category name for display
@@ -102,9 +116,10 @@ try {
                         LEFT JOIN categories c ON p.category_id = c.id
                         LEFT JOIN users u ON p.seller_id = u.id
                         WHERE p.category_id = ?
-                        ORDER BY p.id DESC";
+                        ORDER BY p.id DESC
+                        LIMIT ? OFFSET ?";
         $products_stmt = $conn->prepare($products_sql);
-        $products_stmt->bind_param('i', $category_filter);
+        $products_stmt->bind_param('iii', $category_filter, $limit, $offset);
         $products_stmt->execute();
         $products_result = $products_stmt->get_result();
     } else {
@@ -113,8 +128,12 @@ try {
                         FROM products p
                         LEFT JOIN categories c ON p.category_id = c.id
                         LEFT JOIN users u ON p.seller_id = u.id
-                        ORDER BY p.id DESC";
-        $products_result = $conn->query($products_sql);
+                        ORDER BY p.id DESC
+                        LIMIT ? OFFSET ?";
+        $products_stmt = $conn->prepare($products_sql);
+        $products_stmt->bind_param('ii', $limit, $offset);
+        $products_stmt->execute();
+        $products_result = $products_stmt->get_result();
     }
     
     if ($products_result) {
@@ -1574,10 +1593,9 @@ renderAdminSidebar('products');
                                 <th width="40px"><input type="checkbox" id="select-all" class="product-checkbox"></th>
                                 <th width="80px">Image</th>
                                 <th>Product Name <i class="fas fa-sort"></i></th>
-                                <th>Category</th>
-                                <th>Price <i class="fas fa-sort"></i></th>
-                                <th>User Profile</th>
-                                <th width="180px">Actions</th>
+                                <th width="120px">Status</th>
+                                <th width="100px">Featured</th>
+                                <th width="200px">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1646,36 +1664,31 @@ renderAdminSidebar('products');
                                             </div>
                                         <?php endif; ?>
                                     </td>
-                                    <td><?php echo htmlspecialchars($product['category_name'] ?? 'Uncategorized'); ?></td>
                                     <td>
-                                        <?php echo formatCurrency($product['price']); ?>
+                                        <span class="status-badge <?php echo $product['status'] == 1 ? 'active' : 'hidden'; ?>" 
+                                              style="padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; 
+                                                     background: <?php echo $product['status'] == 1 ? '#dcfce7' : '#fee2e2'; ?>; 
+                                                     color: <?php echo $product['status'] == 1 ? '#166534' : '#991b1b'; ?>;">
+                                            <?php echo $product['status'] == 1 ? 'ACTIVE' : 'HIDDEN'; ?>
+                                        </span>
                                     </td>
-                                    <td>
-                                        <div style="font-size: 13.5px; line-height: 1.4;">
-                                            <strong style="color: #1e293b; display: block; margin-bottom: 2px;">
-                                                <?php echo htmlspecialchars(($product['first_name'] ?? '') . ' ' . ($product['last_name'] ?? 'Admin')); ?>
-                                            </strong>
-<div style="color: #64748b; font-size: 12px; margin-bottom: 3px;">
-                                            <i class="fas fa-envelope" style="width: 14px; opacity: 0.7;"></i> <?php echo htmlspecialchars($product['user_email'] ?? $_SESSION['user_email'] ?? 'System'); ?>
-                                        </div>
-                                            <?php if (!empty($product['city']) || !empty($product['province'])): ?>
-                                            <div style="color: #6366f1; font-size: 12px; font-weight: 500;">
-                                                <i class="fas fa-map-marker-alt" style="width: 14px; opacity: 0.8;"></i> 
-                                                <?php 
-                                                    $location = [];
-                                                    if (!empty($product['city'])) $location[] = $product['city'];
-                                                    if (!empty($product['province'])) $location[] = $product['province'];
-                                                    echo htmlspecialchars(implode(', ', $location));
-                                                ?>
-                                            </div>
-                                            <?php endif; ?>
-                                        </div>
+                                    <td style="text-align: center;">
+                                        <i class="fas fa-star <?php echo $product['is_featured'] ? 'featured-active' : 'featured-inactive'; ?>" 
+                                           style="font-size: 18px; cursor: pointer; color: <?php echo $product['is_featured'] ? '#fbbf24' : '#e2e8f0'; ?>"
+                                           onclick="toggleFeatured(<?php echo $product['id']; ?>, this)"
+                                           title="<?php echo $product['is_featured'] ? 'Remove from Featured' : 'Mark as Featured'; ?>"></i>
                                     </td>
                                     <td>
                                         <div class="table-actions">
-                                            <a href="edit_product.php?id=<?php echo $product['id']; ?>" class="btn-edit"><i class="fas fa-edit"></i> Edit</a>
-                                            <a href="#" class="btn-delete" onclick="deleteProduct(<?php echo $product['id']; ?>)"><i class="fas fa-trash"></i></a>
-                                            <a href="<?php echo getProductUrl($product['id'], $product['name']); ?>" class="btn-view"><i class="fas fa-eye"></i></a>
+                                            <a href="#" class="btn-status-toggle" 
+                                               style="color: <?php echo $product['status'] == 1 ? '#ef4444' : '#22c55e'; ?>"
+                                               onclick="toggleStatus(<?php echo $product['id']; ?>, this)"
+                                               title="<?php echo $product['status'] == 1 ? 'Hide Ad' : 'Show Ad'; ?>">
+                                                <i class="fas <?php echo $product['status'] == 1 ? 'fa-eye-slash' : 'fa-eye'; ?>"></i>
+                                            </a>
+                                            <a href="edit_product.php?id=<?php echo $product['id']; ?>" class="btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="btn-delete" onclick="deleteProduct(<?php echo $product['id']; ?>)" title="Delete"><i class="fas fa-trash"></i></a>
+                                            <a href="<?php echo getProductUrl($product['id'], $product['name']); ?>" class="btn-view" title="View"><i class="fas fa-eye"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -1684,6 +1697,18 @@ renderAdminSidebar('products');
                         </tbody>
                     </table>
                 </div>
+
+                <?php if ($total_pages > 1): ?>
+                    <div class="pagination" style="margin: 20px 0; display: flex; justify-content: center; gap: 8px;">
+                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                            <a href="product_management.php?page=<?php echo $i; ?><?php echo $category_filter > 0 ? '&category='.$category_filter : ''; ?>" 
+                               style="padding: 8px 16px; border-radius: 8px; border: 1px solid #e2e8f0; text-decoration: none; font-weight: 600;
+                                      background: <?php echo $page == $i ? '#6366f1' : '#fff'; ?>; color: <?php echo $page == $i ? '#fff' : '#64748b'; ?>;">
+                                <?php echo $i; ?>
+                            </a>
+                        <?php endfor; ?>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <!-- Bulk Add Products Modal -->
@@ -2356,6 +2381,64 @@ Samsung TV | Electronics | 1299.99"></textarea>
                 }, 100);
             }
         });
+        // Toggle Featured Ad
+        window.toggleFeatured = function(productId, element) {
+            $.ajax({
+                url: 'toggle_featured.php',
+                type: 'POST',
+                data: { id: productId },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        const isFeatured = response.is_featured;
+                        $(element).css('color', isFeatured ? '#fbbf24' : '#e2e8f0');
+                        $(element).attr('title', isFeatured ? 'Remove from Featured' : 'Mark as Featured');
+                        showFancyPopup(isFeatured ? 'Ad marked as Featured' : 'Ad removed from Featured');
+                    } else {
+                        showFancyPopup('Error: ' + response.message, 'error');
+                    }
+                },
+                error: function() {
+                    showFancyPopup('An error occurred. Please try again.', 'error');
+                }
+            });
+        };
+
+        // Toggle Ad Status (Active/Hide)
+        window.toggleStatus = function(productId, element) {
+            $.ajax({
+                url: 'toggle_status.php',
+                type: 'POST',
+                data: { id: productId },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        const isActive = response.status == 1;
+                        const row = $(element).closest('tr');
+                        const badge = row.find('.status-badge');
+                        
+                        // Update badge
+                        badge.text(isActive ? 'ACTIVE' : 'HIDDEN');
+                        badge.css({
+                            'background': isActive ? '#dcfce7' : '#fee2e2',
+                            'color': isActive ? '#166534' : '#991b1b'
+                        });
+                        
+                        // Update action button
+                        $(element).css('color', isActive ? '#ef4444' : '#22c55e');
+                        $(element).attr('title', isActive ? 'Hide Ad' : 'Show Ad');
+                        $(element).find('i').attr('class', isActive ? 'fas fa-eye-slash' : 'fas fa-eye');
+                        
+                        showFancyPopup(isActive ? 'Ad is now Active' : 'Ad is now Hidden');
+                    } else {
+                        showFancyPopup('Error: ' + response.message, 'error');
+                    }
+                },
+                error: function() {
+                    showFancyPopup('An error occurred. Please try again.', 'error');
+                }
+            });
+        };
     });
 
     // Add this after your existing JavaScript code

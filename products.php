@@ -103,7 +103,8 @@ renderHeader('Browse Ads | Adaax Premium', 'explore');
                     <a href="<?php echo getProductUrl($ad['id'], $ad['name']); ?>" class="product-card <?php echo $ad['is_featured'] ? 'featured-card' : ''; ?>">
                         <?php if($ad['is_featured']): ?>
                             <div class="featured-badge-svg">
-                                <img src="/svg-icon/featured-overlay.svg" alt="Featured Ad">
+                                <img src="/svg-icon/featured-desktop.svg" class="desktop-featured" alt="Featured Ad">
+                                <img src="/svg-icon/featured-mobile.svg" class="mobile-featured" alt="Featured Ad">
                             </div>
                         <?php endif; ?>
                         <div class="product-image">

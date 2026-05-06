@@ -460,6 +460,14 @@ html.no-scroll, body.no-scroll {
   overflow: hidden;
 }
 
+.featured-badge-svg .mobile-featured {
+  display: none;
+}
+
+.featured-badge-svg .desktop-featured {
+  display: block;
+}
+
 .featured-badge-svg img {
   width: 100%;
   height: 100%;
@@ -484,10 +492,16 @@ html.no-scroll, body.no-scroll {
 
 /* Specific adjustment for Grid View & Mobile */
 @media (max-width: 768px) {
+  .featured-badge-svg .mobile-featured {
+    display: block;
+  }
+  .featured-badge-svg .desktop-featured {
+    display: none;
+  }
   .featured-badge-svg img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: right top;
   }
 }

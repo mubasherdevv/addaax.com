@@ -1,0 +1,60 @@
+
+/* --- WhatsApp Icons Styling --- */
+.product-price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wa-icon-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.wa-icon-wrap img {
+    display: none;
+    height: 25px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.wa-icon-wrap img:hover {
+    transform: scale(1.1);
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+    .wa-icon-wrap .wa-desktop {
+        display: block;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    /* Mobile List View */
+    .listing-items-wrapper:not(.grid-view) .wa-icon-wrap .wa-mobile-list {
+        display: block;
+    }
+
+    /* Mobile Grid View */
+    .listing-items-wrapper.grid-view .wa-icon-wrap .wa-mobile-grid {
+        display: block;
+        height: 18px;
+    }
+    
+    .listing-items-wrapper.grid-view .product-price {
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    /* Hide description in Mobile Grid View */
+    .listing-items-wrapper.grid-view .product-desc {
+        display: none;
+    }
+    
+    /* Ensure info-bottom has enough space */
+    .listing-items-wrapper.grid-view .info-bottom {
+        padding-top: 10px;
+        margin-top: auto;
+    }
+}

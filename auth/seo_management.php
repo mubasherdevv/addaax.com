@@ -39,13 +39,17 @@ if (isset($_POST['action'])) {
                 $stmt->bind_param("ssss", $page_name, $meta_title, $meta_description, $footer_content);
             }
 
-            if ($stmt->execute()) {
-                $success_message = "SEO settings saved successfully!";
-            } else {
-                if ($conn->errno == 1062) {
-                    $error_message = "Error: SEO settings for this page name already exist.";
+            try {
+                if ($stmt->execute()) {
+                    $success_message = "SEO settings saved successfully!";
                 } else {
                     $error_message = "Error saving SEO settings: " . $conn->error;
+                }
+            } catch (mysqli_sql_exception $e) {
+                if ($e->getCode() == 1062) {
+                    $error_message = "Error: SEO settings for this page name already exist.";
+                } else {
+                    $error_message = "Error: " . $e->getMessage();
                 }
             }
         }

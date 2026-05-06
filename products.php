@@ -140,15 +140,6 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                             <?php endif; ?>
                             
                             <div class="city-badge"><?php echo strtoupper(htmlspecialchars($ad['city'] ?? 'Lahore')); ?></div>
-
-                            <?php if($ad['is_featured']): 
-                                $wa_phone = preg_replace('/[^0-9]/', '', $ad['product_phone'] ?: $ad['seller_phone'] ?: '');
-                                if(!empty($wa_phone)):
-                            ?>
-                                <a href="https://wa.me/<?php echo $wa_phone; ?>" target="_blank" class="wa-float-btn" onclick="event.stopPropagation();">
-                                    <i class="fab fa-whatsapp"></i>
-                                </a>
-                            <?php endif; endif; ?>
                         </div>
                         <div class="product-info">
                             <div class="info-top">
@@ -161,7 +152,17 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                             <p class="product-desc"><?php echo mb_strimwidth(strip_tags($ad['description'] ?? ''), 0, 180, "..."); ?></p>
                             
                             <div class="info-bottom">
-                                <div class="product-price">PKR <?php echo number_format($ad['price']); ?></div>
+                                <div style="display: flex; align-items: center;">
+                                    <div class="product-price">PKR <?php echo number_format($ad['price']); ?></div>
+                                    <?php if($ad['is_featured']): 
+                                        $wa_phone = preg_replace('/[^0-9]/', '', $ad['product_phone'] ?: $ad['seller_phone'] ?: '');
+                                        if(!empty($wa_phone)):
+                                    ?>
+                                        <a href="https://wa.me/<?php echo $wa_phone; ?>" target="_blank" class="wa-card-btn" onclick="event.stopPropagation();">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </a>
+                                    <?php endif; endif; ?>
+                                </div>
                                 
                                 <!-- User Profile (Name Only) -->
                                 <div class="seller-pill">

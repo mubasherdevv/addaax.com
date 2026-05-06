@@ -137,15 +137,21 @@ renderAdminSidebar('users');
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="product_management.php?seller_id=<?php echo $user['id']; ?>" 
-                                           style="text-decoration: none; color: var(--primary); font-weight: 700; background: rgba(99, 102, 241, 0.1); padding: 4px 10px; border-radius: 6px;">
-                                            <?php echo $user['total_ads']; ?> Ads
-                                        </a>
+                                        <?php if ($user['total_ads'] > 0): ?>
+                                            <a href="product_management.php?seller_id=<?php echo $user['id']; ?>" 
+                                               style="text-decoration: none; color: var(--primary); font-weight: 700; background: rgba(99, 102, 241, 0.1); padding: 4px 10px; border-radius: 6px;">
+                                                <?php echo $user['total_ads']; ?> Ads
+                                            </a>
+                                        <?php else: ?>
+                                            <span style="color: var(--text-muted); font-size: 0.85rem; font-style: italic;">No Ads</span>
+                                        <?php endif; ?>
                                     </td>
                                     <td><?php echo $user['last_login'] ? htmlspecialchars($user['last_login']) : 'Never'; ?></td>
                                     <td class="user-actions" style="text-align: right;">
                                         <button onclick="editUser(<?php echo $user['id']; ?>)" class="btn-user-dash" style="background:none; border:none; cursor:pointer; color: var(--primary);" title="Edit"><i class="fas fa-edit"></i></button>
-                                        <a href="product_management.php?seller_id=<?php echo $user['id']; ?>" class="btn-user-dash" style="background:none; border:none; cursor:pointer; color: var(--info);" title="View Ads"><i class="fas fa-ad"></i></a>
+                                        <?php if ($user['total_ads'] > 0): ?>
+                                            <a href="product_management.php?seller_id=<?php echo $user['id']; ?>" class="btn-user-dash" style="background:none; border:none; cursor:pointer; color: var(--info);" title="View Ads"><i class="fas fa-ad"></i></a>
+                                        <?php endif; ?>
                                         <?php if($user['id'] != $_SESSION['user_id']): ?>
                                         <button onclick="deleteUser(<?php echo $user['id']; ?>)" class="btn-user-dash" style="background:none; border:none; cursor:pointer; color: var(--danger);" title="Delete"><i class="fas fa-trash-alt"></i></button>
                                         <?php endif; ?>

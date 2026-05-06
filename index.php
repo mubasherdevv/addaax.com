@@ -60,37 +60,37 @@ renderHeader($PAGE_TITLE, 'home');
                 
                 <div class="location-grid">
                     <a href="/escorts/lahore" class="location-card">
-                        <img src="images/cities/lahore.jpg" alt="Lahore" width="400" height="250" loading="lazy">
+                        <img src="images/cities/lahore.webp" alt="Lahore" width="400" height="250" loading="lazy">
                         <div class="overlay">
                             <h3>Lahore</h3>
                         </div>
                     </a>
                     <a href="/escorts/karachi" class="location-card">
-                        <img src="images/cities/karachi.jpg" alt="Karachi" width="400" height="250" loading="lazy">
+                        <img src="images/cities/karachi.webp" alt="Karachi" width="400" height="250" loading="lazy">
                         <div class="overlay">
                             <h3>Karachi</h3>
                         </div>
                     </a>
                     <a href="/escorts/multan" class="location-card">
-                        <img src="images/cities/multan.jpg" alt="Multan" width="400" height="250" loading="lazy">
+                        <img src="images/cities/multan.webp" alt="Multan" width="400" height="250" loading="lazy">
                         <div class="overlay">
                             <h3>Multan</h3>
                         </div>
                     </a>
                     <a href="/escorts/islamabad" class="location-card">
-                        <img src="images/cities/islamabad.jpg" alt="Islamabad" width="400" height="250" loading="lazy">
-                        <div class="overlay">
+                        <img src="images/cities/islamabad.webp" alt="Islamabad" width="400" height="250" loading="lazy">
+                        <div class="overlay">   
                             <h3>Islamabad</h3>
                         </div>
                     </a>
                     <a href="/escorts/rawalpindi" class="location-card">
-                        <img src="images/cities/rawalpindi.jpg" alt="Rawalpindi" width="400" height="250" loading="lazy">
+                        <img src="images/cities/rawalpindi.webp" alt="Rawalpindi" width="400" height="250" loading="lazy">
                         <div class="overlay">
                             <h3>Rawalpindi</h3>
                         </div>
                     </a>
                     <a href="/escorts/murree" class="location-card">
-                        <img src="images/cities/murree.jpg" alt="Murree" width="400" height="250" loading="lazy">
+                        <img src="images/cities/murree.webp" alt="Murree" width="400" height="250" loading="lazy">
                         <div class="overlay">
                             <h3>Murree</h3>
                         </div>

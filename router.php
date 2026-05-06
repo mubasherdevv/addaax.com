@@ -53,6 +53,11 @@ if (file_exists($path) && is_file($path)) {
     return false; // Serve static files as-is
 }
 
-// 4. Default to index.php
-require 'index.php';
+// 4. Default to 404 for unknown URLs
+if ($path !== '') {
+    http_response_code(404);
+    require '404.php';
+} else {
+    require 'index.php';
+}
 ?>

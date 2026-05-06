@@ -458,17 +458,12 @@ html.no-scroll, body.no-scroll {
   pointer-events: none;
   border-radius: var(--radius);
   overflow: hidden;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
 }
 
 .featured-badge-svg img {
   width: 100%;
-  height: auto;
-  max-height: 100%;
-  object-fit: contain;
-  object-position: right top;
+  height: 100%;
+  object-fit: fill;
   opacity: 1;
 }
 
@@ -480,16 +475,17 @@ html.no-scroll, body.no-scroll {
 
 /* Specific adjustment for List View (Wide cards) */
 .listing-items-wrapper:not(.grid-view) .featured-card .featured-badge-svg img {
-  width: 100%; /* Cover full width to avoid cutting the design lines */
-  object-fit: cover;
-  object-position: right center;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
 }
 
 /* Specific adjustment for Grid View & Mobile */
 @media (max-width: 768px) {
   .featured-badge-svg img {
-    width: 100% !important;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
   }
 }
 

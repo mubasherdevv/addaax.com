@@ -2731,52 +2731,70 @@ html.no-scroll, body.no-scroll {
     font-weight: 600;
     text-transform: capitalize;
 }
+.seller-info-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-/* WhatsApp Mini Icon in Listing */
+.wa-float-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(37, 211, 102, 0.1);
+    border: 1px solid rgba(37, 211, 102, 0.2);
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+}
+
+.wa-float-link:hover {
+    background: rgba(37, 211, 102, 0.2);
+    transform: translateY(-2px) scale(1.1);
+    border-color: #25D366;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+}
+
 .wa-mini-icon {
     width: 20px !important;
     height: 20px !important;
-    min-width: 20px;
-    min-height: 20px;
-    margin-right: 8px;
-    display: inline-block;
-    vertical-align: middle;
+    object-fit: contain !important;
     flex-shrink: 0;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-    transition: transform 0.3s ease;
-}
-
-.seller-pill:hover .wa-mini-icon {
-    transform: scale(1.1) rotate(5deg);
 }
 
 .seller-pill {
     display: flex;
     align-items: center;
     background: rgba(255, 255, 255, 0.05);
-    padding: 6px 12px;
+    padding: 6px 14px;
     border-radius: 20px;
     font-size: 13px;
     color: var(--text-muted);
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .seller-pill i {
     font-size: 16px;
-    margin-right: 6px;
+    margin-right: 8px;
     color: var(--accent-gold);
 }
 
-/* Responsive adjustments for mobile grid/list */
+/* Responsive adjustments */
 @media (max-width: 768px) {
+    .wa-float-link {
+        width: 28px;
+        height: 28px;
+    }
     .wa-mini-icon {
-        width: 16px;
-        height: 16px;
-        margin-right: 4px;
+        width: 16px !important;
+        height: 16px !important;
     }
     .seller-pill {
-        padding: 4px 10px;
+        padding: 4px 12px;
         font-size: 12px;
     }
 }

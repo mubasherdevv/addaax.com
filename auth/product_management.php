@@ -80,6 +80,7 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
 // Get all products
 $products = [];
     $category_filter = isset($_GET['category']) ? intval($_GET['category']) : 0;
+    $seller_filter = isset($_GET['seller_id']) ? intval($_GET['seller_id']) : 0;
     $category_name = '';
 
     try {
@@ -89,56 +90,58 @@ $products = [];
     $offset = ($page - 1) * $limit;
 
     // Get total count for pagination
-    $count_sql = "SELECT COUNT(*) as total FROM products p";
+    $count_sql = "SELECT COUNT(*) as total FROM products p WHERE 1=1";
+    $params_count = [];
+    $types_count = "";
+    
     if ($category_filter > 0) {
-        $count_sql .= " WHERE p.category_id = ?";
-        $count_stmt = $conn->prepare($count_sql);
-        $count_stmt->bind_param('i', $category_filter);
-        $count_stmt->execute();
-        $total_products = $count_stmt->get_result()->fetch_assoc()['total'];
-    } else {
-        $total_products = $conn->query($count_sql)->fetch_assoc()['total'];
+        $count_sql .= " AND p.category_id = ?";
+        $params_count[] = $category_filter;
+        $types_count .= "i";
     }
+    if ($seller_filter > 0) {
+        $count_sql .= " AND p.seller_id = ?";
+        $params_count[] = $seller_filter;
+        $types_count .= "i";
+    }
+    
+    $count_stmt = $conn->prepare($count_sql);
+    if (!empty($params_count)) {
+        $count_stmt->bind_param($types_count, ...$params_count);
+    }
+    $count_stmt->execute();
+    $total_products = $count_stmt->get_result()->fetch_assoc()['total'];
     $total_pages = ceil($total_products / $limit);
 
-    // Check if category filter is applied
+    // Fetch Products with combined filters
+    $products_sql = "SELECT p.*, c.name as category_name, u.first_name, u.last_name, u.email as user_email
+                    FROM products p
+                    LEFT JOIN categories c ON p.category_id = c.id
+                    LEFT JOIN users u ON p.seller_id = u.id
+                    WHERE 1=1";
+    $params_p = [];
+    $types_p = "";
+    
     if ($category_filter > 0) {
-        // Get category name for display
-        $category_sql = "SELECT name FROM categories WHERE id = ?";
-        $category_stmt = $conn->prepare($category_sql);
-        $category_stmt->bind_param('i', $category_filter);
-        $category_stmt->execute();
-        $category_result = $category_stmt->get_result();
-        
-        if ($category_result && $category_row = $category_result->fetch_assoc()) {
-            $category_name = $category_row['name'];
-        }
-        
-        // Filter products by category
-        $products_sql = "SELECT p.*, c.name as category_name, u.first_name, u.last_name, u.email as user_email
-                        FROM products p
-                        LEFT JOIN categories c ON p.category_id = c.id
-                        LEFT JOIN users u ON p.seller_id = u.id
-                        WHERE p.category_id = ?
-                        ORDER BY p.id DESC
-                        LIMIT ? OFFSET ?";
-        $products_stmt = $conn->prepare($products_sql);
-        $products_stmt->bind_param('iii', $category_filter, $limit, $offset);
-        $products_stmt->execute();
-        $products_result = $products_stmt->get_result();
-    } else {
-        // Get all products
-        $products_sql = "SELECT p.*, c.name as category_name, u.first_name, u.last_name, u.email as user_email
-                        FROM products p
-                        LEFT JOIN categories c ON p.category_id = c.id
-                        LEFT JOIN users u ON p.seller_id = u.id
-                        ORDER BY p.id DESC
-                        LIMIT ? OFFSET ?";
-        $products_stmt = $conn->prepare($products_sql);
-        $products_stmt->bind_param('ii', $limit, $offset);
-        $products_stmt->execute();
-        $products_result = $products_stmt->get_result();
+        $products_sql .= " AND p.category_id = ?";
+        $params_p[] = $category_filter;
+        $types_p .= "i";
     }
+    if ($seller_filter > 0) {
+        $products_sql .= " AND p.seller_id = ?";
+        $params_p[] = $seller_filter;
+        $types_p .= "i";
+    }
+    
+    $products_sql .= " ORDER BY p.id DESC LIMIT ? OFFSET ?";
+    $params_p[] = $limit;
+    $params_p[] = $offset;
+    $types_p .= "ii";
+    
+    $products_stmt = $conn->prepare($products_sql);
+    $products_stmt->bind_param($types_p, ...$params_p);
+    $products_stmt->execute();
+    $products_result = $products_stmt->get_result();
     
     if ($products_result) {
         while ($row = $products_result->fetch_assoc()) {
@@ -1378,6 +1381,12 @@ renderAdminSidebar('products');
                 <?php if ($category_filter > 0 && !empty($category_name)): ?>
                 <div class="category-filter-indicator">
                     <span>Showing products in category: <strong><?php echo htmlspecialchars($category_name ?? ''); ?></strong></span>
+                    <a href="product_management.php" class="clear-filter-btn">Clear Filter</a>
+                </div>
+                <?php endif; ?>
+                <?php if ($seller_filter > 0): ?>
+                <div class="category-filter-indicator">
+                    <span>Showing products for Seller ID: <strong><?php echo $seller_filter; ?></strong></span>
                     <a href="product_management.php" class="clear-filter-btn">Clear Filter</a>
                 </div>
                 <?php endif; ?>

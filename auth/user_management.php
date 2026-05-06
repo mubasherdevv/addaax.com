@@ -18,12 +18,13 @@ $website_name = $website_settings['website_name'] ?? 'Wholesale E-commerce';
 $website_logo = $website_settings['website_logo'] ?? 'logo.svg';
 $favicon = $website_settings['favicon'] ?? '';
 
-// Fetch all users from the database
+// Fetch all users from the database with ad counts
 $users = [];
-$users_sql = "SELECT id, CONCAT(first_name, ' ', last_name) AS name, email, role, 
-                    IF(is_verified = 1, 'Active', 'Inactive') AS status, 
-                    created_at AS last_login 
-               FROM users ORDER BY id";
+$users_sql = "SELECT u.id, CONCAT(u.first_name, ' ', u.last_name) AS name, u.email, u.role, 
+                    IF(u.is_verified = 1, 'Active', 'Inactive') AS status, 
+                    u.created_at AS last_login,
+                    (SELECT COUNT(*) FROM products WHERE seller_id = u.id) as total_ads
+               FROM users u ORDER BY u.id";
 $users_result = $conn->query($users_sql);
 if ($users_result) {
     while ($row = $users_result->fetch_assoc()) {
@@ -95,6 +96,7 @@ renderAdminSidebar('users');
                             <th>Email</th>
                             <th>Role</th>
                             <th>Status</th>
+                            <th>Total Ad</th>
                             <th>Last Login</th>
                             <th style="text-align: right;">Actions</th>
                         </tr>
@@ -134,14 +136,16 @@ renderAdminSidebar('users');
                                             <?php echo htmlspecialchars($user['status']); ?>
                                         </span>
                                     </td>
+                                    <td>
+                                        <a href="product_management.php?seller_id=<?php echo $user['id']; ?>" 
+                                           style="text-decoration: none; color: var(--primary); font-weight: 700; background: rgba(99, 102, 241, 0.1); padding: 4px 10px; border-radius: 6px;">
+                                            <?php echo $user['total_ads']; ?> Ads
+                                        </a>
+                                    </td>
                                     <td><?php echo $user['last_login'] ? htmlspecialchars($user['last_login']) : 'Never'; ?></td>
                                     <td class="user-actions" style="text-align: right;">
                                         <button onclick="editUser(<?php echo $user['id']; ?>)" class="btn-user-dash" style="background:none; border:none; cursor:pointer; color: var(--primary);" title="Edit"><i class="fas fa-edit"></i></button>
-                                        <?php if($user['role'] === 'user'): ?>
-                                        <button class="btn-user-dash" style="background:none; border:none; cursor:pointer; color: var(--info);" title="View Ads"><i class="fas fa-ad"></i></button>
-                                        <?php else: ?>
-                                        <button class="btn-user-dash" style="background:none; border:none; cursor:pointer; color: var(--warning);" title="Permissions"><i class="fas fa-key"></i></button>
-                                        <?php endif; ?>
+                                        <a href="product_management.php?seller_id=<?php echo $user['id']; ?>" class="btn-user-dash" style="background:none; border:none; cursor:pointer; color: var(--info);" title="View Ads"><i class="fas fa-ad"></i></a>
                                         <?php if($user['id'] != $_SESSION['user_id']): ?>
                                         <button onclick="deleteUser(<?php echo $user['id']; ?>)" class="btn-user-dash" style="background:none; border:none; cursor:pointer; color: var(--danger);" title="Delete"><i class="fas fa-trash-alt"></i></button>
                                         <?php endif; ?>

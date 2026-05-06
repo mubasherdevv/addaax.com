@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../get_settings.php';
 /**
- * Admin Layout Functions for ADAAX
+ * Admin Layout Functions for ADDAAX
  */
 
 /**
@@ -115,7 +115,7 @@ function renderAdminHeader($page_title = 'Admin Panel') {
     if (!isset($website_name) || !isset($website_logo)) {
         if (function_exists('getWebsiteSettings')) {
             $settings = getWebsiteSettings();
-            $website_name = $website_name ?? $settings['website_name'] ?? 'ADAAX';
+            $website_name = $website_name ?? $settings['website_name'] ?? 'ADDAAX';
             $website_logo = $website_logo ?? $settings['website_logo'] ?? 'logo.jpg';
             $favicon = $favicon ?? $settings['favicon'] ?? '';
         }
@@ -148,7 +148,7 @@ function renderAdminHeader($page_title = 'Admin Panel') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title><?php echo htmlspecialchars($page_title); ?> | <?php echo htmlspecialchars($website_name ?? 'ADAAX'); ?></title>
+    <title><?php echo htmlspecialchars($page_title); ?> | <?php echo htmlspecialchars($website_name ?? 'ADDAAX'); ?></title>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/admin-dashboard.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -210,7 +210,7 @@ function renderAdminHeader($page_title = 'Admin Panel') {
         <div class="container-fluid" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
             <a href="<?php echo BASE_URL; ?>/index.php" class="admin-logo">
                 <img src="<?php echo BASE_URL; ?>/images/<?php echo htmlspecialchars($logo_to_show); ?>" alt="Logo" height="40" onerror="this.src='<?php echo BASE_URL; ?>/images/logo.jpg'; this.onerror=null;">
-                <span>ADAAX ADMIN</span>
+                <span>ADDAAX ADMIN</span>
             </a>
             
             <div class="admin-nav-actions">

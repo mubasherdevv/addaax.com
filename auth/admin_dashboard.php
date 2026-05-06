@@ -341,7 +341,7 @@ renderAdminSidebar($sidebar_active);
                 </div>
                 
                 <div class="dashboard-stats">
-                    <div class="stat-card">
+                    <a href="user_management.php" class="stat-card" style="text-decoration: none; transition: transform 0.2s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                         <div class="stat-icon">
                             <i class="fas fa-users"></i>
                         </div>
@@ -355,11 +355,9 @@ renderAdminSidebar($sidebar_active);
                             <h3><?php echo $users_count; ?></h3>
                             <p>Total Users</p>
                         </div>
-                    </div>
+                    </a>
                     
-
-                    
-                    <div class="stat-card">
+                    <a href="product_management.php" class="stat-card" style="text-decoration: none; transition: transform 0.2s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                         <div class="stat-icon">
                             <i class="fas fa-box"></i>
                         </div>
@@ -371,11 +369,27 @@ renderAdminSidebar($sidebar_active);
                             $products_count = $products_count_result->fetch_assoc()['total'] ?? 0;
                             ?>
                             <h3><?php echo $products_count; ?></h3>
-                            <p>Products</p>
+                            <p>Total Ads</p>
                         </div>
-                    </div>
+                    </a>
+
+                    <a href="product_management.php?featured=1" class="stat-card" style="text-decoration: none; transition: transform 0.2s; cursor: pointer; border-left: 4px solid #fbbf24;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div class="stat-icon" style="background: rgba(251, 191, 36, 0.1); color: #fbbf24;">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <?php
+                            // Get featured products count
+                            $featured_count_sql = "SELECT COUNT(*) as total FROM products WHERE is_featured = 1";
+                            $featured_count_result = $conn->query($featured_count_sql);
+                            $featured_count = $featured_count_result->fetch_assoc()['total'] ?? 0;
+                            ?>
+                            <h3 style="color: #fbbf24;"><?php echo $featured_count; ?></h3>
+                            <p>Featured Ads</p>
+                        </div>
+                    </a>
                     
-                    <div class="stat-card">
+                    <a href="category_management.php" class="stat-card" style="text-decoration: none; transition: transform 0.2s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                         <div class="stat-icon">
                             <i class="fas fa-tags"></i>
                         </div>
@@ -389,7 +403,7 @@ renderAdminSidebar($sidebar_active);
                             <h3><?php echo $categories_count; ?></h3>
                             <p>Categories</p>
                         </div>
-                    </div>
+                    </a>
                     
 
                 </div>

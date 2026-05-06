@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-renderHeader('Create Account | Adaax Premium', 'register');
+renderHeader('Create Account | ADDAAX Premium', 'register');
 ?>
 
     <style>

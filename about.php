@@ -3,7 +3,7 @@ require_once 'includes/website_settings.php';
 require_once 'auth/db_connect.php';
 require_once 'includes/layout_functions.php';
 
-renderHeader('About Us | Adaax Premium', 'about');
+renderHeader('About Us | ADDAAX Premium', 'about');
 ?>
 
 <main>
@@ -26,7 +26,7 @@ renderHeader('About Us | Adaax Premium', 'about');
                 <div>
                     <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: var(--white);">Our Story</h2>
                     <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem; margin-bottom: 20px;">
-                        Founded with a vision to revolutionize the classifieds industry, ADAAX has grown into Pakistan's most trusted premium marketplace. Our journey began with a simple goal: to create a safe, reliable, and verified platform for high-end services.
+                        Founded with a vision to revolutionize the classifieds industry, ADDAAX has grown into Pakistan's most trusted premium marketplace. Our journey began with a simple goal: to create a safe, reliable, and verified platform for high-end services.
                     </p>
                     <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">
                         Today, we are proud to serve a community of thousands, maintaining the highest standards of verification and security. Our commitment to quality continues to drive every decision we make.

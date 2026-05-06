@@ -13,7 +13,7 @@ if (!isLoggedIn() || $_SESSION["user_role"] !== "admin") {
 
 // Get website settings
 $website_settings = getWebsiteSettings();
-$website_name = $website_settings['website_name'] ?? 'ADAAX';
+$website_name = $website_settings['website_name'] ?? 'ADDAAX';
 $website_logo = $website_settings['website_logo'] ?? 'logo.svg';
 $favicon = $website_settings['favicon'] ?? '';
 

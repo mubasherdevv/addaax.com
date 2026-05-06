@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../auth/session.php';
 require_once __DIR__ . '/website_settings.php';
 
-function renderHeader($page_title = 'Adaax Premium', $active_page = 'home') {
+function renderHeader($page_title = 'ADDAAX Premium', $active_page = 'home') {
     global $conn;
     $user_name = $_SESSION['user_name'] ?? 'Account';
     $is_logged_in = isset($_SESSION['user_id']);
@@ -59,7 +59,7 @@ function renderHeader($page_title = 'Adaax Premium', $active_page = 'home') {
             <?php 
             $website_settings = getWebsiteSettings();
             $logo_to_show = !empty($website_settings['website_logo']) ? $website_settings['website_logo'] : 'logo.jpg';
-            $site_name = !empty($website_settings['website_name']) ? $website_settings['website_name'] : 'ADAAX';
+            $site_name = !empty($website_settings['website_name']) ? $website_settings['website_name'] : 'ADDAAX';
             ?>
             <a href="/index.php" class="logo">
                 <img src="<?php echo BASE_URL; ?>/images/<?php echo htmlspecialchars($logo_to_show); ?>" alt="Logo" height="35" style="vertical-align: middle; margin-right: 10px;" onerror="this.src='<?php echo BASE_URL; ?>/images/logo.jpg'; this.onerror=null;">
@@ -91,7 +91,7 @@ function renderHeader($page_title = 'Adaax Premium', $active_page = 'home') {
         <!-- Mobile Menu Overlay -->
         <div class="mobile-menu-overlay" id="mobileMenu">
             <div class="mobile-menu-top" style="padding: 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <a href="/index.php" class="logo">ADAAX</a>
+                <a href="/index.php" class="logo">ADDAAX</a>
                 <button class="close-menu" id="closeMenu" style="position: static;"><i class="fas fa-times"></i></button>
             </div>
             <ul class="menu-links">
@@ -117,11 +117,12 @@ function renderFooter() {
             <div class="container-wide">
                 <div class="footer-grid">
                     <div class="footer-brand">
-                        <a href="/index.php" class="logo">ADAAX</a>
+                        <a href="/index.php" class="logo">ADDAAX</a>
                         <p class="desc">Pakistan's most trusted premium classified marketplace. Reach millions of users with our verified and secure platform.</p>
                         <div class="trust-badges">
                             <div class="trust-badge">Verified</div>
                             <div class="trust-badge">Secure</div>
+                             <div class="trust-badge">Escorts Service</div>
                         </div>
                     </div>
                     <div class="footer-col">
@@ -130,16 +131,18 @@ function renderFooter() {
                             <li><a href="/escorts/">Explore Ads</a></li>
                             <li><a href="/post-ad.php">Post an Ad</a></li>
                             <li><a href="/cities.php">Cities</a></li>
-                            <li><a href="/categories.php">Categories</a></li>
+                            
                         </ul>
                     </div>
                     <div class="footer-col">
                         <h4>Support</h4>
                         <ul class="footer-links">
-                            <li><a href="#">Help Center</a></li>
-                            <li><a href="#">Safety Tips</a></li>
+                            <li><a href="#">Copyright</a></li>
+                            <li><a href="#">Privacy</a></li>
                             <li><a href="#">Contact Us</a></li>
                             <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Anti Scam</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
@@ -153,7 +156,7 @@ function renderFooter() {
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <p>© Adaax™ 2026 - Premium Classifieds Marketplace. All Rights Reserved.</p>
+                    <p>© ADDAAX™ 2026 - Premium Classifieds Marketplace. All Rights Reserved.</p>
                 </div>
             </div>
         </footer>

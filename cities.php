@@ -5,7 +5,7 @@ require_once 'auth/db_connect.php';
 require_once 'includes/layout_functions.php';
 
 // SEO Meta (Defaults)
-$PAGE_TITLE = "Browse Escorts by City & Area | Adaax";
+$PAGE_TITLE = "Browse Escorts by City & Area | ADDAAX";
 $META_DESC = "Find escorts and call girl services by city and area. Browse verified listings.";
 
 renderHeader($PAGE_TITLE, 'cities');
@@ -74,6 +74,36 @@ renderHeader($PAGE_TITLE, 'cities');
             color: var(--accent-gold);
             margin-bottom: 10px;
         }
+
+        .see-more-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .btn-see-more {
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-see-more:hover {
+            background: var(--accent-gold);
+            color: var(--dark-purple);
+        }
+
+        .city-item.hidden {
+            display: none;
+        }
     </style>
 
     <main class="container-wide page-header-offset">
@@ -96,21 +126,34 @@ renderHeader($PAGE_TITLE, 'cities');
                 <div class="city-group">
                     <h2 class="city-name"><?php echo htmlspecialchars($state_name); ?></h2>
                     
-                    <div class="pills-container">
+                    <div class="pills-container" id="state-<?php echo $state_id; ?>">
                         <?php
                         // Fetch Cities for this State
                         $city_sql = "SELECT * FROM cities WHERE state_id = $state_id AND status = 1 ORDER BY name ASC";
                         $city_res = $conn->query($city_sql);
                         
                         if ($city_res && $city_res->num_rows > 0):
+                            $city_count = 0;
                             while ($city = $city_res->fetch_assoc()):
+                                $city_count++;
                                 $city_slug = str_replace(' ', '-', strtolower($city['name']));
+                                $isHidden = $city_count > 10 ? 'hidden' : '';
                         ?>
-                            <a href="/escorts/<?php echo $city_slug; ?>" class="area-pill">
+                            <a href="/escorts/<?php echo $city_slug; ?>" class="area-pill city-item <?php echo $isHidden; ?>">
                                 <?php echo htmlspecialchars($city['name']); ?>
                             </a>
                         <?php 
                             endwhile;
+                            
+                            if ($city_count > 10):
+                        ?>
+                            <div class="see-more-container">
+                                <button type="button" class="btn-see-more" onclick="showMoreCities(<?php echo $state_id; ?>, this)">
+                                    <i class="fas fa-plus"></i> See more
+                                </button>
+                            </div>
+                        <?php
+                            endif;
                         else:
                             echo '<span style="color: var(--text-muted); font-size: 14px;">No cities added yet.</span>';
                         endif; 
@@ -125,6 +168,23 @@ renderHeader($PAGE_TITLE, 'cities');
             ?>
         </div>
     </main>
+
+<script>
+function showMoreCities(stateId, button) {
+    const container = document.getElementById('state-' + stateId);
+    const hiddenCities = container.querySelectorAll('.city-item.hidden');
+    
+    // Show next 10 hidden cities
+    for (let i = 0; i < 10 && i < hiddenCities.length; i++) {
+        hiddenCities[i].classList.remove('hidden');
+    }
+    
+    // Hide button if no more hidden cities
+    if (container.querySelectorAll('.city-item.hidden').length === 0) {
+        button.parentElement.style.display = 'none';
+    }
+}
+</script>
 
 <?php 
 renderFooter();

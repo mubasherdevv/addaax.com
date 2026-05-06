@@ -1,6 +1,6 @@
 <?php
 /**
- * Advanced PHP Router for Adaax.com
+ * Advanced PHP Router for ADDAAX.com
  * Handles SEO-friendly URLs reliably across all servers
  */
 

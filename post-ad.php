@@ -14,7 +14,7 @@ $states = $conn->query("SELECT * FROM states WHERE status = 1 ORDER BY name")->f
 // Initially empty, will be populated by AJAX
 $cities = []; 
 
-renderHeader('Post Your Ad | Adaax Premium', 'post-ad');
+renderHeader('Post Your Ad | ADDAAX Premium', 'post-ad');
 ?>
 
     <style>

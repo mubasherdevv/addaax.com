@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-renderHeader('Contact Us | Adaax Premium', 'contact');
+renderHeader('Contact Us | ADDAAX Premium', 'contact');
 ?>
 
 <main>
@@ -72,7 +72,7 @@ renderHeader('Contact Us | Adaax Premium', 'contact');
                             </div>
                             <div>
                                 <h4 style="color: white; margin-bottom: 4px;">Email</h4>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;">support@adaax.pk</p>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">support@ADDAAX.pk</p>
                             </div>
                         </div>
                     </div>

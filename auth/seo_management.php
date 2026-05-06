@@ -90,11 +90,16 @@ renderAdminHeader('SEO Management');
       selector: '#footer_content',
       plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
       toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-      height: 350,
+      height: 400,
       skin: 'oxide-dark',
       content_css: 'dark',
       promotion: false,
-      branding: false
+      branding: false,
+      setup: function (editor) {
+        editor.on('change', function () {
+          tinymce.triggerSave();
+        });
+      }
     });
   }
 </script>
@@ -125,8 +130,98 @@ renderAdminSidebar('seo');
         </div>
     <?php endif; ?>
 
+    <!-- SEO Form Section (Hidden by default) -->
+    <div id="seoFormSection" class="admin-card" style="display: none; margin-bottom: 30px; background: #1e293b; border: 1px solid #334155;">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <h2 id="formTitle" style="color: white; margin: 0;">Add SEO Settings</h2>
+            <button class="btn btn-secondary" onclick="hideForm()"><i class="fas fa-times"></i> Cancel</button>
+        </div>
+        <div class="card-body" style="padding: 30px;">
+            <form method="POST">
+                <input type="hidden" name="action" value="save_seo">
+                <input type="hidden" name="id" id="seo_id">
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label>Target Type</label>
+                        <select name="page_type" id="page_type" class="form-control" onchange="toggleTargetType(this.value)" required>
+                            <option value="file">Internal File (.php)</option>
+                            <option value="location">Location Page (City)</option>
+                            <option value="custom">Custom URL / Path</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Final Page URL Path</label>
+                        <input type="text" name="page_name" id="page_name" class="form-control" readonly style="background: #0f172a; cursor: not-allowed; opacity: 0.8;" required>
+                        <small style="color: var(--text-muted);">This is the path used for SEO mapping.</small>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <!-- 1. File Selection -->
+                    <div class="form-group" id="file_target_group">
+                        <label>Select Page</label>
+                        <select name="page_name_select" id="page_name_select" class="form-control">
+                            <option value="">-- Choose File --</option>
+                            <?php foreach($root_pages as $page): ?>
+                                <option value="<?php echo $page; ?>"><?php echo $page; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <!-- 2. Location Selection -->
+                    <div id="location_target_group" style="display: none; gap: 20px;">
+                        <div class="form-group">
+                            <label>Select Province</label>
+                            <select id="state_select" class="form-control" onchange="filterCities(this.value)">
+                                <option value="">-- Choose Province --</option>
+                                <?php foreach($all_states as $state): ?>
+                                    <option value="<?php echo $state['id']; ?>"><?php echo htmlspecialchars($state['name']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Select City</label>
+                            <select id="city_select" class="form-control" onchange="generateCityUrl(this.options[this.selectedIndex].text)">
+                                <option value="">-- Choose City --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 3. Custom Path -->
+                    <div class="form-group" id="custom_target_group" style="display: none;">
+                        <label>Custom Page Name / URL</label>
+                        <input type="text" name="page_name_custom" id="page_name_custom" class="form-control" placeholder="e.g. /category/electronics">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Meta Title</label>
+                        <input type="text" name="meta_title" id="meta_title" class="form-control" placeholder="Max 60 characters recommended">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label>Meta Description</label>
+                    <textarea name="meta_description" id="meta_description" class="form-control" rows="3" placeholder="Max 160 characters recommended"></textarea>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 30px;">
+                    <label>Footer SEO Content (Rich Text Editor)</label>
+                    <textarea name="footer_content" id="footer_content" class="form-control" rows="10"></textarea>
+                    <small style="color: var(--text-muted);">This content will be displayed right above the footer on the selected page.</small>
+                </div>
+                
+                <div style="display: flex; gap: 15px;">
+                    <button type="submit" class="btn btn-primary" style="padding: 12px 30px; border-radius: 10px;">Save SEO Settings</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideForm()" style="padding: 12px 30px; border-radius: 10px;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- SEO List Table -->
-    <div class="table-container">
+    <div class="table-container" id="listSection">
         <table class="admin-table">
             <thead>
                 <tr>
@@ -158,157 +253,19 @@ renderAdminSidebar('seo');
     </div>
 </main>
 
-<!-- SEO Modal -->
-<div class="modal-overlay" id="seoModal">
-    <div class="modal" style="max-width: 600px;">
-        <div class="modal-header">
-            <h2 id="modalTitle">Add SEO Settings</h2>
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-        </div>
-        <form method="POST">
-            <input type="hidden" name="action" value="save_seo">
-            <input type="hidden" name="id" id="seo_id">
-            
-            <div class="form-group">
-                <label>Target Type</label>
-                <select name="page_type" id="page_type" class="form-control" onchange="toggleTargetType(this.value)" required>
-                    <option value="file">Internal File (.php)</option>
-                    <option value="location">Location Page (City)</option>
-                    <option value="custom">Custom URL / Path</option>
-                </select>
-            </div>
-
-            <!-- 1. File Selection -->
-            <div class="form-group" id="file_target_group">
-                <label>Select Page</label>
-                <select name="page_name_select" id="page_name_select" class="form-control">
-                    <option value="">-- Choose File --</option>
-                    <?php foreach($root_pages as $page): ?>
-                        <option value="<?php echo $page; ?>"><?php echo $page; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-
-            <!-- 2. Location Selection -->
-            <div id="location_target_group" style="display: none;">
-                <div class="form-group">
-                    <label>Select Province</label>
-                    <select id="state_select" class="form-control" onchange="filterCities(this.value)">
-                        <option value="">-- Choose Province --</option>
-                        <?php foreach($all_states as $state): ?>
-                            <option value="<?php echo $state['id']; ?>"><?php echo htmlspecialchars($state['name']); ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Select City</label>
-                    <select id="city_select" class="form-control" onchange="generateCityUrl(this.options[this.selectedIndex].text)">
-                        <option value="">-- Choose City --</option>
-                        <!-- Populated via JS -->
-                    </select>
-                </div>
-            </div>
-
-            <!-- 3. Custom Path -->
-            <div class="form-group" id="custom_target_group" style="display: none;">
-                <label>Custom Page Name / URL</label>
-                <input type="text" name="page_name_custom" id="page_name_custom" class="form-control" placeholder="e.g. /category/electronics">
-            </div>
-            
-            <!-- Final Value (Hidden or Readonly) -->
-            <div class="form-group">
-                <label>Final Page URL Path</label>
-                <input type="text" name="page_name" id="page_name" class="form-control" readonly style="background: #f1f5f9; cursor: not-allowed;" required>
-                <small style="color: var(--text-muted);">This is the path used for SEO mapping.</small>
-            </div>
-            
-            <div class="form-group">
-                <label>Meta Title</label>
-                <input type="text" name="meta_title" id="meta_title" class="form-control" placeholder="Max 60 characters recommended">
-            </div>
-            
-            <div class="form-group">
-                <label>Meta Description</label>
-                <textarea name="meta_description" id="meta_description" class="form-control" rows="4" placeholder="Max 160 characters recommended"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Footer SEO Content (WYSIWYG Editor)</label>
-                <textarea name="footer_content" id="footer_content" class="form-control" rows="10"></textarea>
-                <small style="color: var(--text-muted);">This content will be displayed right above the footer on the selected page.</small>
-            </div>
-            
-            <div style="margin-top: 20px;">
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Save SEO Settings</button>
-            </div>
-        </form>
-    </div>
-</div>
-
 <style>
-/* Robust Modal Styles */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px);
-    visibility: hidden; 
-    opacity: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: all 0.3s ease;
-}
-.modal-overlay.visible {
-    visibility: visible;
-    opacity: 1;
-}
-.modal {
-    background: #1e293b !important; /* Darker background for admin */
-    color: white !important;
-    padding: 30px;
-    border-radius: 20px;
-    width: 95%;
-    max-width: 900px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-}
-.modal-overlay.visible .modal {
-    transform: translateY(0);
-}
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 15px;
-}
-.modal-header h2 { color: white; margin: 0; }
-.modal-close {
-    background: rgba(255,255,255,0.1);
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: white;
-}
 .form-group label { color: #cbd5e1; font-weight: 600; margin-bottom: 8px; display: block; }
 .form-control { 
     background: #0f172a !important; 
     border: 1px solid #334155 !important; 
     color: white !important; 
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+.btn-secondary {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
 }
 </style>
 
@@ -318,10 +275,7 @@ const allCities = <?php echo json_encode($all_cities); ?>;
 
 // Move functions to global scope explicitly
 window.showAddForm = function() {
-    const modal = document.getElementById('seoModal');
-    if (!modal) return;
-
-    document.getElementById('modalTitle').innerText = 'Add SEO Settings';
+    document.getElementById('formTitle').innerText = 'Add SEO Settings';
     document.getElementById('seo_id').value = '';
     document.getElementById('page_type').value = 'file';
     document.getElementById('page_name_select').value = '';
@@ -335,16 +289,20 @@ window.showAddForm = function() {
     
     toggleTargetType('file');
     
-    modal.style.display = 'flex';
-    setTimeout(() => {
-        modal.classList.add('visible');
-        initTinyMCE();
-    }, 50);
+    document.getElementById('listSection').style.display = 'none';
+    document.getElementById('seoFormSection').style.display = 'block';
+    initTinyMCE();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+window.hideForm = function() {
+    document.getElementById('seoFormSection').style.display = 'none';
+    document.getElementById('listSection').style.display = 'block';
 };
 
 window.toggleTargetType = function(type) {
     document.getElementById('file_target_group').style.display = (type === 'file') ? 'block' : 'none';
-    document.getElementById('location_target_group').style.display = (type === 'location') ? 'block' : 'none';
+    document.getElementById('location_target_group').style.display = (type === 'location') ? 'flex' : 'none';
     document.getElementById('custom_target_group').style.display = (type === 'custom') ? 'block' : 'none';
     
     // Clear final page name when switching
@@ -378,27 +336,29 @@ window.generateCityUrl = function(cityName) {
 };
 
 window.editSeo = function(data) {
-    const modal = document.getElementById('seoModal');
-    if (!modal) return;
-
-    document.getElementById('modalTitle').innerText = 'Edit SEO Settings';
+    document.getElementById('formTitle').innerText = 'Edit SEO Settings';
     document.getElementById('seo_id').value = data.id;
     document.getElementById('meta_title').value = data.meta_title;
     document.getElementById('meta_description').value = data.meta_description;
     document.getElementById('page_name').value = data.page_name;
     
-    if (tinymce.get('footer_content')) {
-        tinymce.get('footer_content').setContent(data.footer_content || '');
-    }
+    // Show form section
+    document.getElementById('listSection').style.display = 'none';
+    document.getElementById('seoFormSection').style.display = 'block';
     
+    initTinyMCE();
+    setTimeout(() => {
+        if (tinymce.get('footer_content')) {
+            tinymce.get('footer_content').setContent(data.footer_content || '');
+        }
+    }, 100);
+
     // Determine type
     if (data.page_name.startsWith('/escorts/')) {
         document.getElementById('page_type').value = 'location';
         toggleTargetType('location');
-        // We don't necessarily know the state_id here easily without more data, 
-        // but we can set the custom field if needed or just let them re-select.
         document.getElementById('page_name_custom').value = data.page_name; 
-        document.getElementById('page_type').value = 'custom'; // Safer to treat as custom on edit
+        document.getElementById('page_type').value = 'custom'; // Treat as custom on edit
         toggleTargetType('custom');
     } else if (data.page_name.endsWith('.php')) {
         document.getElementById('page_type').value = 'file';
@@ -409,22 +369,7 @@ window.editSeo = function(data) {
         toggleTargetType('custom');
         document.getElementById('page_name_custom').value = data.page_name;
     }
-    
-    modal.style.display = 'flex';
-    setTimeout(() => {
-        modal.classList.add('visible');
-        initTinyMCE();
-        if (tinymce.get('footer_content')) {
-            tinymce.get('footer_content').setContent(data.footer_content || '');
-        }
-    }, 50);
-};
-
-window.closeModal = function() {
-    const modal = document.getElementById('seoModal');
-    if (!modal) return;
-    modal.classList.remove('visible');
-    setTimeout(() => modal.style.display = 'none', 300);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 // Form submit handler
@@ -443,14 +388,6 @@ document.addEventListener('DOMContentLoaded', function() {
         customInput.oninput = function() {
             document.getElementById('page_name').value = this.value;
         };
-    }
-
-    // Close on outside click
-    window.onclick = function(event) {
-        const modal = document.getElementById('seoModal');
-        if (event.target == modal) {
-            window.closeModal();
-        }
     }
 });
 </script>

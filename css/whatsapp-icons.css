@@ -29,17 +29,18 @@
         gap: 15px;
     }
 
+    .product-price {
+        order: 1;
+    }
+
     .wa-icon-wrap {
-        order: 3; /* Move to the far right */
+        order: 2;
+        margin-left: auto; /* Push to the right side of the card */
     }
     
     .seller-pill {
-        order: 2;
-        margin-left: auto; /* Space between price and seller */
-    }
-    
-    .product-price {
-        order: 1;
+        order: 3;
+        margin-left: 8px; /* Keep it close to the WA icon */
     }
 
     .wa-icon-wrap .wa-desktop {
@@ -59,7 +60,7 @@
         font-size: 11px !important;
         opacity: 0.6;
         line-height: 1.2 !important;
-        height: 14px !important; /* Force 1 line height */
+        height: 14px !important;
     }
 
     .info-bottom {
@@ -72,7 +73,7 @@
     .listing-items-wrapper:not(.grid-view) .wa-icon-wrap {
         position: absolute;
         right: 0;
-        bottom: 52px; /* Thora aur uper (a bit higher than line) */
+        bottom: 52px;
     }
 
     .listing-items-wrapper:not(.grid-view) .wa-icon-wrap .wa-mobile-list {
@@ -89,15 +90,11 @@
     .listing-items-wrapper.grid-view .wa-icon-wrap {
         position: absolute;
         right: 5px;
-        bottom: 48px; /* Above the line in grid too */
+        bottom: 38px; /* Thora neechay (moved down slightly) */
     }
 
     .listing-items-wrapper.grid-view .wa-icon-wrap .wa-mobile-grid {
         display: block;
         height: 22px;
-    }
-    
-    .listing-items-wrapper.grid-view .product-price {
-        font-size: 14px !important;
     }
 }

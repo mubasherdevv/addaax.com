@@ -7,15 +7,15 @@
     <!-- Animated gold gradient for diagonal wash -->
     <linearGradient id="goldWash" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#C9A227" stop-opacity="0"/>
-      <stop offset="60%" stop-color="#E1AD01" stop-opacity="0.05"/>
-      <stop offset="100%" stop-color="#FFE066" stop-opacity="0.1"/>
+      <stop offset="60%" stop-color="#E1AD01" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#FFE066" stop-opacity="0.08"/>
     </linearGradient>
 
     <!-- Animated top border line gradient -->
     <linearGradient id="topLine" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#C9A227" stop-opacity="0.3"/>
-      <stop offset="40%" stop-color="#FFE066" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#C9A227" stop-opacity="0.3"/>
+      <stop offset="0%" stop-color="#C9A227" stop-opacity="0.2"/>
+      <stop offset="40%" stop-color="#FFE066" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#C9A227" stop-opacity="0.2"/>
       <animate attributeName="x1" values="0%;-100%;0%" dur="3s" repeatCount="indefinite"/>
       <animate attributeName="x2" values="100%;200%;100%" dur="3s" repeatCount="indefinite"/>
     </linearGradient>
@@ -33,36 +33,36 @@
 
   <!-- Diagonal gold wash — right ~55% of card -->
   <polygon
-    points="320,0 600,0 600,130 300,130"
+    points="350,0 600,0 600,130 330,130"
     fill="url(#goldWash)" />
 
   <!-- Top animated gold border -->
-  <rect x="0" y="0" width="600" height="1" fill="url(#topLine)">
-    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+  <rect x="0" y="0" width="600" height="0.8" fill="url(#topLine)">
+    <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite"/>
   </rect>
 
   <!-- Shimmer sweep across full card -->
   <rect x="-80" y="0" width="60" height="130"
-        fill="white" opacity="0.02"
+        fill="white" opacity="0.01"
         transform="skewX(-18)">
     <animate attributeName="x" from="-80" to="660" dur="2.8s" repeatCount="indefinite"/>
   </rect>
 
-  <!-- FEATURED pill badge — top right (Ultra Small) -->
+  <!-- FEATURED pill badge — top right (Micro Size) -->
   <g>
-    <rect x="545" y="6" width="48" height="14" rx="7" fill="url(#badgeGrad)"/>
+    <rect x="560" y="4" width="34" height="10" rx="5" fill="url(#badgeGrad)"/>
     <!-- badge shine sweep -->
-    <rect x="545" y="6" width="15" height="14" rx="7" fill="white" opacity="0.2" transform="skewX(-18)">
-      <animate attributeName="x" from="530" to="610" dur="2.2s" repeatCount="indefinite"/>
+    <rect x="560" y="4" width="10" height="10" rx="5" fill="white" opacity="0.2" transform="skewX(-18)">
+      <animate attributeName="x" from="550" to="610" dur="2.2s" repeatCount="indefinite"/>
     </rect>
     <text
-      x="569" y="15.5"
+      x="577" y="10.8"
       text-anchor="middle"
       fill="#000"
-      font-size="5"
+      font-size="3.5"
       font-family="sans-serif"
       font-weight="900"
-      letter-spacing="0.2">FEATURED</text>
+      letter-spacing="0.1">FEATURED</text>
   </g>
 
 </svg>

@@ -100,7 +100,12 @@ renderHeader('Browse Ads | Adaax Premium', 'explore');
                     $raw_img = !empty($ad['display_image']) ? $ad['display_image'] : '';
                     $img = !empty($raw_img) ? (str_starts_with($raw_img, 'http') ? $raw_img : '/' . ltrim($raw_img, '/')) : '/images/placeholder.png';
                 ?>
-                    <a href="<?php echo getProductUrl($ad['id'], $ad['name']); ?>" class="product-card">
+                    <a href="<?php echo getProductUrl($ad['id'], $ad['name']); ?>" class="product-card <?php echo $ad['is_featured'] ? 'featured-card' : ''; ?>">
+                        <?php if($ad['is_featured']): ?>
+                            <div class="featured-badge-svg">
+                                <img src="/svg-icon/featured.svg" alt="Featured Ad">
+                            </div>
+                        <?php endif; ?>
                         <div class="product-image">
                             <?php if(!empty($raw_img)): ?>
                                 <img src="<?php echo htmlspecialchars($img); ?>" alt="<?php echo htmlspecialchars($ad['name']); ?>">
@@ -109,14 +114,8 @@ renderHeader('Browse Ads | Adaax Premium', 'explore');
                                     <i class="fas fa-image" style="font-size: 48px; opacity: 0.2;"></i>
                                 </div>
                             <?php endif; ?>
-                            
-                            <?php if($ad['is_featured']): ?>
-                                <div class="featured-badge-svg">
-                                    <img src="/svg-icon/featured.svg" alt="Featured Ad">
-                                </div>
-                            <?php endif; ?>
-
-                            <!-- Special Badges -->
+                             
+                             <!-- Special Badges -->
                             <?php if(!empty($ad['badges'])): 
                                 $badges = explode(',', $ad['badges']);
                                 ?>

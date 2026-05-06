@@ -450,17 +450,26 @@ html.no-scroll, body.no-scroll {
 
 .featured-badge-svg {
   position: absolute;
-  top: 15px;
-  left: 15px;
-  z-index: 10;
-  height: 32px;
-  filter: drop-shadow(0 4px 15px rgba(0,0,0,0.5));
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50; /* Set high to be on top of all card elements */
+  pointer-events: none;
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
 .featured-badge-svg img {
+  width: 100%;
   height: 100%;
-  width: auto;
+  object-fit: fill;
   display: block;
+}
+
+.featured-card {
+  border: 1px solid var(--accent-gold) !important;
+  box-shadow: 0 0 25px rgba(201, 168, 76, 0.2);
 }
 
 .featured-badge {

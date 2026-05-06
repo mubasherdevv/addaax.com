@@ -707,9 +707,12 @@ html.no-scroll, body.no-scroll {
 .product-card:hover .seller-name {
   color: var(--accent-gold);
 }
-/* --- WhatsApp Icon Placement Logic --- */
+
+/* --- WhatsApp Icon Placement Logic (Fixed) --- */
 .wa-link {
     display: none; /* Hidden by default */
+    position: absolute;
+    z-index: 5;
     transition: transform 0.3s ease;
 }
 .wa-link:hover {
@@ -719,56 +722,45 @@ html.no-scroll, body.no-scroll {
     display: block;
 }
 
-/* Desktop Styles */
+/* 1. Desktop Placement (Outside Pill) */
 @media (min-width: 769px) {
     .wa-desktop-only {
         display: block;
+        bottom: 20px;
+        right: 185px; /* Positioned before the seller pill */
     }
     .wa-desktop-only .wa-icon {
         height: 24px;
         width: auto;
     }
-    .seller-info-group {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
 }
 
-/* Mobile Styles */
+/* 2. Mobile List View (Below Time) */
 @media (max-width: 768px) {
-    /* Hide Desktop Icon */
-    .wa-desktop-only { display: none !important; }
-
-    /* Mobile List View (Default) */
     .wa-list-mobile {
         display: block;
+        top: 45px;
+        right: 32px;
     }
     .wa-list-mobile .wa-icon {
         height: 20px;
         width: auto;
     }
 
-    /* Mobile Grid View Logic */
+    /* 3. Mobile Grid View (Opposite Price) */
     .listing-items-wrapper.grid-view .wa-list-mobile {
         display: none !important;
     }
     .listing-items-wrapper.grid-view .wa-grid-mobile {
         display: block;
+        bottom: 18px;
+        right: 20px;
     }
     .listing-items-wrapper.grid-view .wa-grid-mobile .wa-icon {
-        height: 18px;
+        height: 20px;
         width: auto;
     }
-
-    .price-wrap-wa {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
 }
-
 
 .action-btn {
   width: 40px;

@@ -480,7 +480,9 @@ html.no-scroll, body.no-scroll {
 
 /* Specific adjustment for List View (Wide cards) */
 .listing-items-wrapper:not(.grid-view) .featured-card .featured-badge-svg img {
-  width: 60%; /* Only cover a portion of the wide card to avoid giant text */
+  width: 100%; /* Cover full width to avoid cutting the design lines */
+  object-fit: cover;
+  object-position: right center;
 }
 
 /* Specific adjustment for Grid View & Mobile */

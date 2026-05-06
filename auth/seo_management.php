@@ -11,6 +11,9 @@ if (!isLoggedIn() || $_SESSION["user_role"] !== "admin") {
     exit;
 }
 
+// Ensure footer_content column exists
+$conn->query("ALTER TABLE seo_settings ADD COLUMN IF NOT EXISTS footer_content LONGTEXT AFTER meta_description");
+
 // Handle Form Submission
 $success_message = '';
 $error_message = '';
@@ -19,6 +22,7 @@ if (isset($_POST['action'])) {
     $page_name = trim($_POST['page_name']);
     $meta_title = trim($_POST['meta_title']);
     $meta_description = trim($_POST['meta_description']);
+    $footer_content = $_POST['footer_content']; // Raw HTML from TinyMCE
     $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
 
     if (empty($page_name)) {
@@ -27,12 +31,12 @@ if (isset($_POST['action'])) {
         if ($_POST['action'] == 'save_seo') {
             if ($id > 0) {
                 // Update
-                $stmt = $conn->prepare("UPDATE seo_settings SET page_name = ?, meta_title = ?, meta_description = ? WHERE id = ?");
-                $stmt->bind_param("sssi", $page_name, $meta_title, $meta_description, $id);
+                $stmt = $conn->prepare("UPDATE seo_settings SET page_name = ?, meta_title = ?, meta_description = ?, footer_content = ? WHERE id = ?");
+                $stmt->bind_param("ssssi", $page_name, $meta_title, $meta_description, $footer_content, $id);
             } else {
                 // Insert
-                $stmt = $conn->prepare("INSERT INTO seo_settings (page_name, meta_title, meta_description) VALUES (?, ?, ?)");
-                $stmt->bind_param("sss", $page_name, $meta_title, $meta_description);
+                $stmt = $conn->prepare("INSERT INTO seo_settings (page_name, meta_title, meta_description, footer_content) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param("ssss", $page_name, $meta_title, $meta_description, $footer_content);
             }
 
             if ($stmt->execute()) {
@@ -74,6 +78,20 @@ $all_cities = $conn->query("SELECT id, name, state_id FROM cities WHERE status =
 
 require_once 'includes/admin_layout.php';
 renderAdminHeader('SEO Management');
+?>
+<!-- TinyMCE CDN -->
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+    selector: '#footer_content',
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    height: 400,
+    skin: 'oxide-dark',
+    content_css: 'dark'
+  });
+</script>
+<?php
 renderAdminSidebar('seo');
 ?>
 
@@ -206,6 +224,12 @@ renderAdminSidebar('seo');
                 <label>Meta Description</label>
                 <textarea name="meta_description" id="meta_description" class="form-control" rows="4" placeholder="Max 160 characters recommended"></textarea>
             </div>
+
+            <div class="form-group">
+                <label>Footer SEO Content (WYSIWYG Editor)</label>
+                <textarea name="footer_content" id="footer_content" class="form-control" rows="10"></textarea>
+                <small style="color: var(--text-muted);">This content will be displayed right above the footer on the selected page.</small>
+            </div>
             
             <div style="margin-top: 20px;">
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Save SEO Settings</button>
@@ -246,7 +270,7 @@ renderAdminSidebar('seo');
     padding: 30px;
     border-radius: 20px;
     width: 95%;
-    max-width: 600px;
+    max-width: 900px; /* Increased for TinyMCE */
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     transform: translateY(-20px);
     transition: all 0.3s ease;
@@ -288,6 +312,9 @@ window.showAddForm = function() {
     document.getElementById('page_name').value = '';
     document.getElementById('meta_title').value = '';
     document.getElementById('meta_description').value = '';
+    if (tinymce.get('footer_content')) {
+        tinymce.get('footer_content').setContent('');
+    }
     
     toggleTargetType('file');
     
@@ -339,6 +366,10 @@ window.editSeo = function(data) {
     document.getElementById('meta_title').value = data.meta_title;
     document.getElementById('meta_description').value = data.meta_description;
     document.getElementById('page_name').value = data.page_name;
+    
+    if (tinymce.get('footer_content')) {
+        tinymce.get('footer_content').setContent(data.footer_content || '');
+    }
     
     // Determine type
     if (data.page_name.startsWith('/escorts/')) {

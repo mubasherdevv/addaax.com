@@ -11,10 +11,11 @@ function renderHeader($page_title = 'ADDAAX Premium', $active_page = 'home') {
     $current_page = basename($_SERVER['PHP_SELF']);
     $request_uri = $_SERVER['REQUEST_URI'];
     $meta_description = "";
+    $footer_seo_content = "";
     
     if (isset($conn)) {
         // Try matching by script name first, then by URI
-        $seo_query = "SELECT meta_title, meta_description FROM seo_settings WHERE page_name = ? OR page_name = ? LIMIT 1";
+        $seo_query = "SELECT meta_title, meta_description, footer_content FROM seo_settings WHERE page_name = ? OR page_name = ? LIMIT 1";
         $seo_stmt = $conn->prepare($seo_query);
         if ($seo_stmt) {
             $seo_stmt->bind_param("ss", $current_page, $request_uri);
@@ -26,6 +27,9 @@ function renderHeader($page_title = 'ADDAAX Premium', $active_page = 'home') {
                 }
                 if (!empty($seo_row['meta_description'])) {
                     $meta_description = $seo_row['meta_description'];
+                }
+                if (!empty($seo_row['footer_content'])) {
+                    $GLOBALS['footer_seo_content'] = $seo_row['footer_content'];
                 }
             }
             $seo_stmt->close();
@@ -130,6 +134,33 @@ function renderHeader($page_title = 'ADDAAX Premium', $active_page = 'home') {
 
 function renderFooter() {
     ?>
+        <!-- SEO Footer Content -->
+        <?php if (!empty($GLOBALS['footer_seo_content'])): ?>
+        <section class="seo-footer-section">
+            <div class="container-wide">
+                <div class="seo-content-rich">
+                    <?php echo $GLOBALS['footer_seo_content']; ?>
+                </div>
+            </div>
+        </section>
+        <style>
+        .seo-footer-section {
+            padding: 60px 0;
+            background: rgba(245, 233, 200, 0.02);
+            border-top: 1px solid var(--glass-border);
+        }
+        .seo-content-rich {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        .seo-content-rich h1, .seo-content-rich h2, .seo-content-rich h3 { color: var(--accent-gold); margin-bottom: 20px; font-family: 'Outfit', sans-serif; }
+        .seo-content-rich p { margin-bottom: 15px; }
+        .seo-content-rich ul { margin-left: 20px; margin-bottom: 15px; }
+        .seo-content-rich a { color: var(--accent-gold); text-decoration: underline; }
+        </style>
+        <?php endif; ?>
+
         <!-- Footer -->
         <footer class="main-footer">
             <div class="container-wide">

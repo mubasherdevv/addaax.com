@@ -82,14 +82,21 @@ renderAdminHeader('SEO Management');
 <!-- TinyMCE CDN -->
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
-  tinymce.init({
-    selector: '#footer_content',
-    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-    height: 400,
-    skin: 'oxide-dark',
-    content_css: 'dark'
-  });
+  function initTinyMCE() {
+    if (tinymce.get('footer_content')) {
+        tinymce.get('footer_content').remove();
+    }
+    tinymce.init({
+      selector: '#footer_content',
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+      height: 350,
+      skin: 'oxide-dark',
+      content_css: 'dark',
+      promotion: false,
+      branding: false
+    });
+  }
 </script>
 <?php
 renderAdminSidebar('seo');
@@ -246,52 +253,62 @@ renderAdminSidebar('seo');
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
-    display: none;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    visibility: hidden; 
+    opacity: 0;
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
 }
 .modal-overlay.visible {
-    display: flex !important;
+    visibility: visible;
     opacity: 1;
 }
-.modal-overlay.visible .modal {
-    display: block !important;
-    transform: translateY(0);
-    opacity: 1 !important;
-    visibility: visible !important;
-}
 .modal {
-    background: white !important;
+    background: #1e293b !important; /* Darker background for admin */
+    color: white !important;
     padding: 30px;
     border-radius: 20px;
     width: 95%;
-    max-width: 900px; /* Increased for TinyMCE */
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    transform: translateY(-20px);
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transform: translateY(20px);
     transition: all 0.3s ease;
-    position: relative;
-    z-index: 10000;
-    margin: auto;
+}
+.modal-overlay.visible .modal {
+    transform: translateY(0);
 }
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
     padding-bottom: 15px;
 }
+.modal-header h2 { color: white; margin: 0; }
 .modal-close {
-    background: none;
+    background: rgba(255,255,255,0.1);
     border: none;
-    font-size: 24px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    color: #64748b;
+    color: white;
+}
+.form-group label { color: #cbd5e1; font-weight: 600; margin-bottom: 8px; display: block; }
+.form-control { 
+    background: #0f172a !important; 
+    border: 1px solid #334155 !important; 
+    color: white !important; 
 }
 </style>
 
@@ -319,7 +336,10 @@ window.showAddForm = function() {
     toggleTargetType('file');
     
     modal.style.display = 'flex';
-    setTimeout(() => modal.classList.add('visible'), 50);
+    setTimeout(() => {
+        modal.classList.add('visible');
+        initTinyMCE();
+    }, 50);
 };
 
 window.toggleTargetType = function(type) {
@@ -391,7 +411,13 @@ window.editSeo = function(data) {
     }
     
     modal.style.display = 'flex';
-    setTimeout(() => modal.classList.add('visible'), 50);
+    setTimeout(() => {
+        modal.classList.add('visible');
+        initTinyMCE();
+        if (tinymce.get('footer_content')) {
+            tinymce.get('footer_content').setContent(data.footer_content || '');
+        }
+    }, 50);
 };
 
 window.closeModal = function() {

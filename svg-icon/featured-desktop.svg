@@ -48,21 +48,21 @@
     <animate attributeName="x" from="-80" to="660" dur="2.8s" repeatCount="indefinite"/>
   </rect>
 
-  <!-- FEATURED pill badge — top right (Micro Size) -->
+  <!-- FEATURED pill badge — top right (Desktop Size) -->
   <g>
-    <rect x="560" y="4" width="34" height="10" rx="5" fill="url(#badgeGrad)"/>
+    <rect x="480" y="10" width="110" height="30" rx="15" fill="url(#badgeGrad)"/>
     <!-- badge shine sweep -->
-    <rect x="560" y="4" width="10" height="10" rx="5" fill="white" opacity="0.2" transform="skewX(-18)">
-      <animate attributeName="x" from="550" to="610" dur="2.2s" repeatCount="indefinite"/>
+    <rect x="480" y="10" width="30" height="30" rx="15" fill="white" opacity="0.22" transform="skewX(-18)">
+      <animate attributeName="x" from="470" to="610" dur="2.2s" repeatCount="indefinite"/>
     </rect>
     <text
-      x="577" y="10.8"
+      x="535" y="30"
       text-anchor="middle"
       fill="#000"
-      font-size="3.5"
+      font-size="12"
       font-family="sans-serif"
       font-weight="900"
-      letter-spacing="0.1">FEATURED</text>
+      letter-spacing="1">FEATURED</text>
   </g>
 
 </svg>

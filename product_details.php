@@ -153,27 +153,7 @@ renderHeader($PAGE_TITLE, 'explore');
             letter-spacing: 0.5px;
         }
 
-        .breadcrumbs a {
-           color: #c9a84c;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .breadcrumbs a:hover {
-            color: var(--accent-gold);
-        }
-
-        .breadcrumbs span {
-            color: rgba(226, 116, 14, 0.15);
-        }
-
-        .breadcrumbs .current {
-            color: var(--text-muted);
-            max-width: 200px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        /* Breadcrumbs handled by modern-directory.css */
         
         @media (max-width: 768px) {
             .mobile-sticky-bar { display: flex; }
@@ -188,7 +168,7 @@ renderHeader($PAGE_TITLE, 'explore');
             <span>></span> 
             <a href="/products.php">Ads</a>
             <span>></span> 
-            <a href="/products.php?category=<?php echo $product['category_id']; ?>"><?php echo htmlspecialchars($product['category_name'] ?? ''); ?></a>
+            <a href="/escorts/">Escorts</a>
             <span>></span> 
             <span class="current"><?php echo htmlspecialchars($product['name'] ?? ''); ?></span>
         </nav>

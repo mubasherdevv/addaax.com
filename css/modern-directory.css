@@ -2697,3 +2697,37 @@ html.no-scroll, body.no-scroll {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+/* --- Breadcrumbs Style --- */
+.breadcrumbs {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.breadcrumbs a {
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0.85;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+.breadcrumbs a:hover {
+    color: var(--accent-gold);
+    opacity: 1;
+}
+.breadcrumbs span {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+.breadcrumbs .current {
+    color: var(--accent-gold);
+    opacity: 1;
+    font-weight: 600;
+    text-transform: capitalize;
+}

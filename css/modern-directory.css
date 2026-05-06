@@ -708,59 +708,31 @@ html.no-scroll, body.no-scroll {
   color: var(--accent-gold);
 }
 
-/* --- WhatsApp Icon Placement Logic (Fixed) --- */
-.wa-link {
-    display: none; /* Hidden by default */
-    position: absolute;
-    z-index: 5;
-    transition: transform 0.3s ease;
+/* --- WhatsApp Button Styling (Stable) --- */
+.seller-pill-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-.wa-link:hover {
-    transform: scale(1.1);
+.wa-btn-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.wa-icon {
-    display: block;
-}
-
-/* 1. Desktop Placement (Outside Pill) */
-@media (min-width: 769px) {
-    .wa-desktop-only {
-        display: block;
-        bottom: 20px;
-        right: 185px; /* Positioned before the seller pill */
-    }
-    .wa-desktop-only .wa-icon {
-        height: 24px;
-        width: auto;
-    }
+.wa-btn-main img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
 }
 
-/* 2. Mobile List View (Below Time) */
+/* Hide on mobile grid if it's too cramped, or resize */
 @media (max-width: 768px) {
-    .wa-list-mobile {
-        display: block;
-        top: 45px;
-        right: 32px;
-    }
-    .wa-list-mobile .wa-icon {
-        height: 20px;
-        width: auto;
-    }
-
-    /* 3. Mobile Grid View (Opposite Price) */
-    .listing-items-wrapper.grid-view .wa-list-mobile {
-        display: none !important;
-    }
-    .listing-items-wrapper.grid-view .wa-grid-mobile {
-        display: block;
-        bottom: 18px;
-        right: 20px;
-    }
-    .listing-items-wrapper.grid-view .wa-grid-mobile .wa-icon {
-        height: 20px;
-        width: auto;
+    .wa-btn-main img {
+        width: 22px;
+        height: 22px;
     }
 }
+
 
 .action-btn {
   width: 40px;

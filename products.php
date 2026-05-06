@@ -1,82 +1,82 @@
 <?php
-require_once 'includes/website_settings.php';
+/**
+ * Product Listing Page - Modern Aesthetic
+ */
 require_once 'auth/db_connect.php';
+require_once 'includes/website_settings.php';
 require_once 'includes/layout_functions.php';
 
-// Filter parameters
-$search = isset($_GET['search']) ? trim($_GET['search']) : '';
-$city_name = isset($_GET['city']) ? trim($_GET['city']) : '';
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$items_per_page = 10;
-$offset = ($page - 1) * $items_per_page;
+// Pagination settings
+$limit = 20;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+// Filter handling (simplified for now)
+$city = isset($_GET['city']) ? $conn->real_escape_string($_GET['city']) : '';
+$category = isset($_GET['category']) ? $conn->real_escape_string($_GET['category']) : '';
 
 // Build Query
-$query_parts = ["p.status = 1"];
-$params = [];
-$types = '';
+$where_clauses = ["p.status = 1"];
+if ($city) $where_clauses[] = "p.city = '$city'";
+if ($category) $where_clauses[] = "c.slug = '$category'";
 
-if (!empty($search)) {
-    $query_parts[] = "(p.name LIKE ? OR p.description LIKE ?)";
-    $s = '%' . $search . '%';
-    $params[] = $s; $params[] = $s;
-    $types .= 'ss';
-}
+$where_sql = implode(" AND ", $where_clauses);
 
-// SEO Slug Matching for City
-if (!empty($city_name)) {
-    $query_parts[] = "REPLACE(LOWER(p.city), ' ', '-') = ?";
-    $params[] = $city_name;
-    $types .= 's';
-}
-
-$where = "WHERE " . implode(" AND ", $query_parts);
-
-// Fetch Products
 $query = "SELECT p.*, c.name as category_name, u.first_name, u.last_name, u.profile_image, p.badges,
           IFNULL(NULLIF(p.image, ''), (SELECT image_path FROM product_images WHERE product_id = p.id ORDER BY is_primary DESC LIMIT 1)) as display_image
           FROM products p 
           LEFT JOIN categories c ON p.category_id = c.id 
           LEFT JOIN users u ON p.seller_id = u.id
-          $where 
+          WHERE $where_sql
           ORDER BY p.is_featured DESC, p.created_at DESC 
-          LIMIT ? OFFSET ?";
-$params[] = $items_per_page;
-$params[] = $offset;
-$types .= 'ii';
+          LIMIT $limit OFFSET $offset";
 
-$stmt = $conn->prepare($query);
-$stmt->bind_param($types, ...$params);
-$stmt->execute();
-$products = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$result = $conn->query($query);
+$products = $result->fetch_all(MYSQLI_ASSOC);
 
-// Sidebar Cities
-$sidebar_cities = $conn->query("SELECT name FROM cities WHERE status = 1 LIMIT 15")->fetch_all(MYSQLI_ASSOC);
+// Get total for pagination
+$total_query = "SELECT COUNT(*) as count FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE $where_sql";
+$total_result = $conn->query($total_query);
+$total_rows = $total_result->fetch_assoc()['count'];
+$total_pages = ceil($total_rows / $limit);
 
-renderHeader('Browse Ads | ADDAAX Premium', 'explore');
+renderHeader('All Listings | ADDAAX Premium', 'browse');
 ?>
 
-    <main class="container-wide">
-        <div class="listing-container">
-            
-            <!-- Main Content -->
-            <div class="listing-main">
-                
-                <!-- Breadcrumbs & Search Header -->
-                <nav class="breadcrumbs">
-                    <a href="/index.php">Home</a> 
-                    <span>></span> 
-                    <a href="/escorts/">Escort</a>
-                    <?php if (!empty($city_name)): ?>
-                        <span>></span> 
-                        <span class="current"><?php echo str_replace('-', ' ', htmlspecialchars($city_name)); ?></span>
-                    <?php else: ?>
-                        <span>></span> 
-                        <span class="current">All Listings</span>
-                    <?php endif; ?>
-                </nav>
+<main class="browse-listings page-header-offset">
+    <div class="container-wide">
+        <div class="breadcrumb-container">
+            <nav class="breadcrumbs">
+                <a href="/">Home</a>
+                <span><i class="fas fa-chevron-right"></i></span>
+                <a href="/products.php">Escort</a>
+                <span><i class="fas fa-chevron-right"></i></span>
+                <span class="current">All Listings</span>
+            </nav>
+        </div>
 
-                <div class="listing-header">
-                    <h2><?php echo $search ? 'Results for: "' . htmlspecialchars($search) . '"' : ($city_name ? ucwords(str_replace('-', ' ', htmlspecialchars($city_name))) . ' Escorts' : 'All Listings'); ?></h2>
+        <div class="listing-layout">
+            <!-- Sidebar / Filters -->
+            <aside class="listing-sidebar">
+                <div class="filter-card">
+                    <h3 class="filter-title">Ads in Pakistan</h3>
+                    <ul class="city-list">
+                        <?php 
+                        $city_list_query = "SELECT name, (SELECT COUNT(*) FROM products WHERE city = cities.name AND status = 1) as ad_count FROM cities WHERE status = 1 ORDER BY ad_count DESC LIMIT 15";
+                        $city_list_result = $conn->query($city_list_query);
+                        while($cl = $city_list_result->fetch_assoc()):
+                        ?>
+                        <li><a href="/escorts/<?php echo strtolower(str_replace(' ', '-', $cl['name'])); ?>"><?php echo $cl['name']; ?> Escort</a></li>
+                        <?php endwhile; ?>
+                        <li><a href="/cities.php" class="see-more">+ see more</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Results Section -->
+            <section class="listing-results">
+                <div class="results-header">
+                    <h1 class="results-title">All Listings</h1>
                     
                     <!-- View Toggle (Mobile Only) -->
                     <div class="view-toggle">
@@ -98,15 +98,10 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                     </div>
                 <?php else: foreach($products as $ad): 
                     $raw_img = !empty($ad['display_image']) ? $ad['display_image'] : '';
-                    $img = !empty($raw_img) ? (str_starts_with($raw_img, 'http') ? $raw_img : '/' . ltrim($raw_img, '/')) : '/images/placeholder.png';
+                    $img = !empty($raw_img) ? "/uploads/products/" . $raw_img : '';
+                    $is_featured = (isset($ad['is_featured']) && $ad['is_featured'] == 1);
                 ?>
-                    <a href="<?php echo getProductUrl($ad['id'], $ad['name']); ?>" class="product-card <?php echo $ad['is_featured'] ? 'featured-card' : ''; ?>">
-                        <?php if($ad['is_featured']): ?>
-                            <div class="featured-badge-svg">
-                                <img src="/svg-icon/featured-desktop.svg" class="desktop-featured" alt="Featured Ad">
-                                <img src="/svg-icon/featured-mobile.svg" class="mobile-featured" alt="Featured Ad">
-                            </div>
-                        <?php endif; ?>
+                    <a href="/product_details.php?id=<?php echo $ad['id']; ?>" class="product-card <?php echo $is_featured ? 'featured-card' : ''; ?>">
                         <div class="product-image">
                             <?php if(!empty($raw_img)): ?>
                                 <img src="<?php echo htmlspecialchars($img); ?>" alt="<?php echo htmlspecialchars($ad['name']); ?>" width="300" height="200" loading="lazy">
@@ -140,7 +135,9 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                             <?php endif; ?>
                             
                             <div class="city-badge"><?php echo strtoupper(htmlspecialchars($ad['city'] ?? 'Lahore')); ?></div>
+                            <?php if($is_featured): ?><div class="featured-badge">FEATURED</div><?php endif; ?>
                         </div>
+
                         <div class="product-info">
                             <div class="info-top">
                                 <span class="category-path"><?php echo strtoupper(htmlspecialchars($ad['category_name'] ?? 'Escorts')); ?></span>
@@ -148,78 +145,55 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                             </div>
                             
                             <h3 class="product-title"><?php echo htmlspecialchars($ad['name']); ?></h3>
-                            
                             <p class="product-desc"><?php echo mb_strimwidth(strip_tags($ad['description'] ?? ''), 0, 180, "..."); ?></p>
                             
                             <div class="info-bottom">
                                 <div class="product-price">PKR <?php echo number_format($ad['price']); ?></div>
                                 
-                                <div class="seller-pill">
-                                    <i class="fas fa-user-circle"></i>
-                                    <span class="seller-name"><?php echo htmlspecialchars(($ad['first_name'] ?? 'Admin') . ' ' . ($ad['last_name'] ?? '')); ?></span>
+                                <div class="seller-pill-wrap">
+                                    <?php if ($is_featured && !empty($ad['phone'])): ?>
+                                        <object>
+                                            <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $ad['phone']); ?>" target="_blank" class="wa-btn-main">
+                                                <img src="/svg-icon/whatsapp-icon/dektop.svg" alt="WA">
+                                            </a>
+                                        </object>
+                                    <?php endif; ?>
+                                    <div class="seller-pill">
+                                        <i class="fas fa-user-circle"></i>
+                                        <span class="seller-name"><?php echo htmlspecialchars(($ad['first_name'] ?? 'Admin') . ' ' . ($ad['last_name'] ?? '')); ?></span>
+                                    </div>
                                 </div>
                             </div>
-
-                            <!-- WhatsApp Icons (Absolutely Positioned via CSS) -->
-                            <?php if (isset($ad['is_featured']) && $ad['is_featured'] == 1 && !empty($ad['phone'])): 
-                                $wa_url = "https://wa.me/" . preg_replace('/[^0-9]/', '', $ad['phone']);
-                            ?>
-                                <a href="<?php echo $wa_url; ?>" target="_blank" class="wa-link wa-desktop-only">
-                                    <img src="/svg-icon/whatsapp-icon/dektop.svg" class="wa-icon" alt="WA">
-                                </a>
-                                <a href="<?php echo $wa_url; ?>" target="_blank" class="wa-link wa-list-mobile">
-                                    <img src="/svg-icon/whatsapp-icon/mobile-list.svg" class="wa-icon" alt="WA">
-                                </a>
-                                <a href="<?php echo $wa_url; ?>" target="_blank" class="wa-link wa-grid-mobile">
-                                    <img src="/svg-icon/whatsapp-icon/mobile-grid.svg" class="wa-icon" alt="WA">
-                                </a>
-                            <?php endif; ?>
                         </div>
                     </a>
                 <?php endforeach; endif; ?>
                 </div>
 
-            </div>
-
-            <!-- Sidebar -->
-            <aside class="sidebar-desktop">
-                <div class="sidebar-card">
-                    <div class="sidebar-title">ADS IN PAKISTAN</div>
-                    <div class="sidebar-list">
-                        <?php foreach($sidebar_cities as $sc): ?>
-                            <a href="/escorts/<?php echo urlencode(strtolower(str_replace(' ', '-', $sc['name']))); ?>">
-                                <?php echo htmlspecialchars($sc['name']); ?> Escort
-                            </a>
-                        <?php endforeach; ?>
-                        <a href="/cities.php" style="color: var(--accent-gold); font-weight: 800;">+ see more</a>
-                    </div>
+                <!-- Pagination -->
+                <?php if($total_pages > 1): ?>
+                <div class="pagination">
+                    <?php for($i=1; $i<=$total_pages; $i++): ?>
+                        <a href="?page=<?php echo $i; ?>" class="<?php echo $page == $i ? 'active' : ''; ?>"><?php echo $i; ?></a>
+                    <?php endfor; ?>
                 </div>
-            </aside>
-
+                <?php endif; ?>
+            </section>
         </div>
-    </main>
+    </div>
+</main>
 
-    <script>
-        // View Toggle Logic
-        const listViewBtn = document.getElementById('listViewBtn');
-        const gridViewBtn = document.getElementById('gridViewBtn');
-        const listingItems = document.getElementById('listingItems');
+<script>
+document.getElementById('listViewBtn').addEventListener('click', function() {
+    document.getElementById('listingItems').classList.remove('grid-view');
+    this.classList.add('active');
+    document.getElementById('gridViewBtn').classList.remove('active');
+});
 
-        if (listViewBtn && gridViewBtn && listingItems) {
-            listViewBtn.addEventListener('click', () => {
-                listViewBtn.classList.add('active');
-                gridViewBtn.classList.remove('active');
-                listingItems.classList.remove('grid-view');
-            });
+document.getElementById('gridViewBtn').addEventListener('click', function() {
+    document.getElementById('listingItems').classList.add('grid-view');
+    this.classList.add('active');
+    document.getElementById('listViewBtn').classList.remove('active');
+});
+</script>
 
-            gridViewBtn.addEventListener('click', () => {
-                gridViewBtn.classList.add('active');
-                listViewBtn.classList.remove('active');
-                listingItems.classList.add('grid-view');
-            });
-        }
-    </script>
-
-<?php
-renderFooter();
-?>
+<?php renderFooter(); ?>

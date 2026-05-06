@@ -1,60 +1,85 @@
 
 /* --- WhatsApp Icons Styling --- */
-.product-price {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
+/* Base container styling */
 .wa-icon-wrap {
     display: flex;
     align-items: center;
+    z-index: 5;
 }
 
 .wa-icon-wrap img {
-    display: none;
-    height: 25px;
+    display: none; /* Hide all by default */
+    height: 28px;
     width: auto;
     transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
 .wa-icon-wrap img:hover {
     transform: scale(1.1);
 }
 
-/* Desktop */
+/* Desktop View Optimization */
 @media (min-width: 769px) {
+    .info-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .wa-icon-wrap {
+        margin-right: auto; /* Push seller-pill to the far right */
+        margin-left: 15px;  /* Space from price */
+    }
+
     .wa-icon-wrap .wa-desktop {
         display: block;
     }
 }
 
-/* Mobile */
+/* Mobile View (Overall) */
 @media (max-width: 768px) {
-    /* Mobile List View */
-    .listing-items-wrapper:not(.grid-view) .wa-icon-wrap .wa-mobile-list {
-        display: block;
+    /* Hide description on mobile as requested */
+    .product-desc {
+        display: none !important;
     }
 
-    /* Mobile Grid View */
+    /* Mobile List View Positioning */
+    .listing-items-wrapper:not(.grid-view) .info-bottom {
+        position: relative;
+        min-height: 50px;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .listing-items-wrapper:not(.grid-view) .wa-icon-wrap {
+        position: absolute;
+        right: 0;
+        bottom: 45px; /* Above the bottom line/seller pill area */
+    }
+
+    .listing-items-wrapper:not(.grid-view) .wa-icon-wrap .wa-mobile-list {
+        display: block;
+        height: 32px; /* Slightly larger for visibility in list */
+    }
+
+    /* Mobile Grid View Positioning */
+    .listing-items-wrapper.grid-view .info-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+    }
+
+    .listing-items-wrapper.grid-view .wa-icon-wrap {
+        position: static;
+        flex-grow: 0;
+    }
+
     .listing-items-wrapper.grid-view .wa-icon-wrap .wa-mobile-grid {
         display: block;
-        height: 18px;
-    }
-    
-    .listing-items-wrapper.grid-view .product-price {
-        justify-content: space-between;
-        width: 100%;
-    }
-    
-    /* Hide description in Mobile Grid View */
-    .listing-items-wrapper.grid-view .product-desc {
-        display: none;
-    }
-    
-    /* Ensure info-bottom has enough space */
-    .listing-items-wrapper.grid-view .info-bottom {
-        padding-top: 10px;
-        margin-top: auto;
+        height: 20px;
     }
 }

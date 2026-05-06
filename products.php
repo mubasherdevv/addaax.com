@@ -152,13 +152,11 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                             <p class="product-desc"><?php echo mb_strimwidth(strip_tags($ad['description'] ?? ''), 0, 180, "..."); ?></p>
                             
                             <div class="info-bottom">
-                                <div class="product-price">
-                                    PKR <?php echo number_format($ad['price']); ?>
-                                    <div class="wa-icon-wrap">
-                                        <img src="/svg-icon/whatsapp-icon/dektop.svg" class="wa-desktop" alt="WA">
-                                        <img src="/svg-icon/whatsapp-icon/mobile-list.svg" class="wa-mobile-list" alt="WA">
-                                        <img src="/svg-icon/whatsapp-icon/mobile-grid.svg" class="wa-mobile-grid" alt="WA">
-                                    </div>
+                                <div class="product-price">PKR <?php echo number_format($ad['price']); ?></div>
+                                <div class="wa-icon-wrap">
+                                    <img src="/svg-icon/whatsapp-icon/dektop.svg" class="wa-desktop" alt="WA">
+                                    <img src="/svg-icon/whatsapp-icon/mobile-list.svg" class="wa-mobile-list" alt="WA">
+                                    <img src="/svg-icon/whatsapp-icon/mobile-grid.svg" class="wa-mobile-grid" alt="WA">
                                 </div>
                                 
                                 <!-- User Profile (Name Only) -->

@@ -1391,8 +1391,6 @@ renderAdminSidebar('products');
                             <i class="fas fa-list"></i>
                         </button>
                     </div>
-                    <a href="add_product.php" class="btn btn-primary btn-icon"><i class="fas fa-plus"></i> <span>Add New Product</span></a>
-                    <button id="bulk-add-btn" class="btn btn-primary btn-icon"><i class="fas fa-layer-group"></i> <span>Bulk Add Products</span></button>
                 </div>
             </div>
             
@@ -1715,38 +1713,6 @@ renderAdminSidebar('products');
                 <?php endif; ?>
             </div>
 
-            <!-- Bulk Add Products Modal -->
-            <div id="bulk-add-modal" class="modal" style="display: none;">
-                <div class="modal-content" style="max-width: 800px;">
-                    <div class="modal-header">
-                        <h3>Bulk Add Products</h3>
-                        <button class="close-modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>You can add multiple products at once. Each product should be on a new line in the following format:</label>
-                            <p style="color: #666; font-size: 0.9em; margin: 5px 0;">Product Name | Category | Price</p>
-                            <textarea id="bulk-products-input" rows="10" placeholder="Product Name | Category | Price
-Example: 
-iPhone 13 | Electronics | 999.99
-Samsung TV | Electronics | 1299.99"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Default Category (if not specified)</label>
-                            <select id="default-category">
-                                <option value="">Select Default Category</option>
-                                <?php foreach ($categories as $category): ?>
-                                <option value="<?php echo $category['id']; ?>"><?php echo htmlspecialchars($category['name']); ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="cancel-bulk-add" class="btn btn-outline">Cancel</button>
-                        <button id="confirm-bulk-add" class="btn btn-primary">Add Products</button>
-                    </div>
-                </div>
-            </div>
             
         </main>
         
@@ -2110,88 +2076,6 @@ Samsung TV | Electronics | 1299.99"></textarea>
         $(document).on('click', function(e) {
             if (!$(e.target).closest('.dropdown').length) {
                 $('.dropdown-menu').removeClass('show');
-            }
-        });
-
-        // Bulk Add Products functionality
-        $('#bulk-add-btn').on('click', function() {
-            $('#bulk-add-modal').show();
-        });
-
-        $('.close-modal, #cancel-bulk-add').on('click', function() {
-            $('#bulk-add-modal').hide();
-        });
-
-        $('#confirm-bulk-add').on('click', function() {
-            var productsText = $('#bulk-products-input').val().trim();
-            var defaultCategory = $('#default-category').val();
-            
-            if (!productsText) {
-                alert('Please enter product details');
-                return;
-            }
-            
-            if (!defaultCategory) {
-                alert('Please select a default category');
-                return;
-            }
-            
-            // Show loading state
-            $('#confirm-bulk-add').prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Adding Products...');
-            
-            // Send AJAX request to add products
-            $.ajax({
-                url: 'bulk_add_products.php',
-                type: 'POST',
-                data: {
-                    products_text: productsText,
-                    default_category: defaultCategory
-                },
-                success: function(response) {
-                    if (response.success) {
-                        showFancyPopup('Products added successfully');
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 2000);
-                    } else {
-                        showFancyPopup('Failed to add products: ' + response.message, 'error');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    alert('Error adding products. Please try again.');
-                    console.error("AJAX Error:", status, error);
-                },
-                complete: function() {
-                    $('#confirm-bulk-add').prop('disabled', false).text('Add Products');
-                    $('#bulk-add-modal').hide();
-                }
-            });
-        });
-
-        // Update form submission handlers
-        $('#add-product-form').on('submit', function(e) {
-            e.preventDefault();
-            // ... existing form submission code ...
-            if (response.success) {
-                showFancyPopup('Product added successfully');
-                setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
-            } else {
-                showFancyPopup('Failed to add product: ' + response.message, 'error');
-            }
-        });
-
-        $('#bulk-add-form').on('submit', function(e) {
-            e.preventDefault();
-            // ... existing form submission code ...
-            if (response.success) {
-                showFancyPopup('Products added successfully');
-                setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
-            } else {
-                showFancyPopup('Failed to add products: ' + response.message, 'error');
             }
         });
 

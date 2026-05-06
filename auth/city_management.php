@@ -265,9 +265,18 @@ renderAdminSidebar('cities');
                 <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
                     <h2><i class="fas fa-city" style="color: var(--primary);"></i> Cities</h2>
                     <div style="display: flex; gap: 10px;">
-                        <button type="button" id="bulkDeleteBtn" onclick="confirmBulkDelete()" class="btn btn-outline" style="padding: 5px 12px; font-size: 0.8rem; color: var(--danger); border-color: var(--danger); display: none;"><i class="fas fa-trash"></i> Delete Selected</button>
                         <button type="button" onclick="toggleBulkAdd()" class="btn btn-outline" style="padding: 5px 12px; font-size: 0.8rem;"><i class="fas fa-layer-group"></i> Bulk Add</button>
                     </div>
+                </div>
+
+                <!-- Floating Bulk Actions Bar -->
+                <div id="cityBulkActions" style="display: none; background: #1e293b; color: white; padding: 12px 20px; border-radius: 12px; position: sticky; top: 10px; z-index: 100; margin-bottom: 20px; align-items: center; justify-content: space-between; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span id="selectedCityCount" style="font-weight: 600; font-size: 0.9rem;">0 cities selected</span>
+                    </div>
+                    <button type="button" onclick="confirmBulkDelete()" class="btn" style="background: #ef4444; color: white; border: none; padding: 6px 15px; font-size: 0.85rem; font-weight: 600; border-radius: 8px;">
+                        <i class="fas fa-trash" style="margin-right: 5px;"></i> Delete Selected
+                    </button>
                 </div>
                 
                 <form method="POST" class="city-form" id="regularCityForm" style="margin-bottom: 30px;">
@@ -362,11 +371,15 @@ function toggleSelectAll(source) {
 
 function toggleDeleteBtn() {
     const checkboxes = document.querySelectorAll('.city-checkbox:checked');
-    const btn = document.getElementById('bulkDeleteBtn');
+    const bulkBar = document.getElementById('cityBulkActions');
+    const countDisplay = document.getElementById('selectedCityCount');
+    
     if (checkboxes.length > 0) {
-        btn.style.display = 'block';
+        bulkBar.style.display = 'flex';
+        countDisplay.innerText = checkboxes.length + ' city(s) selected';
     } else {
-        btn.style.display = 'none';
+        bulkBar.style.display = 'none';
+        document.getElementById('selectAllCities').checked = false;
     }
 }
 

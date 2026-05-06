@@ -274,9 +274,15 @@ renderAdminSidebar('users');
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="edit_password">New Password (leave blank to keep current)</label>
-                    <input type="password" id="edit_password" name="password" class="form-control">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label for="edit_password">New Password</label>
+                        <input type="password" id="edit_password" name="password" class="form-control" placeholder="Leave blank to keep current">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_confirm_password">Confirm Password</label>
+                        <input type="password" id="edit_confirm_password" name="confirm_password" class="form-control">
+                    </div>
                 </div>
                 
                 <div class="form-group" style="margin-top: 20px;">

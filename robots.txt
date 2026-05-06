@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /auth/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /vendor/
+Disallow: /ajax/
+
+Sitemap: https://addaax.com/sitemap.xml

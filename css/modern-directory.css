@@ -9,7 +9,7 @@
   /* Royal Gold */
   --text-main: #F5E9C8;
   /* Cream Glow */
-  --text-muted: rgba(245, 233, 200, 0.6);
+  --text-muted: rgba(245, 233, 200, 0.85); /* Increased from 0.6 for better contrast */
   --gold-gradient: linear-gradient(135deg, #C9A84C, #A68A3D);
   --premium-gradient: linear-gradient(135deg, #ffffff, #25153F);
   --glass: rgba(245, 233, 200, 0.03);

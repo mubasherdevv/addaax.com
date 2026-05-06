@@ -707,42 +707,68 @@ html.no-scroll, body.no-scroll {
 .product-card:hover .seller-name {
   color: var(--accent-gold);
 }
-/* WhatsApp Featured Icon Logic */
-.whatsapp-featured-wrap {
-    display: flex;
-    align-items: center;
-    margin-right: 4px;
+/* --- WhatsApp Icon Placement Logic --- */
+.wa-link {
+    display: none; /* Hidden by default */
+    transition: transform 0.3s ease;
+}
+.wa-link:hover {
+    transform: scale(1.1);
 }
 .wa-icon {
-    display: none; /* Hidden by default */
-}
-/* Desktop Default */
-.wa-desktop {
     display: block;
-    height: 22px;
-    width: auto;
 }
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .wa-desktop { display: none !important; }
-    
-    /* Show Mobile List Icon by Default on Mobile */
-    .wa-mobile-list {
+
+/* Desktop Styles */
+@media (min-width: 769px) {
+    .wa-desktop-only {
         display: block;
+    }
+    .wa-desktop-only .wa-icon {
+        height: 24px;
+        width: auto;
+    }
+    .seller-info-group {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    /* Hide Desktop Icon */
+    .wa-desktop-only { display: none !important; }
+
+    /* Mobile List View (Default) */
+    .wa-list-mobile {
+        display: block;
+    }
+    .wa-list-mobile .wa-icon {
+        height: 20px;
+        width: auto;
+    }
+
+    /* Mobile Grid View Logic */
+    .listing-items-wrapper.grid-view .wa-list-mobile {
+        display: none !important;
+    }
+    .listing-items-wrapper.grid-view .wa-grid-mobile {
+        display: block;
+    }
+    .listing-items-wrapper.grid-view .wa-grid-mobile .wa-icon {
         height: 18px;
         width: auto;
     }
-    
-    /* Toggle for Grid View on Mobile */
-    .listing-items-wrapper.grid-view .wa-mobile-list {
-        display: none !important;
-    }
-    .listing-items-wrapper.grid-view .wa-mobile-grid {
-        display: block !important;
-        height: 16px;
-        width: auto;
+
+    .price-wrap-wa {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
     }
 }
+
 
 .action-btn {
   width: 40px;

@@ -144,7 +144,15 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                         <div class="product-info">
                             <div class="info-top">
                                 <span class="category-path"><?php echo strtoupper(htmlspecialchars($ad['category_name'] ?? 'Escorts')); ?></span>
-                                <span class="post-time"><?php echo time_ago($ad['created_at']); ?></span>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
+                                    <span class="post-time"><?php echo time_ago($ad['created_at']); ?></span>
+                                    <!-- Mobile List WA -->
+                                    <?php if (isset($ad['is_featured']) && $ad['is_featured'] == 1 && !empty($ad['phone'])): ?>
+                                        <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $ad['phone']); ?>" target="_blank" class="wa-link wa-list-mobile">
+                                            <img src="/svg-icon/whatsapp-icon/mobile-list.svg" class="wa-icon" alt="WhatsApp">
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                             
                             <h3 class="product-title"><?php echo htmlspecialchars($ad['name']); ?></h3>
@@ -152,19 +160,30 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                             <p class="product-desc"><?php echo mb_strimwidth(strip_tags($ad['description'] ?? ''), 0, 180, "..."); ?></p>
                             
                             <div class="info-bottom">
-                                <div class="product-price">PKR <?php echo number_format($ad['price']); ?></div>
-                                
-                                <!-- User Profile (Name Only) -->
-                                <div class="seller-pill">
-                                    <?php if (isset($ad['is_featured']) && $ad['is_featured'] == 1): ?>
-                                        <div class="whatsapp-featured-wrap">
-                                            <img src="/svg-icon/whatsapp-icon/dektop.svg" class="wa-icon wa-desktop" alt="WA">
-                                            <img src="/svg-icon/whatsapp-icon/mobile-list.svg" class="wa-icon wa-mobile-list" alt="WA">
-                                            <img src="/svg-icon/whatsapp-icon/mobile-grid.svg" class="wa-icon wa-mobile-grid" alt="WA">
-                                        </div>
+                                <div class="price-wrap-wa">
+                                    <div class="product-price">PKR <?php echo number_format($ad['price']); ?></div>
+                                    
+                                    <!-- Grid View WA (Mobile Only) -->
+                                    <?php if (isset($ad['is_featured']) && $ad['is_featured'] == 1 && !empty($ad['phone'])): ?>
+                                        <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $ad['phone']); ?>" target="_blank" class="wa-link wa-grid-mobile">
+                                            <img src="/svg-icon/whatsapp-icon/mobile-grid.svg" class="wa-icon" alt="WhatsApp">
+                                        </a>
                                     <?php endif; ?>
-                                    <i class="fas fa-user-circle"></i>
-                                    <span class="seller-name"><?php echo htmlspecialchars(($ad['first_name'] ?? 'Admin') . ' ' . ($ad['last_name'] ?? '')); ?></span>
+                                </div>
+                                
+                                <div class="seller-info-group">
+                                    <!-- Desktop WA (Outside Pill) -->
+                                    <?php if (isset($ad['is_featured']) && $ad['is_featured'] == 1 && !empty($ad['phone'])): ?>
+                                        <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $ad['phone']); ?>" target="_blank" class="wa-link wa-desktop-only">
+                                            <img src="/svg-icon/whatsapp-icon/dektop.svg" class="wa-icon" alt="WhatsApp">
+                                        </a>
+                                    <?php endif; ?>
+
+                                    <!-- User Profile -->
+                                    <div class="seller-pill">
+                                        <i class="fas fa-user-circle"></i>
+                                        <span class="seller-name"><?php echo htmlspecialchars(($ad['first_name'] ?? 'Admin') . ' ' . ($ad['last_name'] ?? '')); ?></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

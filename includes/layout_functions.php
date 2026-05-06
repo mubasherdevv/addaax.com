@@ -53,8 +53,8 @@ function renderHeader($page_title = 'ADDAAX Premium', $active_page = 'home') {
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "ADDAAX",
-          "url": "https://addaax.com",
-          "logo": "https://addaax.com/images/logo.jpg",
+          "url": "<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]"; ?>",
+          "logo": "<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]"; ?>/images/logo.jpg",
           "description": "Pakistan's most trusted premium classified marketplace.",
           "address": {
             "@type": "PostalAddress",

@@ -7,8 +7,8 @@
     <!-- Animated gold gradient for diagonal wash -->
     <linearGradient id="goldWash" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#C9A227" stop-opacity="0"/>
-      <stop offset="60%" stop-color="#E1AD01" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#FFE066" stop-opacity="0.15"/>
+      <stop offset="60%" stop-color="#E1AD01" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#FFE066" stop-opacity="0.1"/>
     </linearGradient>
 
     <!-- Animated top border line gradient -->
@@ -33,36 +33,36 @@
 
   <!-- Diagonal gold wash — right ~55% of card -->
   <polygon
-    points="300,0 600,0 600,130 280,130"
+    points="320,0 600,0 600,130 300,130"
     fill="url(#goldWash)" />
 
   <!-- Top animated gold border -->
-  <rect x="0" y="0" width="600" height="1.5" fill="url(#topLine)">
+  <rect x="0" y="0" width="600" height="1" fill="url(#topLine)">
     <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
   </rect>
 
   <!-- Shimmer sweep across full card -->
   <rect x="-80" y="0" width="60" height="130"
-        fill="white" opacity="0.03"
+        fill="white" opacity="0.02"
         transform="skewX(-18)">
     <animate attributeName="x" from="-80" to="660" dur="2.8s" repeatCount="indefinite"/>
   </rect>
 
-  <!-- FEATURED pill badge — top right (Smaller) -->
+  <!-- FEATURED pill badge — top right (Ultra Small) -->
   <g>
-    <rect x="525" y="8" width="65" height="18" rx="9" fill="url(#badgeGrad)"/>
+    <rect x="545" y="6" width="48" height="14" rx="7" fill="url(#badgeGrad)"/>
     <!-- badge shine sweep -->
-    <rect x="525" y="8" width="20" height="18" rx="9" fill="white" opacity="0.2" transform="skewX(-18)">
-      <animate attributeName="x" from="510" to="610" dur="2.2s" repeatCount="indefinite"/>
+    <rect x="545" y="6" width="15" height="14" rx="7" fill="white" opacity="0.2" transform="skewX(-18)">
+      <animate attributeName="x" from="530" to="610" dur="2.2s" repeatCount="indefinite"/>
     </rect>
     <text
-      x="557.5" y="20"
+      x="569" y="15.5"
       text-anchor="middle"
       fill="#000"
-      font-size="7"
+      font-size="5"
       font-family="sans-serif"
       font-weight="900"
-      letter-spacing="0.5">FEATURED</text>
+      letter-spacing="0.2">FEATURED</text>
   </g>
 
 </svg>

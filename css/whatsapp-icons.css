@@ -30,8 +30,16 @@
     }
 
     .wa-icon-wrap {
-        margin-right: auto; /* Push seller-pill to the far right */
-        margin-left: 15px;  /* Space from price */
+        order: 3; /* Move to the far right */
+    }
+    
+    .seller-pill {
+        order: 2;
+        margin-left: auto; /* Space between price and seller */
+    }
+    
+    .product-price {
+        order: 1;
     }
 
     .wa-icon-wrap .wa-desktop {
@@ -41,45 +49,55 @@
 
 /* Mobile View (Overall) */
 @media (max-width: 768px) {
-    /* Hide description on mobile as requested */
+    /* Show exactly 1 line of description on mobile */
     .product-desc {
-        display: none !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 1 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+        margin-bottom: 5px !important;
+        font-size: 11px !important;
+        opacity: 0.6;
+        line-height: 1.2 !important;
+        height: 14px !important; /* Force 1 line height */
+    }
+
+    .info-bottom {
+        position: relative;
+        padding-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     /* Mobile List View Positioning */
-    .listing-items-wrapper:not(.grid-view) .info-bottom {
-        position: relative;
-        min-height: 50px;
-        display: flex;
-        align-items: flex-end;
-    }
-
     .listing-items-wrapper:not(.grid-view) .wa-icon-wrap {
         position: absolute;
         right: 0;
-        bottom: 45px; /* Above the bottom line/seller pill area */
+        bottom: 52px; /* Thora aur uper (a bit higher than line) */
     }
 
     .listing-items-wrapper:not(.grid-view) .wa-icon-wrap .wa-mobile-list {
         display: block;
-        height: 32px; /* Slightly larger for visibility in list */
+        height: 30px;
     }
 
     /* Mobile Grid View Positioning */
     .listing-items-wrapper.grid-view .info-bottom {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 10px;
+        position: relative;
+        padding-top: 8px;
     }
-
+    
     .listing-items-wrapper.grid-view .wa-icon-wrap {
-        position: static;
-        flex-grow: 0;
+        position: absolute;
+        right: 5px;
+        bottom: 48px; /* Above the line in grid too */
     }
 
     .listing-items-wrapper.grid-view .wa-icon-wrap .wa-mobile-grid {
         display: block;
-        height: 20px;
+        height: 22px;
+    }
+    
+    .listing-items-wrapper.grid-view .product-price {
+        font-size: 14px !important;
     }
 }

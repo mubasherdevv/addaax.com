@@ -1,6 +1,6 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/addazjgu/public_html
+    - export DEPLOYPATH=/home/addazjgu/pk.addaax.com
     - /bin/cp -rf * $DEPLOYPATH
     - /bin/cp .htaccess $DEPLOYPATH

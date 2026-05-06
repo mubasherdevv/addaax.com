@@ -10,6 +10,20 @@ $META_DESC = "The premium adult directory platform. Find verified escorts in Mum
 renderHeader($PAGE_TITLE, 'home');
 ?>
 
+<!-- WebSite Search Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://addaax.com/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://addaax.com/products.php?search={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
     <main>
         <!-- Hero Section -->
         <section class="hero">

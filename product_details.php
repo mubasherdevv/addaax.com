@@ -55,6 +55,60 @@ $META_DESC = mb_strimwidth(strip_tags($product['description'] ?? ''), 0, 160, ".
 renderHeader($PAGE_TITLE, 'explore');
 ?>
 
+<!-- Product Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "<?php echo htmlspecialchars($product['name']); ?>",
+  "image": [
+    "<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/" . ltrim($primary_image, '/'); ?>"
+  ],
+  "description": "<?php echo htmlspecialchars(strip_tags($product['description'])); ?>",
+  "sku": "ADX-<?php echo $product['id']; ?>",
+  "brand": {
+    "@type": "Brand",
+    "name": "ADDAAX"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>",
+    "priceCurrency": "PKR",
+    "price": "<?php echo $product['price']; ?>",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition"
+  }
+}
+</script>
+
+<!-- Breadcrumb Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "https://addaax.com/"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Ads",
+    "item": "https://addaax.com/products.php"
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "<?php echo htmlspecialchars($product['category_name']); ?>",
+    "item": "https://addaax.com/products.php?category=<?php echo $product['category_id']; ?>"
+  },{
+    "@type": "ListItem",
+    "position": 4,
+    "name": "<?php echo htmlspecialchars($product['name']); ?>"
+  }]
+}
+</script>
+
     <style>
         .recommend-scroll {
             display: flex;

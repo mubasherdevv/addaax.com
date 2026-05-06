@@ -41,6 +41,24 @@ function renderHeader($page_title = 'ADDAAX Premium', $active_page = 'home') {
         <?php if (!empty($meta_description)): ?>
         <meta name="description" content="<?php echo htmlspecialchars($meta_description); ?>">
         <?php endif; ?>
+        <link rel="canonical" href="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+        
+        <!-- Organization Schema -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "ADDAAX",
+          "url": "https://addaax.com",
+          "logo": "https://addaax.com/images/logo.jpg",
+          "description": "Pakistan's most trusted premium classified marketplace.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "PK"
+          }
+        }
+        </script>
+        
         <?php 
         $website_settings = getWebsiteSettings();
         $favicon = !empty($website_settings['favicon']) ? $website_settings['favicon'] : '';

@@ -1448,6 +1448,11 @@ renderAdminSidebar('products');
                             }
                             ?>
                             <img src="../<?php echo htmlspecialchars($image_path ?? ''); ?>" alt="<?php echo htmlspecialchars($product['name'] ?? ''); ?>" class="product-img">
+                            <?php if(isset($product['is_featured']) && $product['is_featured']): ?>
+                                <div style="position: absolute; top: 10px; left: 10px; background: #ff9800; color: white; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; z-index: 5; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                                    <i class="fas fa-star"></i> FEATURED
+                                </div>
+                            <?php endif; ?>
                             <img src="../<?php echo htmlspecialchars($qr_code_path ?? ''); ?>" alt="QR Code for <?php echo htmlspecialchars($product['name'] ?? ''); ?>" class="qr-code-img" style="display: none;">
                         </div>
                         <div class="product-content">
@@ -1609,7 +1614,12 @@ renderAdminSidebar('products');
                                         </div>
                                     </td>
                                     <td>
-                                        <div style="font-weight: 600; color: #1e293b; margin-bottom: 5px;"><?php echo htmlspecialchars($product['name'] ?? ''); ?></div>
+                                        <div style="font-weight: 600; color: #1e293b; margin-bottom: 5px;">
+                                            <?php if(isset($product['is_featured']) && $product['is_featured']): ?>
+                                                <i class="fas fa-star" style="color: #ff9800; margin-right: 5px;" title="Featured Ad"></i>
+                                            <?php endif; ?>
+                                            <?php echo htmlspecialchars($product['name'] ?? ''); ?>
+                                        </div>
                                         
                                         <!-- Table Product Badges -->
                                         <?php 

@@ -1,0 +1,50 @@
+<svg width="400" height="120" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="goldMove" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFD700">
+        <animate attributeName="offset" values="0;1;0" dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" stop-color="#FFF5CC">
+        <animate attributeName="offset" values="0.5;1.5;0.5" dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#C9A227">
+        <animate attributeName="offset" values="1;2;1" dur="3s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+
+    <radialGradient id="pulseGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.5">
+        <animate attributeName="stop-opacity" values="0.3;0.6;0.3" dur="2.5s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Glow Pulse -->
+  <ellipse cx="300" cy="20" rx="120" ry="50" fill="url(#pulseGlow)" />
+
+  <!-- Animated Diagonal Strip -->
+  <path d="M250 0 L400 0 L400 50 L200 120 L100 120 Z"
+        fill="url(#goldMove)" opacity="0.15"/>
+
+  <!-- Top Shine Line -->
+  <rect x="0" y="0" width="400" height="3" fill="url(#goldMove)">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Shine Sweep -->
+  <rect x="-100" y="0" width="80" height="120" fill="white" opacity="0.08" transform="skewX(-20)">
+    <animate attributeName="x" from="-100" to="500" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Featured Badge -->
+  <g transform="translate(280,10)">
+    <rect rx="20" ry="20" width="110" height="30" fill="url(#goldMove)" />
+    <text x="55" y="20" text-anchor="middle" fill="#000" font-size="12" font-family="Arial" font-weight="bold">
+      FEATURED
+    </text>
+  </g>
+
+</svg>

@@ -51,34 +51,34 @@ renderHeader($PAGE_TITLE, 'home');
                             <h3>Lahore</h3>
                         </div>
                     </a>
-                    <a href="/escorts/delhi" class="location-card">
-                        <img src="images/city_delhi.png" alt="Delhi">
+                    <a href="/escorts/karachi" class="location-card">
+                        <img src="images/city_delhi.png" alt="Karachi">
                         <div class="overlay">
-                            <h3>Delhi</h3>
+                            <h3>Karachi</h3>
                         </div>
                     </a>
-                    <a href="/escorts/bangalore" class="location-card">
-                        <img src="images/city_bangalore.png" alt="Bangalore">
+                    <a href="/escorts/multan" class="location-card">
+                        <img src="images/city_bangalore.png" alt="Multan">
                         <div class="overlay">
-                            <h3>Bangalore</h3>
+                            <h3>Multan</h3>
                         </div>
                     </a>
-                    <a href="/escorts/hyderabad" class="location-card">
-                        <img src="images/city_mumbai.png" alt="Hyderabad" style="filter: hue-rotate(45deg);">
+                    <a href="/escorts/islamabad" class="location-card">
+                        <img src="images/city_mumbai.png" alt="Islamabad" style="filter: hue-rotate(45deg);">
                         <div class="overlay">
-                            <h3>Hyderabad</h3>
+                            <h3>Islamabad</h3>
                         </div>
                     </a>
-                    <a href="/escorts/chennai" class="location-card">
-                        <img src="images/city_delhi.png" alt="Chennai" style="filter: hue-rotate(-45deg);">
+                    <a href="/escorts/rawalpindi" class="location-card">
+                        <img src="images/city_delhi.png" alt="Rawalpindi" style="filter: hue-rotate(-45deg);">
                         <div class="overlay">
-                            <h3>Chennai</h3>
+                            <h3>Rawalpindi</h3>
                         </div>
                     </a>
-                    <a href="/escorts/pune" class="location-card">
-                        <img src="images/city_bangalore.png" alt="Pune" style="filter: brightness(0.8);">
+                    <a href="/escorts/murree" class="location-card">
+                        <img src="images/city_bangalore.png" alt="Murree" style="filter: brightness(0.8);">
                         <div class="overlay">
-                            <h3>Pune</h3>
+                            <h3>Murree</h3>
                         </div>
                     </a>
                 </div>

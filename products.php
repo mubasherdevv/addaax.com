@@ -111,7 +111,9 @@ renderHeader('Browse Ads | Adaax Premium', 'explore');
                             <?php endif; ?>
                             
                             <?php if($ad['is_featured']): ?>
-                                <div class="featured-badge">★ FEATURED</div>
+                                <div class="featured-badge-svg">
+                                    <img src="/svg-icon/featured.svg" alt="Featured Ad">
+                                </div>
                             <?php endif; ?>
 
                             <!-- Special Badges -->

@@ -47,15 +47,18 @@ $price = floatval($_POST['price']);
     
     if (empty($errors)) {
         // Insert into database
-        $sql = "INSERT INTO products (name, description, price, category_id, created_at, updated_at) 
-                VALUES (?, ?, ?, ?, NOW(), NOW())";
+        $sql = "INSERT INTO products (name, description, price, category_id, is_featured, created_at, updated_at) 
+                VALUES (?, ?, ?, ?, ?, NOW(), NOW())";
+        
+        $is_featured = isset($_POST['is_featured']) ? intval($_POST['is_featured']) : 0;
         
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssdi", 
+        $stmt->bind_param("ssdii", 
             $product_name, 
             $product_description, 
             $price,
-            $category_id
+            $category_id,
+            $is_featured
         );
         
         if ($stmt->execute()) {
@@ -366,8 +369,22 @@ renderAdminSidebar('products');
                     </div>
                     
                     <div class="form-group">
-                        <label for="price">Price ($)*</label>
+                        <label for="price">Price (PKR)*</label>
                         <input type="number" id="price" name="price" step="0.01" min="0" value="<?php echo htmlspecialchars($price ?? ''); ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ad Type</label>
+                        <div class="ad-type-selection" style="display: flex; gap: 20px; margin-top: 10px; background: #f0f4ff; padding: 15px; border-radius: 8px; border: 1px solid #d0d7ff;">
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; font-size: 14px; color: #1e293b;">
+                                <input type="radio" name="is_featured" value="0" checked style="width: 18px; height: 18px; accent-color: #3f51b5;">
+                                Simple Ad
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; font-size: 14px; color: #3f51b5;">
+                                <input type="radio" name="is_featured" value="1" style="width: 18px; height: 18px; accent-color: #3f51b5;">
+                                <i class="fas fa-star" style="color: #ff9800;"></i> Featured Ad
+                            </label>
+                        </div>
                     </div>
                     
                     <h2 class="form-title">Product Images</h2>

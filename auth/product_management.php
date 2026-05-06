@@ -79,7 +79,11 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
 
 // Get all products
 $products = [];
-    // Pagination settings
+    $category_filter = isset($_GET['category']) ? intval($_GET['category']) : 0;
+    $category_name = '';
+
+    try {
+        // Pagination settings
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     $limit = 20;
     $offset = ($page - 1) * $limit;

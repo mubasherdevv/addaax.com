@@ -96,7 +96,7 @@ function renderHeader($page_title = 'ADDAAX ', $active_page = 'home') {
             ?>
             <a href="/index.php" class="logo">
                 <?php if (($website_settings['header_style'] ?? 'logo') === 'logo'): ?>
-                    <img src="<?php echo BASE_URL; ?>/images/<?php echo htmlspecialchars($logo_to_show); ?>" alt="<?php echo htmlspecialchars($site_name); ?> Logo" width="140" height="auto" fetchpriority="high" style="vertical-align: middle; height: 35px; width: auto;" onerror="this.src='<?php echo BASE_URL; ?>/images/logo.jpg'; this.onerror=null;">
+                    <img src="<?php echo BASE_URL; ?>/images/<?php echo htmlspecialchars($logo_to_show); ?>" alt="<?php echo htmlspecialchars($site_name); ?> Logo" fetchpriority="high" style="vertical-align: middle; height: 50px; width: auto; max-width: 180px; object-fit: contain;" onerror="this.src='<?php echo BASE_URL; ?>/images/logo.jpg'; this.onerror=null;">
                 <?php else: ?>
                     <span style="font-weight: 900; font-family: 'Outfit', sans-serif; font-size: 1.5rem; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: 1px;"><?php echo htmlspecialchars($site_name); ?></span>
                 <?php endif; ?>

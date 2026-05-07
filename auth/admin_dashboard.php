@@ -1405,13 +1405,13 @@ renderAdminSidebar($sidebar_active);
                 notification.addClass('active');
             }, 10);
             
-            // Hide after 3 seconds
+            // Hide after 8 seconds
             setTimeout(function() {
                 notification.removeClass('active');
                 setTimeout(function() {
                     notification.remove();
                 }, 300);
-            }, 3000);
+            }, 8000);
             
             console.log('Notification:', type, message);
         };
@@ -2527,13 +2527,13 @@ renderAdminSidebar($sidebar_active);
             
             document.body.appendChild(notification);
             
-            // Remove notification after 3 seconds
+            // Remove notification after 8 seconds
             setTimeout(() => {
                 notification.classList.add('fade-out');
                 setTimeout(() => {
                     notification.remove();
                 }, 500);
-            }, 4000);
+            }, 8000);
         }
 
         // Add visual success state to buttons

@@ -2410,14 +2410,19 @@ renderAdminSidebar($sidebar_active);
     <style>
     .notification {
         position: fixed;
-        top: 20px;
+        top: 100px;
         right: 20px;
         padding: 15px 25px;
-        border-radius: 5px;
+        border-radius: 12px;
         color: white;
-        font-weight: 500;
-        z-index: 1000;
+        font-weight: 600;
+        z-index: 9999;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         animation: slideIn 0.3s ease-out;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        backdrop-filter: blur(10px);
     }
 
     .notification.success {

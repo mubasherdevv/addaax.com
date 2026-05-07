@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $city_id = intval($_POST['city_id'] ?? 0);
     $province_id = intval($_POST['province_id'] ?? 0);
     $phone = $conn->real_escape_string($_POST['phone'] ?? '');
+    $display_name = $conn->real_escape_string($_POST['name'] ?? '');
 
     // Get city and province names
     $city_name = '';
@@ -45,15 +46,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
 
     // Insert into products
-    $sql = "INSERT INTO products (name, slug, description, price, seller_id, city, province, phone, status, created_at, updated_at) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, NOW(), NOW())";
+    $sql = "INSERT INTO products (name, slug, description, price, seller_id, city, province, phone, seller_display_name, status, created_at, updated_at) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, NOW(), NOW())";
     
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         die("Database Error");
     }
 
-    $stmt->bind_param("sssdisss", $title, $slug, $description, $price, $user_id, $city_name, $province_name, $phone);
+    $stmt->bind_param("sssdissss", $title, $slug, $description, $price, $user_id, $city_name, $province_name, $phone, $display_name);
     
     if ($stmt->execute()) {
         $product_id = $conn->insert_id;
@@ -61,6 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Handle images
         if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
             require_once '../includes/image_utils.php';
+
+            // Auto-migrate: ensure seller_display_name column exists
+            $conn->query("ALTER TABLE products ADD COLUMN IF NOT EXISTS seller_display_name VARCHAR(255) DEFAULT NULL AFTER phone");
+            
             // Organize by city and title-slug
             $city_slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $city_name)));
             if (empty($city_slug)) $city_slug = 'all';

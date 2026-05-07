@@ -10,6 +10,9 @@ requireLogin();
 $user_id = $_SESSION['user_id'];
 $is_admin = isAdmin();
 
+// Auto-migrate: ensure seller_display_name column exists to prevent SQL errors
+$conn->query("ALTER TABLE products ADD COLUMN IF NOT EXISTS seller_display_name VARCHAR(255) DEFAULT NULL AFTER phone");
+
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header("Location: dashboard.php");
     exit;

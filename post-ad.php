@@ -317,8 +317,8 @@ renderHeader('Post Your Ad | ADDAAX', 'post-ad');
                             // Draw original image
                             ctx.drawImage(img, 0, 0);
                             
-                            // 1. Add darkened background (Full Cover Black - 75% opacity)
-                            ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
+                            // 1. Add darkened background (Full Cover Black - 85% opacity)
+                            ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
                             ctx.fillRect(0, 0, canvas.width, canvas.height);
                             
                             // 2. Draw Watermark

@@ -74,7 +74,7 @@ function compressImage($source, $destination, $quality = 80, $apply_watermark = 
             $overlay = imagecreatetruecolor($width, $height);
             $black   = imagecolorallocate($overlay, 0, 0, 0);
             imagefill($overlay, 0, 0, $black);
-            imagecopymerge($image, $overlay, 0, 0, 0, 0, $width, $height, 60); // 50% dark
+            imagecopymerge($image, $overlay, 0, 0, 0, 0, $width, $height, 75); // 75% dark
             imagedestroy($overlay);
 
             // Watermark on top

@@ -4,7 +4,11 @@ RewriteEngine On
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
 RewriteRule ^index\.php$ / [R=301,L]
 
-# 2. Add .php extension internally
+# 2. Map escorts to products.php
+RewriteRule ^escorts/?$ products.php [NC,L]
+RewriteRule ^escorts/([^/]+)/?$ products.php?city=$1 [NC,QSA,L]
+
+# 3. Add .php extension internally
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]

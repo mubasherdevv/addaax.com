@@ -55,23 +55,6 @@ $sidebar_cities = $conn->query("SELECT name FROM cities WHERE status = 1 LIMIT 1
 renderHeader('Browse Ads | ADDAAX Premium', 'explore');
 ?>
 
-    <!-- Global Mobile Search & Filter Bar -->
-    <div class="global-mobile-bar">
-        <div class="container-wide">
-            <div class="mobile-action-row">
-                <div class="mobile-filter-trigger-circle" id="filterDrawerTrigger">
-                    <i class="fas fa-sliders-h"></i>
-                </div>
-                <form action="/products.php" method="GET" class="mobile-search-pill">
-                    <input type="text" name="search" placeholder="Search escorts..." value="<?php echo htmlspecialchars($search); ?>">
-                    <button type="submit" class="mobile-search-btn-circle">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <main class="container-wide">
         <div class="listing-container">
             
@@ -95,13 +78,19 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                 <div class="listing-header">
                     <h2><?php echo $search ? 'Results for: "' . htmlspecialchars($search) . '"' : ($city_name ? ucwords(str_replace('-', ' ', htmlspecialchars($city_name))) . ' Escorts' : 'All Listings'); ?></h2>
                     
-                    <!-- View Toggle -->
-                    <div class="view-toggle">
-                        <div class="view-btn active" id="listViewBtn" title="List View">
-                            <i class="fas fa-list"></i>
+                    <!-- Consolidated Mobile Controls (Filter + View Toggle) -->
+                    <div class="listing-controls-mobile">
+                        <div class="mobile-filter-trigger-mini" id="filterDrawerTrigger">
+                            <i class="fas fa-sliders-h"></i>
                         </div>
-                        <div class="view-btn" id="gridViewBtn" title="Grid View">
-                            <i class="fas fa-th-large"></i>
+
+                        <div class="view-toggle">
+                            <div class="view-btn active" id="listViewBtn" title="List View">
+                                <i class="fas fa-list"></i>
+                            </div>
+                            <div class="view-btn" id="gridViewBtn" title="Grid View">
+                                <i class="fas fa-th-large"></i>
+                            </div>
                         </div>
                     </div>
                 </div>

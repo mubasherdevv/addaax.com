@@ -61,6 +61,9 @@ $message = $_GET['msg'] ?? '';
 
 renderHeader('User Dashboard | ADDAAX Premium', 'dashboard');
 ?>
+<link rel="stylesheet" href="/css/dashboard-responsive.css">
+
+    <div class="dash-sidebar-overlay" id="dashOverlay"></div>
 
     <main class="container-wide dashboard-page">
         <div class="dashboard-grid">
@@ -88,6 +91,12 @@ renderHeader('User Dashboard | ADDAAX Premium', 'dashboard');
 
             <!-- Content Area -->
             <section class="dash-content">
+                <!-- Mobile Toggle -->
+                <div class="dash-mobile-toggle" id="dashToggle">
+                    <i class="fas fa-bars"></i>
+                    <span>Dashboard Menu</span>
+                </div>
+
                 <?php if ($message): ?>
                     <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; color: #22c55e; padding: 15px; border-radius: 12px; margin-bottom: 30px; display: flex; align-items: center; gap: 10px;">
                         <i class="fas fa-check-circle"></i>
@@ -141,7 +150,7 @@ renderHeader('User Dashboard | ADDAAX Premium', 'dashboard');
                                 <?php else: ?>
                                     <?php foreach($recent_ads as $ad): ?>
                                         <tr>
-                                            <td>
+                                            <td data-label="Ad Detail">
                                                 <div class="dash-ad-item">
                                                     <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;">
                                                     <div>
@@ -155,14 +164,14 @@ renderHeader('User Dashboard | ADDAAX Premium', 'dashboard');
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td><?php echo htmlspecialchars($ad['category_name'] ?? 'Escorts'); ?></td>
-                                            <td>
+                                            <td data-label="Category"><?php echo htmlspecialchars($ad['category_name'] ?? 'Escorts'); ?></td>
+                                            <td data-label="Status">
                                                 <span class="dash-status status-<?php echo $ad['status'] == 1 ? 'active' : ($ad['status'] == 0 ? 'pending' : ($ad['status'] == 2 ? 'hidden' : 'expired')); ?>">
                                                     <?php echo $ad['status'] == 1 ? 'Active' : ($ad['status'] == 0 ? 'Pending' : ($ad['status'] == 2 ? 'Hidden' : 'Expired')); ?>
                                                 </span>
                                             </td>
-                                            <td><?php echo date('M d, Y', strtotime($ad['created_at'])); ?></td>
-                                            <td>
+                                            <td data-label="Date"><?php echo date('M d, Y', strtotime($ad['created_at'])); ?></td>
+                                            <td data-label="Actions">
                                                 <div class="dash-actions">
                                                     <a href="edit_ad.php?id=<?php echo $ad['id']; ?>" class="dash-action-btn" title="Edit" style="color: var(--accent-gold);"><i class="fas fa-edit"></i></a>
                                                     <a href="delete_ad.php?id=<?php echo $ad['id']; ?>" class="dash-action-btn" title="Delete" style="color: #ef4444;" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></a>
@@ -197,7 +206,7 @@ renderHeader('User Dashboard | ADDAAX Premium', 'dashboard');
                                 <?php else: ?>
                                     <?php foreach($my_ads as $ad): ?>
                                         <tr>
-                                            <td>
+                                            <td data-label="Ad Detail">
                                                 <div class="dash-ad-item">
                                                     <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;">
                                                     <div>
@@ -211,14 +220,14 @@ renderHeader('User Dashboard | ADDAAX Premium', 'dashboard');
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td><?php echo htmlspecialchars($ad['category_name'] ?? 'Escorts'); ?></td>
-                                            <td>
+                                            <td data-label="Category"><?php echo htmlspecialchars($ad['category_name'] ?? 'Escorts'); ?></td>
+                                            <td data-label="Status">
                                                 <span class="dash-status status-<?php echo $ad['status'] == 1 ? 'active' : ($ad['status'] == 0 ? 'pending' : ($ad['status'] == 2 ? 'hidden' : 'expired')); ?>">
                                                     <?php echo $ad['status'] == 1 ? 'Active' : ($ad['status'] == 0 ? 'Pending' : ($ad['status'] == 2 ? 'Hidden' : 'Expired')); ?>
                                                 </span>
                                             </td>
-                                            <td><?php echo number_format($ad['views'] ?? 0); ?></td>
-                                            <td>
+                                            <td data-label="Views"><?php echo number_format($ad['views'] ?? 0); ?></td>
+                                            <td data-label="Actions">
                                                 <div class="dash-actions">
                                                     <a href="edit_ad.php?id=<?php echo $ad['id']; ?>" class="dash-action-btn" title="Edit" style="color: var(--accent-gold);"><i class="fas fa-edit"></i></a>
                                                     <a href="delete_ad.php?id=<?php echo $ad['id']; ?>" class="dash-action-btn" title="Delete" style="color: #ef4444;" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></a>
@@ -272,6 +281,26 @@ renderHeader('User Dashboard | ADDAAX Premium', 'dashboard');
             </section>
         </div>
     </main>
+
+    <script>
+        const dashToggle = document.getElementById('dashToggle');
+        const dashSidebar = document.querySelector('.dashboard-sidebar');
+        const dashOverlay = document.getElementById('dashOverlay');
+
+        if (dashToggle && dashSidebar && dashOverlay) {
+            dashToggle.addEventListener('click', () => {
+                dashSidebar.classList.add('active');
+                dashOverlay.classList.add('active');
+                document.body.classList.add('no-scroll');
+            });
+
+            dashOverlay.addEventListener('click', () => {
+                dashSidebar.classList.remove('active');
+                dashOverlay.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            });
+        }
+    </script>
 
 <?php
 renderFooter();

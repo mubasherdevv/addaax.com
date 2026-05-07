@@ -1,0 +1,133 @@
+
+/* --- Dashboard Responsive Enhancements --- */
+
+@media (max-width: 992px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 10px 0;
+    }
+
+    .dashboard-sidebar {
+        position: fixed;
+        left: -300px; /* Hidden by default */
+        top: 0;
+        bottom: 0;
+        width: 280px;
+        background: #0a0a0a;
+        z-index: 2000;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 40px 20px;
+        border-right: 1px solid var(--glass-border);
+    }
+
+    .dashboard-sidebar.active {
+        left: 0;
+    }
+
+    .dash-content {
+        padding: 20px;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    /* Mobile Sidebar Toggle Button */
+    .dash-mobile-toggle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        padding: 12px 20px;
+        border-radius: 12px;
+        color: var(--accent-gold);
+        font-weight: 700;
+        margin-bottom: 20px;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 768px) {
+    .dash-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .dash-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .dash-section-header .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .dash-table td, .dash-table th {
+        padding: 12px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Transform Table to Cards for better mobile UX */
+    .dash-table thead {
+        display: none;
+    }
+
+    .dash-table tr {
+        display: block;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--glass-border);
+        border-radius: 15px;
+        margin-bottom: 15px;
+        padding: 15px;
+    }
+
+    .dash-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: none;
+        padding: 8px 0;
+        text-align: right;
+    }
+
+    .dash-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        font-size: 10px;
+        text-align: left;
+    }
+
+    .dash-ad-item {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .dash-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+/* Sidebar Overlay */
+.dash-sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1999;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.dash-sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}

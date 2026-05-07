@@ -2509,35 +2509,6 @@ html.no-scroll, body.no-scroll {
     font-size: 16px;
     margin-bottom: 2px;
   }
-
-  /* Horizontal Scrollable Menu for Mobile */
-  .dash-menu {
-    display: flex;
-    overflow-x: auto;
-    padding-bottom: 10px;
-    gap: 10px;
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
-    border-bottom: 1px solid var(--glass-border);
-    margin-bottom: 20px;
-  }
-  .dash-menu::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Chrome/Safari */
-  }
-  .dash-menu li {
-    margin-bottom: 0 !important;
-    flex: 0 0 auto;
-  }
-  .dash-menu li a {
-    padding: 10px 20px !important;
-    border-radius: 100px !important;
-    white-space: nowrap;
-    font-size: 13px !important;
-  }
-  .dash-menu li:last-child {
-      border-top: none !important;
-      padding-top: 0 !important;
-      margin-top: 0 !important;
-  }
 }
 
 @media (max-width: 576px) {
@@ -2545,7 +2516,7 @@ html.no-scroll, body.no-scroll {
   .dash-table td:nth-child(2),
   .dash-table th:nth-child(4),
   .dash-table td:nth-child(4) {
-    display: none; /* Hide Category and Date on small mobile */
+    display: none; /* Hide Category and Date on small mobile to save space */
   }
   .dash-ad-item img {
     width: 45px;
@@ -2553,18 +2524,6 @@ html.no-scroll, body.no-scroll {
   }
   .dash-ad-title {
     font-size: 13px;
-  }
-  .dash-section-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 15px;
-  }
-  .dash-section-header .post-ad-btn {
-      width: 100%;
-      text-align: center;
-  }
-  .auth-form .responsive-grid {
-      grid-template-columns: 1fr !important;
   }
 }
 

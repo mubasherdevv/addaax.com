@@ -55,6 +55,23 @@ $sidebar_cities = $conn->query("SELECT name FROM cities WHERE status = 1 LIMIT 1
 renderHeader('Browse Ads | ADDAAX Premium', 'explore');
 ?>
 
+    <!-- Global Mobile Search & Filter Bar -->
+    <div class="global-mobile-bar">
+        <div class="container-wide">
+            <div class="mobile-action-row">
+                <div class="mobile-filter-trigger-circle" id="filterDrawerTrigger">
+                    <i class="fas fa-sliders-h"></i>
+                </div>
+                <form action="/products.php" method="GET" class="mobile-search-pill">
+                    <input type="text" name="search" placeholder="Search escorts..." value="<?php echo htmlspecialchars($search); ?>">
+                    <button type="submit" class="mobile-search-btn-circle">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <main class="container-wide">
         <div class="listing-container">
             
@@ -78,18 +95,6 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                 <div class="listing-header">
                     <h2><?php echo $search ? 'Results for: "' . htmlspecialchars($search) . '"' : ($city_name ? ucwords(str_replace('-', ' ', htmlspecialchars($city_name))) . ' Escorts' : 'All Listings'); ?></h2>
                     
-                    <!-- Mobile Search & Filter Action Bar -->
-                    <div class="mobile-action-bar">
-                        <form action="/products.php" method="GET" class="mobile-mini-search">
-                            <i class="fas fa-search"></i>
-                            <input type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search); ?>">
-                        </form>
-                        <div class="mobile-filter-trigger" id="filterDrawerTrigger">
-                            <i class="fas fa-filter"></i>
-                            <span>Filter</span>
-                        </div>
-                    </div>
-
                     <!-- View Toggle -->
                     <div class="view-toggle">
                         <div class="view-btn active" id="listViewBtn" title="List View">

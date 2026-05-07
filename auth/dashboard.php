@@ -97,12 +97,7 @@ renderHeader('User Dashboard | ADDAAX', 'dashboard');
                     <span>Dashboard Menu</span>
                 </div>
 
-                <?php if ($message): ?>
-                    <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; color: #22c55e; padding: 15px; border-radius: 12px; margin-bottom: 30px; display: flex; align-items: center; gap: 10px;">
-                        <i class="fas fa-check-circle"></i>
-                        <?php echo htmlspecialchars($message); ?>
-                    </div>
-                <?php endif; ?>
+
 
                 <?php if ($active_tab === 'overview'): ?>
                     <div class="dash-section-header">

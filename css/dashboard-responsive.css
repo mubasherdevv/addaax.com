@@ -1,5 +1,7 @@
-
 /* --- Dashboard Responsive Enhancements --- */
+.dash-mobile-toggle {
+    display: none;
+}
 
 @media (max-width: 992px) {
     .dashboard-grid {

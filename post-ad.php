@@ -294,6 +294,10 @@ renderHeader('Post Your Ad | ADDAAX', 'post-ad');
             window.scrollTo({ top: 100, behavior: 'smooth' });
         }
 
+        // Pre-load watermark for instant preview
+        const watermarkImg = new Image();
+        watermarkImg.src = 'images/watermark.png';
+
         function previewImages(input) {
             const grid = document.getElementById('previewGrid');
             grid.innerHTML = '';
@@ -301,10 +305,46 @@ renderHeader('Post Your Ad | ADDAAX', 'post-ad');
                 Array.from(input.files).forEach(file => {
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        const item = document.createElement('div');
-                        item.className = 'preview-item';
-                        item.innerHTML = `<img src="${e.target.result}"><button type="button" class="preview-remove" onclick="this.parentElement.remove()">×</button>`;
-                        grid.appendChild(item);
+                        const img = new Image();
+                        img.onload = function() {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            
+                            // Set canvas dimensions
+                            canvas.width = img.width;
+                            canvas.height = img.height;
+                            
+                            // Draw original image
+                            ctx.drawImage(img, 0, 0);
+                            
+                            // 1. Add darkened background for logo area (matching server-side style)
+                            const targetWWidth = canvas.width * 0.5;
+                            const targetWHeight = (watermarkImg.height / watermarkImg.width) * targetWWidth;
+                            const padding = canvas.width * 0.05; // 5% padding
+                            
+                            const bgWidth = targetWWidth + (padding * 2);
+                            const bgHeight = targetWHeight + (padding * 2);
+                            const bgX = (canvas.width - bgWidth) / 2;
+                            const bgY = (canvas.height - bgHeight) / 2;
+                            
+                            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+                            ctx.fillRect(bgX, bgY, bgWidth, bgHeight);
+                            
+                            // 2. Draw Watermark
+                            if (watermarkImg.complete) {
+                                const destX = (canvas.width - targetWWidth) / 2;
+                                const destY = (canvas.height - targetWHeight) / 2;
+                                ctx.drawImage(watermarkImg, destX, destY, targetWWidth, targetWHeight);
+                            }
+                            
+                            // Create preview item
+                            const item = document.createElement('div');
+                            item.className = 'preview-item';
+                            const previewUrl = canvas.toDataURL('image/jpeg', 0.8);
+                            item.innerHTML = `<img src="${previewUrl}"><button type="button" class="preview-remove" onclick="this.parentElement.remove()">×</button>`;
+                            grid.appendChild(item);
+                        };
+                        img.src = e.target.result;
                     }
                     reader.readAsDataURL(file);
                 });

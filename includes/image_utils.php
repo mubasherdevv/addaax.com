@@ -52,17 +52,8 @@ function compressImage($source, $destination, $quality = 80, $apply_watermark = 
         $height = $new_height;
     }
 
-    // 2. Add Dark Overlay and Watermark (ONLY if requested)
+    // 2. Add Watermark (ONLY if requested)
     if ($apply_watermark) {
-        // Dark Overlay (Full Cover Black)
-        $overlay = imagecreatetruecolor($width, $height);
-        $black = imagecolorallocatealpha($overlay, 0, 0, 0, 70); 
-        imagefill($overlay, 0, 0, $black);
-        imagealphablending($image, true);
-        imagecopy($image, $overlay, 0, 0, 0, 0, $width, $height);
-        imagedestroy($overlay);
-
-        // Watermark
         $watermark_path = __DIR__ . '/../images/watermark.png';
         if (file_exists($watermark_path)) {
             $watermark = imagecreatefrompng($watermark_path);
@@ -81,6 +72,22 @@ function compressImage($source, $destination, $quality = 80, $apply_watermark = 
                 $dest_x = ($width - $target_w_width) / 2;
                 $dest_y = ($height - $target_w_height) / 2;
 
+                // Create a semi-transparent black background rectangle for the logo area
+                $padding = 20;
+                $bg_width = $target_w_width + ($padding * 2);
+                $bg_height = $target_w_height + ($padding * 2);
+                $bg_x = ($width - $bg_width) / 2;
+                $bg_y = ($height - $bg_height) / 2;
+
+                $bg_layer = imagecreatetruecolor($bg_width, $bg_height);
+                $bg_color = imagecolorallocatealpha($bg_layer, 0, 0, 0, 60); // Semi-transparent black
+                imagefill($bg_layer, 0, 0, $bg_color);
+                
+                imagealphablending($image, true);
+                imagecopy($image, $bg_layer, $bg_x, $bg_y, 0, 0, $bg_width, $bg_height);
+                imagedestroy($bg_layer);
+
+                // Copy watermark on top
                 imagecopyresampled($image, $watermark, $dest_x, $dest_y, 0, 0, $target_w_width, $target_w_height, $w_width, $w_height);
                 imagedestroy($watermark);
             }

@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Insert into products
     $sql = "INSERT INTO products (name, slug, description, price, seller_id, city, province, phone, status, created_at, updated_at) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, NOW(), NOW())";
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, NOW(), NOW())";
     
     $stmt = $conn->prepare($sql);
     if (!$stmt) {

@@ -182,6 +182,16 @@ renderHeader($PAGE_TITLE, 'explore');
                 <div class="gallery-card" style="max-width: 800px; margin-left: auto; margin-right: auto;">
                     <div class="main-image-box">
                         <img id="mainImage" src="<?php echo str_starts_with($primary_image, 'http') ? $primary_image : '/' . $primary_image; ?>" alt="<?php echo htmlspecialchars($product['name'] ?? ''); ?>" width="800" height="500" fetchpriority="high">
+                        
+                        <!-- Floating Mobile Icons -->
+                        <div class="mobile-floating-actions">
+                            <div class="floating-btn share" onclick="window.navigator.share({title: '<?php echo addslashes($product['name']); ?>', url: window.location.href})" title="Share">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="floating-btn report" title="Report">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                        </div>
                     </div>
                     <?php if(count($images) > 1): ?>
                     <div class="thumb-strip hide-scrollbar">
@@ -227,8 +237,7 @@ renderHeader($PAGE_TITLE, 'explore');
                         </div>
                         
                         <div class="action-btns-group">
-                            <div class="action-icon-btn"><i class="far fa-heart"></i> Save</div>
-                            <div class="action-icon-btn"><i class="fas fa-share-alt"></i> Share</div>
+                            <div class="action-icon-btn" onclick="window.navigator.share({title: '<?php echo addslashes($product['name']); ?>', url: window.location.href})"><i class="fas fa-share-alt"></i> Share</div>
                             <div class="action-icon-btn"><i class="far fa-flag"></i> Report</div>
                         </div>
                     </div>
@@ -300,10 +309,10 @@ renderHeader($PAGE_TITLE, 'explore');
 
         <!-- Related Products Section -->
         <?php if(!empty($related_products)): ?>
-        <section style="margin-top: 100px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
-                <h2 class="section-title" style="text-align: left; margin-bottom: 0;">Recommended for You</h2>
-                <a href="/products.php" style="color: var(--accent-gold); text-decoration: none; font-weight: 700; font-size: 12px; text-transform: uppercase;">See All</a>
+        <section class="related-section">
+            <div class="related-header">
+                <h2 class="section-title-mini">Recommended for You</h2>
+                <a href="/products.php" class="see-all-link">See All</a>
             </div>
             <div class="recommend-scroll">
                 <?php foreach($related_products as $rp): 

@@ -79,8 +79,9 @@ function renderHeader($page_title = 'ADDAAX ', $active_page = 'home') {
         if (!empty($favicon)): ?>
         <link rel="icon" href="/images/<?php echo htmlspecialchars($favicon); ?>" type="image/x-icon">
         <?php endif; ?>
-        <link rel="stylesheet" href="/css/modern-directory.css?v=2.2">
+        <link rel="stylesheet" href="/css/modern-directory.css?v=2.3">
         <link rel="stylesheet" href="/css/whatsapp-icons.css">
+        <link rel="stylesheet" href="/css/toast.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     </head>
@@ -268,6 +269,7 @@ function renderFooter() {
             if (closeMenu) closeMenu.addEventListener('click', () => toggleM(false));
             if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', () => toggleM(true));
         </script>
+        <script src="/js/toast.js"></script>
     </body>
     </html>
     <?php

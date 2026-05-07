@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         ob_end_clean();
-        header("Location: dashboard.php?tab=ads&msg=Ad posted successfully! Admin will review it.");
+        header("Location: dashboard.php?tab=ads&msg=Ad posted successfully.");
         exit;
     } else {
         die("Submission failed");

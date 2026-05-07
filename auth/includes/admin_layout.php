@@ -151,6 +151,7 @@ function renderAdminHeader($page_title = 'Admin Panel') {
     <title><?php echo htmlspecialchars($page_title); ?> | <?php echo htmlspecialchars($website_name ?? 'ADDAAX'); ?></title>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/admin-dashboard.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/toast.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <?php if (!empty($favicon)): ?>
@@ -242,6 +243,7 @@ function renderAdminFooter() {
             });
         });
     </script>
+    <script src="<?php echo BASE_URL; ?>/js/toast.js"></script>
 </body>
 </html>
     <?php

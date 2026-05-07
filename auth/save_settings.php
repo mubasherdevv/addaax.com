@@ -85,7 +85,8 @@ $key_to_column = [
     'currency' => 'currency',
     'maintenance_mode' => 'maintenance_mode',
     'maintenance_message' => 'maintenance_message',
-    'featured_ad_price' => 'featured_ad_price'
+    'featured_ad_price' => 'featured_ad_price',
+    'header_style' => 'header_style'
 ];
 
 // We'll update the single row of settings

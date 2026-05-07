@@ -16,6 +16,7 @@ if (!isLoggedIn() || $_SESSION["user_role"] !== "admin") {
 $website_settings = getWebsiteSettings();
 $website_name = $website_settings['website_name'] ?? 'Wholesale E-commerce';
 $website_logo = $website_settings['website_logo'] ?? 'logo.svg';
+$header_style = $website_settings['header_style'] ?? 'logo';
 $favicon = $website_settings['favicon'] ?? '';
 
 // Fetch all users from the database
@@ -536,6 +537,21 @@ renderAdminSidebar($sidebar_active);
                             <div class="form-group">
                                 <label for="website_name" style="font-weight: 700; color: #334155; margin-bottom: 10px; display: block;">Website Name</label>
                                 <input type="text" id="website_name" name="website_name" value="<?php echo htmlspecialchars($website_name); ?>" placeholder="Your website name" class="form-control" style="height: 50px; border-radius: 12px; border: 1.5px solid #e2e8f0; padding: 0 20px; font-weight: 500;">
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-weight: 700; color: #334155; margin-bottom: 10px; display: block;">Header Display Style</label>
+                                <div style="display: flex; gap: 20px; background: #f8fafc; padding: 15px; border-radius: 12px; border: 1.5px solid #e2e8f0;">
+                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                        <input type="radio" name="header_style" value="logo" <?php echo $header_style === 'logo' ? 'checked' : ''; ?> style="width: 18px; height: 18px;">
+                                        <span style="font-weight: 600; color: #475569;">Show Logo Image</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                        <input type="radio" name="header_style" value="text" <?php echo $header_style === 'text' ? 'checked' : ''; ?> style="width: 18px; height: 18px;">
+                                        <span style="font-weight: 600; color: #475569;">Show Website Name (Text)</span>
+                                    </label>
+                                </div>
+                                <p style="font-size: 11px; color: #64748b; margin-top: 8px;"><i class="fas fa-info-circle"></i> Choose what appears in the top navigation bar.</p>
                             </div>
                             
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
@@ -2451,6 +2467,7 @@ renderAdminSidebar($sidebar_active);
                     if (data.success) {
                         // Show success message
                         showNotification('Settings saved successfully!', 'success');
+                        if (submitButton) showButtonSuccess(submitButton);
                         
                         // Update only the form values that were submitted
                         for (let [key, value] of formData.entries()) {
@@ -2510,8 +2527,22 @@ renderAdminSidebar($sidebar_active);
                 notification.classList.add('fade-out');
                 setTimeout(() => {
                     notification.remove();
-                }, 300);
-            }, 3000);
+                }, 500);
+            }, 4000);
+        }
+
+        // Add visual success state to buttons
+        function showButtonSuccess(button) {
+            const originalHtml = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Saved!';
+            button.style.backgroundColor = '#10b981';
+            button.style.borderColor = '#10b981';
+            
+            setTimeout(() => {
+                button.innerHTML = originalHtml;
+                button.style.backgroundColor = '';
+                button.style.borderColor = '';
+            }, 2000);
         }
     });
     </script>

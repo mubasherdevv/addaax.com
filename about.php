@@ -3,7 +3,7 @@ require_once 'includes/website_settings.php';
 require_once 'auth/db_connect.php';
 require_once 'includes/layout_functions.php';
 
-renderHeader('About Us | ADDAAX Premium', 'about');
+renderHeader('About Us | ADDAAX', 'about');
 ?>
 
 <main>

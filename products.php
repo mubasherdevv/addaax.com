@@ -52,7 +52,7 @@ $products = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 // Sidebar Cities
 $sidebar_cities = $conn->query("SELECT name FROM cities WHERE status = 1 LIMIT 15")->fetch_all(MYSQLI_ASSOC);
 
-renderHeader('Browse Ads | ADDAAX Premium', 'explore');
+renderHeader('Browse Ads | ADDAAX ', 'explore');
 ?>
 
     <main class="container-wide">

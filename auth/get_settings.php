@@ -25,6 +25,14 @@ function getWebsiteSettings($key = null) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         
+        // Auto-migrate: check if header_style column exists
+        if (!isset($row['header_style'])) {
+            $conn->query("ALTER TABLE website_settings ADD COLUMN header_style VARCHAR(20) DEFAULT 'logo'");
+            // Refresh row data
+            $res = $conn->query("SELECT * FROM website_settings LIMIT 1");
+            $row = $res->fetch_assoc();
+        }
+
         // Map new columns to legacy keys for compatibility
         $settings = [
             'website_name' => $row['site_name'] ?? '',
@@ -36,6 +44,7 @@ function getWebsiteSettings($key = null) {
             'maintenance_mode' => $row['maintenance_mode'] ?? 0,
             'maintenance_message' => $row['maintenance_message'] ?? '',
             'featured_ad_price' => $row['featured_ad_price'] ?? 0,
+            'header_style' => $row['header_style'] ?? 'logo',
         ];
 
         // Merge in social links if they exist

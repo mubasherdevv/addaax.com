@@ -59,7 +59,7 @@ if ($active_tab === 'overview') {
 
 $message = $_GET['msg'] ?? '';
 
-renderHeader('User Dashboard | ADDAAX Premium', 'dashboard');
+renderHeader('User Dashboard | ADDAAX', 'dashboard');
 ?>
 <link rel="stylesheet" href="/css/dashboard-responsive.css">
 

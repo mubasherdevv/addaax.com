@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../auth/session.php';
 require_once __DIR__ . '/website_settings.php';
 
-function renderHeader($page_title = 'ADDAAX Premium', $active_page = 'home') {
+function renderHeader($page_title = 'ADDAAX ', $active_page = 'home') {
     global $conn;
     $user_name = $_SESSION['user_name'] ?? 'Account';
     $is_logged_in = isset($_SESSION['user_id']);
@@ -95,8 +95,11 @@ function renderHeader($page_title = 'ADDAAX Premium', $active_page = 'home') {
             $site_name = !empty($website_settings['website_name']) ? $website_settings['website_name'] : 'ADDAAX';
             ?>
             <a href="/index.php" class="logo">
-                <img src="<?php echo BASE_URL; ?>/images/<?php echo htmlspecialchars($logo_to_show); ?>" alt="<?php echo htmlspecialchars($site_name); ?> Logo" width="35" height="35" fetchpriority="high" style="vertical-align: middle; margin-right: 10px;" onerror="this.src='<?php echo BASE_URL; ?>/images/logo.jpg'; this.onerror=null;">
-                <span><?php echo htmlspecialchars($site_name); ?></span>
+                <?php if (($website_settings['header_style'] ?? 'logo') === 'logo'): ?>
+                    <img src="<?php echo BASE_URL; ?>/images/<?php echo htmlspecialchars($logo_to_show); ?>" alt="<?php echo htmlspecialchars($site_name); ?> Logo" width="35" height="35" fetchpriority="high" style="vertical-align: middle;" onerror="this.src='<?php echo BASE_URL; ?>/images/logo.jpg'; this.onerror=null;">
+                <?php else: ?>
+                    <span style="font-weight: 900; font-family: 'Outfit', sans-serif; font-size: 1.5rem; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: 1px;"><?php echo htmlspecialchars($site_name); ?></span>
+                <?php endif; ?>
             </a>
             <div class="mobile-nav-toggle" id="menuToggle">
                         <i class="fas fa-bars"></i>
@@ -208,10 +211,10 @@ function renderFooter() {
                     <div class="footer-col">
                         <h4>Top Cities</h4>
                         <ul class="footer-links">
-                            <li><a href="#">Lahore</a></li>
-                            <li><a href="#">Karachi</a></li>
-                            <li><a href="#">Islamabad</a></li>
-                            <li><a href="#">Multan</a></li>
+                            <li><a href="/escorts/lahore">Lahore</a></li>
+                            <li><a href="/escorts/karachi">Karachi</a></li>
+                            <li><a href="/escorts/islamabad">Islamabad</a></li>
+                            <li><a href="/escorts/multan">Multan</a></li>
                         </ul>
                     </div>
                 </div>

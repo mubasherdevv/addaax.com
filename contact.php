@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-renderHeader('Contact Us | ADDAAX Premium', 'contact');
+renderHeader('Contact Us | ADDAAX', 'contact');
 ?>
 
 <main>

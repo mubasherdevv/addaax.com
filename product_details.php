@@ -51,7 +51,7 @@ $related_stmt->execute();
 $related_products = $related_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
 // SEO Meta
-$PAGE_TITLE = htmlspecialchars($product['name'] ?? '') . " | ADDAAX Premium Directory";
+$PAGE_TITLE = htmlspecialchars($product['name'] ?? '') . " | ADDAAX  ";
 $META_DESC = mb_strimwidth(strip_tags($product['description'] ?? ''), 0, 160, "...");
 
 renderHeader($PAGE_TITLE, 'explore');

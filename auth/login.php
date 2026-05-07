@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-renderHeader('Login | ADDAAX Premium', 'login');
+renderHeader('Login | ADDAAX', 'login');
 ?>
 
     <style>

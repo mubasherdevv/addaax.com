@@ -159,11 +159,15 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                             
                             <div class="info-bottom">
                                 <div class="product-price">PKR <?php echo number_format($ad['price']); ?></div>
-                                <div class="wa-icon-wrap">
-                                    <img src="/svg-icon/whatsapp-icon/dektop.svg" class="wa-desktop" alt="WA">
-                                    <img src="/svg-icon/whatsapp-icon/mobile-list.svg" class="wa-mobile-list" alt="WA">
-                                    <img src="/svg-icon/whatsapp-icon/mobile-grid.svg" class="wa-mobile-grid" alt="WA">
-                                </div>
+                                <div 
+   class="wa-icon-wrap"
+   onclick="window.open('https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $ad['phone']); ?>?text=<?php echo urlencode('Hi, I saw your ad: ' . $ad['name']); ?>', '_blank'); event.stopPropagation();"
+   style="cursor:pointer;"
+>
+    <img src="/svg-icon/whatsapp-icon/dektop.svg" class="wa-desktop" alt="WA">
+    <img src="/svg-icon/whatsapp-icon/mobile-list.svg" class="wa-mobile-list" alt="WA">
+    <img src="/svg-icon/whatsapp-icon/mobile-grid.svg" class="wa-mobile-grid" alt="WA">
+</div>
                                 
                                 <!-- User Profile (Name Only) -->
                                 <div class="seller-pill">

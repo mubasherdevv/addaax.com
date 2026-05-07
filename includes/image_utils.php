@@ -4,7 +4,7 @@
  * Supports JPEG, PNG, WEBP and GIF
  */
 
-function compressImage($source, $destination, $quality = 80) {
+function compressImage($source, $destination, $quality = 80, $apply_watermark = false) {
     $info = getimagesize($source);
     $mime = $info['mime'];
 
@@ -52,41 +52,42 @@ function compressImage($source, $destination, $quality = 80) {
         $height = $new_height;
     }
 
-    // 2. Add Dark Overlay (Full Cover Black)
-    // Creating a semi-transparent black layer to darken the whole image
-    $overlay = imagecreatetruecolor($width, $height);
-    $black = imagecolorallocatealpha($overlay, 0, 0, 0, 70); // Slightly darker (~30%)
-    imagefill($overlay, 0, 0, $black);
-    imagealphablending($image, true);
-    imagecopy($image, $overlay, 0, 0, 0, 0, $width, $height);
-    imagedestroy($overlay);
+    // 2. Add Dark Overlay and Watermark (ONLY if requested)
+    if ($apply_watermark) {
+        // Dark Overlay (Full Cover Black)
+        $overlay = imagecreatetruecolor($width, $height);
+        $black = imagecolorallocatealpha($overlay, 0, 0, 0, 70); 
+        imagefill($overlay, 0, 0, $black);
+        imagealphablending($image, true);
+        imagecopy($image, $overlay, 0, 0, 0, 0, $width, $height);
+        imagedestroy($overlay);
 
-    // 3. Add Watermark
-    $watermark_path = __DIR__ . '/../images/watermark.png';
-    if (file_exists($watermark_path)) {
-        $watermark = imagecreatefrompng($watermark_path);
-        if ($watermark) {
-            imagealphablending($watermark, true);
-            imagesavealpha($watermark, true);
-            
-            $w_width = imagesx($watermark);
-            $w_height = imagesy($watermark);
+        // Watermark
+        $watermark_path = __DIR__ . '/../images/watermark.png';
+        if (file_exists($watermark_path)) {
+            $watermark = imagecreatefrompng($watermark_path);
+            if ($watermark) {
+                imagealphablending($watermark, true);
+                imagesavealpha($watermark, true);
+                
+                $w_width = imagesx($watermark);
+                $w_height = imagesy($watermark);
 
-            // Scale watermark to 50% of image width
-            $target_w_width = $width * 0.5;
-            $target_w_height = ($w_height / $w_width) * $target_w_width;
+                // Scale watermark to 50% of image width
+                $target_w_width = $width * 0.5;
+                $target_w_height = ($w_height / $w_width) * $target_w_width;
 
-            // Center position
-            $dest_x = ($width - $target_w_width) / 2;
-            $dest_y = ($height - $target_w_height) / 2;
+                // Center position
+                $dest_x = ($width - $target_w_width) / 2;
+                $dest_y = ($height - $target_w_height) / 2;
 
-            // Preserve alpha when copying
-            imagecopyresampled($image, $watermark, $dest_x, $dest_y, 0, 0, $target_w_width, $target_w_height, $w_width, $w_height);
-            imagedestroy($watermark);
+                imagecopyresampled($image, $watermark, $dest_x, $dest_y, 0, 0, $target_w_width, $target_w_height, $w_width, $w_height);
+                imagedestroy($watermark);
+            }
         }
     }
 
-    // 4. Save as WebP
+    // 3. Save as WebP
     $dest_webp = preg_replace('/\.(jpg|jpeg|png|gif)$/i', '.webp', $destination);
     if (empty($dest_webp)) $dest_webp = $destination . '.webp';
     

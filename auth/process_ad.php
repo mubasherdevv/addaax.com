@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $target_path = $upload_dir . $unique_name;
 
                     // Use compression instead of move_uploaded_file
-                    $saved_filename = compressImage($tmp_name, $target_path, 75);
+                    $saved_filename = compressImage($tmp_name, $target_path, 75, true);
                     
                     if ($saved_filename) {
                         $db_path = 'uploads/products/' . $saved_filename;

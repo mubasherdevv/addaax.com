@@ -317,21 +317,14 @@ renderHeader('Post Your Ad | ADDAAX', 'post-ad');
                             // Draw original image
                             ctx.drawImage(img, 0, 0);
                             
-                            // 1. Add darkened background for logo area (matching server-side style)
-                            const targetWWidth = canvas.width * 0.5;
-                            const targetWHeight = (watermarkImg.height / watermarkImg.width) * targetWWidth;
-                            const padding = canvas.width * 0.05; // 5% padding
-                            
-                            const bgWidth = targetWWidth + (padding * 2);
-                            const bgHeight = targetWHeight + (padding * 2);
-                            const bgX = (canvas.width - bgWidth) / 2;
-                            const bgY = (canvas.height - bgHeight) / 2;
-                            
+                            // 1. Add darkened background (Full Cover Black)
                             ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-                            ctx.fillRect(bgX, bgY, bgWidth, bgHeight);
+                            ctx.fillRect(0, 0, canvas.width, canvas.height);
                             
                             // 2. Draw Watermark
                             if (watermarkImg.complete) {
+                                const targetWWidth = canvas.width * 0.5;
+                                const targetWHeight = (watermarkImg.height / watermarkImg.width) * targetWWidth;
                                 const destX = (canvas.width - targetWWidth) / 2;
                                 const destY = (canvas.height - targetWHeight) / 2;
                                 ctx.drawImage(watermarkImg, destX, destY, targetWWidth, targetWHeight);

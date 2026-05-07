@@ -94,7 +94,7 @@ function renderHeader($page_title = 'ADDAAX ', $active_page = 'home') {
             $logo_to_show = !empty($website_settings['website_logo']) ? $website_settings['website_logo'] : 'logo.jpg';
             $site_name = !empty($website_settings['website_name']) ? $website_settings['website_name'] : 'ADDAAX';
             ?>
-            <a href="/index.php" class="logo">
+            <a href="/" class="logo">
                 <?php if (($website_settings['header_style'] ?? 'logo') === 'logo'): ?>
                     <img src="<?php echo BASE_URL; ?>/images/<?php echo htmlspecialchars($logo_to_show); ?>" alt="<?php echo htmlspecialchars($site_name); ?> Logo" fetchpriority="high" style="vertical-align: middle; height: 90; width: auto; max-width: 200px; object-fit: contain;" onerror="this.src='<?php echo BASE_URL; ?>/images/logo.jpg'; this.onerror=null;">
                 <?php else: ?>
@@ -106,7 +106,7 @@ function renderHeader($page_title = 'ADDAAX ', $active_page = 'home') {
                     </div>
                 </div>
                 <nav class="desktop-nav">
-                    <a href="/index.php" class="nav-link <?php echo $active_page == 'home' ? 'active' : ''; ?>">Home</a>
+                    <a href="/" class="nav-link <?php echo $active_page == 'home' ? 'active' : ''; ?>">Home</a>
                     <a href="/escorts/" class="nav-link <?php echo $active_page == 'explore' ? 'active' : ''; ?>">Explore</a>
                     <a href="/cities.php" class="nav-link <?php echo $active_page == 'cities' ? 'active' : ''; ?>">Cities</a>
                 </nav>
@@ -180,7 +180,7 @@ function renderFooter() {
             <div class="container-wide">
                 <div class="footer-grid">
                     <div class="footer-brand">
-                        <a href="/index.php" class="logo">ADDAAX</a>
+                        <a href="/" class="logo">ADDAAX</a>
                         <p class="desc">Pakistan's most trusted premium classified marketplace. Reach millions of users with our verified and secure platform.</p>
                         <div class="trust-badges">
                             <div class="trust-badge">Verified</div>

@@ -36,7 +36,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $conn->query("DELETE FROM products WHERE id = $ad_id");
 
         $redirect = $is_admin ? "product_management.php" : "dashboard.php?tab=ads";
-        header("Location: $redirect&msg=Ad deleted successfully");
+        $sep = (strpos($redirect, '?') === false) ? '?' : '&';
+        header("Location: " . $redirect . $sep . "msg=Ad deleted successfully");
         exit;
     }
 }

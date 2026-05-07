@@ -1,13 +1,10 @@
-ErrorDocument 404 /404.php
-RewriteRule ^sitemap\.xml$ seo-system/index.php [L]
-Options +FollowSymLinks -MultiViews
 RewriteEngine On
-RewriteBase /
 
-# Skip existing files and directories
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
+# 1. Remove index.php from URL
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+RewriteRule ^index\.php$ / [R=301,L]
 
-# Redirect everything else to router.php
-RewriteRule ^ router.php [L]
+# 2. Add .php extension internally
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]

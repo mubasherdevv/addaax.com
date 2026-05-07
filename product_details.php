@@ -236,7 +236,7 @@ renderHeader($PAGE_TITLE, 'explore');
                             <?php endif; ?>
                         </div>
                         
-                        <div class="action-btns-group">
+                        <div class="action-btns-group desktop-only-actions">
                             <div class="action-icon-btn" onclick="window.navigator.share({title: '<?php echo addslashes($product['name']); ?>', url: window.location.href})"><i class="fas fa-share-alt"></i> Share</div>
                             <div class="action-icon-btn"><i class="far fa-flag"></i> Report</div>
                         </div>
@@ -316,7 +316,8 @@ renderHeader($PAGE_TITLE, 'explore');
             </div>
             <div class="recommend-scroll">
                 <?php foreach($related_products as $rp): 
-                    $rp_img = !empty($rp['image']) ? (str_starts_with($rp['image'], 'http') ? $rp['image'] : '/' . $rp['image']) : '/images/placeholder.png';
+                    $rp_raw_img = !empty($rp['display_image']) ? $rp['display_image'] : (!empty($rp['image']) ? $rp['image'] : '');
+                    $rp_img = !empty($rp_raw_img) ? (str_starts_with($rp_raw_img, 'http') ? $rp_raw_img : '/' . ltrim($rp_raw_img, '/')) : '/images/placeholder.png';
                 ?>
                     <a href="<?php echo getProductUrl($rp['id'], $rp['name']); ?>" class="product-card" style="margin-bottom: 0; display: block;">
                         <div class="product-image" style="height: 180px;">
@@ -328,7 +329,8 @@ renderHeader($PAGE_TITLE, 'explore');
                         </div>
                         <div class="product-info" style="padding: 15px;">
                             <div class="category-path" style="font-size: 10px;"><?php echo strtoupper(htmlspecialchars($rp['category_name'])); ?></div>
-                            <h3 class="product-title" style="font-size: 14px; height: 38px;"><?php echo htmlspecialchars($rp['name'] ?? ''); ?></h3>
+                            <h3 class="product-title" style="font-size: 14px; height: auto; margin-bottom: 5px;"><?php echo htmlspecialchars($rp['name'] ?? ''); ?></h3>
+                            <p class="rp-short-desc"><?php echo mb_strimwidth(strip_tags($rp['description'] ?? ''), 0, 40, "..."); ?></p>
                             <div class="info-bottom" style="border-top: none; padding-top: 0;">
                                 <div class="product-price" style="font-size: 18px;">PKR <?php echo number_format($rp['price']); ?></div>
                                 <div class="action-btn btn-whatsapp" style="width: 32px; height: 32px; border-radius: 8px;"><i class="fab fa-whatsapp"></i></div>

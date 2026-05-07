@@ -220,12 +220,19 @@
     object-fit: cover;
 }
 
-@media (max-width: 768px) {
-    .section-title-mini {
-        font-size: 18px !important;
+/* Hide desktop actions on mobile */
+@media (max-width: 992px) {
+    .desktop-only-actions {
+        display: none !important;
     }
-    
-    .recommend-scroll .product-card {
-        min-width: 240px;
-    }
+}
+
+.rp-short-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
 }

@@ -1,118 +1,137 @@
 
-/* --- Product Details Responsive & Button Enhancements --- */
+/* --- Enhanced Product Details Responsive --- */
 
+/* Force layout reset for mobile */
 @media (max-width: 992px) {
-    .detail-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
+    .product-detail-container {
+        padding-top: 80px !important; /* Move down from header */
+        padding-left: 15px !important;
+        padding-right: 15px !important;
     }
 
-    .detail-sidebar {
-        order: 2;
+    .detail-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
     }
 
     .detail-main {
-        order: 1;
+        width: 100% !important;
+        order: 1 !important;
+    }
+
+    .detail-sidebar {
+        width: 100% !important;
+        order: 2 !important;
     }
 
     .sidebar-sticky {
-        position: static;
+        position: static !important;
+    }
+
+    .gallery-main {
+        height: 300px !important;
     }
 }
 
 @media (max-width: 768px) {
     .detail-header-flex {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 15px !important;
     }
 
     .detail-title {
-        font-size: 24px;
+        font-size: 22px !important;
+        line-height: 1.3 !important;
+    }
+
+    .detail-price {
+        font-size: 24px !important;
     }
 
     .detail-meta-list {
-        flex-direction: column;
-        gap: 10px;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
     }
 }
 
-/* Button Styling Enhancements (Sleeker & Smaller) */
+/* --- Premium Contact Buttons --- */
 .btn-contact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    height: 40px !important; /* Smaller height */
-    padding: 0 15px;
-    font-size: 13px; /* Smaller font size */
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-decoration: none !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 50px !important; /* Capsule shape */
-    margin-bottom: 12px;
-    cursor: pointer;
-    border: none;
-    outline: none;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    height: 44px !important; /* Smaller height as requested */
+    border-radius: 12px !important;
+    font-weight: 800 !important;
+    font-size: 13px !important; /* Smaller font as requested */
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    margin-bottom: 12px !important;
+    border: none !important;
 }
 
-/* WhatsApp Button: Modern Green */
+/* WhatsApp Premium Style */
 .btn-whatsapp {
-    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+    background: linear-gradient(135deg, #25D366, #128C7E) !important;
     color: #fff !important;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2) !important;
 }
 
 .btn-whatsapp:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
-    filter: brightness(1.1);
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4) !important;
 }
 
-/* Phone Button: Sleek Glass/Dark */
+/* Phone Premium Style */
 .btn-phone {
     background: rgba(255, 255, 255, 0.05) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     color: var(--white) !important;
+    backdrop-filter: blur(10px) !important;
 }
 
 .btn-phone:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
+    background: rgba(201, 168, 76, 0.1) !important;
     border-color: var(--accent-gold) !important;
     color: var(--accent-gold) !important;
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.02) !important;
 }
 
 .btn-contact i {
-    font-size: 15px;
+    font-size: 16px !important;
 }
 
-/* Sidebar Card Optimization */
+/* Sidebar Card Refinement */
 .contact-card {
-    background: #0d0d0d !important;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 25px;
-    border-radius: 24px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    background: var(--glass) !important;
+    border: 1px solid var(--glass-border) !important;
+    padding: 20px !important;
+    border-radius: 20px !important;
 }
 
 .seller-mini-profile {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    margin-bottom: 20px !important;
+}
+
+.seller-avatar {
+    width: 50px !important;
+    height: 50px !important;
+    border: 2px solid var(--accent-gold) !important;
 }
 
 .seller-info h4 {
-    color: var(--white);
-    margin: 0;
+    font-size: 15px !important;
 }
 
-.seller-info p {
-    color: var(--text-muted);
-    font-size: 12px;
-    margin: 2px 0 0 0;
+/* Gallery Thumbnails Responsive */
+@media (max-width: 576px) {
+    .gallery-thumbs {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 8px !important;
+    }
 }

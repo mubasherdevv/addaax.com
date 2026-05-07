@@ -131,3 +131,175 @@
     opacity: 1;
     visibility: visible;
 }
+
+/* --- Dashboard Ads Card List --- */
+.dash-ads-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dash-ad-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.dash-ad-card:hover {
+    border-color: var(--accent-gold);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dash-ad-card-main {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.dash-ad-img {
+    position: relative;
+    height: 140px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.dash-ad-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dash-status-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2;
+}
+
+.dash-status-badge.status-active { background: #22c55e; color: #fff; }
+.dash-status-badge.status-pending { background: #eab308; color: #000; }
+.dash-status-badge.status-expired { background: #ef4444; color: #fff; }
+
+.dash-ad-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dash-ad-header h4 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 5px;
+}
+
+.dash-ad-short-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.dash-ad-price-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dash-ad-price {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--accent-gold);
+}
+
+.dash-featured-tag {
+    background: var(--accent-gold);
+    color: #000;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.dash-ad-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid var(--glass-border);
+}
+
+.dash-ad-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.dash-ad-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: 0.2s;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 14px;
+}
+
+.dash-ad-btn.edit { color: var(--accent-gold); }
+.dash-ad-btn.delete { color: #ef4444; }
+
+.dash-ad-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.dash-ad-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.dash-ad-meta i {
+    color: var(--accent-gold);
+    margin-right: 4px;
+}
+
+@media (max-width: 576px) {
+    .dash-ad-card-main {
+        grid-template-columns: 100px 1fr;
+        gap: 15px;
+        padding: 15px;
+    }
+    .dash-ad-img {
+        height: 100px;
+    }
+    .dash-ad-header h4 {
+        font-size: 15px;
+    }
+    .dash-ad-short-desc {
+        display: none; /* Hide desc on very small screens */
+    }
+    .dash-ad-footer {
+        flex-direction: column-reverse;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    .dash-ad-meta {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+

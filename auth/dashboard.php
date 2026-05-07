@@ -189,55 +189,48 @@ renderHeader('User Dashboard | ADDAAX Premium', 'dashboard');
                         <h2>My Advertisements</h2>
                         <a href="/post-ad.php" class="post-ad-btn" style="padding: 10px 20px; font-size: 13px;">+ Post New Ad</a>
                     </div>
-                    <div class="dash-table-wrap">
-                        <table class="dash-table">
-                            <thead>
-                                <tr>
-                                    <th>Ad Detail</th>
-                                    <th>Category</th>
-                                    <th>Status</th>
-                                    <th>Views</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if (empty($my_ads)): ?>
-                                    <tr><td colspan="5" style="text-align:center; padding: 40px; color: var(--text-muted);">You haven't posted any ads yet.</td></tr>
-                                <?php else: ?>
-                                    <?php foreach($my_ads as $ad): ?>
-                                        <tr>
-                                            <td data-label="Ad Detail">
-                                                <div class="dash-ad-item">
-                                                    <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;">
-                                                    <div>
-                                                        <a href="/product_details.php?id=<?php echo $ad['id']; ?>" class="dash-ad-title">
-                                                            <?php echo htmlspecialchars($ad['name']); ?>
-                                                            <?php if(isset($ad['is_featured']) && $ad['is_featured']): ?>
-                                                                <span style="font-size: 9px; background: var(--accent-gold); color: #000; padding: 2px 5px; border-radius: 4px; margin-left: 5px; font-weight: 800;">FEATURED</span>
-                                                            <?php endif; ?>
-                                                        </a>
-                                                        <div style="font-size: 11px; color: var(--text-muted);"><?php echo $ad['city'] ?? 'Location N/A'; ?></div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td data-label="Category"><?php echo htmlspecialchars($ad['category_name'] ?? 'Escorts'); ?></td>
-                                            <td data-label="Status">
-                                                <span class="dash-status status-<?php echo $ad['status'] == 1 ? 'active' : ($ad['status'] == 0 ? 'pending' : ($ad['status'] == 2 ? 'hidden' : 'expired')); ?>">
-                                                    <?php echo $ad['status'] == 1 ? 'Active' : ($ad['status'] == 0 ? 'Pending' : ($ad['status'] == 2 ? 'Hidden' : 'Expired')); ?>
-                                                </span>
-                                            </td>
-                                            <td data-label="Views"><?php echo number_format($ad['views'] ?? 0); ?></td>
-                                            <td data-label="Actions">
-                                                <div class="dash-actions">
-                                                    <a href="edit_ad.php?id=<?php echo $ad['id']; ?>" class="dash-action-btn" title="Edit" style="color: var(--accent-gold);"><i class="fas fa-edit"></i></a>
-                                                    <a href="delete_ad.php?id=<?php echo $ad['id']; ?>" class="dash-action-btn" title="Delete" style="color: #ef4444;" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
+                    <div class="dash-ads-list">
+                        <?php if (empty($my_ads)): ?>
+                            <div style="text-align:center; padding: 60px; background: var(--glass); border-radius: 20px; border: 1px solid var(--glass-border);">
+                                <i class="fas fa-ad" style="font-size: 40px; color: var(--accent-gold); margin-bottom: 20px; display: block;"></i>
+                                <p style="color: var(--text-muted);">You haven't posted any ads yet.</p>
+                            </div>
+                        <?php else: ?>
+                            <?php foreach($my_ads as $ad): ?>
+                                <div class="dash-ad-card">
+                                    <div class="dash-ad-card-main">
+                                        <div class="dash-ad-img">
+                                            <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="">
+                                            <span class="dash-status-badge status-<?php echo $ad['status'] == 1 ? 'active' : ($ad['status'] == 0 ? 'pending' : 'expired'); ?>">
+                                                <?php echo $ad['status'] == 1 ? 'Active' : ($ad['status'] == 0 ? 'Pending' : 'Expired'); ?>
+                                            </span>
+                                        </div>
+                                        <div class="dash-ad-info">
+                                            <div class="dash-ad-header">
+                                                <h4><?php echo htmlspecialchars($ad['name']); ?></h4>
+                                                <p class="dash-ad-short-desc"><?php echo mb_strimwidth(strip_tags($ad['description'] ?? ''), 0, 100, "..."); ?></p>
+                                            </div>
+                                            <div class="dash-ad-price-row">
+                                                <span class="dash-ad-price">PKR <?php echo number_format($ad['price'] ?? 0); ?></span>
+                                                <?php if(isset($ad['is_featured']) && $ad['is_featured']): ?>
+                                                    <span class="dash-featured-tag">FEATURED</span>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dash-ad-footer">
+                                        <div class="dash-ad-actions">
+                                            <a href="edit_ad.php?id=<?php echo $ad['id']; ?>" class="dash-ad-btn edit" title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="delete_ad.php?id=<?php echo $ad['id']; ?>" class="dash-ad-btn delete" title="Delete" onclick="return confirm('Are you sure?')"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                        <div class="dash-ad-meta">
+                                            <span><i class="fas fa-eye"></i> <?php echo number_format($ad['views'] ?? 0); ?> Views</span>
+                                            <span><i class="fas fa-calendar-alt"></i> <?php echo date('M d, Y', strtotime($ad['created_at'])); ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
 
                     <?php if ($total_pages > 1): ?>

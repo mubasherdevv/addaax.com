@@ -78,7 +78,19 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                 <div class="listing-header">
                     <h2><?php echo $search ? 'Results for: "' . htmlspecialchars($search) . '"' : ($city_name ? ucwords(str_replace('-', ' ', htmlspecialchars($city_name))) . ' Escorts' : 'All Listings'); ?></h2>
                     
-                    <!-- View Toggle (Mobile Only) -->
+                    <!-- Mobile Search & Filter Action Bar -->
+                    <div class="mobile-action-bar">
+                        <form action="/products.php" method="GET" class="mobile-mini-search">
+                            <i class="fas fa-search"></i>
+                            <input type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search); ?>">
+                        </form>
+                        <div class="mobile-filter-trigger" id="filterDrawerTrigger">
+                            <i class="fas fa-filter"></i>
+                            <span>Filter</span>
+                        </div>
+                    </div>
+
+                    <!-- View Toggle -->
                     <div class="view-toggle">
                         <div class="view-btn active" id="listViewBtn" title="List View">
                             <i class="fas fa-list"></i>
@@ -190,6 +202,28 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
         </div>
     </main>
 
+    <!-- Mobile Filter Drawer Overlay -->
+    <div class="filter-drawer-overlay" id="filterDrawer">
+        <div class="filter-drawer-content">
+            <div class="filter-drawer-header">
+                <h3>ADS IN PAKISTAN</h3>
+                <button class="close-drawer" id="closeDrawerBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="filter-drawer-body">
+                <div class="filter-city-list">
+                    <?php foreach($sidebar_cities as $sc): ?>
+                        <a href="/escorts/<?php echo urlencode(strtolower(str_replace(' ', '-', $sc['name']))); ?>" class="filter-city-item">
+                            <?php echo htmlspecialchars($sc['name']); ?> Escort
+                        </a>
+                    <?php endforeach; ?>
+                    <a href="/cities.php" class="filter-city-item" style="color: var(--accent-gold); border-top: 1px solid rgba(255,255,255,0.1); margin-top: 10px; padding-top: 15px;">
+                        <i class="fas fa-plus-circle"></i> View All Cities
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // View Toggle Logic
         const listViewBtn = document.getElementById('listViewBtn');
@@ -207,6 +241,42 @@ renderHeader('Browse Ads | ADDAAX Premium', 'explore');
                 gridViewBtn.classList.add('active');
                 listViewBtn.classList.remove('active');
                 listingItems.classList.add('grid-view');
+            });
+        }
+
+        // Filter Drawer Logic
+        const filterDrawerTrigger = document.getElementById('filterDrawerTrigger');
+        const filterDrawer = document.getElementById('filterDrawer');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+        const filterCityItems = document.querySelectorAll('.filter-city-item');
+
+        if (filterDrawerTrigger && filterDrawer && closeDrawerBtn) {
+            // Open Drawer
+            filterDrawerTrigger.addEventListener('click', () => {
+                filterDrawer.classList.add('active');
+                document.body.classList.add('no-scroll');
+            });
+
+            // Close Drawer (Button)
+            closeDrawerBtn.addEventListener('click', () => {
+                filterDrawer.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            });
+
+            // Close Drawer (Outside Click)
+            filterDrawer.addEventListener('click', (e) => {
+                if (e.target === filterDrawer) {
+                    filterDrawer.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                }
+            });
+
+            // Auto-close on selection
+            filterCityItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    filterDrawer.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                });
             });
         }
     </script>

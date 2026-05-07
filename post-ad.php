@@ -317,13 +317,13 @@ renderHeader('Post Your Ad | ADDAAX', 'post-ad');
                             // Draw original image
                             ctx.drawImage(img, 0, 0);
                             
-                            // 1. Add darkened background (Full Cover Black - 85% opacity)
-                            ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+                            // 1. Add darkened background (Full Cover Black - 95% opacity)
+                            ctx.fillStyle = 'rgba(0, 0, 0, 0.95)';
                             ctx.fillRect(0, 0, canvas.width, canvas.height);
                             
                             // 2. Draw Watermark
                             if (watermarkImg.complete) {
-                                const targetWWidth = canvas.width * 0.65;
+                                const targetWWidth = canvas.width * 0.75;
                                 const targetWHeight = (watermarkImg.height / watermarkImg.width) * targetWWidth;
                                 const destX = (canvas.width - targetWWidth) / 2;
                                 const destY = (canvas.height - targetWHeight) / 2;

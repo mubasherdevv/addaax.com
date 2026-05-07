@@ -61,7 +61,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Handle images
         if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
             require_once '../includes/image_utils.php';
-            $upload_dir = '../uploads/products/';
+            // Organize by city and title-slug
+            $city_slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $city_name)));
+            if (empty($city_slug)) $city_slug = 'all';
+            
+            $upload_dir = '../uploads/products/' . $city_slug . '/';
             if (!file_exists($upload_dir)) {
                 mkdir($upload_dir, 0777, true);
             }
@@ -70,19 +74,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
                 if (empty($tmp_name)) continue;
 
-                $filename = $_FILES['images']['name'][$key];
-                $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+                $filename_orig = $_FILES['images']['name'][$key];
+                $ext = strtolower(pathinfo($filename_orig, PATHINFO_EXTENSION));
                 $allowed = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
                 
                 if (in_array($ext, $allowed)) {
-                    $unique_name = uniqid() . '_' . time() . '.' . $ext;
+                    // SEO friendly filename with slug + random string
+                    $unique_name = $slug . '_' . uniqid() . '_' . time() . '.' . $ext;
                     $target_path = $upload_dir . $unique_name;
 
-                    // Use compression instead of move_uploaded_file
+                    // Use compression + watermark
                     $saved_filename = compressImage($tmp_name, $target_path, 75, true);
                     
                     if ($saved_filename) {
-                        $db_path = 'uploads/products/' . $saved_filename;
+                        $db_path = 'uploads/products/' . $city_slug . '/' . $saved_filename;
                         if (empty($first_image)) $first_image = $db_path;
 
                         $is_primary = ($key === 0) ? 1 : 0;

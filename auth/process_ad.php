@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $img_sql = "INSERT INTO product_images (product_id, image_path, is_primary, filename, created_at) 
                                     VALUES (?, ?, ?, ?, NOW())";
                         $img_stmt = $conn->prepare($img_sql);
-                        $img_stmt->bind_param("isis", $product_id, $db_path, $is_primary, $filename);
+                        $img_stmt->bind_param("isis", $product_id, $db_path, $is_primary, $filename_orig);
                         $img_stmt->execute();
                     }
                 }

@@ -81,10 +81,10 @@ function compressImage($source, $destination, $quality = 80, $apply_watermark = 
             imagealphablending($image, true);
             imagecopyresampled(
                 $image, $watermark,
-                $dest_x, $dest_y,
+                (int)$dest_x, (int)$dest_y,
                 0, 0,
-                $target_w_width, $target_w_height,
-                $w_width, $w_height
+                (int)$target_w_width, (int)$target_w_height,
+                (int)$w_width, (int)$w_height
             );
             imagedestroy($watermark);
         }

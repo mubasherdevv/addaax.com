@@ -323,7 +323,7 @@ renderHeader('Post Your Ad | ADDAAX', 'post-ad');
                             
                             // 2. Draw Watermark
                             if (watermarkImg.complete) {
-                                const targetWWidth = canvas.width * 0.5;
+                                const targetWWidth = canvas.width * 0.65;
                                 const targetWHeight = (watermarkImg.height / watermarkImg.width) * targetWWidth;
                                 const destX = (canvas.width - targetWWidth) / 2;
                                 const destY = (canvas.height - targetWHeight) / 2;

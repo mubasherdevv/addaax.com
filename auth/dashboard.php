@@ -293,6 +293,61 @@ renderHeader('User Dashboard | ADDAAX', 'dashboard');
                 document.body.classList.remove('no-scroll');
             });
         }
+
+        // --- Toast Notification Logic ---
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast-notif ${type}`;
+            toast.innerHTML = `
+                <div class="toast-content">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => toast.classList.add('show'), 10);
+            
+            // Remove after 5s
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 500);
+            }, 5000);
+        }
+
+        // Check for URL messages
+        const urlParams = new URLSearchParams(window.location.search);
+        const msg = urlParams.get('msg');
+        const error = urlParams.get('error');
+
+        if (msg) showToast(msg, 'success');
+        if (error) showToast(error, 'error');
+
+        // Styles for Toast
+        const toastStyle = document.createElement('style');
+        toastStyle.textContent = `
+            .toast-notif {
+                position: fixed;
+                top: 20px;
+                right: -400px;
+                background: #111;
+                border: 1px solid var(--glass-border);
+                padding: 16px 24px;
+                border-radius: 12px;
+                z-index: 9999;
+                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                backdrop-filter: blur(10px);
+            }
+            .toast-notif.show { right: 20px; }
+            .toast-notif.success { border-left: 4px solid #22c55e; }
+            .toast-notif.error { border-left: 4px solid #ef4444; }
+            .toast-content { display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 600; }
+            .toast-notif.success i { color: #22c55e; }
+            .toast-notif.error i { color: #ef4444; }
+        `;
+        document.head.appendChild(toastStyle);
     </script>
 
 <?php

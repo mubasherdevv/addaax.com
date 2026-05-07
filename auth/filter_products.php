@@ -28,6 +28,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'newest';
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $view = isset($_GET['view']) ? $_GET['view'] : 'grid';
+$seller_id = isset($_GET['seller_id']) ? intval($_GET['seller_id']) : 0;
 
 // Build SQL query
 $sql = "SELECT p.*, c.name as category_name, u.first_name, u.last_name, u.email as user_email
@@ -38,6 +39,13 @@ $sql = "SELECT p.*, c.name as category_name, u.first_name, u.last_name, u.email 
 
 $params = [];
 $types = '';
+
+// Add seller filter
+if ($seller_id > 0) {
+    $sql .= " AND p.seller_id = ?";
+    $params[] = $seller_id;
+    $types .= 'i';
+}
 
 // Add category filter
 if (!empty($category)) {

@@ -1712,7 +1712,7 @@ renderAdminSidebar('products');
                 <?php if ($total_pages > 1): ?>
                     <div class="pagination" style="margin: 20px 0; display: flex; justify-content: center; gap: 8px;">
                         <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <a href="product_management.php?page=<?php echo $i; ?><?php echo $category_filter > 0 ? '&category='.$category_filter : ''; ?>" 
+                            <a href="product_management.php?page=<?php echo $i; ?><?php echo $category_filter > 0 ? '&category='.$category_filter : ''; ?><?php echo $seller_filter > 0 ? '&seller_id='.$seller_filter : ''; ?>" 
                                style="padding: 8px 16px; border-radius: 8px; border: 1px solid #e2e8f0; text-decoration: none; font-weight: 600;
                                       background: <?php echo $page == $i ? '#6366f1' : '#fff'; ?>; color: <?php echo $page == $i ? '#fff' : '#64748b'; ?>;">
                                 <?php echo $i; ?>
@@ -1980,6 +1980,10 @@ renderAdminSidebar('products');
             const searchQuery = $('#product-search').val().trim();
             const viewType = $('#list-view').hasClass('active') ? 'list' : 'grid';
             
+            // Get seller_id from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const sellerId = urlParams.get('seller_id') || 0;
+            
             // Show loading state
             if (viewType === 'grid') {
                 $('.product-grid').html('<div style="grid-column: 1 / -1; text-align: center; padding: 50px 0;"><i class="fas fa-spinner fa-spin" style="font-size: 48px; color: #3f51b5;"></i><p style="margin-top: 20px;">Loading products...</p></div>');
@@ -1996,7 +2000,8 @@ renderAdminSidebar('products');
                     status: status,
                     sort: sort,
                     search: searchQuery,
-                    view: viewType
+                    view: viewType,
+                    seller_id: sellerId
                 },
                 success: function(response) {
                     if (viewType === 'grid') {

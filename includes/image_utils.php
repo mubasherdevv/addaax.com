@@ -14,10 +14,7 @@ function compressImage($source, $destination, $quality = 80) {
             break;
         case 'image/png':
             $image = imagecreatefrompng($source);
-            // Handle transparency
             imagepalettetotruecolor($image);
-            imagealphablending($image, true);
-            imagesavealpha($image, true);
             break;
         case 'image/webp':
             $image = imagecreatefromwebp($source);
@@ -29,7 +26,17 @@ function compressImage($source, $destination, $quality = 80) {
             return false;
     }
 
-    // Optional: Resize if too large (e.g., max width 1200px)
+    if (!$image) return false;
+
+    // Standardize to true color
+    if (!imageistruecolor($image)) {
+        $tmp = imagecreatetruecolor(imagesx($image), imagesy($image));
+        imagecopy($tmp, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
+        imagedestroy($image);
+        $image = $tmp;
+    }
+
+    // 1. Resize if too large
     $max_width = 1200;
     $width = imagesx($image);
     $height = imagesy($image);
@@ -38,38 +45,57 @@ function compressImage($source, $destination, $quality = 80) {
         $new_width = $max_width;
         $new_height = ($height / $width) * $max_width;
         $tmp_img = imagecreatetruecolor($new_width, $new_height);
-        
-        // Preserve transparency for PNG/WebP
-        if ($mime == 'image/png' || $mime == 'image/webp') {
-            imagealphablending($tmp_img, false);
-            imagesavealpha($tmp_img, true);
-            $transparent = imagecolorallocatealpha($tmp_img, 255, 255, 255, 127);
-            imagefill($tmp_img, 0, 0, $transparent);
-        }
-
         imagecopyresampled($tmp_img, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
         imagedestroy($image);
         $image = $tmp_img;
+        $width = $new_width;
+        $height = $new_height;
     }
 
-    // Save as WebP for best compression (if server supports it)
+    // 2. Add Dark Overlay (Full Cover Black)
+    // Creating a semi-transparent black layer to darken the whole image
+    $overlay = imagecreatetruecolor($width, $height);
+    $black = imagecolorallocatealpha($overlay, 0, 0, 0, 70); // Slightly darker (~30%)
+    imagefill($overlay, 0, 0, $black);
+    imagealphablending($image, true);
+    imagecopy($image, $overlay, 0, 0, 0, 0, $width, $height);
+    imagedestroy($overlay);
+
+    // 3. Add Watermark
+    $watermark_path = __DIR__ . '/../images/watermark.png';
+    if (file_exists($watermark_path)) {
+        $watermark = imagecreatefrompng($watermark_path);
+        if ($watermark) {
+            imagealphablending($watermark, true);
+            imagesavealpha($watermark, true);
+            
+            $w_width = imagesx($watermark);
+            $w_height = imagesy($watermark);
+
+            // Scale watermark to 50% of image width
+            $target_w_width = $width * 0.5;
+            $target_w_height = ($w_height / $w_width) * $target_w_width;
+
+            // Center position
+            $dest_x = ($width - $target_w_width) / 2;
+            $dest_y = ($height - $target_w_height) / 2;
+
+            // Preserve alpha when copying
+            imagecopyresampled($image, $watermark, $dest_x, $dest_y, 0, 0, $target_w_width, $target_w_height, $w_width, $w_height);
+            imagedestroy($watermark);
+        }
+    }
+
+    // 4. Save as WebP
+    $dest_webp = preg_replace('/\.(jpg|jpeg|png|gif)$/i', '.webp', $destination);
+    if (empty($dest_webp)) $dest_webp = $destination . '.webp';
+    
     if (function_exists('imagewebp')) {
-        // Change destination extension to .webp
-        $dest_webp = preg_replace('/\.(jpg|jpeg|png|gif)$/i', '.webp', $destination);
         imagewebp($image, $dest_webp, $quality);
         imagedestroy($image);
         return basename($dest_webp);
     } else {
-        // Fallback to original format
-        if ($mime == 'image/jpeg') {
-            imagejpeg($image, $destination, $quality);
-        } elseif ($mime == 'image/png') {
-            imagepng($image, $destination, round(9 * $quality / 100));
-        } else {
-            // Just move it if we can't compress it specifically
-            move_uploaded_file($source, $destination);
-            return basename($destination);
-        }
+        imagejpeg($image, $destination, $quality);
         imagedestroy($image);
         return basename($destination);
     }

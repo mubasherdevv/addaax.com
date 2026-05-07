@@ -53,39 +53,43 @@ function compressImage($source, $destination, $quality = 80, $apply_watermark = 
     }
 
     // 2. Add Watermark (ONLY if requested)
-    if ($apply_watermark) {
-        $watermark_path = __DIR__ . '/../images/watermark.png';
-        if (file_exists($watermark_path)) {
-            $watermark = imagecreatefrompng($watermark_path);
-            if ($watermark) {
-                imagealphablending($watermark, true);
-                imagesavealpha($watermark, true);
-                
-                $w_width = imagesx($watermark);
-                $w_height = imagesy($watermark);
+   if ($apply_watermark) {
+    $watermark_path = __DIR__ . '/../images/watermark.png';
+    if (file_exists($watermark_path)) {
+        $watermark = imagecreatefrompng($watermark_path);
+        if ($watermark) {
+            imagealphablending($watermark, true);
+            imagesavealpha($watermark, true);
 
-                // Scale watermark to 50% of image width
-                $target_w_width = $width * 0.5;
-                $target_w_height = ($w_height / $w_width) * $target_w_width;
+            $w_width  = imagesx($watermark);
+            $w_height = imagesy($watermark);
 
-                // Center position
-                $dest_x = ($width - $target_w_width) / 2;
-                $dest_y = ($height - $target_w_height) / 2;
+            $target_w_width  = $width * 0.5;
+            $target_w_height = ($w_height / $w_width) * $target_w_width;
 
-                // 1. Add Dark Overlay (Full Cover Black)
-                $overlay = imagecreatetruecolor($width, $height);
-                $black = imagecolorallocatealpha($overlay, 0, 0, 0, 70); // Semi-transparent black
-                imagefill($overlay, 0, 0, $black);
-                imagealphablending($image, true);
-                imagecopy($image, $overlay, 0, 0, 0, 0, $width, $height);
-                imagedestroy($overlay);
+            $dest_x = ($width  - $target_w_width)  / 2;
+            $dest_y = ($height - $target_w_height) / 2;
 
-                // 2. Copy watermark on top
-                imagecopyresampled($image, $watermark, $dest_x, $dest_y, 0, 0, $target_w_width, $target_w_height, $w_width, $w_height);
-                imagedestroy($watermark);
-            }
+            // Dark overlay — fixed
+            $overlay = imagecreatetruecolor($width, $height);
+            $black   = imagecolorallocate($overlay, 0, 0, 0);
+            imagefill($overlay, 0, 0, $black);
+            imagecopymerge($image, $overlay, 0, 0, 0, 0, $width, $height, 60); // 50% dark
+            imagedestroy($overlay);
+
+            // Watermark on top
+            imagealphablending($image, true);
+            imagecopyresampled(
+                $image, $watermark,
+                $dest_x, $dest_y,
+                0, 0,
+                $target_w_width, $target_w_height,
+                $w_width, $w_height
+            );
+            imagedestroy($watermark);
         }
     }
+}
 
     // 3. Save as WebP
     $dest_webp = preg_replace('/\.(jpg|jpeg|png|gif)$/i', '.webp', $destination);

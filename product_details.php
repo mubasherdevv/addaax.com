@@ -7,7 +7,9 @@ require_once 'includes/website_settings.php';
 require_once 'auth/db_connect.php';
 require_once 'includes/wishlist_functions.php';
 require_once 'includes/layout_functions.php';
-
+?>
+<link rel="stylesheet" href="/css/product-details-responsive.css">
+<?php
 $product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
@@ -275,10 +277,10 @@ renderHeader($PAGE_TITLE, 'explore');
                             </div>
                         </div>
 
-                        <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $product['seller_phone'] ?: $product['phone'] ?: ''); ?>" target="_blank" class="btn-contact" style="background: #22c55e; height: 48px; border-radius: 8px;">
+                        <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $product['seller_phone'] ?: $product['phone'] ?: ''); ?>" target="_blank" class="btn-contact btn-whatsapp">
                             <i class="fab fa-whatsapp"></i> WhatsApp Seller
                         </a>
-                        <button class="btn-contact" id="callBtn" onclick="showPhone('<?php echo htmlspecialchars($product['seller_phone'] ?: $product['phone'] ?: 'N/A'); ?>')" style="background: transparent; border: 1px solid var(--white); color: var(--white); height: 48px; border-radius: 8px;">
+                        <button class="btn-contact btn-phone" id="callBtn" onclick="showPhone('<?php echo htmlspecialchars($product['seller_phone'] ?: $product['phone'] ?: 'N/A'); ?>')">
                             <i class="fas fa-phone-alt"></i> <span id="callBtnText">Show Phone Number</span>
                         </button>
                     </div>

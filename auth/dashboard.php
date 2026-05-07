@@ -154,7 +154,7 @@ renderHeader('User Dashboard | ADDAAX Premium', 'dashboard');
                                                 <div class="dash-ad-item">
                                                     <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;">
                                                     <div>
-                                                        <a href="/product_details.php?id=<?php echo $ad['id']; ?>" class="dash-ad-title">
+                                                        <a href="<?php echo getProductUrl($ad['id'], $ad['name']); ?>" class="dash-ad-title">
                                                             <?php echo htmlspecialchars($ad['name']); ?>
                                                             <?php if(isset($ad['is_featured']) && $ad['is_featured']): ?>
                                                                 <span style="font-size: 9px; background: var(--accent-gold); color: #000; padding: 2px 5px; border-radius: 4px; margin-left: 5px; font-weight: 800;">FEATURED</span>
@@ -199,15 +199,15 @@ renderHeader('User Dashboard | ADDAAX Premium', 'dashboard');
                             <?php foreach($my_ads as $ad): ?>
                                 <div class="dash-ad-card">
                                     <div class="dash-ad-card-main">
-                                        <div class="dash-ad-img">
+                                        <a href="<?php echo getProductUrl($ad['id'], $ad['name']); ?>" class="dash-ad-img">
                                             <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="">
                                             <span class="dash-status-badge status-<?php echo $ad['status'] == 1 ? 'active' : ($ad['status'] == 0 ? 'pending' : 'expired'); ?>">
                                                 <?php echo $ad['status'] == 1 ? 'Active' : ($ad['status'] == 0 ? 'Pending' : 'Expired'); ?>
                                             </span>
-                                        </div>
+                                        </a>
                                         <div class="dash-ad-info">
                                             <div class="dash-ad-header">
-                                                <h4><?php echo htmlspecialchars($ad['name']); ?></h4>
+                                                <h4><a href="<?php echo getProductUrl($ad['id'], $ad['name']); ?>" style="color: inherit; text-decoration: none;"><?php echo htmlspecialchars($ad['name']); ?></a></h4>
                                                 <p class="dash-ad-short-desc"><?php echo mb_strimwidth(strip_tags($ad['description'] ?? ''), 0, 100, "..."); ?></p>
                                             </div>
                                             <div class="dash-ad-price-row">

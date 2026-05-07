@@ -1,0 +1,101 @@
+
+/* --- Product Details Responsive & Button Enhancements --- */
+
+@media (max-width: 992px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .detail-sidebar {
+        order: 2;
+    }
+
+    .detail-main {
+        order: 1;
+    }
+
+    .sidebar-sticky {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .detail-header-flex {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .detail-title {
+        font-size: 24px;
+    }
+
+    .detail-meta-list {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Button Styling Enhancements */
+.btn-contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 14px; /* Slightly smaller as requested */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 10px !important;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+/* WhatsApp Button Specific */
+.btn-contact[style*="background: #22c55e"] {
+    background: #25D366 !important; /* Proper WhatsApp Green */
+    border: none;
+    color: #fff;
+}
+
+.btn-contact[style*="background: #22c55e"]:hover {
+    background: #128C7E !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+/* Phone Button Specific */
+.btn-contact#callBtn {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: var(--white) !important;
+}
+
+.btn-contact#callBtn:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: var(--accent-gold) !important;
+    color: var(--accent-gold) !important;
+    transform: translateY(-2px);
+}
+
+.btn-contact i {
+    font-size: 18px;
+}
+
+/* Sidebar Card Optimization */
+.contact-card {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.seller-mini-profile {
+    margin-bottom: 25px;
+}

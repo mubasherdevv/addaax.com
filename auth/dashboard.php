@@ -59,6 +59,36 @@ if ($active_tab === 'overview') {
 
 $message = $_GET['msg'] ?? '';
 
+// Handle Profile Update
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $active_tab === 'profile') {
+    $first_name = trim($_POST['first_name'] ?? '');
+    $last_name = trim($_POST['last_name'] ?? '');
+    $phone = trim($_POST['phone'] ?? '');
+
+    if (!empty($first_name) && !empty($last_name)) {
+        $update_sql = "UPDATE users SET first_name = ?, last_name = ?, phone = ? WHERE id = ?";
+        $update_stmt = $conn->prepare($update_sql);
+        $update_stmt->bind_param("sssi", $first_name, $last_name, $phone, $user_id);
+        
+        if ($update_stmt->execute()) {
+            $_SESSION['user_name'] = $first_name . ' ' . $last_name;
+            header("Location: dashboard.php?tab=profile&msg=Profile updated successfully!");
+            exit;
+        } else {
+            $message = "Error updating profile: " . $conn->error;
+        }
+    } else {
+        $message = "First and Last Name are required.";
+    }
+}
+
+// Get Latest User Details
+$sql_user = "SELECT * FROM users WHERE id = ?";
+$user_stmt = $conn->prepare($sql_user);
+$user_stmt->bind_param("i", $user_id);
+$user_stmt->execute();
+$user_data = $user_stmt->get_result()->fetch_assoc();
+
 renderHeader('User Dashboard | ADDAAX', 'dashboard');
 ?>
 <link rel="stylesheet" href="/css/dashboard-responsive.css">
@@ -72,10 +102,10 @@ renderHeader('User Dashboard | ADDAAX', 'dashboard');
                 <div class="dash-user-profile">
                     <div class="dash-avatar">
                         <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--accent-gold); color:#000; font-size:32px; font-weight:900;">
-                            <?php echo strtoupper(substr($user_name, 0, 1)); ?>
+                            <?php echo strtoupper(substr($user_data['first_name'] ?? $user_name, 0, 1)); ?>
                         </div>
                     </div>
-                    <h3><?php echo htmlspecialchars($user_name); ?></h3>
+                    <h3><?php echo htmlspecialchars(($user_data['first_name'] ?? '') . ' ' . ($user_data['last_name'] ?? '')); ?></h3>
                     <p>Verified Member</p>
                 </div>
 
@@ -244,24 +274,24 @@ renderHeader('User Dashboard | ADDAAX', 'dashboard');
                     <div class="dash-section-header">
                         <h2>Profile Settings</h2>
                     </div>
-                    <form class="auth-form" style="max-width: 600px;">
+                    <form class="auth-form" method="POST" style="max-width: 600px;">
                         <div class="responsive-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                             <div class="form-group" style="margin-bottom: 0;">
                                 <label>First Name</label>
-                                <input type="text" value="<?php echo htmlspecialchars($_SESSION['user_name']); ?>" required>
+                                <input type="text" name="first_name" value="<?php echo htmlspecialchars($user_data['first_name'] ?? ''); ?>" required>
                             </div>
                             <div class="form-group" style="margin-bottom: 0;">
                                 <label>Last Name</label>
-                                <input type="text" placeholder="Last Name">
+                                <input type="text" name="last_name" value="<?php echo htmlspecialchars($user_data['last_name'] ?? ''); ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Phone Number</label>
-                            <input type="tel" value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>">
+                            <input type="tel" name="phone" value="<?php echo htmlspecialchars($user_data['phone'] ?? ''); ?>">
                         </div>
                         <div class="form-group">
                             <label>Email Address</label>
-                            <input type="email" value="<?php echo htmlspecialchars($_SESSION['user_email']); ?>" disabled style="opacity: 0.5; cursor: not-allowed;">
+                            <input type="email" value="<?php echo htmlspecialchars($user_data['email'] ?? $_SESSION['user_email']); ?>" disabled style="opacity: 0.5; cursor: not-allowed;">
                         </div>
                         <button type="submit" class="auth-btn" style="width: auto; padding: 0 40px;">Update Profile</button>
                     </form>

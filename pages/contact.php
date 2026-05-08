@@ -9,38 +9,44 @@ renderHeader('Contact Us | ADDAAX', 'contact');
 <style>
     :root {
         --page-accent: var(--accent-gold);
-        --page-bg: #0f172a;
+        --page-bg: #0f172a; /* Match index.php dark blue */
+        --text-gold: #F5E9C8; /* Light Gold */
     }
     
     .legal-page-wrapper {
         background: var(--page-bg);
         min-height: 100vh;
+        padding-top: 100px;
     }
     
     .legal-banner {
         background: linear-gradient(135deg, #1e293b, #0f172a);
-        padding: 80px 0;
+        padding: 100px 0;
         text-align: center;
         border-bottom: 1px solid var(--glass-border);
+        position: relative;
     }
     
     .legal-banner h1 {
-        color: var(--page-accent);
-        font-size: clamp(2rem, 5vw, 3.5rem);
+        background: linear-gradient(to right, var(--text-main), var(--accent-gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
         font-weight: 900;
         margin-bottom: 20px;
         font-family: 'Outfit', sans-serif;
         text-transform: uppercase;
-        letter-spacing: -1px;
+        letter-spacing: -2px;
+        filter: drop-shadow(0 0 15px rgba(201, 168, 76, 0.2));
     }
     
     .legal-banner .breadcrumbs {
-        color: rgba(255,255,255,0.6) !important;
+        color: rgba(255,255,255,0.5) !important;
         justify-content: center;
         font-weight: 700;
         font-size: 14px;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
     }
     
     .legal-banner .breadcrumbs a {
@@ -82,10 +88,11 @@ renderHeader('Contact Us | ADDAAX', 'contact');
     }
     
     .contact-info-card p {
-        color: var(--text-muted);
-        font-size: 1.1rem;
+        color: var(--text-gold);
+        font-size: 1.15rem;
         line-height: 1.8;
         margin-bottom: 30px;
+        opacity: 0.9;
     }
     
     .contact-method {
@@ -93,22 +100,29 @@ renderHeader('Contact Us | ADDAAX', 'contact');
         align-items: center;
         gap: 20px;
         margin-bottom: 25px;
-        padding: 20px;
+        padding: 25px;
         background: rgba(255, 255, 255, 0.02);
         border-radius: 20px;
         border: 1px solid var(--glass-border);
+        transition: all 0.3s ease;
+    }
+
+    .contact-method:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--page-accent);
     }
     
     .contact-method i {
         font-size: 24px;
         color: var(--page-accent);
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         background: rgba(201, 168, 76, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 15px;
+        border-radius: 18px;
+        box-shadow: 0 0 15px rgba(201, 168, 76, 0.1);
     }
     
     .contact-method div h4 {
@@ -121,7 +135,7 @@ renderHeader('Contact Us | ADDAAX', 'contact');
     
     .contact-method div p {
         margin: 0;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: 700;
         color: white;
     }
@@ -142,7 +156,7 @@ renderHeader('Contact Us | ADDAAX', 'contact');
         display: block;
         margin-bottom: 8px;
         font-weight: 600;
-        color: white;
+        color: var(--text-gold);
     }
 
     .form-group input, .form-group textarea {
@@ -165,19 +179,21 @@ renderHeader('Contact Us | ADDAAX', 'contact');
     .submit-btn {
         background: var(--page-accent);
         color: #000;
-        padding: 15px 30px;
+        padding: 18px 30px;
         border: none;
-        border-radius: 12px;
+        border-radius: 15px;
         font-size: 1.1rem;
         font-weight: 700;
         cursor: pointer;
         width: 100%;
         transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
 
     .submit-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(201, 168, 76, 0.2);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(201, 168, 76, 0.3);
     }
 
     @media (max-width: 992px) {
@@ -237,7 +253,7 @@ renderHeader('Contact Us | ADDAAX', 'contact');
                             <label>Email Address</label>
                             <input type="email" placeholder="john@example.com" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group :">
                             <label>Subject</label>
                             <input type="text" placeholder="How can we help?" required>
                         </div>

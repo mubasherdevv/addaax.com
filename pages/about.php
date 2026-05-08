@@ -9,38 +9,44 @@ renderHeader('About Us | ADDAAX', 'about');
 <style>
     :root {
         --page-accent: var(--accent-gold);
-        --page-bg: #0f172a;
+        --page-bg: #0f172a; /* Match index.php dark blue */
+        --text-gold: #F5E9C8; /* Light Gold */
     }
     
     .legal-page-wrapper {
         background: var(--page-bg);
         min-height: 100vh;
+        padding-top: 100px; /* Offset to prevent header overlap */
     }
     
     .legal-banner {
         background: linear-gradient(135deg, #1e293b, #0f172a);
-        padding: 80px 0;
+        padding: 100px 0;
         text-align: center;
         border-bottom: 1px solid var(--glass-border);
+        position: relative;
     }
     
     .legal-banner h1 {
-        color: var(--page-accent);
-        font-size: clamp(2.2rem, 6vw, 3.8rem);
+        background: linear-gradient(to right, var(--text-main), var(--accent-gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
         font-weight: 900;
         margin-bottom: 20px;
         font-family: 'Outfit', sans-serif;
         text-transform: uppercase;
-        letter-spacing: -1px;
+        letter-spacing: -2px;
+        filter: drop-shadow(0 0 15px rgba(201, 168, 76, 0.2));
     }
     
     .legal-banner .breadcrumbs {
-        color: rgba(255,255,255,0.6) !important;
+        color: rgba(255,255,255,0.5) !important;
         justify-content: center;
         font-weight: 700;
         font-size: 14px;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
     }
     
     .legal-banner .breadcrumbs a {
@@ -69,15 +75,15 @@ renderHeader('About Us | ADDAAX', 'about');
         left: 31px;
         top: 0;
         bottom: 0;
-        width: 2px;
-        background: var(--page-accent);
-        opacity: 0.3;
+        width: 3px;
+        background: #000000; /* BLACK LINE */
+        opacity: 0.8;
     }
 
     .timeline-item {
         position: relative;
         padding-left: 80px;
-        margin-bottom: 50px;
+        margin-bottom: 60px;
     }
 
     .timeline-item::before {
@@ -91,55 +97,59 @@ renderHeader('About Us | ADDAAX', 'about');
         border: 4px solid var(--page-accent);
         border-radius: 50%;
         z-index: 2;
+        box-shadow: 0 0 15px rgba(201, 168, 76, 0.4);
     }
 
     .timeline-content {
         background: rgba(255, 255, 255, 0.03);
-        padding: 30px;
-        border-radius: 24px;
+        padding: 40px;
+        border-radius: 30px;
         border: 1px solid var(--glass-border);
         backdrop-filter: blur(20px);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .timeline-content:hover {
-        transform: translateX(10px);
+        transform: translateX(15px);
         background: rgba(255, 255, 255, 0.05);
         border-color: var(--page-accent);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
 
     .timeline-content h2 {
         color: var(--page-accent);
-        font-size: 1.6rem;
-        margin-bottom: 15px;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
         font-weight: 800;
         font-family: 'Outfit', sans-serif;
     }
     
     .timeline-content p {
         margin-bottom: 15px;
-        font-size: 1.1rem;
-        color: var(--text-muted);
-        line-height: 1.8;
+        font-size: 1.15rem;
+        color: var(--text-gold); /* LIGHT GOLD TEXT */
+        line-height: 1.9;
+        opacity: 0.9;
     }
 
     .contact-info-box {
-        background: rgba(201, 168, 76, 0.05);
+        background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), transparent);
         border: 1px solid var(--glass-border);
-        padding: 40px;
-        border-radius: 30px;
-        margin-top: 60px;
+        padding: 50px;
+        border-radius: 40px;
+        margin-top: 80px;
         max-width: 900px;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
+        backdrop-filter: blur(10px);
     }
 
     @media (max-width: 768px) {
         .timeline-wrapper::before { left: 16px; }
         .timeline-item { padding-left: 45px; }
         .timeline-item::before { left: 5px; width: 20px; height: 20px; }
-        .timeline-content { padding: 20px; }
+        .timeline-content { padding: 25px; }
     }
 </style>
 
@@ -209,21 +219,21 @@ renderHeader('About Us | ADDAAX', 'about');
             </div>
 
             <div class="contact-info-box">
-                <h3 style="margin-top: 0; color: var(--page-accent); font-size: 1.8rem; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 15px;">User Support</h3>
-                <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">We are always open to feedback, suggestions, and support requests. If you have any questions or need assistance, you can reach us through our support channels:</p>
-                <div style="margin-top: 30px; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                <h3 style="margin-top: 0; color: var(--page-accent); font-size: 2rem; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 20px;">Premium Support</h3>
+                <p style="color: var(--text-gold); line-height: 1.8; font-size: 1.2rem; margin-bottom: 30px;">We are always open to feedback, suggestions, and support requests. If you have any questions or need assistance, you can reach us through our support channels:</p>
+                <div style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
                     <div>
-                        <h4 style="color: white; margin-bottom: 5px;">Email</h4>
-                        <p style="color: var(--page-accent); font-weight: 700;">contactadmin@addaax.com</p>
+                        <h4 style="color: rgba(255,255,255,0.4); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">Email Address</h4>
+                        <p style="color: white; font-weight: 700; font-size: 1.3rem;">contactadmin@addaax.com</p>
                     </div>
                     <div>
-                        <h4 style="color: white; margin-bottom: 5px;">WhatsApp</h4>
-                        <p style="color: var(--page-accent); font-weight: 700;">+447490809237</p>
+                        <h4 style="color: rgba(255,255,255,0.4); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">WhatsApp</h4>
+                        <p style="color: white; font-weight: 700; font-size: 1.3rem;">+447490809237</p>
                     </div>
                 </div>
             </div>
             
-            <p style="margin-top: 60px; font-style: italic; text-align: center; color: rgba(255,255,255,0.4);">We are committed to helping our users and continuously improving the platform experience.</p>
+            <p style="margin-top: 80px; font-style: italic; text-align: center; color: rgba(255,255,255,0.3); font-size: 0.95rem;">We are committed to helping our users and continuously improving the platform experience.</p>
         </div>
     </section>
 </div>

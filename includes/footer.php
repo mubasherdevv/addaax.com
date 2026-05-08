@@ -85,6 +85,7 @@ $footer_cats = $conn->query("SELECT * FROM categories WHERE status = 1 LIMIT 6")
         <a href="pages/terms.php">Terms</a>
         <a href="pages/privacy.php">Privacy</a>
         <a href="pages/anti-scam.php">Anti-Scam</a>
+        <a href="pages/copyright-policy.php">Copyright</a>
       </div>
     </div>
   </div>

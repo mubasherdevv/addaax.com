@@ -9,38 +9,44 @@ renderHeader('Privacy Policy | ADDAAX', 'privacy');
 <style>
     :root {
         --page-accent: var(--accent-gold);
-        --page-bg: #0f172a;
+        --page-bg: #0f172a; /* Match index.php dark blue */
+        --text-gold: #F5E9C8; /* Light Gold */
     }
     
     .legal-page-wrapper {
         background: var(--page-bg);
         min-height: 100vh;
+        padding-top: 100px;
     }
     
     .legal-banner {
         background: linear-gradient(135deg, #1e293b, #0f172a);
-        padding: 80px 0;
+        padding: 100px 0;
         text-align: center;
         border-bottom: 1px solid var(--glass-border);
+        position: relative;
     }
     
     .legal-banner h1 {
-        color: var(--page-accent);
+        background: linear-gradient(to right, var(--text-main), var(--accent-gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         font-size: clamp(2rem, 5vw, 3.5rem);
         font-weight: 900;
         margin-bottom: 20px;
         font-family: 'Outfit', sans-serif;
         text-transform: uppercase;
-        letter-spacing: -1px;
+        letter-spacing: -2px;
+        filter: drop-shadow(0 0 15px rgba(201, 168, 76, 0.2));
     }
     
     .legal-banner .breadcrumbs {
-        color: rgba(255,255,255,0.6) !important;
+        color: rgba(255,255,255,0.5) !important;
         justify-content: center;
         font-weight: 700;
         font-size: 14px;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
     }
     
     .legal-banner .breadcrumbs a {
@@ -69,15 +75,15 @@ renderHeader('Privacy Policy | ADDAAX', 'privacy');
         left: 31px;
         top: 0;
         bottom: 0;
-        width: 2px;
-        background: var(--page-accent);
-        opacity: 0.3;
+        width: 3px;
+        background: #000000; /* BLACK LINE */
+        opacity: 0.8;
     }
 
     .timeline-item {
         position: relative;
         padding-left: 80px;
-        margin-bottom: 50px;
+        margin-bottom: 60px;
     }
 
     .timeline-item::before {
@@ -91,43 +97,46 @@ renderHeader('Privacy Policy | ADDAAX', 'privacy');
         border: 4px solid var(--page-accent);
         border-radius: 50%;
         z-index: 2;
+        box-shadow: 0 0 15px rgba(201, 168, 76, 0.4);
     }
 
     .timeline-content {
         background: rgba(255, 255, 255, 0.03);
-        padding: 30px;
-        border-radius: 24px;
+        padding: 40px;
+        border-radius: 30px;
         border: 1px solid var(--glass-border);
         backdrop-filter: blur(20px);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .timeline-content:hover {
-        transform: translateX(10px);
+        transform: translateX(15px);
         background: rgba(255, 255, 255, 0.05);
         border-color: var(--page-accent);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
 
     .timeline-content h2 {
         color: var(--page-accent);
-        font-size: 1.5rem;
-        margin-bottom: 15px;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
         font-weight: 800;
         font-family: 'Outfit', sans-serif;
     }
     
     .timeline-content p {
         margin-bottom: 15px;
-        font-size: 1.1rem;
-        color: var(--text-muted);
-        line-height: 1.8;
+        font-size: 1.15rem;
+        color: var(--text-gold); /* LIGHT GOLD TEXT */
+        line-height: 1.9;
+        opacity: 0.9;
     }
 
     @media (max-width: 768px) {
         .timeline-wrapper::before { left: 16px; }
         .timeline-item { padding-left: 45px; }
         .timeline-item::before { left: 5px; width: 20px; height: 20px; }
-        .timeline-content { padding: 20px; }
+        .timeline-content { padding: 25px; }
     }
 </style>
 

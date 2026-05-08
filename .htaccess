@@ -12,3 +12,6 @@ RewriteRule ^escorts/([^/]+)/?$ products.php?city=$1 [NC,QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# 4. Map ad/slug-id to product_details.php
+RewriteRule ^ad/[a-z0-9-]+-([0-9]+)/?$ product_details.php?id=$1 [NC,QSA,L]

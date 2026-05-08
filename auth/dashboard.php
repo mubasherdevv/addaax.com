@@ -3,6 +3,7 @@ require_once 'session.php';
 require_once 'db_connect.php';
 require_once '../includes/functions.php';
 require_once '../includes/layout_functions.php';
+require_once '../includes/image_utils.php';
 
 // Require login
 requireLogin();
@@ -78,9 +79,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $active_tab === 'profile') {
         $allowed_exts = ['jpg', 'jpeg', 'png', 'webp'];
         
         if (in_array($file_ext, $allowed_exts)) {
+            $temp_path = $_FILES['profile_pic']['tmp_name'];
             $new_filename = 'profile_' . $user_id . '_' . time() . '.' . $file_ext;
-            if (move_uploaded_file($_FILES['profile_pic']['tmp_name'], $upload_dir . $new_filename)) {
-                $profile_pic = 'uploads/profiles/' . $new_filename;
+            $target_path = $upload_dir . $new_filename;
+            
+            // Compress and convert to WebP (no watermark for profile pics)
+            $final_name = compressImage($temp_path, $target_path, 80, false);
+            if ($final_name) {
+                $profile_pic = 'uploads/profiles/' . $final_name;
             }
         }
     }

@@ -938,14 +938,34 @@ html.no-scroll, body.no-scroll {
 
   .mobile-hero-search {
     display: flex;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 12px;
-    padding: 6px;
-    margin: 0 auto;
-    max-width: 320px;
+    background: #ffffff;
+    border: 1px solid #f1f1f1;
+    border-radius: 100px;
+    padding: 5px;
+    margin: 20px auto 0;
+    max-width: 350px;
     align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+
+  .mobile-hero-search input {
+    background: transparent;
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    flex: 1;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .mobile-hero-search button {
+    background: #dc2626;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 13px;
   }
 
   .mobile-hero-search input {
@@ -1083,16 +1103,15 @@ html.no-scroll, body.no-scroll {
 
 /* Search Bar */
 .search-container {
-  background: var(--glass);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
+  background: #ffffff;
+  border: 1px solid #f8fafc;
   padding: 8px;
   border-radius: 100px;
   display: flex;
   align-items: center;
   gap: 8px;
   max-width: 600px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 15px 45px rgba(0,0,0,0.08);
 }
 
 .mobile-hero-search {
@@ -1112,14 +1131,14 @@ html.no-scroll, body.no-scroll {
 }
 
 .search-input-group i {
-  color: var(--accent-purple);
+  color: #dc2626;
   margin-right: 12px;
 }
 
 .search-container input {
   background: transparent;
   border: none;
-  color: var(--white);
+  color: #333333;
   padding: 16px 0;
   width: 100%;
   font-size: 15px;
@@ -1127,19 +1146,19 @@ html.no-scroll, body.no-scroll {
 }
 
 .search-container input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: #94a3b8;
 }
 
 .search-btn {
-  background: var(--premium-gradient);
-  color: var(--white);
+  background: #dc2626;
+  color: #ffffff;
   border: none;
   padding: 16px 32px;
   border-radius: 100px;
   font-weight: 800;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 10px 20px rgba(236, 72, 153, 0.2);
+  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.2);
 }
 
 .search-btn:hover {

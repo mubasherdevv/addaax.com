@@ -41,7 +41,7 @@ renderHeader($PAGE_TITLE, 'cities');
         }
         
         .area-pill {
-            background: rgba(245, 233, 200, 0.05);
+            background: rgba(220, 38, 38, 0.05);
             border: 1px solid var(--glass-border);
             color: var(--text-main);
             padding: 10px 20px;
@@ -54,14 +54,14 @@ renderHeader($PAGE_TITLE, 'cities');
         
         .area-pill:hover {
             background: var(--accent-gold);
-            color: var(--dark-purple);
+            color: #fff;
             border-color: var(--accent-gold);
             transform: translateY(-2px);
         }
 
         .area-pill.popular {
-            background: rgba(201, 168, 76, 0.1);
-            border-color: rgba(201, 168, 76, 0.3);
+            background: rgba(220, 38, 38, 0.1);
+            border-color: rgba(220, 38, 38, 0.3);
         }
         
         .page-intro {

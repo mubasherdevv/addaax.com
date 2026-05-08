@@ -3,15 +3,15 @@
 /* Base Variables */
 :root {
     /* Modern color palette */
-    --primary-color: #4f46e5;
-    --primary-dark: #4338ca;
-    --primary-light: #818cf8;
-    --secondary-color: #0ea5e9;
-    --accent-color: #06b6d4;
-    --background-color: #f9fafb;
-    --background-alt: #f3f4f6;
-    --text-color: #1f2937;
-    --text-muted: #6b7280;
+    --primary-color: #dc2626;
+    --primary-dark: #991b1b;
+    --primary-light: #ef4444;
+    --secondary-color: #ef4444;
+    --accent-color: #dc2626;
+    --background-color: #ffffff;
+    --background-alt: #f8fafc;
+    --text-color: #111827;
+    --text-muted: #4b5563;
     --border-color: #e5e7eb;
     --success-color: #10b981;
     --warning-color: #f59e0b;

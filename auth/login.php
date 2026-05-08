@@ -54,11 +54,11 @@ renderHeader('Login | ADDAAX', 'login');
 ?>
 
     <style>
-        .auth-page-hero { padding: 140px 0 160px; min-height: 100vh; background: #000; }
-        .auth-split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .auth-page-hero { padding: 140px 0 160px; min-height: 100vh; background: var(--dark-purple); }
+        .auth-split-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
         .auth-info-side h1 { font-size: 56px; font-weight: 900; line-height: 1.1; margin-bottom: 25px; }
         .auth-info-side p { font-size: 18px; color: var(--text-muted); line-height: 1.6; }
-        .auth-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(40px); border: 1px solid var(--glass-border); padding: 50px; border-radius: 24px; }
+        .auth-card { background: #fff; border: 1px solid var(--glass-border); padding: 40px; border-radius: 24px; box-shadow: var(--shadow-lg); }
         
         @media (max-width: 992px) {
             .auth-split-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }

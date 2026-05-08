@@ -72,7 +72,7 @@ renderHeader('Anti-Scam Guide | Addaax', 'anti-scam');
         top: 0;
         bottom: 0;
         width: 2px;
-        background: #f1f5f9;
+        background: #991b1b; /* Dark Red Line */
     }
 
     .timeline-item {

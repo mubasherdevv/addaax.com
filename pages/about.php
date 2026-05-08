@@ -158,6 +158,63 @@ renderHeader('About Us | Elocanto', 'about');
             </div>
         </div>
     </section>
+
+    <section class="timeline-section">
+        <div class="container-wide">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="color: var(--page-red); font-size: 2.5rem; font-weight: 900; margin-bottom: 15px;">Our Journey</h2>
+                <p style="color: #6b7280; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Building a trusted marketplace takes time and commitment. Here is how we've grown.</p>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <span class="timeline-year">Foundation</span>
+                            <h3>The Vision Begins</h3>
+                            <p>Elocanto was founded with a simple goal: to make classified ads simple, accessible, and reliable for everyone across Pakistan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <span class="timeline-year">Growth</span>
+                            <h3>Expanding Community</h3>
+                            <p>We successfully connected thousands of buyers and sellers, creating a vibrant digital ecosystem for trade and services.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <span class="timeline-year">Safety</span>
+                            <h3>Trust & Security</h3>
+                            <p>Implemented advanced anti-scam policies and reporting tools to ensure a safe environment for all our users.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <span class="timeline-year">Future</span>
+                            <h3>Constant Innovation</h3>
+                            <p>We continue to evolve, adding new features and improving performance to remain Pakistan's favorite classifieds platform.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <?php 

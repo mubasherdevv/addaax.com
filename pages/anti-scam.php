@@ -13,7 +13,7 @@ renderHeader('Anti-Scam Guide | Elocanto', 'anti-scam');
     }
     
     .legal-page-wrapper {
-        padding-top: 90px; /* Offset for fixed header */
+        padding-top: 90px;
         background: #ffffff;
         min-height: 100vh;
     }
@@ -58,29 +58,70 @@ renderHeader('Anti-Scam Guide | Elocanto', 'anti-scam');
         padding: 80px 0;
     }
     
-    .legal-card {
-        max-width: 1000px;
+    .timeline-wrapper {
+        position: relative;
+        max-width: 900px;
         margin: 0 auto;
-        padding: 0 24px;
-        color: var(--page-black);
-        line-height: 1.8;
+        padding: 40px 0;
     }
-    
-    .legal-card h2 {
+
+    .timeline-wrapper::before {
+        content: '';
+        position: absolute;
+        left: 31px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #f1f5f9;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding-left: 80px;
+        margin-bottom: 50px;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: 20px;
+        top: 0;
+        width: 24px;
+        height: 24px;
+        background: white;
+        border: 4px solid var(--page-red);
+        border-radius: 50%;
+        z-index: 2;
+    }
+
+    .timeline-content {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 24px;
+        border: 1px solid #f1f5f9;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+        transition: all 0.3s ease;
+    }
+
+    .timeline-content:hover {
+        transform: translateX(10px);
+        border-color: #fee2e2;
+        box-shadow: 0 15px 40px rgba(220,38,38,0.05);
+    }
+
+    .timeline-content h2 {
         color: var(--page-red);
-        font-size: 1.8rem;
-        margin-top: 50px;
-        margin-bottom: 25px;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
         font-weight: 800;
         font-family: 'Outfit', sans-serif;
-        border-left: 5px solid var(--page-red);
-        padding-left: 20px;
     }
     
-    .legal-card p {
-        margin-bottom: 25px;
+    .timeline-content p {
+        margin-bottom: 15px;
         font-size: 1.1rem;
         color: #374151;
+        line-height: 1.8;
     }
 
     .safety-alert {
@@ -89,6 +130,9 @@ renderHeader('Anti-Scam Guide | Elocanto', 'anti-scam');
         padding: 40px;
         border-radius: 24px;
         margin: 60px 0;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .safety-alert h3 {
@@ -102,15 +146,10 @@ renderHeader('Anti-Scam Guide | Elocanto', 'anti-scam');
     }
 
     @media (max-width: 768px) {
-        .legal-banner {
-            padding: 60px 0;
-        }
-        .legal-content-section {
-            padding: 40px 0;
-        }
-        .safety-alert {
-            padding: 25px;
-        }
+        .timeline-wrapper::before { left: 16px; }
+        .timeline-item { padding-left: 45px; }
+        .timeline-item::before { left: 5px; width: 20px; height: 20px; }
+        .timeline-content { padding: 20px; }
     }
 </style>
 
@@ -128,91 +167,56 @@ renderHeader('Anti-Scam Guide | Elocanto', 'anti-scam');
 
     <section class="legal-content-section">
         <div class="container-wide">
-            <div class="legal-card">
-                <h2>Our Commitment to Transparency and Trust</h2>
-                <p>We at Elocanto believe that trust is at the heart for any marketplace that succeeds. When you use our platform we aren't only scrolling through ads, but meeting genuine people who have real possibilities and genuine intentions. This is why we are determined to address our users in a clear and honest manner.</p>
-                <p>We would like you to be confident when using our service. This is why it's crucial that we make the following statement: Elocanto itself does not take part in any type of fraud, scam or other fraudulent activities. We don't create false listings, we don't fool users and we never modify any transactions. We create a platform for users can interact with each other.</p>
-
-                <h2>Understanding How Our Platform Operates</h2>
-                <p>In order to understand the importance of security you must know how the platform functions. Elocanto is a classified ads site. It means that each ad displayed is made by a single user. It doesn't matter if it's a item that is for sale, a job ad, a home listing or service, it's designed and handled by the user who put it up.</p>
-                <p>We are not the owners of the goods being sold. We do not participate directly in the transactions between buyers and sellers. We are not an intermediary in any deals. Consider Elocanto as a virtual platform for meeting, much like a market that allows people to meet for a chat, network, or make bargains on their specifications.</p>
-                <p>As a result of our open-architecture, we give users the ability to publish and engage. However, at the same time this also implies that users should be vigilant and take smart choices.</p>
-
-                <div class="safety-alert">
-                    <h3><i class="fas fa-shield-alt"></i> Safety First: Your Responsibility</h3>
-                    <p>When communicating with an online person, it's always a good decision to conduct your business with an open-minded mentality. If you feel something seems too appealing to be real then it probably is.</p>
-                    <p><strong>Payment Safety:</strong> We highly recommend that you not make advance payment in particular when working with a person who you don't know, or are not able to verify. Making payments prior to receiving an item or service may be dangerous.</p>
+            <div class="timeline-wrapper">
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h2>Our Commitment to Transparency and Trust</h2>
+                        <p>We at Elocanto believe that trust is at the heart for any marketplace that succeeds. When you use our platform we aren't only scrolling through ads, but meeting genuine people who have real possibilities and genuine intentions. This is why we are determined to address our users in a clear and honest manner.</p>
+                        <p>We would like you to be confident when using our service. This is why it's crucial that we make the following statement: Elocanto itself does not take part in any type of fraud, scam or other fraudulent activities. We don't create false listings, we don't fool users and we never modify any transactions. We create a platform for users can interact with each other.</p>
+                    </div>
                 </div>
 
-                <h2>Ongoing Efforts to Maintain a Safe Marketplace</h2>
-                <p>While we're non-directly involved with transactions, our concern for your security is not less important for us. We monitor our platform regularly and take steps to prevent the misuse of our platform.</p>
-                <p>When we spot fraudulent listings, suspicious activities or any behavior that is in violation of our rules, we will decide to take action. It could be removing advertisements and accounts that are not being used, as well as blocking those who abuse the platform.</p>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h2>Understanding How Our Platform Operates</h2>
+                        <p>In order to understand the importance of security you must know how the platform functions. Elocanto is a classified ads site. It means that each ad displayed is made by a single user. It doesn't matter if it's a item that is for sale, a job ad, a home listing or service, it's designed and handled by the user who put it up.</p>
+                        <p>We are not the owners of the goods being sold. We do not participate directly in the transactions between buyers and sellers. We are not an intermediary in any deals. Consider Elocanto as a virtual platform for meeting, much like a market that allows people to meet for a chat, network, or make bargains on their specifications.</p>
+                    </div>
+                </div>
 
-                <h2>Reporting System and Quick Action Commitment</h2>
-                <p>We've made it possible to use a number of different choices on our website to let users report every issues they could face. If you come across an advertisement that you feel is unsafe, insensitive or doesn't belong to the platform, then you are able to immediately report it.</p>
-                <p>If a complaint has been submitted, our team reviews the matter carefully and then takes the appropriate steps. We usually try to address problems reported within 24 hours.</p>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h2>Ongoing Efforts to Maintain a Safe Marketplace</h2>
+                        <p>While we're non-directly involved with transactions, our concern for your security is not less important for us. We monitor our platform regularly and take steps to prevent the misuse of our platform.</p>
+                        <p>When we spot fraudulent listings, suspicious activities or any behavior that is in violation of our rules, we will decide to take action. It could be removing advertisements and accounts that are not being used, as well as blocking those who abuse the platform.</p>
+                    </div>
+                </div>
 
-                <h2>Final Thoughts and User Assurance</h2>
-                <p>Elocanto was designed to serve real-life people who are looking for genuine opportunities. If you're purchasing, selling or providing services, we'd like the experience to go smoothly and safe. We don't support fraud and actively battle to stop them.</p>
-                <p>Consider this platform an opportunity-rich place, but as in real life you should always take action with a sense of awareness. If you don't like something be sure to trust your gut. If you need assistance, we're there to help.</p>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h2>Reporting System and Quick Action Commitment</h2>
+                        <p>We've made it possible to use a number of different choices on our website to let users report every issues they could face. If you come across an advertisement that you feel is unsafe, insensitive or doesn't belong to the platform, then you are able to immediately report it.</p>
+                        <p>If a complaint has been submitted, our team reviews the matter carefully and then takes the appropriate steps. We usually try to address problems reported within 24 hours.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h2>Final Thoughts and User Assurance</h2>
+                        <p>Elocanto was designed to serve real-life people who are looking for genuine opportunities. If you're purchasing, selling or providing services, we'd like the experience to go smoothly and safe. We don't support fraud and actively battle to stop them.</p>
+                        <p>Consider this platform an opportunity-rich place, but as in real life you should always take action with a sense of awareness. If you don't like something be sure to trust your gut. If you need assistance, we're there to help.</p>
+                    </div>
+                </div>
+
             </div>
-        </div>
-    </section>
 
-    <section class="timeline-section">
-        <div class="container-wide">
-            <div style="text-align: center; margin-bottom: 60px;">
-                <h2 style="color: var(--page-red); font-size: 2.5rem; font-weight: 900; margin-bottom: 15px;">Our Journey</h2>
-                <p style="color: #6b7280; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Building a trusted marketplace takes time and commitment. Here is how we've grown.</p>
+            <div class="safety-alert">
+                <h3><i class="fas fa-shield-alt"></i> Safety First: Your Responsibility</h3>
+                <p>When communicating with an online person, it's always a good decision to conduct your business with an open-minded mentality. If you feel something seems too appealing to be real then it probably is.</p>
+                <p><strong>Payment Safety:</strong> We highly recommend that you not make advance payment in particular when working with a person who you don't know, or are not able to verify. Making payments prior to receiving an item or service may be dangerous.</p>
             </div>
 
-            <div class="timeline-container">
-                <div class="timeline-line"></div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-card">
-                            <span class="timeline-year">Foundation</span>
-                            <h3>The Vision Begins</h3>
-                            <p>Elocanto was founded with a simple goal: to make classified ads simple, accessible, and reliable for everyone across Pakistan.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-card">
-                            <span class="timeline-year">Growth</span>
-                            <h3>Expanding Community</h3>
-                            <p>We successfully connected thousands of buyers and sellers, creating a vibrant digital ecosystem for trade and services.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-card">
-                            <span class="timeline-year">Safety</span>
-                            <h3>Trust & Security</h3>
-                            <p>Implemented advanced anti-scam policies and reporting tools to ensure a safe environment for all our users.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-card">
-                            <span class="timeline-year">Future</span>
-                            <h3>Constant Innovation</h3>
-                            <p>We continue to evolve, adding new features and improving performance to remain Pakistan's favorite classifieds platform.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 </div>

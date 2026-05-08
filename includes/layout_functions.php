@@ -135,8 +135,6 @@ function renderHeader($page_title = 'ADDAAX ', $active_page = 'home') {
                 <li><a href="/index.php">Home</a></li>
                 <li><a href="/escorts/">Explore</a></li>
                 <li><a href="/cities.php">Cities</a></li>
-                <li><a href="/pages/about.php">About Us</a></li>
-                <li><a href="/pages/contact.php">Contact</a></li>
                 <?php if ($is_logged_in): ?>
                     <li><a href="/auth/dashboard.php">My Account</a></li>
                     <li><a href="/auth/logout.php">Logout</a></li>

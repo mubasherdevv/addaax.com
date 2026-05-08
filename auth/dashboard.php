@@ -207,7 +207,7 @@ renderHeader('User Dashboard | ADDAAX', 'dashboard');
                                         <tr>
                                             <td data-label="Ad Detail">
                                                 <div class="dash-ad-item">
-                                                    <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;">
+                                                    <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;" loading="lazy" decoding="async">
                                                     <div>
                                                         <a href="<?php echo getProductUrl($ad['id'], $ad['name']); ?>" class="dash-ad-title">
                                                             <?php echo htmlspecialchars($ad['name']); ?>
@@ -255,7 +255,7 @@ renderHeader('User Dashboard | ADDAAX', 'dashboard');
                                 <div class="dash-ad-card">
                                     <div class="dash-ad-card-main">
                                         <a href="<?php echo getProductUrl($ad['id'], $ad['name']); ?>" class="dash-ad-img">
-                                            <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="">
+                                            <img src="<?php echo !empty($ad['image']) ? '/' . $ad['image'] : '/images/placeholder.png'; ?>" alt="" loading="lazy" decoding="async">
                                             <span class="dash-status-badge status-<?php echo $ad['status'] == 1 ? 'active' : ($ad['status'] == 0 ? 'pending' : 'expired'); ?>">
                                                 <?php echo $ad['status'] == 1 ? 'Active' : ($ad['status'] == 0 ? 'Pending' : 'Expired'); ?>
                                             </span>

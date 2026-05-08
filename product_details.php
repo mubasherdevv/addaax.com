@@ -199,7 +199,7 @@ renderHeader($PAGE_TITLE, 'explore');
                             $img_path = str_starts_with($img['image_path'], 'http') ? $img['image_path'] : '/' . $img['image_path'];
                         ?>
                             <div class="thumb-box <?php echo $idx == 0 ? 'active' : ''; ?>" onclick="changeImage('<?php echo htmlspecialchars($img_path); ?>', this)">
-                                <img src="<?php echo htmlspecialchars($img_path); ?>" alt="" width="80" height="60" loading="lazy">
+                                <img src="<?php echo htmlspecialchars($img_path); ?>" alt="" width="80" height="60" loading="lazy" decoding="async">
                             </div>
                         <?php endforeach; ?>
                     </div>

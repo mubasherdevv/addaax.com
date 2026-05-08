@@ -60,37 +60,37 @@ renderHeader($PAGE_TITLE, 'home');
                 
                 <div class="location-grid">
                     <a href="/call-girls/lahore" class="location-card">
-                        <img src="images/cities/lahore.webp" alt="Lahore" width="400" height="250" loading="lazy">
+                        <img src="images/cities/lahore.webp" alt="Lahore" width="400" height="250" loading="lazy" decoding="async">
                         <div class="overlay">
                             <h3>Lahore</h3>
                         </div>
                     </a>
                     <a href="/call-girls/karachi" class="location-card">
-                        <img src="images/cities/karachi.webp" alt="Karachi" width="400" height="250" loading="lazy">
+                        <img src="images/cities/karachi.webp" alt="Karachi" width="400" height="250" loading="lazy" decoding="async">
                         <div class="overlay">
                             <h3>Karachi</h3>
                         </div>
                     </a>
                     <a href="/call-girls/multan" class="location-card">
-                        <img src="images/cities/multan.webp" alt="Multan" width="400" height="250" loading="lazy">
+                        <img src="images/cities/multan.webp" alt="Multan" width="400" height="250" loading="lazy" decoding="async">
                         <div class="overlay">
                             <h3>Multan</h3>
                         </div>
                     </a>
                     <a href="/call-girls/islamabad" class="location-card">
-                        <img src="images/cities/islamabad.webp" alt="Islamabad" width="400" height="250" loading="lazy">
+                        <img src="images/cities/islamabad.webp" alt="Islamabad" width="400" height="250" loading="lazy" decoding="async">
                         <div class="overlay">   
                             <h3>Islamabad</h3>
                         </div>
                     </a>
                     <a href="/call-girls/rawalpindi" class="location-card">
-                        <img src="images/cities/rawalpindi.webp" alt="Rawalpindi" width="400" height="250" loading="lazy">
+                        <img src="images/cities/rawalpindi.webp" alt="Rawalpindi" width="400" height="250" loading="lazy" decoding="async">
                         <div class="overlay">
                             <h3>Rawalpindi</h3>
                         </div>
                     </a>
                     <a href="/call-girls/murree" class="location-card">
-                        <img src="images/cities/murree.webp" alt="Murree" width="400" height="250" loading="lazy">
+                        <img src="images/cities/murree.webp" alt="Murree" width="400" height="250" loading="lazy" decoding="async">
                         <div class="overlay">
                             <h3>Murree</h3>
                         </div>

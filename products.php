@@ -115,7 +115,7 @@ renderHeader('Browse Ads | ADDAAX ', 'explore');
                         <?php endif; ?>
                         <div class="product-image">
                             <?php if(!empty($raw_img)): ?>
-                                <img src="<?php echo htmlspecialchars($img); ?>" alt="<?php echo htmlspecialchars($ad['name']); ?>" width="300" height="200" loading="lazy">
+                                <img src="<?php echo htmlspecialchars($img); ?>" alt="<?php echo htmlspecialchars($ad['name']); ?>" width="300" height="200" loading="lazy" decoding="async">
                             <?php else: ?>
                                 <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #111; color: #444;">
                                     <i class="fas fa-image" style="font-size: 48px; opacity: 0.2;"></i>

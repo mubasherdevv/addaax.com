@@ -135,6 +135,8 @@ function renderHeader($page_title = 'ADDAAX ', $active_page = 'home') {
                 <li><a href="/index.php">Home</a></li>
                 <li><a href="/escorts/">Explore</a></li>
                 <li><a href="/cities.php">Cities</a></li>
+                <li><a href="/pages/about.php">About Us</a></li>
+                <li><a href="/pages/contact.php">Contact</a></li>
                 <?php if ($is_logged_in): ?>
                     <li><a href="/auth/dashboard.php">My Account</a></li>
                     <li><a href="/auth/logout.php">Logout</a></li>
@@ -201,12 +203,12 @@ function renderFooter() {
                     <div class="footer-col">
                         <h4>Support</h4>
                         <ul class="footer-links">
-                            <li><a href="#">Copyright</a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Terms of Service</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Anti Scam</a></li>
+                            <li><a href="/pages/about.php">About Us</a></li>
+                            <li><a href="/pages/contact.php">Contact Us</a></li>
+                            <li><a href="/pages/terms.php">Terms of Service</a></li>
+                            <li><a href="/pages/privacy.php">Privacy Policy</a></li>
+                            <li><a href="/pages/anti-scam.php">Anti Scam Guide</a></li>
+                            <li><a href="/pages/copyright-policy.php">Copyright Policy</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">

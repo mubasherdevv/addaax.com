@@ -112,9 +112,23 @@ function renderHeader($page_title = 'ADDAAX ', $active_page = 'home') {
                     <a href="/cities.php" class="nav-link <?php echo $active_page == 'cities' ? 'active' : ''; ?>">Cities</a>
                 </nav>
                 <div class="header-actions">
-                    <?php if ($is_logged_in): ?>
-                        <a href="/auth/dashboard.php" class="user-profile-link <?php echo $active_page == 'dashboard' ? 'active' : ''; ?>">
-                            <i class="fas fa-user-circle"></i>
+                    <?php if ($is_logged_in): 
+                        // Fetch profile pic for header
+                        $header_user_id = $_SESSION['user_id'];
+                        $header_pic = null;
+                        if (isset($conn)) {
+                            $header_res = $conn->query("SELECT profile_pic FROM users WHERE id = $header_user_id");
+                            if ($header_res && $header_row = $header_res->fetch_assoc()) {
+                                $header_pic = $header_row['profile_pic'];
+                            }
+                        }
+                    ?>
+                        <a href="/auth/dashboard.php" class="user-profile-link <?php echo $active_page == 'dashboard' ? 'active' : ''; ?>" style="display: flex; align-items: center; gap: 10px;">
+                            <?php if ($header_pic): ?>
+                                <img src="/<?php echo htmlspecialchars($header_pic); ?>" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid var(--accent-gold);">
+                            <?php else: ?>
+                                <i class="fas fa-user-circle"></i>
+                            <?php endif; ?>
                             <span><?php echo htmlspecialchars($user_name); ?></span>
                         </a>
                     <?php else: ?>

@@ -11,6 +11,9 @@ $user_id = $_SESSION['user_id'];
 $user_name = $_SESSION['user_name'];
 $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'overview';
 
+// Auto-migrate: ensure profile_pic column exists to prevent SQL errors
+$conn->query("ALTER TABLE users ADD COLUMN IF NOT EXISTS profile_pic VARCHAR(255) DEFAULT NULL AFTER phone");
+
 // Get User Stats
 $sql_total = "SELECT COUNT(*) as count FROM products WHERE seller_id = ?";
 $stmt = $conn->prepare($sql_total);
@@ -312,9 +315,18 @@ renderHeader('User Dashboard | ADDAAX', 'dashboard');
                         </div>
                         <div class="form-group">
                             <label>Profile Picture</label>
-                            <input type="file" name="profile_pic" accept="image/*">
+                            <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 10px;">
+                                <div id="profile-preview" style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 2px solid var(--accent-gold); background: #f1f5f9; display: flex; align-items: center; justify-content: center;">
+                                    <?php if(!empty($user_data['profile_pic'])): ?>
+                                        <img src="/<?php echo htmlspecialchars($user_data['profile_pic']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <?php else: ?>
+                                        <i class="fas fa-user" style="font-size: 30px; color: #cbd5e1;"></i>
+                                    <?php endif; ?>
+                                </div>
+                                <input type="file" name="profile_pic" id="profile_pic_input" accept="image/*" onchange="previewImage(this)">
+                            </div>
                             <?php if(!empty($user_data['profile_pic'])): ?>
-                                <p style="font-size: 12px; color: var(--text-muted); margin-top: 5px;">Current: <?php echo basename($user_data['profile_pic']); ?></p>
+                                <p style="font-size: 12px; color: var(--text-muted);">Current: <?php echo basename($user_data['profile_pic']); ?></p>
                             <?php endif; ?>
                         </div>
                         <div class="form-group">
@@ -329,6 +341,17 @@ renderHeader('User Dashboard | ADDAAX', 'dashboard');
     </main>
 
     <script>
+        function previewImage(input) {
+            const preview = document.getElementById('profile-preview');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover;">`;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
         const dashToggle = document.getElementById('dashToggle');
         const dashSidebar = document.querySelector('.dashboard-sidebar');
         const dashOverlay = document.getElementById('dashOverlay');

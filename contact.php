@@ -72,7 +72,7 @@ renderHeader('Contact Us | ADDAAX', 'contact');
                             </div>
                             <div>
                                 <h4 style="color: white; margin-bottom: 4px;">Email</h4>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;">support@ADDAAX.pk</p>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">contactadmin@addaax.com</p>
                             </div>
                         </div>
                     </div>

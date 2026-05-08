@@ -210,7 +210,7 @@ renderHeader('Contact Us | Addaax', 'contact');
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h4>Email Support</h4>
-                            <p>support@Addaax.pk</p>
+                            <p>contactadmin@addaax.com</p>
                         </div>
                     </div>
 

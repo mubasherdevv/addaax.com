@@ -6,53 +6,134 @@ require_once '../includes/layout_functions.php';
 renderHeader('Copyright Policy | Elocanto', 'copyright');
 ?>
 
-<main>
-    <!-- Page Hero -->
-    <section class="page-banner" style="background: linear-gradient(135deg, #1e293b, #0f172a); padding: 80px 0; text-align: center;">
+<style>
+    :root {
+        --page-red: #dc2626;
+        --page-black: #111827;
+    }
+    
+    .legal-page-wrapper {
+        padding-top: 90px; /* Offset for fixed header */
+        background: #ffffff;
+        min-height: 100vh;
+    }
+    
+    .legal-banner {
+        background: #f8fafc;
+        padding: 80px 0;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .legal-banner h1 {
+        color: var(--page-red);
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 900;
+        margin-bottom: 20px;
+        font-family: 'Outfit', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+    }
+    
+    .legal-banner .breadcrumbs {
+        color: var(--page-black) !important;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .legal-banner .breadcrumbs a {
+        color: var(--page-black) !important;
+        text-decoration: none;
+    }
+    
+    .legal-banner .breadcrumbs span {
+        color: var(--page-red);
+        opacity: 1;
+    }
+    
+    .legal-content-section {
+        padding: 80px 0;
+    }
+    
+    .legal-card {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px;
+        color: var(--page-black);
+        line-height: 1.8;
+    }
+    
+    .legal-card h2 {
+        color: var(--page-red);
+        font-size: 1.8rem;
+        margin-top: 50px;
+        margin-bottom: 25px;
+        font-weight: 800;
+        font-family: 'Outfit', sans-serif;
+        border-left: 5px solid var(--page-red);
+        padding-left: 20px;
+    }
+    
+    .legal-card p {
+        margin-bottom: 25px;
+        font-size: 1.1rem;
+        color: #374151;
+    }
+
+    @media (max-width: 768px) {
+        .legal-banner {
+            padding: 60px 0;
+        }
+        .legal-content-section {
+            padding: 40px 0;
+        }
+    }
+</style>
+
+<div class="legal-page-wrapper">
+    <section class="legal-banner">
         <div class="container-wide">
-            <h1 style="color: var(--accent-gold); font-size: 3.5rem; font-weight: 900; margin-bottom: 15px;">Copyright Policy</h1>
-            <div class="breadcrumbs" style="color: rgba(255,255,255,0.6); font-size: 1.1rem;">
-                <a href="<?php echo BASE_URL; ?>/index.php" style="color: white; text-decoration: none;">Home</a>
-                <span style="margin: 0 10px;">/</span>
-                <span>Copyright Policy</span>
+            <h1>Copyright Policy</h1>
+            <div class="breadcrumbs">
+                <a href="<?php echo BASE_URL; ?>/index.php">Home</a>
+                <span style="margin: 0 15px;">/</span>
+                <span class="current">Copyright Policy</span>
             </div>
         </div>
     </section>
 
-    <!-- Content Section -->
-    <section class="section-padding" style="padding: 80px 0; background: var(--bg-dark);">
-        <div class="container-wide" style="max-width: 900px; margin: 0 auto;">
-            <div class="content-card" style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 32px; padding: 60px; backdrop-filter: blur(10px);">
-                <div class="legal-content" style="color: var(--text-muted); line-height: 1.8; font-size: 1.05rem;">
-                    <h2 style="color: var(--white); font-size: 2rem; margin-bottom: 25px;">Respect for Intellectual Property Rights</h2>
-                    <p style="margin-bottom: 20px;">At Elocanto, we respect the intellectual property rights of others and expect all users of our platform to do the same. We are committed to maintaining a safe and lawful environment where original content is protected.</p>
-                    <p style="margin-bottom: 20px;">All content published on Elocanto, including text, images, logos, design elements, and layout, is either owned by Elocanto or used with proper authorization.</p>
+    <section class="legal-content-section">
+        <div class="container-wide">
+            <div class="legal-card">
+                <h2>Respect for Intellectual Property Rights</h2>
+                <p>At Elocanto, we respect the intellectual property rights of others and expect all users of our platform to do the same. We are committed to maintaining a safe and lawful environment where original content is protected and unauthorized use of copyrighted material is strictly prohibited.</p>
+                <p>All content published on Elocanto, including text, images, logos, design elements, and layout, is either owned by Elocanto or used with proper authorization. Any unauthorized copying, reproduction, or distribution of this content is not allowed.</p>
 
-                    <h3 style="color: var(--accent-gold); font-size: 1.5rem; margin-top: 40px; margin-bottom: 15px;">User Responsibility for Content</h3>
-                    <p style="margin-bottom: 20px;">Elocanto is a user-generated content platform. By posting content, you confirm that you own the rights to that content or have proper permission to use it. You also confirm that your content does not infringe on any third-party copyright, trademark, or intellectual property rights.</p>
+                <h2>User Responsibility for Uploaded Content</h2>
+                <p>Elocanto is a user-generated content platform, which means all listings, including images, descriptions, and other materials, are created and uploaded by users.</p>
+                <p>By posting content on Elocanto, you confirm that you own the rights to that content or have proper permission to use it. You also confirm that your content does not infringe on any third-party copyright, trademark, or intellectual property rights. Users are fully responsible for ensuring that their content is legal and authorized.</p>
 
-                    <h3 style="color: var(--accent-gold); font-size: 1.5rem; margin-top: 40px; margin-bottom: 15px;">Reporting Infringement</h3>
-                    <p style="margin-bottom: 20px;">If you believe that any content on Elocanto violates your copyright or intellectual property rights, you can report it to us immediately. Please include:
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Link to the infringing content</li>
-                            <li>Description of the copyrighted material</li>
-                            <li>Proof of ownership (if available)</li>
-                        </ul>
-                    </p>
+                <h2>Reporting Copyright Infringement</h2>
+                <p>If you believe that any content on Elocanto violates your copyright or intellectual property rights, you can report it to us immediately.</p>
+                <p>When submitting a complaint, please include clear details such as the link to the content, a description of the copyrighted material, and proof of ownership if available. This helps us review your request quickly and accurately. We take all valid copyright complaints seriously and investigate them as soon as they are received.</p>
 
-                    <h3 style="color: var(--accent-gold); font-size: 1.5rem; margin-top: 40px; margin-bottom: 15px;">Enforcement Actions</h3>
-                    <p style="margin-bottom: 20px;">If any content is found to be infringing, we may take immediate action, including removing the content, restricting access, or suspending the user account responsible for repeated violations.</p>
+                <h2>Enforcement Actions and Content Removal</h2>
+                <p>We are committed to protecting intellectual property rights on our platform. If any content is found to be infringing or violating copyright laws, we may take immediate action. This may include removing the content, restricting access, or suspending the user account responsible for repeated violations.</p>
 
-                    <div style="margin-top: 60px; padding: 40px; background: rgba(212, 175, 55, 0.05); border-radius: 20px; border-left: 4px solid var(--accent-gold);">
-                        <h4 style="color: var(--white); margin-bottom: 15px;">Contact for Copyright Concerns</h4>
-                        <p><strong>Email:</strong> support@elocanto.pk</p>
-                        <p><strong>WhatsApp:</strong> +447490809237</p>
-                    </div>
-                </div>
+                <h2>Platform Liability Disclaimer</h2>
+                <p>Elocanto acts as a platform that allows users to post and view classified ads. We do not pre-verify all content uploaded by users. While we make efforts to address copyright complaints promptly, we cannot guarantee that all content on the platform is free from infringement. Users acknowledge that they use the platform at their own risk regarding content ownership and accuracy.</p>
+
+                <h2>Contact for Copyright Concerns</h2>
+                <p>If you need to report copyright infringement or have any related concerns, you can contact us directly:</p>
+                <p><strong>Email:</strong> support@elocanto.pk</p>
+                <p><strong>WhatsApp:</strong> +447490809237</p>
             </div>
         </div>
     </section>
-</main>
+</div>
 
 <?php 
 renderFooter();

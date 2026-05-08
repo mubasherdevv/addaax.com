@@ -79,6 +79,11 @@ function renderHeader($page_title = 'ADDAAX ', $active_page = 'home') {
         if (!empty($favicon)): ?>
         <link rel="icon" href="/images/<?php echo htmlspecialchars($favicon); ?>" type="image/x-icon">
         <?php endif; ?>
+        
+        <!-- Speed Optimization: Preconnect to Font Servers -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        
         <link rel="stylesheet" href="/css/modern-directory.css?v=2.3">
         <link rel="stylesheet" href="/css/whatsapp-icons.css">
         <link rel="stylesheet" href="/css/toast.css">

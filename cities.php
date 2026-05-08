@@ -5,8 +5,8 @@ require_once 'auth/db_connect.php';
 require_once 'includes/layout_functions.php';
 
 // SEO Meta (Defaults)
-$PAGE_TITLE = "Browse Escorts by City & Area | ADDAAX";
-$META_DESC = "Find escorts and call girl services by city and area. Browse verified listings.";
+$PAGE_TITLE = "Browse Call Girls by City & Area | ADDAAX";
+$META_DESC = "Find call girls and call girl services by city and area. Browse verified listings.";
 
 renderHeader($PAGE_TITLE, 'cities');
 ?>
@@ -139,7 +139,7 @@ renderHeader($PAGE_TITLE, 'cities');
                                 $city_slug = str_replace(' ', '-', strtolower($city['name']));
                                 $isHidden = $city_count > 10 ? 'hidden' : '';
                         ?>
-                            <a href="/escorts/<?php echo $city_slug; ?>" class="area-pill city-item <?php echo $isHidden; ?>">
+                            <a href="/call-girls/<?php echo $city_slug; ?>" class="area-pill city-item <?php echo $isHidden; ?>">
                                 <?php echo htmlspecialchars($city['name']); ?>
                             </a>
                         <?php 

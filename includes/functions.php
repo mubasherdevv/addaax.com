@@ -75,4 +75,24 @@ function time_ago($timestamp) {
         }
     }
 }
+
+/**
+ * Formats category name (replaces Escorts with Call Girls)
+ */
+function formatCategoryName($name) {
+    if (empty($name) || strtolower($name) === 'escorts') {
+        return 'Call Girls';
+    }
+    return $name;
+}
+
+/**
+ * Formats category name (replaces Escorts with Call Girls)
+ */
+function formatCategoryName($name) {
+    if (empty($name) || strtolower($name) === 'escorts') {
+        return 'Call Girls';
+    }
+    return $name;
+}
  

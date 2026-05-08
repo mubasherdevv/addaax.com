@@ -20,8 +20,8 @@ $path = trim($path, '/');
 // Routing Logic
 $segments = explode('/', $path);
 
-// 1. Escorts Base (addaax.com/escorts)
-if ($segments[0] === 'escorts') {
+// 1. Call Girls Base (addaax.com/call-girls)
+if ($segments[0] === 'call-girls') {
     if (isset($segments[1]) && !empty($segments[1])) {
         $_GET['city'] = $segments[1]; // City filter
         if (isset($segments[2])) {

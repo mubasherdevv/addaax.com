@@ -15,7 +15,7 @@ if ($cities_result) {
     while ($city = $cities_result->fetch_assoc()) {
         $city_slug = strtolower(str_replace(' ', '-', trim($city['name'])));
         echo '<url>';
-        echo '<loc>' . $base_url . '/escorts/' . $city_slug . '</loc>';
+        echo '<loc>' . $base_url . '/call-girls/' . $city_slug . '</loc>';
         echo '</url>';
     }
 }

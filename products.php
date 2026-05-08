@@ -65,7 +65,7 @@ renderHeader('Browse Ads | ADDAAX ', 'explore');
                 <nav class="breadcrumbs">
                     <a href="/index.php">Home</a> 
                     <span>></span> 
-                    <a href="/escorts/">Escort</a>
+                    <a href="/call-girls/">Call Girl</a>
                     <?php if (!empty($city_name)): ?>
                         <span>></span> 
                         <span class="current"><?php echo str_replace('-', ' ', htmlspecialchars($city_name)); ?></span>
@@ -76,7 +76,7 @@ renderHeader('Browse Ads | ADDAAX ', 'explore');
                 </nav>
 
                 <div class="listing-header">
-                    <h2><?php echo $search ? 'Results for: "' . htmlspecialchars($search) . '"' : ($city_name ? ucwords(str_replace('-', ' ', htmlspecialchars($city_name))) . ' Escorts' : 'All Listings'); ?></h2>
+                    <h2><?php echo $search ? 'Results for: "' . htmlspecialchars($search) . '"' : ($city_name ? ucwords(str_replace('-', ' ', htmlspecialchars($city_name))) . ' Call Girls' : 'All Listings'); ?></h2>
                     
                     <!-- Consolidated Mobile Controls (Filter + View Toggle) -->
                     <div class="listing-controls-mobile">
@@ -149,7 +149,7 @@ renderHeader('Browse Ads | ADDAAX ', 'explore');
                         </div>
                         <div class="product-info">
                             <div class="info-top">
-                                <span class="category-path"><?php echo strtoupper(htmlspecialchars($ad['category_name'] ?? 'Escorts')); ?></span>
+                                <span class="category-path"><?php echo strtoupper(htmlspecialchars(formatCategoryName($ad['category_name'] ?? ''))); ?></span>
                                 <span class="post-time"><?php echo time_ago($ad['created_at']); ?></span>
                             </div>
                             
@@ -188,8 +188,8 @@ renderHeader('Browse Ads | ADDAAX ', 'explore');
                     <div class="sidebar-title">ADS IN PAKISTAN</div>
                     <div class="sidebar-list">
                         <?php foreach($sidebar_cities as $sc): ?>
-                            <a href="/escorts/<?php echo urlencode(strtolower(str_replace(' ', '-', $sc['name']))); ?>">
-                                <?php echo htmlspecialchars($sc['name']); ?> Escort
+                            <a href="/call-girls/<?php echo urlencode(strtolower(str_replace(' ', '-', $sc['name']))); ?>">
+                                <?php echo htmlspecialchars($sc['name']); ?> Call Girl
                             </a>
                         <?php endforeach; ?>
                         <a href="/cities.php" style="color: var(--accent-gold); font-weight: 800;">+ see more</a>
@@ -210,8 +210,8 @@ renderHeader('Browse Ads | ADDAAX ', 'explore');
             <div class="filter-drawer-body">
                 <div class="filter-city-list">
                     <?php foreach($sidebar_cities as $sc): ?>
-                        <a href="/escorts/<?php echo urlencode(strtolower(str_replace(' ', '-', $sc['name']))); ?>" class="filter-city-item">
-                            <?php echo htmlspecialchars($sc['name']); ?> Escort
+                        <a href="/call-girls/<?php echo urlencode(strtolower(str_replace(' ', '-', $sc['name']))); ?>" class="filter-city-item">
+                            <?php echo htmlspecialchars($sc['name']); ?> Call Girl
                         </a>
                     <?php endforeach; ?>
                     <a href="/cities.php" class="filter-city-item" style="color: var(--accent-gold); border-top: 1px solid rgba(255,255,255,0.1); margin-top: 10px; padding-top: 15px;">

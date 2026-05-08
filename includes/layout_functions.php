@@ -108,7 +108,7 @@ function renderHeader($page_title = 'ADDAAX ', $active_page = 'home') {
                 </div>
                 <nav class="desktop-nav">
                     <a href="/" class="nav-link <?php echo $active_page == 'home' ? 'active' : ''; ?>">Home</a>
-                    <a href="/escorts/" class="nav-link <?php echo $active_page == 'explore' ? 'active' : ''; ?>">Explore</a>
+                    <a href="/call-girls/" class="nav-link <?php echo $active_page == 'explore' ? 'active' : ''; ?>">Explore</a>
                     <a href="/cities.php" class="nav-link <?php echo $active_page == 'cities' ? 'active' : ''; ?>">Cities</a>
                 </nav>
                 <div class="header-actions">
@@ -133,7 +133,7 @@ function renderHeader($page_title = 'ADDAAX ', $active_page = 'home') {
             </div>
             <ul class="menu-links">
                 <li><a href="/index.php">Home</a></li>
-                <li><a href="/escorts/">Explore</a></li>
+                <li><a href="/call-girls/">Explore</a></li>
                 <li><a href="/cities.php">Cities</a></li>
                 <?php if ($is_logged_in): ?>
                     <li><a href="/auth/dashboard.php">My Account</a></li>
@@ -186,13 +186,13 @@ function renderFooter() {
                         <div class="trust-badges">
                             <div class="trust-badge">Verified</div>
                             <div class="trust-badge">Secure</div>
-                             <div class="trust-badge">Escorts Service</div>
+                             <div class="trust-badge">Call Girls Service</div>
                         </div>
                     </div>
                     <div class="footer-col">
                         <h4>Quick Links</h4>
                         <ul class="footer-links">
-                            <li><a href="/escorts/">Explore Ads</a></li>
+                            <li><a href="/call-girls/">Explore Ads</a></li>
                             <li><a href="/post-ad.php">Post an Ad</a></li>
                             <li><a href="/cities.php">Cities</a></li>
                             
@@ -212,10 +212,10 @@ function renderFooter() {
                     <div class="footer-col">
                         <h4>Top Cities</h4>
                         <ul class="footer-links">
-                            <li><a href="/escorts/lahore">Lahore</a></li>
-                            <li><a href="/escorts/karachi">Karachi</a></li>
-                            <li><a href="/escorts/islamabad">Islamabad</a></li>
-                            <li><a href="/escorts/multan">Multan</a></li>
+                            <li><a href="/call-girls/lahore">Lahore</a></li>
+                            <li><a href="/call-girls/karachi">Karachi</a></li>
+                            <li><a href="/call-girls/islamabad">Islamabad</a></li>
+                            <li><a href="/call-girls/multan">Multan</a></li>
                         </ul>
                     </div>
                 </div>
@@ -231,7 +231,7 @@ function renderFooter() {
                 <i class="fas fa-home"></i>
                 <span>Home</span>
             </a>
-            <a href="/escorts/" class="nav-item">
+            <a href="/call-girls/" class="nav-item">
                 <i class="fas fa-search"></i>
                 <span>Search</span>
             </a>

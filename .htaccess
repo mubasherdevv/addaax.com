@@ -4,9 +4,9 @@ RewriteEngine On
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
 RewriteRule ^index\.php$ / [R=301,L]
 
-# 2. Map escorts to products.php
-RewriteRule ^escorts/?$ products.php [NC,L]
-RewriteRule ^escorts/([^/]+)/?$ products.php?city=$1 [NC,QSA,L]
+# 2. Map call-girls to products.php
+RewriteRule ^call-girls/?$ products.php [NC,L]
+RewriteRule ^call-girls/([^/]+)/?$ products.php?city=$1 [NC,QSA,L]
 
 # 3. Map ad details to product_details.php (or let router.php handle it)
 # We can use router.php as a fallback for everything else

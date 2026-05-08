@@ -336,7 +336,7 @@ window.generateCityUrl = function(cityName) {
         return;
     }
     const slug = cityName.toLowerCase().trim().replace(/ /g, '-');
-    document.getElementById('page_name').value = '/escorts/' + slug;
+    document.getElementById('page_name').value = '/call-girls/' + slug;
 };
 
 window.editSeo = function(data) {
@@ -358,7 +358,7 @@ window.editSeo = function(data) {
     }, 100);
 
     // Determine type
-    if (data.page_name.startsWith('/escorts/')) {
+    if (data.page_name.startsWith('/call-girls/')) {
         document.getElementById('page_type').value = 'location';
         toggleTargetType('location');
         document.getElementById('page_name_custom').value = data.page_name; 

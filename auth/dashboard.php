@@ -189,7 +189,7 @@ renderHeader('User Dashboard | ADDAAX', 'dashboard');
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td data-label="Category"><?php echo htmlspecialchars($ad['category_name'] ?? 'Escorts'); ?></td>
+                                            <td data-label="Category"><?php echo htmlspecialchars(formatCategoryName($ad['category_name'] ?? '')); ?></td>
                                             <td data-label="Status">
                                                 <span class="dash-status status-<?php echo $ad['status'] == 1 ? 'active' : ($ad['status'] == 0 ? 'pending' : ($ad['status'] == 2 ? 'hidden' : 'expired')); ?>">
                                                     <?php echo $ad['status'] == 1 ? 'Active' : ($ad['status'] == 0 ? 'Pending' : ($ad['status'] == 2 ? 'Hidden' : 'Expired')); ?>

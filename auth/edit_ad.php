@@ -108,12 +108,12 @@ renderHeader('Edit Ad | ADDAAX', 'dashboard');
 
 <style>
     :root {
-        --accent-gold: #c9a84c;
-        --accent-hover: #e0bc5a;
-        --glass-bg: rgba(245, 233, 200, 0.02);
-        --glass-border: rgba(255, 255, 255, 0.08);
-        --text-muted: #a0a0a0;
-        --white: #ffffff;
+        --accent-gold: #dc2626;
+        --accent-hover: #b91c1c;
+        --glass-bg: #ffffff;
+        --glass-border: rgba(220, 38, 38, 0.15);
+        --text-muted: #4b5563;
+        --white: #111827;
         --radius: 24px;
     }
 
@@ -121,9 +121,10 @@ renderHeader('Edit Ad | ADDAAX', 'dashboard');
         padding-top: 100px;
         padding-bottom: 80px;
         min-height: 100vh;
+        background-color: #f8fafc;
         background-image: 
-            radial-gradient(circle at top right, rgba(201, 168, 76, 0.05), transparent 40%),
-            radial-gradient(circle at bottom left, rgba(201, 168, 76, 0.03), transparent 40%);
+            radial-gradient(circle at top right, rgba(220, 38, 38, 0.05), transparent 40%),
+            radial-gradient(circle at bottom left, rgba(220, 38, 38, 0.03), transparent 40%);
     }
 
     .post-form-card {
@@ -134,7 +135,7 @@ renderHeader('Edit Ad | ADDAAX', 'dashboard');
         border: 1px solid var(--glass-border);
         border-radius: var(--radius);
         padding: 35px 40px;
-        box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.05);
     }
 
     .form-progress {
@@ -157,21 +158,22 @@ renderHeader('Edit Ad | ADDAAX', 'dashboard');
         width: 45px;
         height: 45px;
         border-radius: 50%;
-        background: rgba(255,255,255,0.05);
+        background: rgba(220, 38, 38, 0.05);
         border: 2px solid var(--glass-border);
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 700;
         font-family: 'Outfit', sans-serif;
+        color: var(--white);
         transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .progress-step.active .step-number {
         background: var(--accent-gold);
         border-color: var(--accent-gold);
-        box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
-        color: #000;
+        box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+        color: #fff;
     }
 
     .progress-step.completed .step-number {
@@ -184,12 +186,12 @@ renderHeader('Edit Ad | ADDAAX', 'dashboard');
     .progress-step.active .step-label { color: var(--accent-gold); }
 
     .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.9); }
+    .form-group label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--white); }
     
     .form-group input, .form-group textarea, .form-group select {
         width: 100%;
         padding: 12px 16px;
-        background: rgba(255,255,255,0.03);
+        background: #f8fafc;
         border: 1px solid var(--glass-border);
         border-radius: 12px;
         color: var(--white);
@@ -200,9 +202,9 @@ renderHeader('Edit Ad | ADDAAX', 'dashboard');
     }
 
     .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-        background: rgba(255,255,255,0.06);
+        background: #ffffff;
         border-color: var(--accent-gold);
-        box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.1);
+        box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
     }
 
     .image-upload-area {
@@ -212,17 +214,18 @@ renderHeader('Edit Ad | ADDAAX', 'dashboard');
         text-align: center;
         cursor: pointer;
         transition: 0.3s;
-        background: rgba(255,255,255,0.01);
+        background: rgba(220, 38, 38, 0.02);
+        color: var(--white);
     }
 
     .image-upload-area:hover {
         border-color: var(--accent-gold);
-        background: rgba(201, 168, 76, 0.03);
+        background: rgba(220, 38, 38, 0.05);
     }
 
     .post-ad-btn {
         background: var(--accent-gold);
-        color: #000;
+        color: #fff;
         border: none;
         padding: 15px 30px;
         border-radius: 16px;
@@ -234,7 +237,7 @@ renderHeader('Edit Ad | ADDAAX', 'dashboard');
         width: 100%;
     }
 
-    .post-ad-btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 10px 25px rgba(201, 168, 76, 0.3); }
+    .post-ad-btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3); }
 
     .step-container { display: none; animation: fadeIn 0.5s ease; }
     .step-container.active { display: block; }

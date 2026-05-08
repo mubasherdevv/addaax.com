@@ -4,8 +4,8 @@ require_once 'auth/db_connect.php';
 require_once 'includes/layout_functions.php';
 
 // SEO Meta
-$PAGE_TITLE = "Simple, Reliable, Verified | Find Escorts in Your City";
-$META_DESC = "The premium adult directory platform. Find verified escorts in Mumbai, Delhi, Bangalore, and across India. Simple, reliable, and secure.";
+$PAGE_TITLE = "Simple, Reliable, Verified | Find Call Girls in Your City";
+$META_DESC = "The premium adult directory platform. Find verified call girls in Mumbai, Delhi, Bangalore, and across India. Simple, reliable, and secure.";
 
 renderHeader($PAGE_TITLE, 'home');
 ?>
@@ -30,7 +30,7 @@ renderHeader($PAGE_TITLE, 'home');
             <div class="container-wide hero-grid">
                 <div class="hero-content">
                     <h1>Simple, Reliable, Verified</h1>
-                    <p class="subtext">Find <span>escorts</span> in your city</p>
+                    <p class="subtext">Find <span>call girls</span> in your city</p>
                     
                     <form action="products.php" method="GET" class="search-container desktop-only">
                         <div class="search-input-group">
@@ -48,7 +48,7 @@ renderHeader($PAGE_TITLE, 'home');
                 </div>
                 
                 <div class="hero-image-wrap">
-                    <img src="images/hero_model.png" alt="Premium Escort Directory" width="600" height="400" fetchpriority="high">
+                    <img src="images/hero_model.png" alt="Premium Call Girl Directory" width="600" height="400" fetchpriority="high">
                 </div>
             </div>
         </section>
@@ -59,37 +59,37 @@ renderHeader($PAGE_TITLE, 'home');
                 <h2 class="section-title">Featured Locations</h2>
                 
                 <div class="location-grid">
-                    <a href="/escorts/lahore" class="location-card">
+                    <a href="/call-girls/lahore" class="location-card">
                         <img src="images/cities/lahore.webp" alt="Lahore" width="400" height="250" loading="lazy">
                         <div class="overlay">
                             <h3>Lahore</h3>
                         </div>
                     </a>
-                    <a href="/escorts/karachi" class="location-card">
+                    <a href="/call-girls/karachi" class="location-card">
                         <img src="images/cities/karachi.webp" alt="Karachi" width="400" height="250" loading="lazy">
                         <div class="overlay">
                             <h3>Karachi</h3>
                         </div>
                     </a>
-                    <a href="/escorts/multan" class="location-card">
+                    <a href="/call-girls/multan" class="location-card">
                         <img src="images/cities/multan.webp" alt="Multan" width="400" height="250" loading="lazy">
                         <div class="overlay">
                             <h3>Multan</h3>
                         </div>
                     </a>
-                    <a href="/escorts/islamabad" class="location-card">
+                    <a href="/call-girls/islamabad" class="location-card">
                         <img src="images/cities/islamabad.webp" alt="Islamabad" width="400" height="250" loading="lazy">
                         <div class="overlay">   
                             <h3>Islamabad</h3>
                         </div>
                     </a>
-                    <a href="/escorts/rawalpindi" class="location-card">
+                    <a href="/call-girls/rawalpindi" class="location-card">
                         <img src="images/cities/rawalpindi.webp" alt="Rawalpindi" width="400" height="250" loading="lazy">
                         <div class="overlay">
                             <h3>Rawalpindi</h3>
                         </div>
                     </a>
-                    <a href="/escorts/murree" class="location-card">
+                    <a href="/call-girls/murree" class="location-card">
                         <img src="images/cities/murree.webp" alt="Murree" width="400" height="250" loading="lazy">
                         <div class="overlay">
                             <h3>Murree</h3>

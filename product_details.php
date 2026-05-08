@@ -170,7 +170,7 @@ renderHeader($PAGE_TITLE, 'explore');
             <span>></span> 
             <a href="/products.php">Ads</a>
             <span>></span> 
-            <a href="/escorts/">Escorts</a>
+            <a href="/call-girls/">Call Girls</a>
             <span>></span> 
             <span class="current"><?php echo htmlspecialchars($product['name'] ?? ''); ?></span>
         </nav>

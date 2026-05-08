@@ -8,8 +8,8 @@ $footer_cats = $conn->query("SELECT * FROM categories WHERE status = 1 LIMIT 6")
       <!-- Brand & Mission -->
       <div class="footer-col">
         <a href="index.php" class="footer-logo">
-          <div class="logo-box">E</div>
-          <span class="logo-text">Elo<span>canto</span></span>
+          <div class="logo-box">A</div>
+          <span class="logo-text">Add<span>aax</span></span>
         </a>
         <p class="footer-desc">
           <?php echo isset($WEBSITE_SETTINGS['default_meta_description']) ? htmlspecialchars($WEBSITE_SETTINGS['default_meta_description']) : "Pakistan's most trusted classified marketplace. Buy, sell, and find everything from cars and property to jobs and services."; ?>
@@ -63,7 +63,7 @@ $footer_cats = $conn->query("SELECT * FROM categories WHERE status = 1 LIMIT 6")
           </li>
           <li>
             <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-            <a href="mailto:support@elocanto.pk">support@elocanto.pk</a>
+            <a href="mailto:contactadmin@addaax.com">contactadmin@addaax.com</a>
           </li>
         </ul>
       </div>
@@ -71,20 +71,20 @@ $footer_cats = $conn->query("SELECT * FROM categories WHERE status = 1 LIMIT 6")
 
     <div class="footer-disclaimer">
       <p>
-        <strong>Legal Disclaimer:</strong> The content on our platform is intended only for an adult audience. All advertisements on our pages have been posted independently by the advertiser and are therefore under their exclusive responsibility. Elocanto is not responsible for the truthfulness, legality, or respect for property rights of such content.
+        <strong>Legal Disclaimer:</strong> The content on our platform is intended only for an adult audience. All advertisements on our pages have been posted independently by the advertiser and are therefore under their exclusive responsibility. Addaax is not responsible for the truthfulness, legality, or respect for property rights of such content.
       </p>
     </div>
 
     <div class="footer-bottom">
       <p class="copyright">
-        <span class="brand">Elocanto</span> © <?php echo date('Y'); ?>
+        <span class="brand">Addaax</span> © <?php echo date('Y'); ?>
       </p>
       <div class="bottom-links">
-        <a href="about.php">About</a>
-        <a href="contact.php">Contact</a>
-        <a href="terms.php">Terms</a>
-        <a href="privacy.php">Privacy</a>
-        <a href="anti-scam.php">Anti-Scam</a>
+        <a href="pages/about.php">About</a>
+        <a href="pages/contact.php">Contact</a>
+        <a href="pages/terms.php">Terms</a>
+        <a href="pages/privacy.php">Privacy</a>
+        <a href="pages/anti-scam.php">Anti-Scam</a>
       </div>
     </div>
   </div>

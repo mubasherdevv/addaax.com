@@ -8,7 +8,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
       <div class="logo-icon-box">
         <i class="fas fa-store"></i>
       </div>
-      <span class="logo-text">Elo<span>canto</span></span>
+      <span class="logo-text">Add<span>aax</span></span>
     </a>
     
     <!-- Navigation Links -->
@@ -17,7 +17,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <li><a href="index.php" class="nav-link <?php echo $current_page == 'index.php' ? 'active' : ''; ?>">Home</a></li>
         <li><a href="products.php" class="nav-link <?php echo $current_page == 'products.php' ? 'active' : ''; ?>">Explore</a></li>
         <li><a href="categories.php" class="nav-link <?php echo $current_page == 'categories.php' ? 'active' : ''; ?>">Categories</a></li>
-        <li><a href="contact.php" class="nav-link <?php echo $current_page == 'contact.php' ? 'active' : ''; ?>">Support</a></li>
+        <li><a href="pages/contact.php" class="nav-link <?php echo $current_page == 'contact.php' ? 'active' : ''; ?>">Support</a></li>
       </ul>
     </nav>
 

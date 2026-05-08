@@ -3,7 +3,7 @@ require_once '../includes/website_settings.php';
 require_once '../auth/db_connect.php';
 require_once '../includes/layout_functions.php';
 
-renderHeader('Copyright Policy | Elocanto', 'copyright');
+renderHeader('Copyright Policy | Addaax', 'copyright');
 ?>
 
 <style>
@@ -151,23 +151,23 @@ renderHeader('Copyright Policy | Elocanto', 'copyright');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Respect for Intellectual Property Rights</h2>
-                        <p>At Elocanto, we respect the intellectual property rights of others and expect all users of our platform to do the same. We are committed to maintaining a safe and lawful environment where original content is protected and unauthorized use of copyrighted material is strictly prohibited.</p>
-                        <p>All content published on Elocanto, including text, images, logos, design elements, and layout, is either owned by Elocanto or used with proper authorization. Any unauthorized copying, reproduction, or distribution of this content is not allowed.</p>
+                        <p>At Addaax, we respect the intellectual property rights of others and expect all users of our platform to do the same. We are committed to maintaining a safe and lawful environment where original content is protected and unauthorized use of copyrighted material is strictly prohibited.</p>
+                        <p>All content published on Addaax, including text, images, logos, design elements, and layout, is either owned by Addaax or used with proper authorization. Any unauthorized copying, reproduction, or distribution of this content is not allowed.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>User Responsibility for Uploaded Content</h2>
-                        <p>Elocanto is a user-generated content platform, which means all listings, including images, descriptions, and other materials, are created and uploaded by users.</p>
-                        <p>By posting content on Elocanto, you confirm that you own the rights to that content or have proper permission to use it. You also confirm that your content does not infringe on any third-party copyright, trademark, or intellectual property rights. Users are fully responsible for ensuring that their content is legal and authorized.</p>
+                        <p>Addaax is a user-generated content platform, which means all listings, including images, descriptions, and other materials, are created and uploaded by users.</p>
+                        <p>By posting content on Addaax, you confirm that you own the rights to that content or have proper permission to use it. You also confirm that your content does not infringe on any third-party copyright, trademark, or intellectual property rights. Users are fully responsible for ensuring that their content is legal and authorized.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Reporting Copyright Infringement</h2>
-                        <p>If you believe that any content on Elocanto violates your copyright or intellectual property rights, you can report it to us immediately.</p>
+                        <p>If you believe that any content on Addaax violates your copyright or intellectual property rights, you can report it to us immediately.</p>
                         <p>When submitting a complaint, please include clear details such as the link to the content, a description of the copyrighted material, and proof of ownership if available. This helps us review your request quickly and accurately. We take all valid copyright complaints seriously and investigate them as soon as they are received.</p>
                     </div>
                 </div>
@@ -182,7 +182,7 @@ renderHeader('Copyright Policy | Elocanto', 'copyright');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Platform Liability Disclaimer</h2>
-                        <p>Elocanto acts as a platform that allows users to post and view classified ads. We do not pre-verify all content uploaded by users. While we make efforts to address copyright complaints promptly, we cannot guarantee that all content on the platform is free from infringement. Users acknowledge that they use the platform at their own risk regarding content ownership and accuracy.</p>
+                        <p>Addaax acts as a platform that allows users to post and view classified ads. We do not pre-verify all content uploaded by users. While we make efforts to address copyright complaints promptly, we cannot guarantee that all content on the platform is free from infringement. Users acknowledge that they use the platform at their own risk regarding content ownership and accuracy.</p>
                     </div>
                 </div>
 
@@ -190,7 +190,7 @@ renderHeader('Copyright Policy | Elocanto', 'copyright');
                     <div class="timeline-content">
                         <h2>Contact for Copyright Concerns</h2>
                         <p>If you need to report copyright infringement or have any related concerns, you can contact us directly:</p>
-                        <p><strong>Email:</strong> support@elocanto.pk</p>
+                        <p><strong>Email:</strong> contactadmin@addaax.com</p>
                         <p><strong>WhatsApp:</strong> +447490809237</p>
                     </div>
                 </div>

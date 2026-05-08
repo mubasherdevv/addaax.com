@@ -63,7 +63,7 @@ $footer_cats = $conn->query("SELECT * FROM categories WHERE status = 1 LIMIT 6")
           </li>
           <li>
             <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-            <a href="mailto:support@elocanto.pk">support@elocanto.pk</a>
+            <a href="mailto:contactadmin@addaax.com">contactadmin@addaax.com</a>
           </li>
         </ul>
       </div>
@@ -71,13 +71,13 @@ $footer_cats = $conn->query("SELECT * FROM categories WHERE status = 1 LIMIT 6")
 
     <div class="footer-disclaimer">
       <p>
-        <strong>Legal Disclaimer:</strong> The content on our platform is intended only for an adult audience. All advertisements on our pages have been posted independently by the advertiser and are therefore under their exclusive responsibility. Elocanto is not responsible for the truthfulness, legality, or respect for property rights of such content.
+        <strong>Legal Disclaimer:</strong> The content on our platform is intended only for an adult audience. All advertisements on our pages have been posted independently by the advertiser and are therefore under their exclusive responsibility. Addaax is not responsible for the truthfulness, legality, or respect for property rights of such content.
       </p>
     </div>
 
     <div class="footer-bottom">
       <p class="copyright">
-        <span class="brand">Elocanto</span> © <?php echo date('Y'); ?>
+        <span class="brand">Addaax</span> © <?php echo date('Y'); ?>
       </p>
       <div class="bottom-links">
         <a href="about.php">About</a>

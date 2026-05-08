@@ -3,7 +3,7 @@ require_once '../includes/website_settings.php';
 require_once '../auth/db_connect.php';
 require_once '../includes/layout_functions.php';
 
-renderHeader('Contact Us | Elocanto', 'contact');
+renderHeader('Contact Us | Addaax', 'contact');
 ?>
 
 <style>
@@ -203,14 +203,14 @@ renderHeader('Contact Us | Elocanto', 'contact');
             <div class="contact-grid">
                 <div class="contact-info-card">
                     <h2>We're Here to Help You</h2>
-                    <p>At Elocanto, we value the customers we serve and are willing to assist. If you've got a query or need help, wish to raise an issue or just want to provide your feedback, we are ready to hear from you.</p>
+                    <p>At Addaax, we value the customers we serve and are willing to assist. If you've got a query or need help, wish to raise an issue or just want to provide your feedback, we are ready to hear from you.</p>
                     <p>We are committed to clear communications as well as quick assistance to ensure your experience with us is smooth and secure.</p>
                     
                     <div class="contact-method">
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h4>Email Support</h4>
-                            <p>support@elocanto.pk</p>
+                            <p>support@Addaax.pk</p>
                         </div>
                     </div>
 

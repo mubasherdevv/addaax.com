@@ -8,7 +8,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
       <div class="logo-icon-box">
         <i class="fas fa-store"></i>
       </div>
-      <span class="logo-text">Elo<span>canto</span></span>
+      <span class="logo-text">Add<span>aax</span></span>
     </a>
     
     <!-- Navigation Links -->

@@ -3,7 +3,7 @@ require_once '../includes/website_settings.php';
 require_once '../auth/db_connect.php';
 require_once '../includes/layout_functions.php';
 
-renderHeader('Privacy Policy | Elocanto', 'privacy');
+renderHeader('Privacy Policy | Addaax', 'privacy');
 ?>
 
 <style>
@@ -151,15 +151,15 @@ renderHeader('Privacy Policy | Elocanto', 'privacy');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Overview and Commitment to Privacy</h2>
-                        <p>Welcome to Elocanto. Your privacy is very important to us. This Privacy Policy explains how we collect, use, and protect your information when you use our website.</p>
-                        <p>By using Elocanto, you agree to the practices described in this policy. If you do not agree, please stop using the platform.</p>
+                        <p>Welcome to Addaax. Your privacy is very important to us. This Privacy Policy explains how we collect, use, and protect your information when you use our website.</p>
+                        <p>By using Addaax, you agree to the practices described in this policy. If you do not agree, please stop using the platform.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Information We Collect from Users</h2>
-                        <p>When you use Elocanto, we may collect different types of information to provide and improve our services.</p>
+                        <p>When you use Addaax, we may collect different types of information to provide and improve our services.</p>
                         <p>This includes information you directly provide, such as your name, email address, phone number, and details you include in your ads when creating an account or posting listings.</p>
                         <p>We also collect basic technical data automatically, such as IP address, browser type, device information, and pages visited, to help us improve platform performance and security.</p>
                     </div>
@@ -168,7 +168,7 @@ renderHeader('Privacy Policy | Elocanto', 'privacy');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>How We Use Your Information</h2>
-                        <p>We use collected information to operate, maintain, and improve the Elocanto platform. This includes enabling ad posting, account management, user communication, customer support, platform security, fraud prevention, and service improvement.</p>
+                        <p>We use collected information to operate, maintain, and improve the Addaax platform. This includes enabling ad posting, account management, user communication, customer support, platform security, fraud prevention, and service improvement.</p>
                         <p>We may also use your information to send important updates related to platform usage and safety. We do not use your data for any illegal or unauthorized purpose.</p>
                     </div>
                 </div>
@@ -176,7 +176,7 @@ renderHeader('Privacy Policy | Elocanto', 'privacy');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Public Content and User Responsibility</h2>
-                        <p>Elocanto is a user-generated content platform. Any information you publish in ads, including images and descriptions, may be visible to other users.</p>
+                        <p>Addaax is a user-generated content platform. Any information you publish in ads, including images and descriptions, may be visible to other users.</p>
                         <p>We strongly recommend avoiding the sharing of sensitive personal or financial details in public listings, as this information becomes accessible to others.</p>
                     </div>
                 </div>
@@ -214,14 +214,14 @@ renderHeader('Privacy Policy | Elocanto', 'privacy');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Third-Party Links and External Websites</h2>
-                        <p>Elocanto may contain links to external websites or third-party services. We are not responsible for the privacy practices or content of these external sites. Users are encouraged to review their policies before sharing any personal information.</p>
+                        <p>Addaax may contain links to external websites or third-party services. We are not responsible for the privacy practices or content of these external sites. Users are encouraged to review their policies before sharing any personal information.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Children’s Privacy Protection</h2>
-                        <p>Elocanto is not intended for use by individuals under the age of 18 without supervision. We do not knowingly collect personal data from minors. If such data is identified, it will be removed promptly.</p>
+                        <p>Addaax is not intended for use by individuals under the age of 18 without supervision. We do not knowingly collect personal data from minors. If such data is identified, it will be removed promptly.</p>
                     </div>
                 </div>
 
@@ -235,8 +235,8 @@ renderHeader('Privacy Policy | Elocanto', 'privacy');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Contact Information and User Support</h2>
-                        <p>If you have any questions, concerns, or requests regarding this Privacy Policy or how your data is handled, you can contact us at any time. We are committed to maintaining transparency and providing support to all users of Elocanto.</p>
-                        <p><strong>Email:</strong> support@elocanto.pk</p>
+                        <p>If you have any questions, concerns, or requests regarding this Privacy Policy or how your data is handled, you can contact us at any time. We are committed to maintaining transparency and providing support to all users of Addaax.</p>
+                        <p><strong>Email:</strong> contactadmin@addaax.com</p>
                         <p><strong>WhatsApp:</strong> +447490809237</p>
                     </div>
                 </div>

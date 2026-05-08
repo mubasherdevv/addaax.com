@@ -3,7 +3,7 @@ require_once '../includes/website_settings.php';
 require_once '../auth/db_connect.php';
 require_once '../includes/layout_functions.php';
 
-renderHeader('About Us | Elocanto', 'about');
+renderHeader('About Us | Addaax', 'about');
 ?>
 
 <style>
@@ -146,7 +146,7 @@ renderHeader('About Us | Elocanto', 'about');
 <div class="legal-page-wrapper">
     <section class="legal-banner">
         <div class="container-wide">
-            <h1>About Elocanto</h1>
+            <h1>About Addaax</h1>
             <div class="breadcrumbs">
                 <a href="<?php echo BASE_URL; ?>/index.php">Home</a>
                 <span style="margin: 0 15px;">/</span>
@@ -162,23 +162,23 @@ renderHeader('About Us | Elocanto', 'about');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Our Vision: Connecting People Through Digital Classifieds</h2>
-                        <p>Elocanto is a modern online classified ads platform designed to connect people across Pakistan through simple, fast, and reliable listings. Our goal is to make buying, selling, and offering services easier for everyone by providing a digital space where real people can interact directly.</p>
-                        <p>We believe that opportunities should be accessible to everyone, whether you are selling a product, searching for a job, renting a property, or offering a service. Elocanto is built to bring these opportunities together in one place.</p>
+                        <p>Addaax is a modern online classified ads platform designed to connect people across Pakistan through simple, fast, and reliable listings. Our goal is to make buying, selling, and offering services easier for everyone by providing a digital space where real people can interact directly.</p>
+                        <p>We believe that opportunities should be accessible to everyone, whether you are selling a product, searching for a job, renting a property, or offering a service. Addaax is built to bring these opportunities together in one place.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h2>Platform Overview: What Elocanto Offers</h2>
-                        <p>Elocanto allows users to post and explore a wide range of classified ads across multiple categories. From jobs and real estate to vehicles, services, and personal items, our platform is designed to support everyday needs and business opportunities.</p>
+                        <h2>Platform Overview: What Addaax Offers</h2>
+                        <p>Addaax allows users to post and explore a wide range of classified ads across multiple categories. From jobs and real estate to vehicles, services, and personal items, our platform is designed to support everyday needs and business opportunities.</p>
                         <p>We provide a simple and user-friendly system where users can create listings, reach potential buyers, and communicate directly without unnecessary complexity.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h2>How Elocanto Works: A User-Driven Marketplace</h2>
-                        <p>Elocanto is a user-generated platform, which means all ads are created and managed by individual users. We do not sell products or services directly. Instead, we provide the platform where users can connect, communicate, and complete transactions independently.</p>
+                        <h2>How Addaax Works: A User-Driven Marketplace</h2>
+                        <p>Addaax is a user-generated platform, which means all ads are created and managed by individual users. We do not sell products or services directly. Instead, we provide the platform where users can connect, communicate, and complete transactions independently.</p>
                         <p>This model gives users full control over their listings while allowing flexibility and freedom in how they interact with others.</p>
                     </div>
                 </div>
@@ -195,7 +195,7 @@ renderHeader('About Us | Elocanto', 'about');
                     <div class="timeline-content">
                         <h2>Building Trust and User Safety Awareness</h2>
                         <p>We understand that trust is essential in any online marketplace. While we provide tools and systems to help maintain safety, we also encourage users to stay alert and make informed decisions when interacting with others.</p>
-                        <p>Elocanto is built for real users and real opportunities, but users are always advised to follow safe practices when dealing online.</p>
+                        <p>Addaax is built for real users and real opportunities, but users are always advised to follow safe practices when dealing online.</p>
                     </div>
                 </div>
 
@@ -212,7 +212,7 @@ renderHeader('About Us | Elocanto', 'about');
                 <h3 style="margin-top: 0; color: var(--page-red); font-size: 1.5rem; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 15px;">Contact Us and User Support</h3>
                 <p style="color: #374151; line-height: 1.8;">We are always open to feedback, suggestions, and support requests. If you have any questions or need assistance, you can reach us through our support channels:</p>
                 <div style="margin-top: 20px;">
-                    <p style="margin-bottom: 10px; font-size: 1.1rem;"><strong>Email:</strong> support@elocanto.pk</p>
+                    <p style="margin-bottom: 10px; font-size: 1.1rem;"><strong>Email:</strong> contactadmin@addaax.com</p>
                     <p style="margin-bottom: 0; font-size: 1.1rem;"><strong>WhatsApp:</strong> +447490809237</p>
                 </div>
             </div>

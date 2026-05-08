@@ -3,7 +3,7 @@ require_once '../includes/website_settings.php';
 require_once '../auth/db_connect.php';
 require_once '../includes/layout_functions.php';
 
-renderHeader('Terms & Conditions | Elocanto', 'terms');
+renderHeader('Terms & Conditions | Addaax', 'terms');
 ?>
 
 <style>
@@ -151,7 +151,7 @@ renderHeader('Terms & Conditions | Elocanto', 'terms');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Acceptance and Agreement to Terms</h2>
-                        <p>Welcome to Elocanto. By accessing or using our website, you agree to comply with and be bound by these Terms and Conditions. These terms are designed to ensure a safe, fair, and reliable environment for all users of the platform.</p>
+                        <p>Welcome to Addaax. By accessing or using our website, you agree to comply with and be bound by these Terms and Conditions. These terms are designed to ensure a safe, fair, and reliable environment for all users of the platform.</p>
                         <p>If you do not agree with any part of these terms, you should discontinue using our services immediately.</p>
                     </div>
                 </div>
@@ -159,7 +159,7 @@ renderHeader('Terms & Conditions | Elocanto', 'terms');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Platform Overview and Nature of Service</h2>
-                        <p>Elocanto is an online classified ads platform that enables users to post listings, explore ads, and connect with others for buying, selling, or offering services.</p>
+                        <p>Addaax is an online classified ads platform that enables users to post listings, explore ads, and connect with others for buying, selling, or offering services.</p>
                         <p>We do not own, control, or directly sell any of the products or services listed on the platform. All content is generated and managed by individual users. Our role is limited to providing a digital space where users can interact.</p>
                     </div>
                 </div>
@@ -167,7 +167,7 @@ renderHeader('Terms & Conditions | Elocanto', 'terms');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>User Obligations and Responsibilities</h2>
-                        <p>By using Elocanto, you agree to act responsibly, honestly, and in accordance with applicable laws.</p>
+                        <p>By using Addaax, you agree to act responsibly, honestly, and in accordance with applicable laws.</p>
                         <p>You are solely responsible for the content you post, including text, images, and any other information. All listings must be accurate, genuine, and not misleading. Any misuse of the platform that may harm other users or the integrity of the platform is strictly prohibited.</p>
                     </div>
                 </div>
@@ -175,7 +175,7 @@ renderHeader('Terms & Conditions | Elocanto', 'terms');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Listing Standards and Content Compliance</h2>
-                        <p>All ads posted on Elocanto must meet basic quality and legal standards. Users must ensure that their listings are clear, truthful, and relevant.</p>
+                        <p>All ads posted on Addaax must meet basic quality and legal standards. Users must ensure that their listings are clear, truthful, and relevant.</p>
                         <p>Posting duplicate ads, misleading information, or unauthorized content is not allowed. Any content that violates laws or platform guidelines may be removed without prior notice.</p>
                     </div>
                 </div>
@@ -191,14 +191,14 @@ renderHeader('Terms & Conditions | Elocanto', 'terms');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>User-to-User Transactions and Deal Responsibility</h2>
-                        <p>All transactions conducted through Elocanto take place directly between users. We do not act as a party to any agreement, payment, or delivery process. Therefore, we do not guarantee the quality, safety, legality, or authenticity of any listing.</p>
+                        <p>All transactions conducted through Addaax take place directly between users. We do not act as a party to any agreement, payment, or delivery process. Therefore, we do not guarantee the quality, safety, legality, or authenticity of any listing.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Payment Disclaimer and Financial Risk</h2>
-                        <p>Elocanto does not process or facilitate payments between users. All financial interactions are carried out at the user's own discretion and risk. We strongly recommend avoiding advance payments unless you fully trust the other party.</p>
+                        <p>Addaax does not process or facilitate payments between users. All financial interactions are carried out at the user's own discretion and risk. We strongly recommend avoiding advance payments unless you fully trust the other party.</p>
                         <p>We are not liable for any financial loss, fraud, or disputes arising from user transactions.</p>
                     </div>
                 </div>
@@ -221,7 +221,7 @@ renderHeader('Terms & Conditions | Elocanto', 'terms');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Limitation of Liability and Platform Disclaimer</h2>
-                        <p>Elocanto is provided on an "as-is" basis without any guarantees or warranties. We are not responsible for any direct or indirect loss, damage, or disputes that may occur between users. This includes financial loss, misrepresentation, or issues related to listings or services.</p>
+                        <p>Addaax is provided on an "as-is" basis without any guarantees or warranties. We are not responsible for any direct or indirect loss, damage, or disputes that may occur between users. This includes financial loss, misrepresentation, or issues related to listings or services.</p>
                     </div>
                 </div>
 
@@ -235,7 +235,7 @@ renderHeader('Terms & Conditions | Elocanto', 'terms');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Modifications and Updates to Terms</h2>
-                        <p>Elocanto reserves the right to update or modify these Terms and Conditions at any time without prior notice. Users are encouraged to review this page regularly. Continued use of the platform after changes means you accept the updated terms.</p>
+                        <p>Addaax reserves the right to update or modify these Terms and Conditions at any time without prior notice. Users are encouraged to review this page regularly. Continued use of the platform after changes means you accept the updated terms.</p>
                     </div>
                 </div>
 

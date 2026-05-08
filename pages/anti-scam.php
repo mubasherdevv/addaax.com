@@ -3,7 +3,7 @@ require_once '../includes/website_settings.php';
 require_once '../auth/db_connect.php';
 require_once '../includes/layout_functions.php';
 
-renderHeader('Anti-Scam Guide | Elocanto', 'anti-scam');
+renderHeader('Anti-Scam Guide | Addaax', 'anti-scam');
 ?>
 
 <style>
@@ -172,16 +172,16 @@ renderHeader('Anti-Scam Guide | Elocanto', 'anti-scam');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Our Commitment to Transparency and Trust</h2>
-                        <p>We at Elocanto believe that trust is at the heart for any marketplace that succeeds. When you use our platform we aren't only scrolling through ads, but meeting genuine people who have real possibilities and genuine intentions. This is why we are determined to address our users in a clear and honest manner.</p>
-                        <p>We would like you to be confident when using our service. This is why it's crucial that we make the following statement: Elocanto itself does not take part in any type of fraud, scam or other fraudulent activities. We don't create false listings, we don't fool users and we never modify any transactions. We create a platform for users can interact with each other.</p>
+                        <p>We at Addaax believe that trust is at the heart for any marketplace that succeeds. When you use our platform we aren't only scrolling through ads, but meeting genuine people who have real possibilities and genuine intentions. This is why we are determined to address our users in a clear and honest manner.</p>
+                        <p>We would like you to be confident when using our service. This is why it's crucial that we make the following statement: Addaax itself does not take part in any type of fraud, scam or other fraudulent activities. We don't create false listings, we don't fool users and we never modify any transactions. We create a platform for users can interact with each other.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Understanding How Our Platform Operates</h2>
-                        <p>In order to understand the importance of security you must know how the platform functions. Elocanto is a classified ads site. It means that each ad displayed is made by a single user. It doesn't matter if it's a item that is for sale, a job ad, a home listing or service, it's designed and handled by the user who put it up.</p>
-                        <p>We are not the owners of the goods being sold. We do not participate directly in the transactions between buyers and sellers. We are not an intermediary in any deals. Consider Elocanto as a virtual platform for meeting, much like a market that allows people to meet for a chat, network, or make bargains on their specifications.</p>
+                        <p>In order to understand the importance of security you must know how the platform functions. Addaax is a classified ads site. It means that each ad displayed is made by a single user. It doesn't matter if it's a item that is for sale, a job ad, a home listing or service, it's designed and handled by the user who put it up.</p>
+                        <p>We are not the owners of the goods being sold. We do not participate directly in the transactions between buyers and sellers. We are not an intermediary in any deals. Consider Addaax as a virtual platform for meeting, much like a market that allows people to meet for a chat, network, or make bargains on their specifications.</p>
                     </div>
                 </div>
 
@@ -204,7 +204,7 @@ renderHeader('Anti-Scam Guide | Elocanto', 'anti-scam');
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h2>Final Thoughts and User Assurance</h2>
-                        <p>Elocanto was designed to serve real-life people who are looking for genuine opportunities. If you're purchasing, selling or providing services, we'd like the experience to go smoothly and safe. We don't support fraud and actively battle to stop them.</p>
+                        <p>Addaax was designed to serve real-life people who are looking for genuine opportunities. If you're purchasing, selling or providing services, we'd like the experience to go smoothly and safe. We don't support fraud and actively battle to stop them.</p>
                         <p>Consider this platform an opportunity-rich place, but as in real life you should always take action with a sense of awareness. If you don't like something be sure to trust your gut. If you need assistance, we're there to help.</p>
                     </div>
                 </div>

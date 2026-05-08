@@ -220,12 +220,12 @@ function renderFooter() {
                     <div class="footer-col">
                         <h4>Support</h4>
                         <ul class="footer-links">
-                            <li><a href="#">Copyright</a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Terms of Service</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Anti Scam</a></li>
+                            <li><a href="<?php echo BASE_URL; ?>/pages/copyright-policy.php">Copyright</a></li>
+                            <li><a href="<?php echo BASE_URL; ?>/pages/privacy.php">Privacy</a></li>
+                            <li><a href="<?php echo BASE_URL; ?>/pages/contact.php">Contact Us</a></li>
+                            <li><a href="<?php echo BASE_URL; ?>/pages/terms.php">Terms of Service</a></li>
+                            <li><a href="<?php echo BASE_URL; ?>/pages/about.php">About Us</a></li>
+                            <li><a href="<?php echo BASE_URL; ?>/pages/anti-scam.php">Anti Scam</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">

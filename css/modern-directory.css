@@ -407,9 +407,9 @@ html.no-scroll, body.no-scroll {
 }
 
 .product-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: #dc2626;
   backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius);
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -422,10 +422,10 @@ html.no-scroll, body.no-scroll {
 }
 
 .product-card:hover {
-  border-color: var(--accent-gold);
+  border-color: #ffffff;
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 20px 40px rgba(220, 38, 38, 0.3);
+  background: #b91c1c;
 }
 
 .product-image {
@@ -613,20 +613,22 @@ html.no-scroll, body.no-scroll {
 .category-path {
   font-size: 11px;
   font-weight: 800;
-  color: var(--accent-gold);
+  color: #ffffff;
   letter-spacing: 1px;
+  opacity: 0.9;
 }
 
 .post-time {
   font-size: 11px;
-  color: var(--text-muted);
+  color: #ffffff;
   font-weight: 600;
+  opacity: 0.7;
 }
 
 .product-title {
   font-size: 20px;
   font-weight: 800;
-  color: var(--white);
+  color: #ffffff;
   margin-bottom: 12px;
   line-height: 1.4;
   text-transform: uppercase;
@@ -638,11 +640,11 @@ html.no-scroll, body.no-scroll {
 }
 
 .product-card:hover .product-title {
-  color: var(--accent-gold);
+  color: #ffffff;
 }
 
 .product-desc {
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 13px;
   margin-bottom: 0;
   line-height: 1.6;
@@ -663,7 +665,7 @@ html.no-scroll, body.no-scroll {
 .product-price {
   font-size: 22px;
   font-weight: 900;
-  color: var(--accent-gold);
+  color: #ffffff;
 }
 
 .action-buttons {
@@ -685,8 +687,8 @@ html.no-scroll, body.no-scroll {
 
 .seller-pill i {
   font-size: 14px;
-  color: var(--accent-gold);
-  opacity: 0.8;
+  color: #ffffff;
+  opacity: 0.9;
 }
 
 .product-card:hover .seller-pill {
@@ -697,13 +699,13 @@ html.no-scroll, body.no-scroll {
 .seller-name {
   font-size: 13px;
   font-weight: 600;
-  color: var(--white);
+  color: #ffffff;
   letter-spacing: 0.5px;
   text-transform: capitalize;
 }
 
 .product-card:hover .seller-name {
-  color: var(--accent-gold);
+  color: #ffffff;
 }
 
 .action-btn {
@@ -716,9 +718,9 @@ html.no-scroll, body.no-scroll {
   text-decoration: none;
   transition: all 0.3s ease;
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--white);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 .btn-whatsapp:hover {
@@ -737,20 +739,21 @@ html.no-scroll, body.no-scroll {
 
 /* Sidebar Styles */
 .sidebar-card {
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
+  background: #ffffff;
+  border: 1px solid #dc2626;
   border-radius: var(--radius-sm);
   overflow: hidden;
+  box-shadow: 0 5px 15px rgba(220, 38, 38, 0.05);
 }
 
 .sidebar-title {
-  background: #000000;
+  background: #dc2626;
   padding: 16px 24px;
   font-size: 14px;
   font-weight: 900;
   text-transform: uppercase;
-  color: var(--white);
-  border-bottom: 1px solid var(--glass-border);
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sidebar-list {
@@ -760,11 +763,12 @@ html.no-scroll, body.no-scroll {
 .sidebar-list a {
   display: block;
   padding: 12px 24px;
-  color: var(--text-muted);
+  color: #dc2626;
   text-decoration: none;
   font-size: 14px;
-  border-bottom: 1px solid var(--glass-border);
+  border-bottom: 1px solid rgba(220, 38, 38, 0.1);
   transition: all 0.2s;
+  font-weight: 500;
 }
 
 .sidebar-list a:hover {
@@ -1176,12 +1180,13 @@ html.no-scroll, body.no-scroll {
   overflow: hidden;
   text-decoration: none;
   transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1);
-  border: 1px solid var(--glass-border);
+  border: 2px solid #dc2626;
 }
 
 .location-card:hover {
   transform: translateY(-8px);
-  border-color: var(--accent-gold);
+  border-color: #dc2626;
+  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2);
 }
 
 .location-card img {
@@ -1198,7 +1203,7 @@ html.no-scroll, body.no-scroll {
 .location-card .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -1208,7 +1213,7 @@ html.no-scroll, body.no-scroll {
 .location-card h3 {
   font-size: 20px;
   font-weight: 900;
-  color: var(--white);
+  color: #dc2626;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -1259,9 +1264,9 @@ html.no-scroll, body.no-scroll {
 
 /* --- Footer --- */
 .main-footer {
-  background: #000000;
+  background: #ffffff;
   padding: 100px 0 40px;
-  border-top: 1px solid var(--glass-border);
+  border-top: 1px solid #dc2626;
 }
 
 .footer-grid {
@@ -1275,14 +1280,16 @@ html.no-scroll, body.no-scroll {
   font-size: 28px;
   display: block;
   margin-bottom: 20px;
+  color: #dc2626;
 }
 
 .footer-brand .desc {
-  color: var(--text-muted);
+  color: #dc2626;
   font-size: 14px;
   line-height: 1.8;
   margin-bottom: 30px;
   max-width: 320px;
+  opacity: 0.8;
 }
 
 .trust-badges {
@@ -1292,13 +1299,13 @@ html.no-scroll, body.no-scroll {
 }
 
 .trust-badge {
-  background: rgba(201, 168, 76, 0.05);
+  background: rgba(220, 38, 38, 0.05);
   padding: 6px 14px;
   border-radius: 6px;
   font-weight: 800;
   font-size: 10px;
-  color: var(--accent-gold);
-  border: 1px solid rgba(201, 168, 76, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.1);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -1311,7 +1318,7 @@ html.no-scroll, body.no-scroll {
 
 .payment-icons i {
   font-size: 24px;
-  color: var(--text-muted);
+  color: #dc2626;
 }
 
 .footer-col h4 {
@@ -1320,7 +1327,7 @@ html.no-scroll, body.no-scroll {
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin-bottom: 32px;
-  color: var(--white);
+  color: #dc2626;
 }
 
 .footer-links {
@@ -1332,22 +1339,25 @@ html.no-scroll, body.no-scroll {
 }
 
 .footer-links a {
-  color: var(--text-muted);
+  color: #dc2626;
   text-decoration: none;
   font-size: 14px;
   transition: color 0.2s;
+  opacity: 0.7;
 }
 
 .footer-links a:hover {
-  color: var(--accent-purple);
+  color: #dc2626;
+  opacity: 1;
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 40px;
-  border-top: 1px solid var(--glass-border);
-  color: var(--text-muted);
+  border-top: 1px solid rgba(220, 38, 38, 0.1);
+  color: #dc2626;
   font-size: 13px;
+  opacity: 0.6;
 }
 
 /* --- Responsive --- */

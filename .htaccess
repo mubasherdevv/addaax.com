@@ -8,7 +8,8 @@ RewriteRule ^index\.php$ / [R=301,L]
 RewriteRule ^escorts/?$ products.php [NC,L]
 RewriteRule ^escorts/([^/]+)/?$ products.php?city=$1 [NC,QSA,L]
 
-# 3. Add .php extension internally
+# 3. Map ad details to product_details.php (or let router.php handle it)
+# We can use router.php as a fallback for everything else
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteRule ^(.*)$ router.php [L,QSA]

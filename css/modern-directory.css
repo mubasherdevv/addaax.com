@@ -2868,3 +2868,39 @@ html.no-scroll, body.no-scroll {
         display: none;
     }
 }
+
+/* Breadcrumbs Styling */
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 25px;
+    font-size: 14px;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-muted);
+    padding: 10px 0;
+}
+
+.breadcrumbs a {
+    color: #b91c1c; /* Darker Red for links */
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.breadcrumbs a:hover {
+    color: #dc2626;
+    text-decoration: underline;
+}
+
+.breadcrumbs span {
+    margin: 0 10px;
+    color: #9ca3af;
+    font-weight: 400;
+}
+
+.breadcrumbs .current {
+    color: #991b1b; /* Darkest Red for active page */
+    font-weight: 800;
+}

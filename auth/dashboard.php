@@ -64,11 +64,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $active_tab === 'profile') {
     $first_name = trim($_POST['first_name'] ?? '');
     $last_name = trim($_POST['last_name'] ?? '');
     $phone = trim($_POST['phone'] ?? '');
+    
+    // Handle Profile Picture Upload
+    $profile_pic = $user_data['profile_pic'] ?? null;
+    if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] === UPLOAD_ERR_OK) {
+        $upload_dir = '../uploads/profiles/';
+        if (!file_exists($upload_dir)) mkdir($upload_dir, 0777, true);
+        
+        $file_ext = strtolower(pathinfo($_FILES['profile_pic']['name'], PATHINFO_EXTENSION));
+        $allowed_exts = ['jpg', 'jpeg', 'png', 'webp'];
+        
+        if (in_array($file_ext, $allowed_exts)) {
+            $new_filename = 'profile_' . $user_id . '_' . time() . '.' . $file_ext;
+            if (move_uploaded_file($_FILES['profile_pic']['tmp_name'], $upload_dir . $new_filename)) {
+                $profile_pic = 'uploads/profiles/' . $new_filename;
+            }
+        }
+    }
 
     if (!empty($first_name) && !empty($last_name)) {
-        $update_sql = "UPDATE users SET first_name = ?, last_name = ?, phone = ? WHERE id = ?";
+        $update_sql = "UPDATE users SET first_name = ?, last_name = ?, phone = ?, profile_pic = ? WHERE id = ?";
         $update_stmt = $conn->prepare($update_sql);
-        $update_stmt->bind_param("sssi", $first_name, $last_name, $phone, $user_id);
+        $update_stmt->bind_param("ssssi", $first_name, $last_name, $phone, $profile_pic, $user_id);
         
         if ($update_stmt->execute()) {
             $_SESSION['user_name'] = $first_name . ' ' . $last_name;
@@ -101,9 +118,13 @@ renderHeader('User Dashboard | ADDAAX', 'dashboard');
             <aside class="dashboard-sidebar">
                 <div class="dash-user-profile">
                     <div class="dash-avatar">
-                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--accent-gold); color:#000; font-size:32px; font-weight:900;">
-                            <?php echo strtoupper(substr($user_data['first_name'] ?? $user_name, 0, 1)); ?>
-                        </div>
+                        <?php if (!empty($user_data['profile_pic'])): ?>
+                            <img src="/<?php echo htmlspecialchars($user_data['profile_pic']); ?>" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                        <?php else: ?>
+                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--accent-gold); color:#fff; font-size:32px; font-weight:900; border-radius:50%;">
+                                <?php echo strtoupper(substr($user_data['first_name'] ?? $user_name, 0, 1)); ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <h3><?php echo htmlspecialchars(($user_data['first_name'] ?? '') . ' ' . ($user_data['last_name'] ?? '')); ?></h3>
                     <p>Verified Member</p>
@@ -274,7 +295,7 @@ renderHeader('User Dashboard | ADDAAX', 'dashboard');
                     <div class="dash-section-header">
                         <h2>Profile Settings</h2>
                     </div>
-                    <form class="auth-form" method="POST" style="max-width: 600px;">
+                    <form class="auth-form" method="POST" enctype="multipart/form-data" style="max-width: 600px;">
                         <div class="responsive-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                             <div class="form-group" style="margin-bottom: 0;">
                                 <label>First Name</label>
@@ -288,6 +309,13 @@ renderHeader('User Dashboard | ADDAAX', 'dashboard');
                         <div class="form-group">
                             <label>Phone Number</label>
                             <input type="tel" name="phone" value="<?php echo htmlspecialchars($user_data['phone'] ?? ''); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Profile Picture</label>
+                            <input type="file" name="profile_pic" accept="image/*">
+                            <?php if(!empty($user_data['profile_pic'])): ?>
+                                <p style="font-size: 12px; color: var(--text-muted); margin-top: 5px;">Current: <?php echo basename($user_data['profile_pic']); ?></p>
+                            <?php endif; ?>
                         </div>
                         <div class="form-group">
                             <label>Email Address</label>

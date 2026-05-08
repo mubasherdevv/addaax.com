@@ -20,7 +20,7 @@ $favicon = $website_settings['favicon'] ?? '';
 
 // Fetch all users from the database with ad counts
 $users = [];
-$users_sql = "SELECT u.id, CONCAT(u.first_name, ' ', u.last_name) AS name, u.email, u.role, 
+$users_sql = "SELECT u.id, CONCAT(u.first_name, ' ', u.last_name) AS name, u.email, u.role, u.profile_pic,
                     IF(u.is_verified = 1, 'Active', 'Inactive') AS status, 
                     u.created_at AS last_login,
                     (SELECT COUNT(*) FROM products WHERE seller_id = u.id) as total_ads
@@ -92,6 +92,7 @@ renderAdminSidebar('users');
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Profile</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
@@ -110,6 +111,15 @@ renderAdminSidebar('users');
                                 <?php foreach($users as $user): ?>
                                 <tr data-user-id="<?php echo $user['id']; ?>">
                                     <td><?php echo htmlspecialchars($user['id']); ?></td>
+                                    <td>
+                                        <?php if (!empty($user['profile_pic'])): ?>
+                                            <img src="/<?php echo htmlspecialchars($user['profile_pic']); ?>" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid #ddd;">
+                                        <?php else: ?>
+                                            <div style="width: 35px; height: 35px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">
+                                                <?php echo strtoupper(substr($user['name'] ?? 'U', 0, 1)); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </td>
                                     <td><?php echo htmlspecialchars($user['name']); ?></td>
                                     <td><?php echo htmlspecialchars($user['email']); ?></td>
                                     <td>

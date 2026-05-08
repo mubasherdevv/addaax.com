@@ -63,7 +63,7 @@ renderHeader('Browse Ads | ADDAAX ', 'explore');
                 
                 <!-- Breadcrumbs & Search Header -->
                 <nav class="breadcrumbs">
-                    <a href="/index.php">Home</a> 
+                    <a href="/index.php"><i class="fas fa-home"></i></a> 
                     <span>></span> 
                     <a href="/call-girls/">Call Girl</a>
                     <?php if (!empty($city_name)): ?>

@@ -18,7 +18,7 @@ $product_query = "
     SELECT p.*, 
            c.name as category_name, 
            u.first_name as seller_name, 
-           u.profile_image as seller_image, 
+           u.profile_pic as seller_image, 
            u.created_at as seller_created_at,
            u.phone as seller_phone,
            p.badges
@@ -166,7 +166,7 @@ renderHeader($PAGE_TITLE, 'explore');
     <main class="product-detail-container container-wide">
         <!-- Breadcrumbs -->
         <nav class="breadcrumbs">
-            <a href="/index.php">Home</a> 
+            <a href="/index.php"><i class="fas fa-home"></i></a> 
             <span>></span> 
             <a href="/products.php">Ads</a>
             <span>></span> 
@@ -270,12 +270,10 @@ renderHeader($PAGE_TITLE, 'explore');
                     <div class="contact-card">
                         <div class="seller-mini-profile">
                             <div class="avatar-wrap">
-                                <?php if(!empty($product['seller_image'])): 
-                                    $seller_img = str_starts_with($product['seller_image'], 'http') ? $product['seller_image'] : '/' . $product['seller_image'];
-                                ?>
-                                    <img src="<?php echo htmlspecialchars($seller_img); ?>" class="seller-avatar" style="width: 50px; height: 50px;">
+                                <?php if(!empty($product['seller_image'])): ?>
+                                    <img src="/<?php echo htmlspecialchars($product['seller_image']); ?>" class="seller-avatar" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-gold);">
                                 <?php else: ?>
-                                    <div class="seller-avatar" style="width: 50px; height: 50px; background: #0066ff; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px;">
+                                    <div class="seller-avatar" style="width: 60px; height: 60px; border-radius: 50%; background: var(--accent-gold); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 24px; border: 2px solid var(--accent-gold);">
                                         <?php echo strtoupper(substr($product['seller_name'] ?? 'U', 0, 1)); ?>
                                     </div>
                                 <?php endif; ?>

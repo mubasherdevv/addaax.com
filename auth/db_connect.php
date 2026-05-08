@@ -8,9 +8,9 @@ error_log("Attempting database connection");
 
 // Database configuration
 $host = getenv('DB_HOST') ?: 'localhost';
-$dbname = getenv('DB_NAME') ?: 'addazjgu_wholesale_ecommerce';
-$username = getenv('DB_USER') ?: 'addazjgu_root';
-$password = getenv('DB_PASS') ?: 'addazjgu_wholesale_ecommerce';
+$dbname = getenv('DB_NAME') ?: 'addazjgu_call_girls';
+$username = getenv('DB_USER') ?: 'addazjgu_root2';
+$password = getenv('DB_PASS') ?: 'addazjgu_call_girls';
 
 // Log database configuration (without password)
 error_log("Database config - Host: $host, DB: $dbname, User: $username");

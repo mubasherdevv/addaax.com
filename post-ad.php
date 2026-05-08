@@ -151,21 +151,19 @@ renderHeader('Post Your Ad | ADDAAX', 'post-ad');
             .form-grid-2 { grid-template-columns: 1fr !important; gap: 0 !important; }
         }
 
-        .post-ad-btn {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: var(--accent-gold);
-            color: white;
-            border: none;
-            padding: 18px 30px;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        
+       .post-ad-btn {
+    background: var(--gold-gradient);
+    color: var(--dark-purple);
+    padding: 12px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    box-shadow: 0 10px 25px rgba(250, 204, 21, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
         .post-ad-btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3); }
         .post-ad-btn:disabled { opacity: 0.7; cursor: not-allowed; }

@@ -14,10 +14,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <!-- Navigation Links -->
     <nav class="hidden-md">
       <ul class="nav-links">
-        <li><a href="index.php" class="nav-link <?php echo $current_page == 'index.php' ? 'active' : ''; ?>">Home</a></li>
-        <li><a href="products.php" class="nav-link <?php echo $current_page == 'products.php' ? 'active' : ''; ?>">Explore</a></li>
-        <li><a href="categories.php" class="nav-link <?php echo $current_page == 'categories.php' ? 'active' : ''; ?>">Categories</a></li>
-        <li><a href="pages/contact.php" class="nav-link <?php echo $current_page == 'contact.php' ? 'active' : ''; ?>">Support</a></li>
+        <li><a href="<?php echo BASE_URL; ?>/index.php" class="nav-link <?php echo $current_page == 'index.php' ? 'active' : ''; ?>">Home</a></li>
+        <li><a href="<?php echo BASE_URL; ?>/products.php" class="nav-link <?php echo $current_page == 'products.php' ? 'active' : ''; ?>">Explore</a></li>
+        <li><a href="<?php echo BASE_URL; ?>/categories.php" class="nav-link <?php echo $current_page == 'categories.php' ? 'active' : ''; ?>">Categories</a></li>
+        <li><a href="<?php echo BASE_URL; ?>/pages/contact.php" class="nav-link <?php echo $current_page == 'contact.php' ? 'active' : ''; ?>">Support</a></li>
       </ul>
     </nav>
 
@@ -37,7 +37,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </a>
       <?php endif; ?>
 
-      <a href="post-ad.php" class="btn-post-ad">
+      <a href="<?php echo BASE_URL; ?>/post-ad.php" class="btn-post-ad">
         <i class="fas fa-plus-circle"></i>
         <span>Post Ad</span>
       </a>

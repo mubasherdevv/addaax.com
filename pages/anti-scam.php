@@ -8,27 +8,27 @@ renderHeader('Anti-Scam Guide | ADDAAX', 'anti-scam');
 
 <style>
     :root {
-        --page-accent: var(--accent-gold);
-        --page-bg: #0f172a; /* Match index.php dark blue */
-        --text-gold: #F5E9C8; /* Light Gold */
+        --page-accent: #C9A84C;
+        --page-bg: #ffffff;
+        --text-gold: #C9A84C;
+        --banner-bg: #000000;
     }
     
     .legal-page-wrapper {
         background: var(--page-bg);
         min-height: 100vh;
-        padding-top: 100px;
     }
     
     .legal-banner {
-        background: linear-gradient(135deg, #1e293b, #0f172a);
-        padding: 100px 0;
+        background: var(--banner-bg);
+        padding: 120px 0 80px;
         text-align: center;
-        border-bottom: 1px solid var(--glass-border);
+        border-bottom: 2px solid var(--page-accent);
         position: relative;
     }
     
     .legal-banner h1 {
-        background: linear-gradient(to right, var(--text-main), var(--accent-gold));
+        background: linear-gradient(to right, #F5E9C8, var(--page-accent));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-size: clamp(2rem, 5vw, 3.5rem);
@@ -36,12 +36,11 @@ renderHeader('Anti-Scam Guide | ADDAAX', 'anti-scam');
         margin-bottom: 20px;
         font-family: 'Outfit', sans-serif;
         text-transform: uppercase;
-        letter-spacing: -2px;
-        filter: drop-shadow(0 0 15px rgba(201, 168, 76, 0.2));
+        letter-spacing: -1px;
     }
     
     .legal-banner .breadcrumbs {
-        color: rgba(255,255,255,0.5) !important;
+        color: rgba(255,255,255,0.6) !important;
         justify-content: center;
         font-weight: 700;
         font-size: 14px;
@@ -59,6 +58,7 @@ renderHeader('Anti-Scam Guide | ADDAAX', 'anti-scam');
     }
     
     .legal-content-section {
+        background: #ffffff;
         padding: 80px 0;
     }
     
@@ -76,8 +76,8 @@ renderHeader('Anti-Scam Guide | ADDAAX', 'anti-scam');
         top: 0;
         bottom: 0;
         width: 3px;
-        background: #000000; /* BLACK LINE */
-        opacity: 0.8;
+        background: #000000;
+        opacity: 0.15;
     }
 
     .timeline-item {
@@ -93,32 +93,31 @@ renderHeader('Anti-Scam Guide | ADDAAX', 'anti-scam');
         top: 0;
         width: 24px;
         height: 24px;
-        background: var(--page-bg);
+        background: #ffffff;
         border: 4px solid var(--page-accent);
         border-radius: 50%;
         z-index: 2;
-        box-shadow: 0 0 15px rgba(201, 168, 76, 0.4);
+        box-shadow: 0 0 10px rgba(201, 168, 76, 0.2);
     }
 
     .timeline-content {
-        background: rgba(255, 255, 255, 0.03);
+        background: #ffffff;
         padding: 40px;
         border-radius: 30px;
-        border: 1px solid var(--glass-border);
-        backdrop-filter: blur(20px);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid #f1f5f9;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: all 0.4s ease;
     }
 
     .timeline-content:hover {
-        transform: translateX(15px);
-        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-5px);
         border-color: var(--page-accent);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        box-shadow: 0 20px 40px rgba(201, 168, 76, 0.1);
     }
 
     .timeline-content h2 {
         color: var(--page-accent);
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         margin-bottom: 20px;
         font-weight: 800;
         font-family: 'Outfit', sans-serif;
@@ -127,21 +126,20 @@ renderHeader('Anti-Scam Guide | ADDAAX', 'anti-scam');
     .timeline-content p {
         margin-bottom: 15px;
         font-size: 1.15rem;
-        color: var(--text-gold); /* LIGHT GOLD TEXT */
-        line-height: 1.9;
-        opacity: 0.9;
+        color: #C9A84C;
+        line-height: 1.8;
+        font-weight: 500;
     }
 
     .safety-alert {
-        background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), transparent);
-        border: 2px dashed var(--glass-border);
+        background: #fdfbf7;
+        border: 2px dashed #f3ebd5;
         padding: 40px;
         border-radius: 30px;
         margin: 60px 0;
         max-width: 900px;
         margin-left: auto;
         margin-right: auto;
-        backdrop-filter: blur(10px);
     }
 
     .safety-alert h3 {
@@ -222,8 +220,8 @@ renderHeader('Anti-Scam Guide | ADDAAX', 'anti-scam');
 
             <div class="safety-alert">
                 <h3><i class="fas fa-shield-alt"></i> Safety First: Your Responsibility</h3>
-                <p style="color: var(--text-gold);">When communicating with an online person, it's always a good decision to conduct your business with an open-minded mentality. If you feel something seems too appealing to be real then it probably is.</p>
-                <p style="color: var(--text-gold); margin-top: 15px;"><strong>Payment Safety:</strong> We highly recommend that you not make advance payment in particular when working with a person who you don't know, or are not able to verify. Making payments prior to receiving an item or service may be dangerous.</p>
+                <p>When communicating with an online person, it's always a good decision to conduct your business with an open-minded mentality. If you feel something seems too appealing to be real then it probably is.</p>
+                <p style="margin-top: 15px;"><strong>Payment Safety:</strong> We highly recommend that you not make advance payment in particular when working with a person who you don't know, or are not able to verify. Making payments prior to receiving an item or service may be dangerous.</p>
             </div>
 
         </div>

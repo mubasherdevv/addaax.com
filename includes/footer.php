@@ -7,7 +7,7 @@ $footer_cats = $conn->query("SELECT * FROM categories WHERE status = 1 LIMIT 6")
     <div class="footer-grid">
       <!-- Brand & Mission -->
       <div class="footer-col">
-        <a href="index.php" class="footer-logo">
+        <a href="<?php echo BASE_URL; ?>/index.php" class="footer-logo">
           <div class="logo-box">A</div>
           <span class="logo-text">Add<span>aax</span></span>
         </a>
@@ -27,7 +27,7 @@ $footer_cats = $conn->query("SELECT * FROM categories WHERE status = 1 LIMIT 6")
         <ul class="footer-links">
           <?php foreach ($footer_cats as $cat): ?>
             <li>
-              <a href="products.php?category=<?php echo $cat['id']; ?>">
+              <a href="<?php echo BASE_URL; ?>/products.php?category=<?php echo $cat['id']; ?>">
                 <span>→</span> <?php echo htmlspecialchars($cat['name']); ?>
               </a>
             </li>
@@ -45,7 +45,7 @@ $footer_cats = $conn->query("SELECT * FROM categories WHERE status = 1 LIMIT 6")
           foreach ($pak_cities as $city): 
           ?>
             <li>
-              <a href="products.php?city=<?php echo urlencode($city); ?>">
+              <a href="<?php echo BASE_URL; ?>/products.php?city=<?php echo urlencode($city); ?>">
                 <span>→</span> <?php echo $city; ?>
               </a>
             </li>
@@ -80,12 +80,12 @@ $footer_cats = $conn->query("SELECT * FROM categories WHERE status = 1 LIMIT 6")
         <span class="brand">Addaax</span> © <?php echo date('Y'); ?>
       </p>
       <div class="bottom-links">
-        <a href="pages/about.php">About</a>
-        <a href="pages/contact.php">Contact</a>
-        <a href="pages/terms.php">Terms</a>
-        <a href="pages/privacy.php">Privacy</a>
-        <a href="pages/anti-scam.php">Anti-Scam</a>
-        <a href="pages/copyright-policy.php">Copyright</a>
+        <a href="<?php echo BASE_URL; ?>/pages/about.php">About</a>
+        <a href="<?php echo BASE_URL; ?>/pages/contact.php">Contact</a>
+        <a href="<?php echo BASE_URL; ?>/pages/terms.php">Terms</a>
+        <a href="<?php echo BASE_URL; ?>/pages/privacy.php">Privacy</a>
+        <a href="<?php echo BASE_URL; ?>/pages/anti-scam.php">Anti-Scam</a>
+        <a href="<?php echo BASE_URL; ?>/pages/copyright-policy.php">Copyright</a>
       </div>
     </div>
   </div>
@@ -95,22 +95,22 @@ $footer_cats = $conn->query("SELECT * FROM categories WHERE status = 1 LIMIT 6")
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <div class="bottom-nav">
-  <a href="index.php" class="bottom-nav-item <?php echo $current_page == 'index.php' ? 'active' : ''; ?>">
+  <a href="<?php echo BASE_URL; ?>/index.php" class="bottom-nav-item <?php echo $current_page == 'index.php' ? 'active' : ''; ?>">
     <i class="fas fa-home"></i>
     <span>Home</span>
   </a>
-  <a href="products.php" class="bottom-nav-item <?php echo $current_page == 'products.php' ? 'active' : ''; ?>">
+  <a href="<?php echo BASE_URL; ?>/products.php" class="bottom-nav-item <?php echo $current_page == 'products.php' ? 'active' : ''; ?>">
     <i class="fas fa-search"></i>
     <span>Explore</span>
   </a>
-  <a href="post-ad.php" class="bottom-nav-item post-ad-mobile">
+  <a href="<?php echo BASE_URL; ?>/post-ad.php" class="bottom-nav-item post-ad-mobile">
     <div class="plus-icon"><i class="fas fa-plus"></i></div>
   </a>
-  <a href="categories.php" class="bottom-nav-item <?php echo $current_page == 'categories.php' ? 'active' : ''; ?>">
+  <a href="<?php echo BASE_URL; ?>/categories.php" class="bottom-nav-item <?php echo $current_page == 'categories.php' ? 'active' : ''; ?>">
     <i class="fas fa-th-large"></i>
     <span>Categories</span>
   </a>
-  <a href="auth/login.php" class="bottom-nav-item <?php echo strpos($_SERVER['REQUEST_URI'], 'auth/') !== false ? 'active' : ''; ?>">
+  <a href="<?php echo BASE_URL; ?>/auth/login.php" class="bottom-nav-item <?php echo strpos($_SERVER['REQUEST_URI'], 'auth/') !== false ? 'active' : ''; ?>">
     <i class="fas fa-user-circle"></i>
     <span>Account</span>
   </a>

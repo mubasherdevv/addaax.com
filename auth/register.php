@@ -27,16 +27,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($email) || empty($password)) {
         $errors["register"] = "All fields are required";
     } else {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (email, password, first_name, last_name, phone, is_verified) VALUES (?, ?, ?, ?, ?, 1)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $email, $hashed_password, $first_name, $last_name, $phone);
+        // Check if email already exists
+        $check_sql = "SELECT id FROM users WHERE email = ?";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("s", $email);
+        $check_stmt->execute();
+        $check_result = $check_stmt->get_result();
         
-        if ($stmt->execute()) {
-            header("Location: login.php?msg=Registration successful! Please login.");
-            exit;
+        if ($check_result->num_rows > 0) {
+            $errors["register"] = "This email address is already registered. Please login instead.";
         } else {
-            $errors["register"] = "Registration failed. Email might already be in use.";
+            try {
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                $sql = "INSERT INTO users (email, password, first_name, last_name, phone, is_verified) VALUES (?, ?, ?, ?, ?, 1)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sssss", $email, $hashed_password, $first_name, $last_name, $phone);
+                
+                if ($stmt->execute()) {
+                    header("Location: login.php?msg=Registration successful! Please login.");
+                    exit;
+                } else {
+                    $errors["register"] = "Registration failed. Please try again.";
+                }
+            } catch (mysqli_sql_exception $e) {
+                if ($e->getCode() == 1062) { // Duplicate entry error code
+                    $errors["register"] = "This email is already registered.";
+                } else {
+                    $errors["register"] = "An error occurred during registration. Please try again.";
+                }
+            }
         }
     }
 }
@@ -77,26 +96,32 @@ renderHeader('Create Account | ADDAAX ', 'register');
                     <div class="auth-card" style="max-width: 550px;">
                         <h2 class="auth-title" style="text-align: left; margin-bottom: 25px;">Create Account</h2>
 
+                        <?php if (isset($errors["register"])): ?>
+                            <div class="alert alert-error" style="color: #ef4444; margin-bottom: 20px; background: rgba(239, 68, 68, 0.1); padding: 15px; border-radius: 10px;">
+                                <i class="fas fa-exclamation-circle"></i> <?php echo $errors["register"]; ?>
+                            </div>
+                        <?php endif; ?>
+
                         <form class="auth-form" method="post">
                             <div class="responsive-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                                 <div class="form-group" style="margin-bottom: 0;">
                                     <label>First Name</label>
-                                    <input type="text" name="first_name" placeholder="John" required>
+                                    <input type="text" name="first_name" value="<?php echo htmlspecialchars($first_name); ?>" placeholder="John" required>
                                 </div>
                                 <div class="form-group" style="margin-bottom: 0;">
                                     <label>Last Name</label>
-                                    <input type="text" name="last_name" placeholder="Doe" required>
+                                    <input type="text" name="last_name" value="<?php echo htmlspecialchars($last_name); ?>" placeholder="Doe" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label>Phone Number</label>
-                                <input type="tel" name="phone" placeholder="+92 3XX XXXXXXX" required>
+                                <input type="tel" name="phone" value="<?php echo htmlspecialchars($phone); ?>" placeholder="+92 3XX XXXXXXX" required>
                             </div>
 
                             <div class="form-group">
                                 <label>Email Address</label>
-                                <input type="email" name="email" placeholder="example@mail.com" required>
+                                <input type="email" name="email" value="<?php echo htmlspecialchars($email); ?>" placeholder="example@mail.com" required>
                             </div>
 
                             <div class="form-group">

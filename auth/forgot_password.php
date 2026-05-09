@@ -1,214 +1,186 @@
 <?php
 require_once 'session.php';
 require_once 'db_connect.php';
+require_once '../includes/layout_functions.php';
+require_once 'get_settings.php';
+
+// Import PHPMailer classes into the global namespace
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+// Load PHPMailer (Manual loading since composer might not be available or working)
+if (file_exists('../vendor/phpmailer/phpmailer/autoload.php')) {
+    require_once '../vendor/phpmailer/phpmailer/autoload.php';
+}
+
+// Get website settings for SMTP
+$settings = getWebsiteSettings();
 
 // Initialize variables
 $email = "";
-$message = "";
-$message_type = "";
+$errors = [];
+$success_message = "";
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate email
-    if (empty($_POST["email"])) {
-        $message = "Email is required";
-        $message_type = "error";
+    $email = trim($_POST["email"] ?? '');
+    
+    if (empty($email)) {
+        $errors["email"] = "Email address is required";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors["email"] = "Invalid email format";
     } else {
-        $email = trim($_POST["email"]);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $message = "Invalid email format";
-            $message_type = "error";
-        } else {
-            // Check if email exists
-            $sql = "SELECT id, email, first_name FROM users WHERE email = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
+        // Check if email exists
+        $sql = "SELECT id, email, first_name FROM users WHERE email = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows === 1) {
+            $user = $result->fetch_assoc();
             
-            if ($result->num_rows === 1) {
-                $user = $result->fetch_assoc();
+            // Generate reset token
+            $reset_token = bin2hex(random_bytes(32));
+            $token_expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
+            
+            // Save token to database
+            $update_sql = "UPDATE users SET reset_token = ?, reset_token_expiry = ? WHERE id = ?";
+            $update_stmt = $conn->prepare($update_sql);
+            $update_stmt->bind_param("ssi", $reset_token, $token_expiry, $user["id"]);
+            
+            if ($update_stmt->execute()) {
+                // Create reset link
+                $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+                $reset_link = $protocol . "://" . $_SERVER['HTTP_HOST'] . "/auth/reset_password.php?token=" . $reset_token;
                 
-                // Generate reset token
-                $reset_token = bin2hex(random_bytes(32));
-                $token_expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
-                
-                // Save token to database
-                $update_sql = "UPDATE users SET reset_token = ?, reset_token_expiry = ? WHERE id = ?";
-                $update_stmt = $conn->prepare($update_sql);
-                $update_stmt->bind_param("ssi", $reset_token, $token_expiry, $user["id"]);
-                
-                if ($update_stmt->execute()) {
-                    // Create reset link
-                    $reset_link = "http://" . $_SERVER['HTTP_HOST'] . "/auth/reset_password.php?token=" . $reset_token;
-                    
-                    // In a real application, send email with reset link
-                    // For this example, we'll set a success message with the link
-                    $message = "Password reset instructions have been sent to your email address. (For demo purposes, use this link: <a href='" . $reset_link . "'>Reset Password</a>)";
-                    $message_type = "success";
+                // Send Email using SMTP
+                if (!empty($settings['smtp_host'])) {
+                    $mail = new PHPMailer(true);
+
+                    try {
+                        //Server settings
+                        $mail->isSMTP();
+                        $mail->Host       = $settings['smtp_host'];
+                        $mail->SMTPAuth   = true;
+                        $mail->Username   = $settings['smtp_user'];
+                        $mail->Password   = $settings['smtp_pass'];
+                        $mail->SMTPSecure = ($settings['smtp_encryption'] == 'ssl') ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS;
+                        $mail->Port       = $settings['smtp_port'];
+
+                        //Recipients
+                        $mail->setFrom($settings['smtp_from_email'], $settings['smtp_from_name']);
+                        $mail->addAddress($email, $user['first_name']);
+
+                        //Content
+                        $mail->isHTML(true);
+                        $mail->Subject = 'Password Reset Request | ' . $settings['website_name'];
+                        
+                        // Email Body
+                        $mail->Body    = "
+                            <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;'>
+                                <h2 style='color: #ef4444;'>Password Reset Request</h2>
+                                <p>Hello " . htmlspecialchars($user['first_name']) . ",</p>
+                                <p>We received a request to reset your password. If you didn't make this request, you can safely ignore this email.</p>
+                                <p>To reset your password, click the button below:</p>
+                                <div style='text-align: center; margin: 30px 0;'>
+                                    <a href='$reset_link' style='background-color: #ef4444; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;'>Reset Password</a>
+                                </div>
+                                <p>Or copy and paste this link into your browser:</p>
+                                <p style='word-break: break-all; color: #666;'>$reset_link</p>
+                                <p>This link will expire in 1 hour.</p>
+                                <hr style='border: 0; border-top: 1px solid #eee; margin: 20px 0;'>
+                                <p style='font-size: 12px; color: #999;'>This is an automated email, please do not reply.</p>
+                            </div>
+                        ";
+
+                        $mail->send();
+                        $success_message = "Password reset instructions have been sent to your email address.";
+                    } catch (Exception $e) {
+                        $errors["email"] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    }
                 } else {
-                    $message = "An error occurred. Please try again later.";
-                    $message_type = "error";
+                    // Fallback or message if SMTP not configured
+                    $success_message = "Password reset link generated (SMTP not configured): <a href='$reset_link'>$reset_link</a>";
                 }
             } else {
-                // Do not reveal that the email doesn't exist for security reasons
-                $message = "If your email exists in our system, you will receive password reset instructions.";
-                $message_type = "success";
+                $errors["email"] = "An error occurred. Please try again later.";
             }
+        } else {
+            // Do not reveal that the email doesn't exist for security reasons
+            $success_message = "If your email exists in our system, you will receive password reset instructions.";
         }
     }
 }
 
-// Close connection
-$conn->close();
+renderHeader('Forgot Password | ADDAAX', 'forgot-password');
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password | Wholesale E-commerce</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/responsive.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        .auth-container {
-            max-width: 500px;
-            margin: 80px auto;
-            padding: 30px;
-            background-color: white;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-md);
-        }
+        .auth-page-hero { padding: 140px 0 160px; min-height: 100vh; background: #000; }
+        .auth-split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .auth-info-side h1 { font-size: 56px; font-weight: 900; line-height: 1.1; margin-bottom: 25px; }
+        .auth-info-side p { font-size: 18px; color: var(--text-muted); line-height: 1.6; }
+        .auth-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(40px); border: 1px solid var(--glass-border); padding: 50px; border-radius: 24px; }
         
-        .auth-header {
-            text-align: center;
-            margin-bottom: 30px;
+        @media (max-width: 992px) {
+            .auth-split-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .auth-info-side { display: flex; flex-direction: column; align-items: center; }
+            .auth-info-side h1 { font-size: 42px; }
+            .auth-info-side p { font-size: 16px; max-width: 600px; }
+            .auth-card { padding: 35px 25px; }
         }
-        
-        .auth-form .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .auth-form label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .auth-form input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            font-size: 16px;
-        }
-        
-        .auth-form input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-        }
-        
-        .auth-form .error {
-            color: var(--error-color);
-            font-size: 14px;
-            margin-top: 5px;
-        }
-        
-        .auth-form .btn-submit {
-            width: 100%;
-            padding: 14px;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-        
-        .auth-links {
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .auth-links a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-        
-        .auth-links a:hover {
-            text-decoration: underline;
-        }
-        
-        .alert {
-            padding: 15px;
-            border-radius: var(--radius-md);
-            margin-bottom: 20px;
-        }
-        
-        .alert-success {
-            background-color: #D1FAE5;
-            color: #065F46;
-            border: 1px solid #A7F3D0;
-        }
-        
-        .alert-error {
-            background-color: #FEE2E2;
-            color: #B91C1C;
-            border: 1px solid #FECACA;
+
+        @media (max-width: 576px) {
+            .auth-page-hero { padding: 100px 0 100px; }
+            .auth-info-side h1 { font-size: 32px; }
         }
     </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <a href="../index.php" class="logo">
-                <img src="../images/logo.svg" alt="Wholesale Logo">
-                <span>Wholesale</span>
-            </a>
-        </div>
-    </header>
 
-    <!-- Forgot Password Form -->
-    <main>
-        <div class="container">
-            <div class="auth-container">
-                <div class="auth-header">
-                    <h1>Forgot Password</h1>
-                    <p>Enter your email to receive password reset instructions</p>
+    <section class="auth-page-hero">
+        <div class="container-wide">
+            <div class="auth-split-grid">
+                <div class="auth-info-side">
+                    <h1>Forgot <span>Password?</span></h1>
+                    <p>No worries, it happens to the best of us. Enter your registered email and we'll send you a secure link to reset it.</p>
                 </div>
-                
-                <?php if (!empty($message)): ?>
-                    <div class="alert alert-<?php echo $message_type; ?>">
-                        <?php echo $message; ?>
+
+                <div class="auth-card-wrap">
+                    <div class="auth-card">
+                        <h2 class="auth-title" style="text-align: left; margin-bottom: 25px;">Reset Password</h2>
+
+                        <?php if (!empty($errors)): ?>
+                            <div class="alert alert-error" style="color: #ef4444; margin-bottom: 20px; background: rgba(239, 68, 68, 0.1); padding: 15px; border-radius: 10px;">
+                                <i class="fas fa-exclamation-circle"></i> <?php echo reset($errors); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if (!empty($success_message)): ?>
+                            <div class="alert alert-success" style="color: #10b981; margin-bottom: 20px; background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 10px;">
+                                <i class="fas fa-check-circle"></i> <?php echo $success_message; ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <form class="auth-form" method="post">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" placeholder="example@mail.com" required>
+                                <p style="font-size: 12px; color: var(--text-muted); margin-top: 5px;">A reset link will be sent to this email.</p>
+                            </div>
+
+                            <button type="submit" class="post-ad-btn">Send Reset Link</button>
+
+                            <div class="auth-footer-links" style="text-align: left; border-top: 1px solid var(--glass-border); padding-top: 25px; margin-top: 30px;">
+                                <p>Remember your password? <a href="login.php" style="color: var(--accent-gold);">Back to Login</a></p>
+                            </div>
+                        </form>
                     </div>
-                <?php endif; ?>
-                
-                <form class="auth-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-submit">Reset Password</button>
-                    
-                    <div class="auth-links">
-                        <a href="login.php">Back to Login</a>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-    </main>
+    </section>
 
-    <!-- Footer -->
-    <footer style="margin-top: 80px;">
-        <div class="container">
-            <div class="copyright">
-                <p>&copy; 2023 Wholesale E-commerce. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="../js/main.js"></script>
-</body>
-</html> 
+<?php
+renderFooter();
+?>

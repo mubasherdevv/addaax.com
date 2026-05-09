@@ -45,6 +45,13 @@ function getWebsiteSettings($key = null) {
             'maintenance_message' => $row['maintenance_message'] ?? '',
             'featured_ad_price' => $row['featured_ad_price'] ?? 0,
             'header_style' => $row['header_style'] ?? 'logo',
+            'smtp_host' => $row['smtp_host'] ?? '',
+            'smtp_port' => $row['smtp_port'] ?? 587,
+            'smtp_user' => $row['smtp_user'] ?? '',
+            'smtp_pass' => $row['smtp_pass'] ?? '',
+            'smtp_encryption' => $row['smtp_encryption'] ?? 'tls',
+            'smtp_from_email' => $row['smtp_from_email'] ?? '',
+            'smtp_from_name' => $row['smtp_from_name'] ?? '',
         ];
 
         // Merge in social links if they exist

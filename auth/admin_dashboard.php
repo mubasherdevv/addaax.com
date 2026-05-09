@@ -18,6 +18,13 @@ $website_name = $website_settings['website_name'] ?? 'Wholesale E-commerce';
 $website_logo = $website_settings['website_logo'] ?? 'logo.svg';
 $header_style = $website_settings['header_style'] ?? 'logo';
 $favicon = $website_settings['favicon'] ?? '';
+$smtp_host = $website_settings['smtp_host'] ?? '';
+$smtp_port = $website_settings['smtp_port'] ?? 587;
+$smtp_user = $website_settings['smtp_user'] ?? '';
+$smtp_pass = $website_settings['smtp_pass'] ?? '';
+$smtp_encryption = $website_settings['smtp_encryption'] ?? 'tls';
+$smtp_from_email = $website_settings['smtp_from_email'] ?? '';
+$smtp_from_name = $website_settings['smtp_from_name'] ?? '';
 
 // Fetch all users from the database
 $users = [];
@@ -586,6 +593,53 @@ renderAdminSidebar($sidebar_active);
                         <div style="margin-top: 40px; border-top: 1px solid #f0f0f0; pt: 30px; display: flex; align-items: center; justify-content: space-between;">
                             <button type="submit" class="btn btn-primary" style="padding: 12px 35px; border-radius: 12px; font-weight: 700; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);">Save All Changes</button>
                             <div class="settings-response" id="general-settings-response" style="font-weight: 500; font-size: 0.9rem;"></div>
+                        </div>
+                    </form>
+
+                    <div style="margin-top: 50px; margin-bottom: 30px; border-bottom: 1px solid #f0f0f0; padding-bottom: 20px;">
+                        <h2 style="font-size: 1.5rem; color: #1e293b; font-weight: 800; margin-bottom: 5px;">SMTP Email Configuration</h2>
+                        <p style="color: #64748b; font-size: 0.9rem;">Configure SMTP settings to send emails for password resets and notifications.</p>
+                    </div>
+
+                    <form class="settings-form" id="smtp-settings-form" method="post" action="save_settings.php">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                            <div class="form-group">
+                                <label for="smtp_host" style="font-weight: 700; color: #334155; margin-bottom: 10px; display: block;">SMTP Host</label>
+                                <input type="text" id="smtp_host" name="smtp_host" value="<?php echo htmlspecialchars($smtp_host); ?>" placeholder="smtp.gmail.com" class="form-control" style="height: 50px; border-radius: 12px; border: 1.5px solid #e2e8f0; padding: 0 20px; font-weight: 500;">
+                            </div>
+                            <div class="form-group">
+                                <label for="smtp_port" style="font-weight: 700; color: #334155; margin-bottom: 10px; display: block;">SMTP Port</label>
+                                <input type="number" id="smtp_port" name="smtp_port" value="<?php echo htmlspecialchars($smtp_port); ?>" placeholder="587" class="form-control" style="height: 50px; border-radius: 12px; border: 1.5px solid #e2e8f0; padding: 0 20px; font-weight: 500;">
+                            </div>
+                            <div class="form-group">
+                                <label for="smtp_user" style="font-weight: 700; color: #334155; margin-bottom: 10px; display: block;">SMTP Username</label>
+                                <input type="text" id="smtp_user" name="smtp_user" value="<?php echo htmlspecialchars($smtp_user); ?>" placeholder="your-email@gmail.com" class="form-control" style="height: 50px; border-radius: 12px; border: 1.5px solid #e2e8f0; padding: 0 20px; font-weight: 500;">
+                            </div>
+                            <div class="form-group">
+                                <label for="smtp_pass" style="font-weight: 700; color: #334155; margin-bottom: 10px; display: block;">SMTP Password</label>
+                                <input type="password" id="smtp_pass" name="smtp_pass" value="<?php echo htmlspecialchars($smtp_pass); ?>" placeholder="••••••••" class="form-control" style="height: 50px; border-radius: 12px; border: 1.5px solid #e2e8f0; padding: 0 20px; font-weight: 500;">
+                            </div>
+                            <div class="form-group">
+                                <label for="smtp_encryption" style="font-weight: 700; color: #334155; margin-bottom: 10px; display: block;">Encryption</label>
+                                <select id="smtp_encryption" name="smtp_encryption" class="form-control" style="height: 50px; border-radius: 12px; border: 1.5px solid #e2e8f0; padding: 0 20px; font-weight: 500; width: 100%;">
+                                    <option value="tls" <?php echo $smtp_encryption === 'tls' ? 'selected' : ''; ?>>TLS</option>
+                                    <option value="ssl" <?php echo $smtp_encryption === 'ssl' ? 'selected' : ''; ?>>SSL</option>
+                                    <option value="none" <?php echo $smtp_encryption === 'none' ? 'selected' : ''; ?>>None</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="smtp_from_name" style="font-weight: 700; color: #334155; margin-bottom: 10px; display: block;">From Name</label>
+                                <input type="text" id="smtp_from_name" name="smtp_from_name" value="<?php echo htmlspecialchars($smtp_from_name); ?>" placeholder="ADDAAX Support" class="form-control" style="height: 50px; border-radius: 12px; border: 1.5px solid #e2e8f0; padding: 0 20px; font-weight: 500;">
+                            </div>
+                            <div class="form-group" style="grid-column: span 2;">
+                                <label for="smtp_from_email" style="font-weight: 700; color: #334155; margin-bottom: 10px; display: block;">From Email Address</label>
+                                <input type="email" id="smtp_from_email" name="smtp_from_email" value="<?php echo htmlspecialchars($smtp_from_email); ?>" placeholder="no-reply@addaax.com" class="form-control" style="height: 50px; border-radius: 12px; border: 1.5px solid #e2e8f0; padding: 0 20px; font-weight: 500;">
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 40px; border-top: 1px solid #f0f0f0; pt: 30px; display: flex; align-items: center; justify-content: space-between;">
+                            <button type="submit" class="btn btn-primary" style="padding: 12px 35px; border-radius: 12px; font-weight: 700; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);">Save SMTP Settings</button>
+                            <div class="settings-response" id="smtp-settings-response" style="font-weight: 500; font-size: 0.9rem;"></div>
                         </div>
                     </form>
                 </div>

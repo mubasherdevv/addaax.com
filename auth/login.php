@@ -104,7 +104,10 @@ renderHeader('Login | ADDAAX', 'login');
                             </div>
 
                             <div class="form-group">
-                                <label for="password">Password</label>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <label for="password" style="margin-bottom: 0;">Password</label>
+                                    <a href="forgot_password.php" style="font-size: 13px; color: var(--accent-gold); font-weight: 500;">Forgot Password?</a>
+                                </div>
                                 <input type="password" id="password" name="password" placeholder="••••••••" required>
                             </div>
 

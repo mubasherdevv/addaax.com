@@ -86,7 +86,14 @@ $key_to_column = [
     'maintenance_mode' => 'maintenance_mode',
     'maintenance_message' => 'maintenance_message',
     'featured_ad_price' => 'featured_ad_price',
-    'header_style' => 'header_style'
+    'header_style' => 'header_style',
+    'smtp_host' => 'smtp_host',
+    'smtp_port' => 'smtp_port',
+    'smtp_user' => 'smtp_user',
+    'smtp_pass' => 'smtp_pass',
+    'smtp_encryption' => 'smtp_encryption',
+    'smtp_from_email' => 'smtp_from_email',
+    'smtp_from_name' => 'smtp_from_name'
 ];
 
 // We'll update the single row of settings

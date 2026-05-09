@@ -25,13 +25,35 @@ function getWebsiteSettings($key = null) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         
-        // Auto-migrate: check if header_style column exists
-        if (!isset($row['header_style'])) {
-            $conn->query("ALTER TABLE website_settings ADD COLUMN header_style VARCHAR(20) DEFAULT 'logo'");
+        // Auto-migrate: check if columns exist
+        $cols_to_add = [
+            'header_style' => "VARCHAR(20) DEFAULT 'logo'",
+            'smtp_host' => "VARCHAR(255) DEFAULT NULL",
+            'smtp_port' => "INT DEFAULT 587",
+            'smtp_user' => "VARCHAR(255) DEFAULT NULL",
+            'smtp_pass' => "VARCHAR(255) DEFAULT NULL",
+            'smtp_encryption' => "VARCHAR(10) DEFAULT 'tls'",
+            'smtp_from_email' => "VARCHAR(255) DEFAULT NULL",
+            'smtp_from_name' => "VARCHAR(255) DEFAULT NULL"
+        ];
+
+        $needs_refresh = false;
+        foreach ($cols_to_add as $col => $definition) {
+            if (!isset($row[$col])) {
+                $conn->query("ALTER TABLE website_settings ADD COLUMN $col $definition");
+                $needs_refresh = true;
+            }
+        }
+
+        if ($needs_refresh) {
             // Refresh row data
             $res = $conn->query("SELECT * FROM website_settings LIMIT 1");
             $row = $res->fetch_assoc();
         }
+
+        // Auto-migrate users table
+        $conn->query("ALTER TABLE users ADD COLUMN IF NOT EXISTS reset_token VARCHAR(255) DEFAULT NULL");
+        $conn->query("ALTER TABLE users ADD COLUMN IF NOT EXISTS reset_token_expiry DATETIME DEFAULT NULL");
 
         // Map new columns to legacy keys for compatibility
         $settings = [

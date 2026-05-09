@@ -1282,6 +1282,52 @@ renderAdminSidebar($sidebar_active);
                 }
             });
         });
+        
+        // Handle General and SMTP Settings Form Submission via AJAX
+        $('#general-settings-form, #smtp-settings-form').on('submit', function(e) {
+            e.preventDefault();
+            const form = $(this);
+            const formData = new FormData(this);
+            const responseDiv = form.find('.settings-response');
+            const submitBtn = form.find('button[type="submit"]');
+            
+            // Show loading state
+            showNotification('Saving settings...', 'info');
+            submitBtn.prop('disabled', true).css('opacity', '0.7');
+            
+            $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    let data;
+                    try {
+                        data = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (data.success) {
+                            showNotification(data.message || 'Settings saved successfully!', 'success');
+                            // Reload after 1.5s to show changes (like logo/favicon)
+                            if (form.attr('id') === 'general-settings-form') {
+                                setTimeout(() => window.location.reload(), 1500);
+                            }
+                        } else {
+                            showNotification(data.message || 'Error saving settings', 'error');
+                        }
+                    } catch (err) {
+                        console.error('Parse error:', err);
+                        showNotification('Invalid response from server', 'error');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', error);
+                    showNotification('Connection error occurred', 'error');
+                },
+                complete: function() {
+                    submitBtn.prop('disabled', false).css('opacity', '1');
+                }
+            });
+        });
     });
     </script>
 

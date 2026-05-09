@@ -57,6 +57,20 @@ function renderHeader($page_title = 'ADDAAX ', $active_page = 'home') {
         ?>
         <link rel="canonical" href="<?php echo $canonical_url; ?>">
         
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="<?php echo $canonical_url; ?>">
+        <meta property="og:title" content="<?php echo htmlspecialchars($page_title); ?>">
+        <meta property="og:description" content="<?php echo htmlspecialchars(!empty($meta_description) ? $meta_description : "Pakistan's most trusted premium classified marketplace."); ?>">
+        <meta property="og:image" content="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]"; ?>/images/logo.jpg">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="<?php echo $canonical_url; ?>">
+        <meta property="twitter:title" content="<?php echo htmlspecialchars($page_title); ?>">
+        <meta property="twitter:description" content="<?php echo htmlspecialchars(!empty($meta_description) ? $meta_description : "Pakistan's most trusted premium classified marketplace."); ?>">
+        <meta property="twitter:image" content="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]"; ?>/images/logo.jpg">
+
         <!-- Organization Schema -->
         <script type="application/ld+json">
         {

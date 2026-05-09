@@ -61,6 +61,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $token_valid) {
         $update_stmt->bind_param("si", $hashed_password, $user_id);
         
         if ($update_stmt->execute()) {
+            // Send confirmation email
+            require_once 'get_settings.php';
+            $settings = getWebsiteSettings();
+            
+            if (!empty($settings['smtp_host'])) {
+                require_once '../vendor/phpmailer/phpmailer/Exception.php';
+                require_once '../vendor/phpmailer/phpmailer/PHPMailer.php';
+                require_once '../vendor/phpmailer/phpmailer/SMTP.php';
+                
+                $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = $settings['smtp_host'];
+                    $mail->SMTPAuth = true;
+                    $mail->Username = $settings['smtp_user'];
+                    $mail->Password = $settings['smtp_pass'];
+                    $mail->SMTPSecure = ($settings['smtp_encryption'] == 'ssl') ? \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS : \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = $settings['smtp_port'];
+
+                    $mail->setFrom($settings['smtp_from_email'], $settings['smtp_from_name']);
+                    $mail->addAddress($user['email']);
+
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Password Changed Successfully';
+                    $mail->Body = "
+                        <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee;'>
+                            <h2 style='color: #ff0000;'>Security Notification</h2>
+                            <p>Hello,</p>
+                            <p>This is a confirmation that the password for your account <strong>" . $user['email'] . "</strong> has been changed successfully.</p>
+                            <p>If you did not make this change, please contact our support team immediately.</p>
+                            <br>
+                            <p>Regards,<br>ADDAAX Team</p>
+                        </div>";
+
+                    $mail->send();
+                } catch (Exception $e) {
+                    // Silently fail if email fails, as the password IS reset
+                }
+            }
+
             $_SESSION['success_message'] = "Your password has been reset successfully. You can now login with your new password.";
             header("Location: login.php");
             exit;

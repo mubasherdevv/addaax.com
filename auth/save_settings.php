@@ -104,8 +104,15 @@ $types = "";
 foreach ($settings as $key => $value) {
     if (isset($key_to_column[$key])) {
         $col = $key_to_column[$key];
+        $trimmed_value = trim($value);
+        
+        // Skip smtp_pass if it's empty (to prevent overwriting existing password)
+        if ($key === 'smtp_pass' && empty($trimmed_value)) {
+            continue;
+        }
+        
         $update_parts[] = "$col = ?";
-        $update_values[] = $value;
+        $update_values[] = $trimmed_value;
         $types .= "s";
     }
 }

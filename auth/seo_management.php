@@ -144,7 +144,7 @@ renderAdminSidebar('seo');
             <button class="btn btn-secondary" onclick="hideForm()"><i class="fas fa-times"></i> Cancel</button>
         </div>
         <div class="card-body" style="padding: 30px;">
-            <form method="POST">
+            <form method="POST" onsubmit="tinymce.triggerSave();">
                 <input type="hidden" name="action" value="save_seo">
                 <input type="hidden" name="id" id="seo_id">
                 

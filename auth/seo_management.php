@@ -311,11 +311,6 @@ window.toggleTargetType = function(type) {
     document.getElementById('file_target_group').style.display = (type === 'file') ? 'block' : 'none';
     document.getElementById('location_target_group').style.display = (type === 'location') ? 'flex' : 'none';
     document.getElementById('custom_target_group').style.display = (type === 'custom') ? 'block' : 'none';
-    
-    // Clear final page name when switching
-    if (type !== 'file' || document.getElementById('page_name_select').value === '') {
-        document.getElementById('page_name').value = '';
-    }
 };
 
 window.filterCities = function(stateId) {

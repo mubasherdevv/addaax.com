@@ -247,7 +247,7 @@ renderAdminSidebar('seo');
                             <?php echo htmlspecialchars($seo['meta_description']); ?>
                         </td>
                         <td style="text-align: right;">
-                            <button onclick='editSeo(<?php echo json_encode($seo); ?>)' class="btn-user-dash" style="background:none; border:none; cursor:pointer; color: var(--primary);" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button onclick='editSeo(<?php echo htmlspecialchars(json_encode($seo), ENT_QUOTES, "UTF-8"); ?>)' class="btn-user-dash" style="background:none; border:none; cursor:pointer; color: var(--primary);" title="Edit"><i class="fas fa-edit"></i></button>
                             <a href="?delete=<?php echo $seo['id']; ?>" class="btn-user-dash" onclick="return confirm('Are you sure you want to delete SEO settings for this page?')" style="color: var(--danger); margin-left: 10px;" title="Delete"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>

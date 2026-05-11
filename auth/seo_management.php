@@ -86,7 +86,7 @@ renderAdminHeader('SEO Management');
 <!-- TinyMCE CDN -->
 <script src="https://cdn.tiny.cloud/1/1vxh163mkcmuu0c82seo7eyc3ihpi172k71utpwgfqqwvinq/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
-  function initTinyMCE() {
+  function initTinyMCE(initialContent = '') {
     if (tinymce.get('footer_content')) {
         tinymce.get('footer_content').remove();
     }
@@ -100,6 +100,9 @@ renderAdminHeader('SEO Management');
       promotion: false,
       branding: false,
       setup: function (editor) {
+        editor.on('init', function () {
+          editor.setContent(initialContent);
+        });
         editor.on('change', function () {
           tinymce.triggerSave();
         });
@@ -295,7 +298,7 @@ window.showAddForm = function() {
     
     document.getElementById('listSection').style.display = 'none';
     document.getElementById('seoFormSection').style.display = 'block';
-    initTinyMCE();
+    initTinyMCE('');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
@@ -350,12 +353,7 @@ window.editSeo = function(data) {
     document.getElementById('listSection').style.display = 'none';
     document.getElementById('seoFormSection').style.display = 'block';
     
-    initTinyMCE();
-    setTimeout(() => {
-        if (tinymce.get('footer_content')) {
-            tinymce.get('footer_content').setContent(data.footer_content || '');
-        }
-    }, 100);
+    initTinyMCE(data.footer_content || '');
 
     // Determine type
     if (data.page_name.startsWith('/escorts/')) {
